@@ -20,10 +20,7 @@ h1 {
 h2 {
     font-size: 3.5vw;
     line-height: .05ex;
-}
-
-h2::before, h2::after {
-    content: '\00a0';
+    margin-inline: .4em;
 }
 
 h3 {
