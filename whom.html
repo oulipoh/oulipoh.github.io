@@ -24,7 +24,6 @@
 
         for ([person, _] of Object.keys(people).map(x => [x, Math.random()]).sort((a, b) => a[1] - b[1])) {
             img = document.createElement('img')
-            img.alt = person
             img.className = 'headshot'
             img.src = `media/headshots/${person}.jpg`
 
