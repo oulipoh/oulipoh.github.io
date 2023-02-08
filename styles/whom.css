@@ -1,0 +1,53 @@
+body {
+    font-family: Alef, Arial, sans-serif;
+    margin: 0;
+}
+
+figure {
+    margin: 0;
+}
+
+figcaption {
+    bottom: 3ex;
+    font-size: max(5vw, 3em);
+    height: 0;
+    position: relative;
+    text-align: center;
+}
+
+#grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(450px, 100%), 1fr));
+}
+
+#grid > a {
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    -webkit-text-stroke: 1px black;
+}
+
+#grid > a:hover {
+    color: pink;
+}
+
+.headshot {
+    aspect-ratio: 1;
+    object-fit: cover;
+    object-position: top;
+    width: 100%;
+}
+
+h3 {
+    background: #fff8;
+    font-size: max(2vw, 1rem);
+    font-weight: normal;
+    left: 1em;
+    padding-inline: .2em;
+    position: fixed;
+    text-align: end;
+}
+
+img {
+    display: block;
+}

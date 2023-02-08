@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Alef:wght@400;700&display=block">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alef:wght@400;700&display=block">
+    <link rel="stylesheet" href="styles/whom.css">
+    <title>מי אנו?</title>
+</head>
+<body style="visibility: hidden" onload="document.body.style.visibility = 'visible'">
+    <noscript><style>body {visibility: visible !important;}</style></noscript>
+    <h3><a href=".">אוליפֹה</a></h3>
+    <div id="grid"></div>
+    <script>
+        people = {
+            'Meytar Moran': {name: 'מיתר מורן', url: 'https://www.meytarmoran.com'},
+            'Noam Dovev': {name: 'נעם דובב', url: 'https://palindromist.art'},
+            'Eyal Gruss': {name: 'איל גרוּס', url: 'https://eyalgruss.com'},
+            'Savyon': {name: 'סביון', url: 'https://fisha67.wixsite.com/savyon'},
+            'Alex Ben-Ari': {name: 'אלכס בן־ארי', url: 'https://alexbenari.com'},
+        }
+
+        for ([person, _] of Object.keys(people).map(x => [x, Math.random()]).sort((a, b) => a[1] - b[1])) {
+            img = document.createElement('img')
+            img.alt = person
+            img.className = 'headshot'
+            img.src = `media/headshots/${person}.jpg`
+
+            cap = document.createElement('figcaption')
+            cap.innerHTML = people[person].name
+
+            fig = document.createElement('figure')
+            fig.appendChild(img)
+            fig.appendChild(cap)
+
+            a = document.createElement('a')
+            a.title = a.href = people[person].url
+            a.appendChild(fig)
+            grid.appendChild(a)
+        }
+    </script>
+</body>
+</html>
