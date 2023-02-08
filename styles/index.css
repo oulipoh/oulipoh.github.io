@@ -8,12 +8,9 @@ body {
     margin: 0;
 }
 
-a {
-    cursor: pointer;
-}
-
 div {
     text-align-last: justify;
+    width: 67.5%;  /* for Safari */
 }
 
 @keyframes stroke {
