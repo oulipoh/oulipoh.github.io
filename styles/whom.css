@@ -21,12 +21,10 @@ figcaption > div {
 
 figcaption > div > a {
     background: #fff8;
-    color: initial;
     font-size: 1rem;
     font-weight: initial;
     padding-inline: .2em;
-    text-decoration: initial;
-    -webkit-text-stroke: initial;
+    -webkit-text-stroke: 0;
 }
 
 #grid {
