@@ -9,6 +9,7 @@ body {
 }
 
 div {
+    line-height: 0;
     text-align-last: justify;
     width: 67.5%;  /* for Safari */
 }
@@ -30,12 +31,10 @@ div {
 
 h1 {
     font-size: 20vw;
-    line-height: 0;
 }
 
 h2 {
     font-size: 3.5vw;
-    line-height: 0;
     margin-inline: .4em;
 }
 
