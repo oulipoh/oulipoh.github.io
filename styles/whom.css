@@ -8,11 +8,25 @@ figure {
 }
 
 figcaption {
-    bottom: 3ex;
+    bottom: 4ex;
     font-size: max(5vw, 3em);
     height: 0;
     position: relative;
     text-align: center;
+}
+
+figcaption > div {
+    line-height: 0;
+}
+
+figcaption > div > a {
+    background: #fff8;
+    color: initial;
+    font-size: 1rem;
+    font-weight: initial;
+    padding-inline: .2em;
+    text-decoration: initial;
+    -webkit-text-stroke: initial;
 }
 
 #grid {
