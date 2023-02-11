@@ -11,7 +11,7 @@ body {
 
 div {
     line-height: 0;
-    width: 67.5%;  /* for Safari */
+    width: 67.5%;  /* Safari need this, otherwise justified element take full parent width */
 }
 
 @keyframes stroke {
