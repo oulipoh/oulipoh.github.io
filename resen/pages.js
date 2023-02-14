@@ -178,7 +178,7 @@ function make_header() {
     if (mobile)
         index_title = index_title.split(' ').slice(0, lang ? 1 : 2).join(' ')
     let parent_title = decodeURI(location).split('/').slice(-3)[0]
-    let diff = index_title.length - parent_title.length
+    let diff = index_title.replace(/\u0591-\u05bd\u05bf\u05c1\u05c2\u05c4\u05c5\u05c7/g, '').length - parent_title.replace(/\u0591-\u05bd\u05bf\u05c1\u05c2\u05c4\u05c5\u05c7/g, '').length
     let backarrow = ui[lang].dir == 'ltr' ? '&larr;' : '&rarr;'
     let keywords, trans, span, a
     if (name == 'index') {
