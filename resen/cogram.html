@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Alef:wght@400;700&display=block">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alef:wght@400;700&display=block">
+    <link rel="preload" href="Alef-Monospace.woff2" as="font" type="font/woff2" crossorigin>
+    <script src="pages.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>&#64335;&#1439;&#1434;&#1447;&#1444;</text></svg>">
+    <meta property="og:image" content="https://eyalgruss.com/constrained/media/og_image.jpg">
+</head>
+<body style="visibility: hidden" onload="document.body.style.visibility = 'visible'">
+    <noscript><style>body {visibility: visible !important;}</style></noscript>
+    <script>make_header()</script>
+    <h2>סכוּמילים (קוֹגרמה)</h2>
+    בעברית ישנן 22 אותיות, ואלו יכולות לשמש לשיטת ספירה ב<b>בסיס 22</b><span> </span><a href="https://en.wikipedia.org/wiki/Bijective_numeration">בייקטיבי</a> (bijective) כלהלן:
+    <blockquote class="formula mono">
+        <span><span>א = 1</span>&nbsp;&nbsp;&nbsp;<span><span>ב = 2</span>&nbsp; ...</span></span> <span><span>י = 10</span>&nbsp;&nbsp;<span><span>כ = 11</span> ...</span></span> <span><span>ש = 21</span>&nbsp;&nbsp;<span><span>ת = 22 = ø</span> (כמו בשעון)</span></span>
+    </blockquote>
+    <p>
+        נגדיר פעולת חיבור חשבונית על אותיות באופן מודולרי:
+    </p>
+    <pre class="bigsquare">
++אבגדהוזחטיכלמנסעפצקרשת
+אבגדהוזחטיכלמנסעפצקרשתא
+בגדהוזחטיכלמנסעפצקרשתאב
+גדהוזחטיכלמנסעפצקרשתאבג
+דהוזחטיכלמנסעפצקרשתאבגד
+הוזחטיכלמנסעפצקרשתאבגדה
+וזחטיכלמנסעפצקרשתאבגדהו
+זחטיכלמנסעפצקרשתאבגדהוז
+חטיכלמנסעפצקרשתאבגדהוזח
+טיכלמנסעפצקרשתאבגדהוזחט
+יכלמנסעפצקרשתאבגדהוזחטי
+כלמנסעפצקרשתאבגדהוזחטיכ
+למנסעפצקרשתאבגדהוזחטיכל
+מנסעפצקרשתאבגדהוזחטיכלמ
+נסעפצקרשתאבגדהוזחטיכלמנ
+סעפצקרשתאבגדהוזחטיכלמנס
+עפצקרשתאבגדהוזחטיכלמנסע
+פצקרשתאבגדהוזחטיכלמנסעפ
+צקרשתאבגדהוזחטיכלמנסעפצ
+קרשתאבגדהוזחטיכלמנסעפצק
+רשתאבגדהוזחטיכלמנסעפצקר
+שתאבגדהוזחטיכלמנסעפצקרש
+תאבגדהוזחטיכלמנסעפצקרשת
+</pre>
+    <p>
+        כעת נוכל לפרק משפט לשני משפטים חדשים, כך שסכום כל זוג אותיות מקביליות במשפטים החדשים הוא אות המקבילה במשפט המקורי. למשל:
+    </p>
+    <div class="cogram">
+        <pre>
+עושות אהבה ולא מלחמה
+===== ==== === =====
+הסתכם שורת חדש ושימש
++++++ ++++ +++ +++++
+כמשפט בשדה רחב זמרתו
+</pre>
+    </div>
+    <p>
+        נא לשים לב ש<b>בניגוד</b> ל<a href="https://he.wikipedia.org/wiki/%D7%90%D7%95%D7%AA%D7%99%D7%95%D7%AA_%D7%95%D7%9E%D7%A1%D7%A4%D7%A8%D7%99%D7%9D">חידת אותיות ומספרים</a> (alphametics או cryptarithms), כאן הערכים המספריים של האותיות קבועים מראש.
+    </p>
+    <p dir="ltr">
+        <b>Cogram</b> - in Hebrew there are 22 letters, which can be used as a numerical system in <a href="https://en.wikipedia.org/wiki/Bijective_numeration">bijective</a> <b>base 22</b>. Using modular arithmetic, we can "factor" a sentence into two new sentences, so that each pair of parallel letters in the new sentences sums up to the parallel letter in the original sentence. Note that in <b>contrast</b> to <a href="https://en.wikipedia.org/wiki/Verbal_arithmetic">cryptarithms or alphametics</a>, here the numerical values of the letters are predetermined.
+    </p>
+    <br><br>
+    <h2>סכוּמילים פלינדרומי (קוֹדרום או סכוּמוֹפֹה)</h2>
+    <p>
+        באופן דומה, נוכל לפרק משפט פלינדרומי (להלן של  <a href="https://eranhadas.com">ערן הדס</a>) לשני משפטים פלינדרומיים חדשים:
+    </p>
+    <div class="cogram">
+        <pre>
+רק פושטק עלוב בולע קטשופ קר
+== ===== ==== ==== ===== ==
+ער הדסים דעתי יתעד מיסדה רע
+++ +++++ ++++ ++++ +++++ ++
+דש לבושו לצון נוצל ושובל שד
+</pre>
+    </div>
+    <p dir="ltr">
+        <b>Codrome</b> - similarly, we can factor a palindromic sentence (as the above by <a href="https://eranhadas.com">Eran Hadas</a>) into two new palindromic sentences.
+    </p>
+    <br><br>
+    <h2>סכוּמילים פלינדרומי מוצלב (קוֹדרום כיאסטי)</h2>
+    <p>
+        לחלופין, נוכל לפרק משפט פלינדרומי לזוג משפטים אנדרומיים שיחד יוצרים פלינדרום אחד גדול:
+    </p>
+    <div class="cogram">
+        <pre>
+רק פושטק עלוב בולע קטשופ קר
+== ===== ==== ==== ===== ==
+ער הדסים לצון יתעד ושובל שד
+++ +++++ ++++ ++++ +++++ ++
+דש לבושו דעתי נוצל מיסדה רע
+</pre>
+    </div>
+    <p>
+        אם במשפט המקורי יש מספר אי־זוגי של אותיות, אז האות האמצעית חייבת להיות בעלת ערך זוגי (ב', ד', ...).
+    </p>
+    <p dir="ltr">
+        <b>Chiastic codrome</b> - alternatively, We can factor a palindromic sentence into a pair of anadromic sentences that together form one big palindrome.
+        If the original sentence has an odd number of letters, then the middle letter must be of even value.
+    </p>
+    <div class="refs">
+        <blockquote>Philip M. Cohen, <a href="https://digitalcommons.butler.edu/cgi/viewcontent.cgi?article=2030&context=wordways">Base 26</a>, Word Ways (1977).</blockquote>
+        <blockquote>Lee Sallows, <a href="https://digitalcommons.butler.edu/cgi/viewcontent.cgi?article=3766&context=wordways">Base 27: The Key to a New Gimatria</a>, Word Ways (1993).</blockquote>
+        <blockquote>Mike Keith, <a href="http://cadaeic.net/alphas.htm">Alphametics</a>.</blockquote>
+    </div>
+    <script>make_footer()</script>
+</body>
+</html>

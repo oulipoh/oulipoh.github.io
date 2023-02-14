@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Alef:wght@400;700&display=block">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alef:wght@400;700&display=block">
+    <link rel="preload" href="Alef-Monospace.woff2" as="font" type="font/woff2" crossorigin>
+    <script src="pages.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>&#64335;&#1439;&#1434;&#1447;&#1444;</text></svg>">
+    <meta property="og:image" content="https://eyalgruss.com/constrained/media/og_image.jpg">
+</head>
+<body style="visibility: hidden" onload="document.body.style.visibility = 'visible'; iframe.src = 'https://player.vimeo.com/video/469788336?byline=0&loop=1&portrait=0&quality=1080p&title=0'">
+    <noscript><style>body {visibility: visible !important;}</style></noscript>
+    <script>make_header()</script>
+    <p>
+        <a href="https://en.wikipedia.org/wiki/Cyclic_cellular_automaton">אוטומט תאי ציקלי</a> מבוסס אותיות.
+        אות תתקדם לאות שבאה אחריה באלף־בית, אם לפחות אחת משמונת האותיות הסובבות היא האות החדשה הזו. הקליקי בשביל לאתחל.
+    </p>
+    <p class="sliders">
+        <label class="slider">
+            <span onclick="lang_slider.value = 0; reset_flag = true">English</span>&NoBreak;
+            <input type="range" id="lang_slider" max="1" value="1" autocomplete="off" class="green">&NoBreak;
+            <span onclick="lang_slider.value = 1; reset_flag = true">Hebrew</span>
+        </label>
+        <label class="slider">
+            <span onclick="rate_slider.value = 0">Slow</span>
+            <input type="range" id="rate_slider" value="50" autocomplete="off" class="green">
+            <span onclick="rate_slider.value = 100">Fast</span>
+        </label>
+    </p>
+    <pre id="grid" onclick="reset_flag = true" title="Click to restart"></pre>
+    <p dir="ltr">
+        Letter-based <a href="https://en.wikipedia.org/wiki/Cyclic_cellular_automaton">cyclic cellular automata</a>.
+        A letter will advance to the letter that follows it in the alphabet, if at least one of the eight surrounding letters is that new letter. Click to restart.
+    </p>
+    <p>
+        ב־"להט החרב המתהפכת" ניסיתי להשתמש בזה בשביל לחולל <a href="#magicspell" onclick="location.href = make_url(this.href.split('#')[1])">לחשקסם</a>, בכך שאפשרתי למילים מסוימות, ככל שהן נוצרות באופן ספונטני, להיצרב ויותר לא להשתנות:
+    </p>
+    <iframe id="iframe" allow="fullscreen; web-share" class="video"></iframe>
+    <div class="refs">
+        <blockquote>Saskia Hiltemann, <a href="https://theses.liacs.nl/pdf/16-SaskiaHiltemann.pdf">Multi-coloured Cellular Automata</a>.</blockquote>
+        <blockquote>Laurel O'Brien, <a href="https://github.com/laurelobrien/typo-automata">typo-automata</a>.</blockquote>
+    </div>
+    <script>
+        make_footer()
+
+        width = 160
+        height = 80
+        chars = ['abcdefghijklmnopqrstuvwxyz', 'אבגדהוזחטיכלמנסעפצקרשת']
+
+        var lang
+        s = 0
+
+        function reset() {
+            ind_grid = []
+            new_str = ''
+            for (i = 0; i < height; i++) {
+                ind_grid[i] = []
+                new_str += '  '
+                for (j = 0; j < width; j++) {
+                    ind = Math.random() * chars[lang].length | 0
+                    ind_grid[i][j] = [ind, ind]
+                    new_str += chars[lang][ind]
+                }
+                new_str += '  \n'
+            }
+        }
+
+        function update() {
+            try {
+                if (lang != lang_slider.value || reset_flag) {
+                    lang = lang_slider.value
+                    reset_flag = false
+                    reset()
+                }
+                grid.textContent = new_str
+                new_str = ''
+                for (i = 0; i < height; i++) {
+                    new_str += '  '
+                    for (j = 0; j < width; j++) {
+                        next_ind = (ind_grid[i][j][s]+1) % chars[lang].length
+                        loop:
+                        for (m = -1; m <= 1; m++)
+                            for (n = -1; n <= 1; n++)
+                                if (ind_grid[(i+m+height) % height][(j+n+width) % width][1 - s] == next_ind) {
+                                    ind_grid[i][j][s] = next_ind
+                                    break loop
+                                }
+                        new_str += chars[lang][ind_grid[i][j][s]]
+                    }
+                    new_str += '  \n'
+                }
+                s = 1 - s
+                setTimeout(update, 1000 - Math.log10(rate_slider.value*99.99 + 1)*250)
+            }
+            catch (e) {
+            }
+        }
+        update()
+    </script>
+</body>
+</html>

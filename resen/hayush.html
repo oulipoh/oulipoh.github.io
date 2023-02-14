@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Alef:wght@400;700&display=block">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alef:wght@400;700&display=block">
+    <script src="pages.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>&#64335;&#1439;&#1434;&#1447;&#1444;</text></svg>">
+    <meta property="og:image" content="https://eyalgruss.com/constrained/media/og_image.jpg">
+</head>
+<body style="visibility: hidden" onload="document.body.style.visibility = 'visible'">
+    <noscript><style>body {visibility: visible !important;}</style></noscript>
+    <script>make_header()</script>
+    <p>
+        גרסאות עבריות ל<a href="https://en.wikipedia.org/wiki/Aronson%27s_sequence">סדרת ארונסון</a>,
+        שמציינת את המיקומים בהן חוזרת האות הפותחת (בהתעלם מסימני פיסוק), ובתוך כך מייצרת את ההמשך של עצמה:
+    </p>
+    <blockquote title="... 17,940,279,051 ... ,29 ,22 ,21 ,16 ,15 ,9 ,5 ,2 ,1">ה היא האות הראשונה, השנייה, החמישית, התשיעית, החמש עשרה, השש עשרה, העשרים ואחת, העשרים ושתיים, העשרים ותשע, ... השבעה עשר מיליארד תשע מאות וארבעים מיליון מאתיים שבעים ותשעה אלף חמישים ואחת, ... במשפט זה.&emsp;<cite>(<a href="media/hayush_he.txt">10,000 המספרים הראשונים להורדה</a>)</cite></blockquote>
+    <blockquote title="... 7,207,767,016, ... ,61 ,51 ,48 ,44 ,38 ,26 ,13 ,7 ,1">ו היא האות הראשונה, השביעית, השלוש עשרה, העשרים ושש, השלושים ושמונה, הארבעים וארבע, הארבעים ושמונה, החמישים ואחת, השישים ואחת, ... השבעה מיליארד מאתיים ושבעה מיליון שבע מאות שישים ושבעה אלף שבע מאות ושש עשרה, ... במשפט זה.&emsp;<cite>(<a href="media/hayush_vav.txt">10,000 המספרים הראשונים להורדה</a>)</cite></blockquote>
+    <blockquote title="... 8,323,378,158, ... ,67 ,65 ,57 ,46 ,35 ,21 ,19 ,3 ,1">י היא האות הראשונה, השלישית, התשע עשרה, העשרים ואחת, השלושים וחמש, הארבעים ושש, החמישים ושבע, השישים וחמש, השישים ושבע, ... השמונה מיליארד שלוש מאות עשרים ושלושה מיליון שלוש מאות שבעים ושמונה אלף מאה חמישים ושמונה, ... במשפט זה.&emsp;<cite>(<a href="media/hayush_yod.txt">10,000 המספרים הראשונים להורדה</a>)</cite></blockquote>
+    <blockquote title="... 7,018,161,309, ... ,47 ,40 ,35 ,30 ,26 ,22 ,17 ,12 ,1">ש היא האות הראשונה, השתים עשרה, השבע עשרה, העשרים ושתיים, העשרים ושש, השלושים, השלושים וחמש, הארבעים, הארבעים ושבע, ... השבעה מיליארד ושמונה עשר מיליון מאה שישים ואחד אלף שלוש מאות ותשע, ... במשפט זה.&emsp;<cite>(<a href="media/hayush_shin.txt">10,000 המספרים הראשונים להורדה</a>)</cite></blockquote>
+    <p>
+        סדרות אלו הנפתחות באותיות <b>היו"ש</b>, הן היחידות בעברית שלהן לפחות <b>מיליארד איברים</b> (האיברים האחרונים הנזכרים לעיל).
+        גרסאות אנגליות שאינן ידועות כסופיות קיימות רק לאותיות:
+        <a href="https://oeis.org/A055508">H</a>
+        <a href="https://oeis.org/A049525">I</a>
+        <a href="https://oeis.org/A005224">T</a>,
+        ובצרפתית:
+        <a href="https://oeis.org/A080520">E</a>
+        <a href="https://oeis.org/A080519">T</a>.
+    </p>
+    <p>
+        על מנת לחשב את הסדרות העבריות, ביצעתי עדכון משמעותי בקוד שמטפל בעברית בספריית הפייתון
+        <a href="https://github.com/savoirfairelinux/num2words">num2words</a>
+        שמתרגמת מספרים מספרוׁת למילים.
+    </p>
+    <p dir="ltr">
+        Hebrew versions of <a href="https://en.wikipedia.org/wiki/Aronson%27s_sequence">Aronson's sequence</a>, that indicates the locations at which the opening letter repeats (ignoring punctuation marks), and by that produces its own continuation.
+        The sequences above, opening with <b>He, Vav, Yod, or Shin</b>, are the only four that have at least <b>one billion</b> terms (the final terms mentioned above).
+        The corresponding English sequences that are not known to be finite, open with:
+        <a href="https://oeis.org/A055508">H</a>
+        <a href="https://oeis.org/A049525">I</a>
+        <a href="https://oeis.org/A005224">T</a>, and in French:
+        <a href="https://oeis.org/A080520">E</a>
+        <a href="https://oeis.org/A080519">T</a>.
+    </p>
+    <p dir="ltr">
+        In order to calculate the Hebrew sequences, I made a significant update to the code that handles Hebrew in the Python library <a href="https://github.com/savoirfairelinux/num2words">num2words</a> that translates numbers from digits to words.
+    </p>
+    <script>make_footer()</script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Alef:wght@400;700&display=block">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alef:wght@400;700&display=block">
+    <link rel="preload" href="Alef-Monospace.woff2" as="font" type="font/woff2" crossorigin>
+    <script src="pages.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>&#64335;&#1439;&#1434;&#1447;&#1444;</text></svg>">
+    <meta property="og:image" content="https://eyalgruss.com/constrained/media/og_image.jpg">
+</head>
+<body style="visibility: hidden" onload="document.body.style.visibility = 'visible'">
+    <noscript><style>body {visibility: visible !important;}</style></noscript>
+    <script>make_header()</script>
+    <p>
+        <a href="https://he.wikipedia.org/wiki/%D7%A4%D7%A0%D7%92%D7%A8%D7%9E%D7%94">פנגרמות מושלמות</a>
+        בהן כל אות באלף־בית מופיעה בדיוק פעם אחת (כמו למשל "דג נפצע ושחה לאט בתרכיז קסם"), שמהוות ביטוי עם <b>מספר המילים המינימלי</b> האפשרי:
+    </p>
+    <blockquote class="pangram">והאזמרגד לסחבקית כשנצטעף</blockquote>
+    <blockquote class="pangram">הזדעקתי באסטרוגן שמפצלחך</blockquote>
+    <blockquote class="pangram">להצטברח מסגפנותי כשאזדעק</blockquote>
+    <blockquote class="pangram">ואצטברח שהזדעפתן כקלגסים</blockquote>
+    <blockquote class="pangram">ואחפיצה לכשתענטז במדגסקר</blockquote>
+    <blockquote class="pangram">ובאזעקה כשמפצחת סטלינגרד</blockquote>
+    <blockquote class="pangram">כשהצדעת באגרופים לקזחסטן</blockquote>
+    <blockquote class="pangram">לצפרדע האגנוסטי שבחזקתכם</blockquote>
+    <blockquote class="pangram">לגניחות צפרדעכם שבאקסטזה</blockquote>
+    <blockquote class="pangram">כשהצפרדע בגחמנות לאקסטזי</blockquote>
+    <p>
+        כאן בחרתי להתמקד בפנגרמות עם מילים באורך 7 ו־8 אותיות בלבד,
+        אשר מצאתי בעזרת תוכנה ו<a href="https://github.com/eyaler/hebrew_wordlists">מאגרי מילים</a> שחצבתי.
+        לא מצאתי פתרון בן פחות משלוש מילים. הפתרון הכי קרוב עם שתי מילים וללא אותיות חוזרות היה "<a href="https://en.wikipedia.org/wiki/Lipogram#Pangrammatic_lipogram">פנגרמה מושלמת ליפוגרמטית</a>" עם 21 אותיות: "וכשלצפרדעה מבקזחסטאנית", ופנגרמות לא מושלמות בשתי מילים כאשר חזרות מותרות - לא מצאתי כלל.
+        מצד שני, נעם דובב חיבר <a href="https://palindromist.art/perfect-pangrams-from-maximum-words/">פנגרמה מושלמת מקסימלית</a> בת 11 מילים.
+    </p>
+    <p dir="ltr">
+        <b>Minimal perfect pangrams</b> - <a href="https://en.wikipedia.org/wiki/Pangram#Perfect_pangrams">perfect pangrams</a> containing every Hebrew letter exactly once, that form a phrase with the <b>minimal number of words</b> possible.
+        I could not find a solution with less than three words. The closest two-word solution without letter repetition was a "<a href="https://en.wikipedia.org/wiki/Lipogram#Pangrammatic_lipogram">lipogrammatic perfect pangram</a>" with 21 letters, and I could not find any two-word (non-perfect) pangrams allowing repetitions.
+        On the other hand, Noam Dovev composed a <a href="https://palindromist.art/perfect-pangrams-from-maximum-words/">Maximal perfect pangram</a> with 11 words.
+    </p>
+    <br><br>
+    <h2>פנגרמות קומפוזיציה מינימליות</h2>
+    <p>
+        פנגרמות מושלמות מינימליות עם האילוץ הנוסף שמילה יכולה להכיל רק אותיות שבאות באלף־בית אחרי אותיות שהופיעו במילים קודמות (ללא הצלבות <b>בין</b> המילים):
+    </p>
+    <blockquote class="pangram">בדאגה חזו: נטילכם פסע שתקצר</blockquote>
+    <blockquote class="pangram">באגדה, זו טיח מסלעכן שתקצרף</blockquote>
+    <p>
+        לא מצאתי פתרון קצר מחמש מילים.
+    </p>
+    <p>
+        מספר החלוקות האפשריות של אלף־בית עם n אותיות לרצפים של אותיות רצופות (<a href="https://en.wikipedia.org/wiki/Composition_(combinatorics)">קומפוזיציות</a>) הוא 2<sup>n-1</sup>, ומספר ההרכבים ללא מילים בנות אות אחת ניתן על ידי <a href="https://he.wikipedia.org/wiki/%D7%A1%D7%93%D7%A8%D7%AA_%D7%A4%D7%99%D7%91%D7%95%D7%A0%D7%90%D7%A6%27%D7%99">מספר פיבונאצ'י</a> F<sub>n-1</sub>.
+        מספר האפשרויות כאשר לוקחים בחשבון את כל התמורות של כל אחד מהרצפים ניתן על ידי <a href="https://oeis.org/A051296">A051296</a>(n) (כאשר כוללים מילים בנות אות אחת).
+    </p>
+    <p class="formula">
+    בהתייחס רק לחלוקות עם k מילים, הספירות המקבילות לאמור לעיל ניתנות על ידי
+    <a href="https://he.wikipedia.org/wiki/%D7%9E%D7%A7%D7%93%D7%9D_%D7%91%D7%99%D7%A0%D7%95%D7%9E%D7%99">המקדם הבינומי</a> <span dir="ltr"><span>C(n-1, k-1)</span> = <span>(n-1)!/(k-1)!/(n-k)!</span></span>,
+    <span dir="ltr"><span><a href="https://oeis.org/A011973">A011973</a>(n-2, k-1)</span> = <span>C(n-k-1, k-1)</span> = <span>(n-k-1)!/(k-1)!/(n-2k)!</span></span>,
+    ו־ <span dir="ltr"><a href="https://oeis.org/A090238">A090238</a>(n, k)</span>, בהתאמה.
+    </p>
+    <p dir="ltr">
+        <b>Minimal compositional pangrams</b> - minimal perfect pangrams with the additional constraint that a word can only contain letters that come in the alphabet after letters that appeared in previous words (no crossover <b>between</b> words).
+        I could not find a solution with less than five words.
+    <p dir="ltr">
+        The number of possible divisions of an alphabet with n letters into continuous letter sequences (<a href="https://en.wikipedia.org/wiki/Composition_(combinatorics)">compositions</a>) is 2<sup>n-1</sup>, and the number of compositions without one-letter words (as in Hebrew) is given by the <a href="https://en.wikipedia.org/wiki/Fibonacci_number">Fibonacci number</a> F<sub>n-1</sub>.
+        The number of possibilities accounting for all permutations of each of the sequences is given by <a href="https://oeis.org/A051296">A051296</a>(n) (when including one-letter words).
+    </p>
+    <p dir="ltr" class="formula">
+        Considering only divisions to k words, the counts corresponding to the above are given by the <a href="https://en.wikipedia.org/wiki/Binomial_coefficient">Binomial coefficient</a> <span><span>C(n-k-1, k-1)</span> = <span>(n-1)!/(k-1)!/(n-k)!</span>,</span> <span><span><a href="https://oeis.org/A011973">A011973</a>(n-2, k-1)</span> = <span>C(n-k-1, k-1)</span> = <span>(n-k-1)!/(k-1)!/(n-2k)!</span>,</span> and <span><a href="https://oeis.org/A090238">A090238</a>(n, k)</span>, respectively.
+    </p>
+    <div class="refs">
+        <blockquote>Calvin Li, <a href="https://medium.com/@FallingForFallacies/all-perfect-pangrams-of-english-8c8d0f621bee">All* perfect pangrams of English</a>.</blockquote>
+        <blockquote>Matt Parker, <a href="https://youtube.com/watch?v=c33AZBnRHks">Someone improved my code by 40,832,277,770%</a>.</blockquote>
+        <blockquote>Benjamin Paaßen, <a href="https://docs.google.com/spreadsheets/d/11sUBkPSEhbGx2K8ah6WbGV62P8ii5l5vVeMpkzk17PI/edit#gid=0">Five Words Implementations</a>.</blockquote>
+        <blockquote>Noam Dovev, <a href="https://palindromist.art/perfect-pangrams-from-maximum-words/">פנגרמה מושלמת ממספר מילים מקסימלי</a>.</blockquote>
+    </div>
+    <script>make_footer()</script>
+</body>
+</html>
