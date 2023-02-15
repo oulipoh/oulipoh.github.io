@@ -31,7 +31,7 @@ social = {
 
 authors = {
     oulipoh: {
-        name: {'': 'כתב עת מקוון לספרות עברית אילוצית - בהקמה', en: 'An online journal for constrained Hebrew literature - under construction'},
+        name: {'': 'כתב עת מקוון ליצירה אילוצית וחישובית בעברית (בהקמה)', en: 'An online journal for constrained and computational creation in Hebrew (under construction)'},
         mail: 'eyalgruss+oulipoh@gmail.com',
         github: 'oulipoh',
     },
