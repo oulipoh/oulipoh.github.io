@@ -1,13 +1,9 @@
 pages = {
     index: {title: 'רֶסֶן', alt: 'Resen', author: 'oulipoh', special: true},
 
-    squares: {title: 'ריבועי הקסם הגדולים בעברית', alt: 'The largest magic squares in Hebrew', author: 'eyal', keywords: ['2D', 'Hebrew cheatery', 'palindrome', 'record', 'software']},
-    cogram: {title: 'סכוּמילים', alt: 'Cograms and codromes', author: 'eyal', keywords: ['2D', 'constraint combo', 'cypher', 'Hebrew cheatery', 'math', 'new constraint', 'palindrome', 'software']},
-    pangrams: {title: 'פנגרמות מושלמות מינימליות', alt: 'Minimal perfect pangrams', author: 'eyal', keywords: ['constraint combo', 'Hebrew cheatery', 'math', 'new constraint', 'pangram', 'record', 'software']},
     eyal: {title: 'אֱיָליטרציה', alt: 'Eyalliteration', author: 'eyal', keywords: ['constraint combo', 'discourse', 'poem', 'self-referral']},
     otomat: {title: 'אות־וֹמט תאי', alt: 'Letter cellular automata', author: 'eyal', keywords: ['2D', 'math', 'new constraint', 'software']},
     taz: {title: 'תחום אוטונומי זמני', alt: 'Temporary Autonomous Zone', author: 'eyal', keywords: ['cypher', 'math', 'new constraint', 'software']},
-    hayush: {title: 'סדרות היוּש', alt: 'Aronson sequences in Hebrew', author: 'eyal', keywords: ['math', 'record', 'self-referral', 'software']},
 }
 
 kw_dict = {
@@ -115,6 +111,11 @@ function make_url(page, lang=null) {
     return page + (page.includes('.') ? '' : '.html') + (lang && '?' + lang)
 }
 
+
+function open_internal_link(event) {
+    event.preventDefault()
+    location.href = make_url(event.target.href.split('#')[1])
+}
 
 function make_contents() {
     let lang = get_lang()
