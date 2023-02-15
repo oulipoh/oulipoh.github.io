@@ -1,13 +1,13 @@
 pages = {
-    index: {title: 'רֶסֶן', alt: 'Resen', special: true},
+    index: {title: 'רֶסֶן', alt: 'Resen', author: 'oulipoh', special: true},
 
-    squares: {title: 'ריבועי הקסם הגדולים בעברית', alt: 'The largest magic squares in Hebrew', keywords: ['2D', 'Hebrew cheatery', 'palindrome', 'record', 'software']},
-    cogram: {title: 'סכוּמילים', alt: 'Cograms and codromes', keywords: ['2D', 'constraint combo', 'cypher', 'Hebrew cheatery', 'math', 'new constraint', 'palindrome', 'software']},
-    pangrams: {title: 'פנגרמות מושלמות מינימליות', alt: 'Minimal perfect pangrams', keywords: ['constraint combo', 'Hebrew cheatery', 'math', 'new constraint', 'pangram', 'record', 'software']},
-    eyal: {title: 'אֱיָליטרציה', alt: 'Eyalliteration', keywords: ['constraint combo', 'discourse', 'poem', 'self-referral']},
-    otomat: {title: 'אות־וֹמט תאי', alt: 'Letter cellular automata', keywords: ['2D', 'math', 'new constraint', 'software']},
-    taz: {title: 'תחום אוטונומי זמני', alt: 'Temporary Autonomous Zone', keywords: ['cypher', 'math', 'new constraint', 'software']},
-    hayush: {title: 'סדרות היוּש', alt: 'Aronson sequences in Hebrew', keywords: ['math', 'record', 'self-referral', 'software']},
+    squares: {title: 'ריבועי הקסם הגדולים בעברית', alt: 'The largest magic squares in Hebrew', author: 'eyal', keywords: ['2D', 'Hebrew cheatery', 'palindrome', 'record', 'software']},
+    cogram: {title: 'סכוּמילים', alt: 'Cograms and codromes', author: 'eyal', keywords: ['2D', 'constraint combo', 'cypher', 'Hebrew cheatery', 'math', 'new constraint', 'palindrome', 'software']},
+    pangrams: {title: 'פנגרמות מושלמות מינימליות', alt: 'Minimal perfect pangrams', author: 'eyal', keywords: ['constraint combo', 'Hebrew cheatery', 'math', 'new constraint', 'pangram', 'record', 'software']},
+    eyal: {title: 'אֱיָליטרציה', alt: 'Eyalliteration', author: 'eyal', keywords: ['constraint combo', 'discourse', 'poem', 'self-referral']},
+    otomat: {title: 'אות־וֹמט תאי', alt: 'Letter cellular automata', author: 'eyal', keywords: ['2D', 'math', 'new constraint', 'software']},
+    taz: {title: 'תחום אוטונומי זמני', alt: 'Temporary Autonomous Zone', author: 'eyal', keywords: ['cypher', 'math', 'new constraint', 'software']},
+    hayush: {title: 'סדרות היוּש', alt: 'Aronson sequences in Hebrew', author: 'eyal', keywords: ['math', 'record', 'self-referral', 'software']},
 }
 
 kw_dict = {
@@ -28,13 +28,28 @@ kw_dict = {
 }
 
 social = {
-    mail: {url: 'mailto:eyalgruss+oulipoh@gmail.com', label: '&#x2709;'},
-    github: {url: 'https://github.com/oulipoh', label: '&#x1f431;'},
+        mail: {url: 'mailto:', label: '&#x2709;'},
+        twitter: {url: 'https://twitter.com/', label: '&#x1f426;'},
+        github: {url: 'https://github.com/', label: '&#x1f431;'},
+}
+
+authors = {
+    oulipoh: {
+        name: {'': 'כתב עת מקוון לספרות עברית אילוצית - בהקמה', en: 'An online journal for constrained Hebrew literature - under construction'},
+        mail: 'eyalgruss+oulipoh@gmail.com',
+        github: 'oulipoh',
+    },
+    eyal: {
+        name: {'': 'איל יהוה גרוּס', en: 'Eyal Yehowa Gruss'},
+        mail: 'eyalgruss@gmail.com',
+        twitter: 'eyaler',
+        github: 'eyaler',
+    },
 }
 
 ui = {
-    '': {author: 'כתב עת מקוון לספרות עברית אילוצית - בהקמה', next: 'הבא', prev: 'הקודם', lang: 'עברית', refs: 'ראו גם', theme_name: 'עיצוב של מתכנת', theme: 'תבנית', copyright: 'כל הזכויות שמורות'},
-    'en': {author: 'An online journal for constrained Hebrew literature - under construction', next: 'Next', prev: 'Prev', lang: 'English', refs: 'See also', theme_name: 'Designed by a programmer', theme: 'Theme', copyright: 'All rights reversed', dir: 'ltr'},
+    '': {next: 'הבא', prev: 'הקודם', lang: 'עברית', refs: 'ראו גם', theme_name: 'עיצוב של מתכנת', theme: 'תבנית', copyright: 'כל הזכויות שמורות'},
+    en: {next: 'Next', prev: 'Prev', lang: 'English', refs: 'See also', theme_name: 'Designed by a programmer', theme: 'Theme', copyright: 'All rights reversed', dir: 'ltr'},
 }
 
 globe = '&#x1f310;&#xfe0e;'
@@ -83,10 +98,10 @@ function get_hash(kw) {
 }
 
 
-function get_titles(name, lang='') {
-    let titles = {title: pages[name].title, alt: ''}
-    if (pages[name].alt) {
-        titles.alt = pages[name].alt
+function get_titles(page, lang='') {
+    let titles = {title: pages[page].title, alt: ''}
+    if (pages[page].alt) {
+        titles.alt = pages[page].alt
         if (lang)
             [titles.title, titles.alt] = [titles.alt, titles.title]
     }
@@ -94,10 +109,10 @@ function get_titles(name, lang='') {
 }
 
 
-function make_url(name, lang=null) {
+function make_url(page, lang=null) {
     if (lang === null)
         lang = get_lang()
-    return name + (name.includes('.') ? '' : '.html') + (lang && '?' + lang)
+    return page + (page.includes('.') ? '' : '.html') + (lang && '?' + lang)
 }
 
 
@@ -109,12 +124,12 @@ function make_contents() {
     if (flip(lang))
         div.dir = ui[lang].dir
     let keywords, titles, a, p
-    for (name in pages) {
-        if (pages[name].special)
+    for (page in pages) {
+        if (pages[page].special)
             continue
-        keywords = all_keywords.filter(kw => !pages[name].keywords?.includes(kw)).map(get_hash)
-        titles = get_titles(name, lang)
-        a = create_link(make_url(name, lang), titles.title, keywords)
+        keywords = all_keywords.filter(kw => !pages[page].keywords?.includes(kw)).map(get_hash)
+        titles = get_titles(page, lang)
+        a = create_link(make_url(page, lang), titles.title, keywords)
         a.title = titles.alt
         p = document.createElement('p')
         p.appendChild(a)
@@ -130,8 +145,8 @@ function export_all(lang, skip) {
     document.body.innerHTML = ''
     document.body.style.paddingInline = 0
     let iframe
-    for (name in pages) {
-        if (skip?.includes(name))
+    for (page in pages) {
+        if (skip?.includes(page))
             continue
         iframe = document.createElement('iframe')
         iframe.className = 'export'
@@ -140,7 +155,7 @@ function export_all(lang, skip) {
             this.contentDocument.querySelector('footer').remove()
             this.style.height = this.contentDocument.documentElement.scrollHeight + 8 + 'px'
         }
-        iframe.src = make_url(name, lang)
+        iframe.src = make_url(page, lang)
         document.body.appendChild(iframe)
     }
 }
@@ -163,16 +178,19 @@ function add_nav_element(nav, url, label, symbol='', ident=0)
 }
 
 
+function get_page() {
+    return decodeURI(location.pathname).split('/').slice(-1)[0].split('.')[0] || 'index'
+}
+
+
 function make_header() {
-    let name = decodeURI(location.pathname).split('/').slice(-1)[0].split('.')[0] || 'index'
+    let page = get_page()
     let lang = get_lang()
-    let titles = get_titles(name, lang)
+    let titles = get_titles(page, lang)
     document.title = titles.title
     let nav = document.createElement('nav')
-    let list = Object.keys(pages).filter(x => !pages[x].special || x == name)
-    let index = list.indexOf(name)
-    let prev = (index-1+list.length) % list.length
-    let next = (index+1) % list.length
+    let list = Object.keys(pages).filter(x => !pages[x].special || x == page)
+    let index = list.indexOf(page)
     let index_title = get_titles('index', lang).title
     let mobile = matchMedia('(hover: none), (max-device-width: 500px), (max-device-height: 500px)').matches
     if (mobile)
@@ -181,7 +199,7 @@ function make_header() {
     let diff = index_title.replace(/[\u0591-\u05bd\u05bf\u05c1\u05c2\u05c4\u05c5\u05c7]/g, '').length - parent_title.replace(/[\u0591-\u05bd\u05bf\u05c1\u05c2\u05c4\u05c5\u05c7]/g, '').length
     let backarrow = ui[lang].dir == 'ltr' ? '&larr;' : '&rarr;'
     let keywords, trans, span, a
-    if (name == 'index') {
+    if (page == 'index') {
         span = document.createElement('span')
         span.dir = 'ltr'
         span.innerHTML = parent_title
@@ -190,16 +208,20 @@ function make_header() {
     }
     else {
         add_nav_element(nav, make_url('.', lang), index_title, backarrow)
-        keywords = order(pages[name].keywords, lang)
+        keywords = order(pages[page].keywords, lang)
         diff *= -1
     }
+    if (list.length > 1) {
+        let prev = (index-1+list.length) % list.length
+        let next = (index+1) % list.length
     a = add_nav_element(nav, make_url(list[next], lang), ui[lang].next, '&darr;', ident=diff)
     a.title = get_titles(list[next], lang).title
     a = add_nav_element(nav, make_url(list[prev], lang), ui[lang].prev, '&uarr;', ident=null)
     a.title = get_titles(list[prev], lang).title
-    alt_langs = Object.keys(ui).filter(x => x != lang)
+    }
+    let alt_langs = Object.keys(ui).filter(x => x != lang)
     if (alt_langs.length) {
-        trans = add_nav_element(nav, make_url(name, alt_langs[0]), mobile ? '' : ui[alt_langs[0]].lang, globe, ident=-1)
+        trans = add_nav_element(nav, make_url(page, alt_langs[0]), mobile ? '' : ui[alt_langs[0]].lang, globe, ident=-1)
         span = trans.querySelector('span')
         span.classList.add('green')
         if (mobile)
@@ -232,7 +254,7 @@ function make_header() {
                 button.innerHTML = kw_dict[kw] || kw
                 button.title = kw
             }
-            if (name == 'index') {
+            if (page == 'index') {
                 button.onclick = (kw => (function() {
                     this.classList.toggle('on')
                     hash = get_hash(kw)
@@ -251,7 +273,7 @@ function make_header() {
                     buttons_on = document.getElementsByClassName('on')
                     x_button.style.visibility = buttons_on.length ? 'visible' : 'hidden'
                     if (buttons_on.length == 1)
-                        history.replaceState('', '', '#' + (lang ? buttons_on[0].textContent : buttons_on[0].title))
+                        history.replaceState('', '', '#' + buttons_on[0][lang ? 'textContent' : 'title'])
                     else if (url_hash)
                         history.replaceState('', '', '#')
                     if (trans) {
@@ -271,7 +293,7 @@ function make_header() {
             }
             div.appendChild(button)
         }
-        if (name == 'index') {
+        if (page == 'index') {
             button = document.createElement('button')
             button.id = 'x_button'
             button.innerHTML = 'X'
@@ -292,31 +314,47 @@ function make_header() {
         h1.dir = ui[lang].dir
     }
     document.body.appendChild(header)
-    if (name == 'index' && url_hash)
+    if (page == 'index' && url_hash)
         document.getElementById(url_hash)?.click()
+    if (pages[page].author)
+        make_author()
+    return titles.title
 }
 
 
-function make_author(alt_author) {
-    let h2 = document.createElement('h2')
+function make_author(transform=x => x) {
+    let page = get_page()
     let lang = get_lang()
-    h2.innerHTML = alt_author || ui[lang].author
-    if (Object.keys(social).length) {
+    let key = pages[page].author || Object.keys(authors)[0]
+    if (!key)
+        return
+    let author = authors[key]
+    let names = author?.name
+    let name = names?.[lang] || names?.[''] || names?.values[0] || key
+    let h2 = document.createElement('h2')
+    h2.innerHTML = harden_makaf(transform(name))
+    if (flip(lang))
+        h2.dir = ui[lang].dir
+    if (author) {
+        let alt_names = Object.entries(names).filter(([k, v]) => k != lang && v).map(x => x[1])
+        if (lang in names && alt_names.length)
+            h2.title = alt_names[0]
+        let networks = Object.entries(author).filter(([k, v]) => k != 'name' && k in social && v).map(x => x[0])
+        if (networks.length) {
         h2.innerHTML += '&emsp;'
-        if (flip(lang)) {
-            h2.dir = ui[lang].dir
-        }
         let span = document.createElement('span')
         span.classList.add('social', 'green')
         let a
-        for (cls in social) {
-            a = create_link(social[cls].url, social[cls].label, cls)
+            for (net of networks) {
+                a = create_link(social[net].url + author[net], social[net].label, net)
             span.appendChild(a)
             span.innerHTML += ' '
         }
         h2.appendChild(span)
     }
+    }
     document.body.appendChild(h2)
+    return name
 }
 
 
