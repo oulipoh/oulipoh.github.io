@@ -46,59 +46,38 @@
     <script>
         make_footer()
 
-        width = 160
-        height = 80
-        chars = ['abcdefghijklmnopqrstuvwxyz', 'אבגדהוזחטיכלמנסעפצקרשת']
+        const w = 160;
+        const h = 80;
+        const chars = ['abcdefghijklmnopqrstuvwxyz', 'אבגדהוזחטיכלמנסעפצקרשת'];
 
-        var lang
-        s = 0
+        var lang;
 
-        function reset() {
-            ind_grid = []
-            new_str = ''
-            for (i = 0; i < height; i++) {
-                ind_grid[i] = []
-                new_str += '  '
-                for (j = 0; j < width; j++) {
-                    ind = Math.random() * chars[lang].length | 0
-                    ind_grid[i][j] = [ind, ind]
-                    new_str += chars[lang][ind]
-                }
-                new_str += '  \n'
-            }
+        function next(x, k) {
+            let i = k/w + h | 0;  // Note: k/w | h gives a nice glitch
+            let j = k%w + w;
+            let next_ind = (x+1) % chars[lang].length;
+            for (let m = -1; m < 2; m++)
+                for (let n = -1; n < 2; n++)
+                    if (ind_grid[(i+m)%h*w + (j+n)%w] == next_ind)
+                        return next_ind;
+            return x;
         }
 
         function update() {
             try {
                 if (lang != lang_slider.value || reset_flag) {
-                    lang = lang_slider.value
-                    reset_flag = false
-                    reset()
+                    lang = lang_slider.value;
+                    reset_flag = false;
+                    ind_grid = Array(w * h).fill().map(() => Math.random() * chars[lang].length | 0);
                 }
-                grid.textContent = new_str
-                new_str = ''
-                for (i = 0; i < height; i++) {
-                    new_str += '  '
-                    for (j = 0; j < width; j++) {
-                        next_ind = (ind_grid[i][j][s]+1) % chars[lang].length
-                        loop:
-                        for (m = -1; m <= 1; m++)
-                            for (n = -1; n <= 1; n++)
-                                if (ind_grid[(i+m+height) % height][(j+n+width) % width][1 - s] == next_ind) {
-                                    ind_grid[i][j][s] = next_ind
-                                    break loop
-                                }
-                        new_str += chars[lang][ind_grid[i][j][s]]
-                    }
-                    new_str += '  \n'
-                }
-                s = 1 - s
-                setTimeout(update, 1000 - Math.log10(rate_slider.value*99.99 + 1)*250)
+                grid.textContent = ind_grid.map((x, k) => (k % w ? '' : '\n') + chars[lang][x]).join('').slice(1);
+                ind_grid = ind_grid.map((x, k) => next(x, k));
+                setTimeout(update, 1000 - Math.log10(rate_slider.value*99.99 + 1)*250);
             }
             catch (e) {
             }
         }
-        update()
+        update();
     </script>
 </body>
 </html>

@@ -124,6 +124,14 @@ cite, footer, nav, .slider, .small, .table {
         -webkit-text-stroke-width: 1px;
     }
 
+    @keyframes web {
+        100% { scale: 1.1; }
+    }
+
+    .web:hover {
+        animation: .3s infinite alternate web;
+    }
+
     .slider > span:hover {
         color: var(--fg_highlight);
     }
@@ -303,9 +311,10 @@ footer::before {
     font-variant-ligatures: none;
     letter-spacing: 0;
     line-height: .66;
-    margin-bottom: 4rem;
+    margin-bottom: 3rem;
     overflow-x: auto;
     overflow-y: hidden;
+    padding-bottom: 1rem;
     text-align: center;
     user-select: none;
     -webkit-user-select: none;
@@ -622,5 +631,9 @@ pre.square + p {
 
     .refs > blockquote {
         font-size: initial;
+    }
+
+    .web {
+        font-size: .5em !important;
     }
 }

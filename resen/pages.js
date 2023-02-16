@@ -25,6 +25,7 @@ kw_dict = {
 
 social = {
         mail: {url: 'mailto:', label: '&#x2709;'},
+        web: {label: '&#x1f3e0;&#xfe0e;'},
         twitter: {url: 'https://twitter.com/', label: '&#x1f426;'},
         github: {url: 'https://github.com/', label: '&#x1f431;'},
 }
@@ -38,6 +39,7 @@ authors = {
     eyal: {
         name: {'': 'איל יהוה גרוּס', en: 'Eyal Yehowa Gruss'},
         mail: 'eyalgruss@gmail.com',
+        web: 'https://eyalgruss.com',
         twitter: 'eyaler',
         github: 'eyaler',
     },
@@ -125,7 +127,7 @@ function make_contents() {
     if (flip(lang))
         div.dir = ui[lang].dir
     let keywords, titles, a, p
-    for (page in pages) {
+    for (let page in pages) {
         if (pages[page].special)
             continue
         keywords = all_keywords.filter(kw => !pages[page].keywords?.includes(kw)).map(get_hash)
@@ -146,7 +148,7 @@ function export_all(lang, skip) {
     document.body.innerHTML = ''
     document.body.style.paddingInline = 0
     let iframe
-    for (page in pages) {
+    for (let page in pages) {
         if (skip?.includes(page))
             continue
         iframe = document.createElement('iframe')
@@ -244,7 +246,7 @@ function make_header() {
         div.className = 'keywords'
         url_hash = 'kw_' + location.hash.slice(1).replace(/%/g, '')
         let hash, css, found, buttons_on
-        for (kw of keywords) {
+        for (let kw of keywords) {
             button = document.createElement('button')
             button.id = get_hash(kw)
             if (lang) {
@@ -261,7 +263,7 @@ function make_header() {
                     hash = get_hash(kw)
                     css = document.getElementById('mystyle').sheet
                     found = false
-                    for (i = css.cssRules.length - 1; i >= 0; i--)
+                    for (let i = css.cssRules.length - 1; i >= 0; i--)
                         if (css.cssRules[i].selectorText?.slice(1) == hash) {
                             css.deleteRule(i)
                             found = true
@@ -346,8 +348,8 @@ function make_author(transform=x => x) {
         let span = document.createElement('span')
         span.classList.add('social', 'green')
         let a
-            for (net of networks) {
-                a = create_link(social[net].url + author[net], social[net].label, net)
+            for (let net of networks) {
+                a = create_link((social[net].url || '') + author[net], social[net].label, net)
             span.appendChild(a)
             span.innerHTML += ' '
         }
