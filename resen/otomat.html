@@ -70,7 +70,7 @@
                     reset_flag = false;
                     ind_grid = Array(w * h).fill().map(() => Math.random() * chars[lang].length | 0);
                 }
-                grid.textContent = ind_grid.map((x, k) => (k % w ? '' : '\n') + chars[lang][x]).join('').slice(1);
+                grid.textContent = ind_grid.map((x, k) => (k % w || !k ? '' : '\n') + chars[lang][x]).join('');
                 ind_grid = ind_grid.map((x, k) => next(x, k));
                 setTimeout(update, 1000 - Math.log10(rate_slider.value*99.99 + 1)*250);
             }

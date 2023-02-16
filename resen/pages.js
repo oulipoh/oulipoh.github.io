@@ -333,15 +333,18 @@ function make_author(transform=x => x) {
         return
     let author = authors[key]
     let names = author?.name
-    let name = names?.[lang] || names?.[''] || names?.values[0] || key
+    let name = key
     let h2 = document.createElement('h2')
+    if (names) {
+        name = names[lang] || names[''] || Object.values(names)[0] || name
+        let alt_names = Object.entries(names).filter(([k, v]) => k != lang && v).map(x => x[1])
+        if (lang in names && alt_names.length)
+            h2.title = alt_names[0]
+    }
     h2.innerHTML = harden_makaf(transform(name))
     if (flip(lang))
         h2.dir = ui[lang].dir
     if (author) {
-        let alt_names = Object.entries(names).filter(([k, v]) => k != lang && v).map(x => x[1])
-        if (lang in names && alt_names.length)
-            h2.title = alt_names[0]
         let networks = Object.entries(author).filter(([k, v]) => k != 'name' && k in social && v).map(x => x[0])
         if (networks.length) {
         h2.innerHTML += '&emsp;'
