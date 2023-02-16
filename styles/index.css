@@ -10,6 +10,12 @@ body {
     text-underline-position: under;
 }
 
+@supports (-webkit-touch-callout: none) {
+    body {
+        min-height: -webkit-fill-available;
+    }
+}
+
 @keyframes border-dance {
     0% { background-position: 0 0, 100% 100%, 0 100%, 100% 0; }
     100% { background-position: 100% 0, 0 100%, 0 0, 100% 100%; }

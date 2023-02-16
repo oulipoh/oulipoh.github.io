@@ -30,6 +30,12 @@ body {
     width: 100%;
 }
 
+@supports (-webkit-touch-callout: none) {
+    body {
+        height: -webkit-fill-available;
+    }
+}
+
 button, pre {
     font-family: inherit;
 }
@@ -605,7 +611,7 @@ pre.square + p {
 
 #xx17n > iframe {
     height: 965px;
-    width: max(85%, 1280px);
+    min-width: 1280px;
 }
 
 @media (hover: none), (max-device-width: 500px), (max-device-height: 500px) {
