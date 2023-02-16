@@ -3,7 +3,7 @@ body {
     display: flex;
     flex-direction: column;
     font-family: Alef, Arial, sans-serif;
-    height: 100vh;
+    min-height: 100vh;
     justify-content: space-evenly;
     margin: 0;
     text-align: center;
@@ -31,7 +31,7 @@ body {
 
 div {
     line-height: 0;
-    width: 67.5%;  /* Safari need this, otherwise justified element take full parent width */
+    width: 67.5vw;  /* Safari need this, otherwise justified element take full parent width */
 }
 
 @keyframes stroke {
