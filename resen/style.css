@@ -130,12 +130,8 @@ cite, footer, nav, .slider, .small, .table {
         -webkit-text-stroke-width: 1px;
     }
 
-    @keyframes web {
-        100% { scale: 1.1; }
-    }
-
-    .web:hover {
-        animation: .3s infinite alternate web;
+    .table tr:hover {
+        background: var(--fg_verydull);
     }
 
     .slider > span:hover {
@@ -148,6 +144,14 @@ cite, footer, nav, .slider, .small, .table {
 
     .twitter:hover {
         animation: .3s infinite alternate twitter;
+    }
+
+    @keyframes web {
+        100% { scale: 1.1; }
+    }
+
+    .web:hover {
+        animation: .3s infinite alternate web;
     }
 }
 

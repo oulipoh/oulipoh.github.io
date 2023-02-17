@@ -22,7 +22,7 @@ figcaption > div {
 figcaption > div > a {
     background: #fff8;
     font-size: 1rem;
-    font-weight: initial;
+    font-weight: normal;
     padding-inline: .2em;
     -webkit-text-stroke: 0;
 }

@@ -380,7 +380,7 @@ function make_footer() {
     let a = create_link((new Error).fileName, ui[lang].theme_name, 'nowrap')
     footer.innerHTML += ui[lang].theme + ':&nbsp;'
     footer.appendChild(a)
-    footer.innerHTML += '&emsp;&emsp;'
+    footer.innerHTML += '&emsp;&emsp;\n'
     a = create_link('https://creativecommons.org/licenses/by/4.0/', ui[lang].copyright, 'nowrap')
     footer.appendChild(a)
     footer.innerHTML += '&nbsp;'
