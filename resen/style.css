@@ -253,7 +253,6 @@ cite {
 
 .contents {
     columns: 3;
-    margin-bottom: 1ex;
 }
 
 .contents > p {
@@ -291,15 +290,17 @@ cite {
 }
 
 footer {
-    color: var(--fg_dull);
     display: table-row;
-    height: 1px;
-    text-align: center;
 }
 
-footer::before {
-    content: '\a';
-    white-space: pre;
+footer > div {
+    align-items: end;
+    color: var(--fg_dull);
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5em 3em;
+    justify-content: center;
+    margin-top: 2rem;
 }
 
 .formula {

@@ -374,20 +374,28 @@ function make_footer() {
             refs.dir = ui[lang].dir
     }
 
-    let footer = document.createElement('footer')
+    let flex = document.createElement('div')
     if (f)
-        footer.dir = ui[lang].dir
-    let a = create_link((new Error).fileName, ui[lang].theme_name, 'nowrap')
-    footer.innerHTML += ui[lang].theme + ':&nbsp;'
-    footer.appendChild(a)
-    footer.innerHTML += '&emsp;&emsp;\n'
-    a = create_link('https://creativecommons.org/licenses/by/4.0/', ui[lang].copyright, 'nowrap')
-    footer.appendChild(a)
-    footer.innerHTML += '&nbsp;'
+        flex.dir = ui[lang].dir
+
     let span = document.createElement('span')
-    span.className = 'nowrap'
-    span.dir = 'ltr'
-    span.innerHTML = '(CC)(&#xc6c3;)'
-    footer.appendChild(span)
+    let a = create_link((new Error).fileName, ui[lang].theme_name, 'nowrap')
+    span.innerHTML += ui[lang].theme + ':&nbsp;'
+    span.appendChild(a)
+    flex.appendChild(span)
+
+    span = document.createElement('span')
+    a = create_link('https://creativecommons.org/licenses/by/4.0/', ui[lang].copyright, 'nowrap')
+    span.appendChild(a)
+    span.innerHTML += '&nbsp;'
+    let span2 = document.createElement('span')
+    span2.className = 'nowrap'
+    span2.dir = 'ltr'
+    span2.innerHTML = '(CC)(&#xc6c3;)'
+    span.appendChild(span2)
+    flex.appendChild(span)
+
+    let footer = document.createElement('footer')
+    footer.appendChild(flex)
     document.body.appendChild(footer)
 }
