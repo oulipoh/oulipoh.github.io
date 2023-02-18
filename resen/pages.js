@@ -325,7 +325,7 @@ function make_header() {
 }
 
 
-function make_author(transform=x => x) {
+function make_author() {
     let page = get_page()
     let lang = get_lang()
     let key = pages[page].author || Object.keys(authors)[0]
@@ -341,7 +341,7 @@ function make_author(transform=x => x) {
         if (lang in names && alt_names.length)
             h2.title = alt_names[0]
     }
-    h2.innerHTML = harden_makaf(transform(name))
+    h2.innerHTML = harden_makaf(name)
     if (flip(lang))
         h2.dir = ui[lang].dir
     if (author) {
