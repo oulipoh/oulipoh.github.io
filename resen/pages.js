@@ -119,6 +119,7 @@ function open_internal_link(event) {
     location.href = make_url(event.target.href.split('#')[1])
 }
 
+
 function make_contents() {
     let lang = get_lang()
     let all_keywords = get_all_keywords(lang)

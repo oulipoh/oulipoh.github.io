@@ -98,6 +98,10 @@ cite, footer, nav, .slider, .small, .table {
         outline: transparent;
     }
 
+    .bigsquare > span:hover > b {
+        background: var(--fg_verydull);
+    }
+
     @keyframes border {
         33% { border-style: dashed; }
         66% { border-style: dotted; }
@@ -189,6 +193,7 @@ a {
 }
 
 .bigsquare {
+    cursor: default;
     margin-block: 3ex 4ex;
     text-align: center;
 }
