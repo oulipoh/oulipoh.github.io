@@ -37,7 +37,6 @@ body {
 
 div {
     line-height: 0;
-    width: 67.5vw;  /* Safari need this, otherwise justified element take full parent width */
 }
 
 @keyframes stroke {
@@ -60,9 +59,14 @@ h1 {
 }
 
 h2 {
+    box-sizing: border-box;
     font-size: 3.5vw;
-    margin-inline: .4em;
+    padding-inline: .4em;
     text-align-last: justify;
+
+    /* Safari needs this, otherwise this justified element will stretch parent width */
+    min-width: 100%
+    width: 0;
 }
 
 h3 {

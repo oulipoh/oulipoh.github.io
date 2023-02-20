@@ -47,7 +47,7 @@ authors = {
 
 ui = {
     '': {next: 'הבא', prev: 'הקודם', lang: 'עברית', refs: 'ראו גם', theme_name: 'עיצוב של מתכנת', theme: 'תבנית', copyright: 'כל הזכויות שמורות'},
-    en: {next: 'Next', prev: 'Prev', lang: 'English', refs: 'See also', theme_name: 'Designed by a programmer', theme: 'Theme', copyright: 'All rights reversed', dir: 'ltr'},
+    en: {next: 'next', prev: 'prev', lang: 'English', refs: 'See also', theme_name: 'Designed by a programmer', theme: 'Theme', copyright: 'All rights reversed', dir: 'ltr'},
 }
 
 globe = '&#x1f310;&#xfe0e;'
