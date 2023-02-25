@@ -128,7 +128,7 @@ function make_contents() {
     if (flip(lang))
         div.dir = ui[lang].dir
     let keywords, titles, a, p
-    for (let page in pages) {
+    for (const page in pages) {
         if (pages[page].special)
             continue
         keywords = all_keywords.filter(kw => !pages[page].keywords?.includes(kw)).map(get_hash)
@@ -149,7 +149,7 @@ function export_all(lang, skip) {
     document.body.innerHTML = ''
     document.body.style.paddingInline = 0
     let iframe
-    for (let page in pages) {
+    for (const page in pages) {
         if (skip?.includes(page))
             continue
         iframe = document.createElement('iframe')
@@ -246,8 +246,8 @@ function make_header() {
         div = document.createElement('div')
         div.className = 'keywords'
         url_hash = 'kw_' + location.hash.slice(1).replace(/%/g, '')
-        let hash, css, found, buttons_on
-        for (let kw of keywords) {
+        let hash, css, found, i, buttons_on
+        for (const kw of keywords) {
             button = document.createElement('button')
             button.id = get_hash(kw)
             if (lang) {
@@ -264,15 +264,15 @@ function make_header() {
                     hash = get_hash(kw)
                     css = document.getElementById('mystyle').sheet
                     found = false
-                    for (let i = css.cssRules.length - 1; i >= 0; i--)
+                    for (i = css.cssRules.length - 1; i >= 0; i--)
                         if (css.cssRules[i].selectorText?.slice(1) == hash) {
                             css.deleteRule(i)
                             found = true
                         }
                     if (!found) {
-                        css.insertRule(`.${hash} {color: var(--fg_dull);}`)
+                        css.insertRule(`.${hash} {color: var(--fg_dull)}`)
                         if (matchMedia('(forced-colors: active)').matches)
-                            css.insertRule(`.${hash} {text-decoration-line: line-through;}`)
+                            css.insertRule(`.${hash} {text-decoration-line: line-through}`)
                     }
                     buttons_on = document.getElementsByClassName('on')
                     x_button.style.visibility = buttons_on.length ? 'visible' : 'hidden'
@@ -352,7 +352,7 @@ function make_author() {
         let span = document.createElement('span')
         span.classList.add('social', 'green')
         let a
-            for (let net of networks) {
+            for (const net of networks) {
                 a = create_link((social[net].url || '') + author[net], social[net].label, net)
             span.appendChild(a)
             span.innerHTML += ' '

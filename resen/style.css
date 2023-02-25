@@ -46,28 +46,28 @@ cite, footer, nav, .sliders, .small, .table {
 
 @media (hover: hover) {
     @keyframes symbol_rarr {
-        100% { translate: .12em; }
+        100% { translate: .12em }
     }
 
     @keyframes symbol_larr {
-        100% { translate: -.12em; }
+        100% { translate: -.12em }
     }
 
     @keyframes symbol_darr {
-        100% { translate: 0 .12em; }
+        100% { translate: 0 .12em }
     }
 
     @keyframes symbol_uarr {
-        100% { translate: 0 -.12em; }
+        100% { translate: 0 -.12em }
     }
 
     @keyframes symbol_x1f310 {
-        100% { rotate: 0 1 0 360deg; }
+        100% { rotate: 0 1 0 360deg }
     }
 
     @keyframes deco {
-        33% { text-decoration-style: dashed; }
-        66% { text-decoration-style: dotted; }
+        33% { text-decoration-style: dashed }
+        66% { text-decoration-style: dotted }
     }
 
     a:hover, a:focus-visible {
@@ -103,8 +103,8 @@ cite, footer, nav, .sliders, .small, .table {
     }
 
     @keyframes border {
-        33% { border-style: dashed; }
-        66% { border-style: dotted; }
+        33% { border-style: dashed }
+        66% { border-style: dotted }
     }
 
     button:hover, button:focus-visible {
@@ -126,7 +126,7 @@ cite, footer, nav, .sliders, .small, .table {
     }
 
     @keyframes stroke {
-        50% { -webkit-text-stroke-color: var(--fg_dull); }
+        50% { -webkit-text-stroke-color: var(--fg_dull) }
     }
 
     #dot:hover, #dot:focus-visible {
@@ -143,7 +143,7 @@ cite, footer, nav, .sliders, .small, .table {
     }
 
     @keyframes twitter {
-        100% { rotate: -15deg; }
+        100% { rotate: -15deg }
     }
 
     .twitter:hover {
@@ -151,7 +151,7 @@ cite, footer, nav, .sliders, .small, .table {
     }
 
     @keyframes web {
-        100% { scale: 1.1; }
+        100% { scale: 1.1 }
     }
 
     .web:hover {
@@ -418,10 +418,10 @@ li {
 }
 
 @keyframes flash {
-    99.00% {background: var(--bg); color: var(--fg);}
-    99.01% {background: var(--fg); color: var(--fg_highlight);}
-    99.40% {background: var(--bg); color: var(--fg);}
-    99.41% {background: var(--fg); color: var(--fg_highlight);}
+    99.00% {background: var(--bg); color: var(--fg)}
+    99.01% {background: var(--fg); color: var(--fg_highlight)}
+    99.40% {background: var(--bg); color: var(--fg)}
+    99.41% {background: var(--fg); color: var(--fg_highlight)}
 }
 
 #namretla {

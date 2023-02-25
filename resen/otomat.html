@@ -12,11 +12,11 @@
     <meta property="og:image" content="https://oulipoh.com/resen/media/og_image.jpg">
 </head>
 <body style="visibility: hidden" onload="document.body.style.visibility = 'visible'; iframe.src = 'https://player.vimeo.com/video/469788336?byline=0&loop=1&portrait=0&quality=1080p&title=0'">
-    <noscript><style>body {visibility: visible !important;}</style></noscript>
+    <noscript><style>body {visibility: visible !important}</style></noscript>
     <script>make_header()</script>
     <p>
         <a href="https://en.wikipedia.org/wiki/Cyclic_cellular_automaton">אוטומט תאי ציקלי</a> מבוסס אותיות.
-        אות תתקדם לאות שבאה אחריה באלף־בית, אם לפחות אחת משמונת האותיות הסובבות היא האות החדשה הזו. הקליקי בשביל לאתחל.
+        אות תתקדם לאות שבאה אחריה באלף־בית, אם לפחות אחת משמונת האותיות הסובבות היא האות החדשה הזו. בנוסף, מילים מסוימות, כשהן נוצרות באופן ספונטני, יכולות לקפוא ויותר לא להשתנות. הקליקי בשביל לאתחל.
     </p>
     <div class="sliders">
         <label>
@@ -30,6 +30,11 @@
             <span onclick="rate_slider.value = 100">Fast</span>
         </label>
         <label>
+            <span onclick="freeze_slider.value = 0">Unfreeze</span>
+            <input type="range" id="freeze_slider" max="1" value="1" autocomplete="off" oninput="frozen = Array(w * h).fill(0)">
+            <span onclick="freeze_slider.value = 1">Freeze</span>
+        </label>
+        <label>
             <span onclick="glitch_slider.value = 0">Normal</span>
             <input type="range" id="glitch_slider" max="1" value="0" autocomplete="off">
             <span onclick="glitch_slider.value = 1">Glitch</span>
@@ -38,10 +43,10 @@
     <pre id="grid" onclick="reset_flag = true" title="Click to restart"></pre>
     <p dir="ltr">
         Letter-based <a href="https://en.wikipedia.org/wiki/Cyclic_cellular_automaton">cyclic cellular automata</a>.
-        A letter will advance to the letter that follows it in the alphabet, if at least one of the eight surrounding letters is that new letter. Click to restart.
+        A letter will advance to the letter that follows it in the alphabet, if at least one of the eight surrounding letters is that new letter. In addition, certain words, as they form spontaneously, can freeze and not change anymore. Click to restart.
     </p>
     <p>
-        ב־"להט החרב המתהפכת" ניסיתי להשתמש בזה בשביל לחולל <a href="#magicspell" onclick="open_internal_link(event)">לחשקסם</a>, בכך שאפשרתי למילים מסוימות, ככל שהן נוצרות באופן ספונטני, להיצרב ויותר לא להשתנות:
+        ב־"להט החרב המתהפכת" ניסיתי להשתמש בזה בשביל לחולל <a href="#magicspell" onclick="open_internal_link(event)">לחשקסם</a>:
     </p>
     <iframe id="iframe" allow="fullscreen; web-share" class="video"></iframe>
     <div class="refs">
@@ -54,15 +59,19 @@
         const w = 160;
         const h = 80;
         const chars = ['abcdefghijklmnopqrstuvwxyz', 'אבגדהוזחטיכלמנסעפצקרשת'];
+        const words = [['foo', 'bar'], ['לחש', 'קסם']];
 
-        let lang, glitch;
+        let lang, freeze, glitch;
 
         function next(x, k) {
+            if (freeze && frozen[k])
+                return x;
             let i = glitch ? k/w | h : k/w + h | 0;
             let j = k%w + w;
             let next_ind = (x+1) % chars[lang].length;
-            for (let m = -1; m < 2; m++)
-                for (let n = -1; n < 2; n++)
+            let m, n;
+            for (m = -1; m < 2; m++)
+                for (n = -1; n < 2; n++)
                     if (ind_grid[(i+m)%h*w + (j+n)%w] == next_ind)
                         return next_ind;
             return x;
@@ -73,8 +82,26 @@
                     lang = lang_slider.value;
                     reset_flag = false;
                     ind_grid = Array(w * h).fill().map(() => Math.random() * chars[lang].length | 0);
+                frozen = Array(w * h).fill(0);
+                regexp = words[lang].length ? new RegExp(words[lang].join('|'), 'g') : null;
                 }
-                grid.textContent = ind_grid.map((x, k) => (k % w || !k ? '' : '\n') + chars[lang][x]).join('');
+            let text = ind_grid.map((x, k) => (k % w || !k ? '' : '\n') + chars[lang][x]).join('');
+            freeze = freeze_slider.value == '1';
+            if (freeze && regexp) {
+                if (lang == '1')
+                    for (const word of words[lang])
+                        text = text.replaceAll(word.replace(/ך/g, 'כ').replace(/ם/g, 'מ').replace(/ן/g, 'נ').replace(/ף/g, 'פ').replace(/ץ/g, 'צ'), word);
+                let start;
+                for (const match of text.matchAll(regexp))
+                {
+                    start = match.index - (match.index/(w+1)|0);
+                    frozen.fill(1, start, start + match[0].length);
+                }
+                //for (const word of words[lang])
+                //    text = text.replaceAll(word, '<span style="color: var(--fg_highlight)">$&</span>');
+            }
+            // grid.innerHTML = text;
+            grid.textContent = text;
             glitch = glitch_slider.value == '1';
             ind_grid = ind_grid.map(next);
                 setTimeout(update, 1000 - Math.log10(rate_slider.value*99.99 + 1)*250);
