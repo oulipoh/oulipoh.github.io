@@ -195,7 +195,7 @@ function make_header() {
     const nav = document.createElement('nav')
     const list = Object.keys(pages).filter(x => !pages[x].special || x == page)
     const index = list.indexOf(page)
-    const index_title = get_titles('index', lang).title
+    let index_title = get_titles('index', lang).title
     const mobile = matchMedia('(hover: none), (max-device-width: 500px), (max-device-height: 500px)').matches
     if (mobile)
         index_title = index_title.split(' ').slice(0, lang ? 1 : 2).join(' ')

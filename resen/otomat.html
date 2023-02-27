@@ -30,7 +30,7 @@
             <span onclick="rate_slider.value = 100">Fast</span>
         </label>
         <label>
-            <span onclick="freeze_slider.value = 0">Unfreeze</span>
+            <span onclick="freeze_slider.value = 0">Melt</span>
             <input type="range" id="freeze_slider" max="1" value="1" autocomplete="off" oninput="frozen = Array(w * h).fill(0)">
             <span onclick="freeze_slider.value = 1">Freeze</span>
         </label>
@@ -115,7 +115,7 @@
                     frozen.forEach((x, k) => {
                         const start = k + k/w | 0;
                         if (x == 1)
-                            chars[start] = chars[start].replace(/כ/, 'ך').replace(/מ/, 'ם').replace(/נ/, 'ן').replace(/פ/, 'ף').replace(/צ/, 'ץ')
+                            chars[start] = chars[start].replace(/כ/, 'ך').replace(/מ/, 'ם').replace(/נ/, 'ן').replace(/פ/, 'ף').replace(/צ/, 'ץ');
                     });
                     text = chars.join('');
                 }

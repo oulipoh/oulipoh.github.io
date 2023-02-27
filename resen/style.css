@@ -560,6 +560,7 @@ pre.square + p {
 }
 
 input[type=range] {
+    margin-inline: -1px;
     touch-action: none;
     width: 2.5em;
 }
