@@ -79,7 +79,7 @@ function harden_makaf(s) {
 
 
 function create_link(url, label, cls) {
-    let a = document.createElement('a')
+    const a = document.createElement('a')
     if (cls)
         a.classList.add(...[cls].flat())
     a.href = url
@@ -97,7 +97,7 @@ function get_hash(kw) {
 
 
 function get_titles(page, lang='') {
-    let titles = {title: pages[page].title, alt: ''}
+    const titles = {title: pages[page].title, alt: ''}
     if (pages[page].alt) {
         titles.alt = pages[page].alt
         if (lang)
@@ -121,9 +121,9 @@ function open_internal_link(event) {
 
 
 function make_contents() {
-    let lang = get_lang()
-    let all_keywords = get_all_keywords(lang)
-    let div = document.createElement('div')
+    const lang = get_lang()
+    const all_keywords = get_all_keywords(lang)
+    const div = document.createElement('div')
     div.className = 'contents'
     if (flip(lang))
         div.dir = ui[lang].dir
@@ -168,11 +168,11 @@ function export_all(lang, skip) {
 function add_nav_element(nav, url, label, symbol='', ident=0)
 {
     if (nav.innerHTML && ident != -1) nav.innerHTML += ident === null ? '&nbsp;'.repeat(4) : '&emsp;' + '&ensp;'.repeat(1.5 + Math.max(ident, 0)*.8)
-    let a = create_link(url, label, 'nowrap')
+    const a = create_link(url, label, 'nowrap')
     if (symbol) {
         span = document.createElement('span')
         span.className = 'symbol_' + symbol.match(/\w+/)
-        let span2 = document.createElement('span')
+        const span2 = document.createElement('span')
         span2.innerHTML = symbol
         span.appendChild(span2)
         a.prepend(span)
@@ -188,20 +188,20 @@ function get_page() {
 
 
 function make_header() {
-    let page = get_page()
-    let lang = get_lang()
-    let titles = get_titles(page, lang)
+    const page = get_page()
+    const lang = get_lang()
+    const titles = get_titles(page, lang)
     document.title = titles.title
-    let nav = document.createElement('nav')
-    let list = Object.keys(pages).filter(x => !pages[x].special || x == page)
-    let index = list.indexOf(page)
-    let index_title = get_titles('index', lang).title
-    let mobile = matchMedia('(hover: none), (max-device-width: 500px), (max-device-height: 500px)').matches
+    const nav = document.createElement('nav')
+    const list = Object.keys(pages).filter(x => !pages[x].special || x == page)
+    const index = list.indexOf(page)
+    const index_title = get_titles('index', lang).title
+    const mobile = matchMedia('(hover: none), (max-device-width: 500px), (max-device-height: 500px)').matches
     if (mobile)
         index_title = index_title.split(' ').slice(0, lang ? 1 : 2).join(' ')
-    let parent_title = decodeURI(location).split('/').slice(-3)[0]
+    const parent_title = decodeURI(location).split('/').slice(-3)[0]
     let diff = index_title.replace(/[\u0591-\u05bd\u05bf\u05c1\u05c2\u05c4\u05c5\u05c7]/g, '').length - parent_title.replace(/[\u0591-\u05bd\u05bf\u05c1\u05c2\u05c4\u05c5\u05c7]/g, '').length
-    let backarrow = ui[lang].dir == 'ltr' ? '&larr;' : '&rarr;'
+    const backarrow = ui[lang].dir == 'ltr' ? '&larr;' : '&rarr;'
     let keywords, trans, span, a
     if (page == 'index') {
         span = document.createElement('span')
@@ -216,14 +216,14 @@ function make_header() {
         diff *= -1
     }
     if (list.length > 1) {
-        let prev = (index-1+list.length) % list.length
-        let next = (index+1) % list.length
+        const prev = (index-1+list.length) % list.length
+        const next = (index+1) % list.length
     a = add_nav_element(nav, make_url(list[next], lang), ui[lang].next, '&darr;', ident=diff)
     a.title = get_titles(list[next], lang).title
     a = add_nav_element(nav, make_url(list[prev], lang), ui[lang].prev, '&uarr;', ident=null)
     a.title = get_titles(list[prev], lang).title
     }
-    let alt_langs = Object.keys(ui).filter(x => x != lang)
+    const alt_langs = Object.keys(ui).filter(x => x != lang)
     if (alt_langs.length) {
         trans = add_nav_element(nav, make_url(page, alt_langs[0]), mobile ? '' : ui[alt_langs[0]].lang, globe, ident=-1)
         span = trans.querySelector('span')
@@ -240,7 +240,7 @@ function make_header() {
         }
     }
     document.body.appendChild(nav)
-    let header = document.createElement('header')
+    const header = document.createElement('header')
     let div, url_hash, button
     if (keywords.length) {
         div = document.createElement('div')
@@ -307,7 +307,7 @@ function make_header() {
         }
         header.appendChild(div)
     }
-    let h1 = document.createElement('h1')
+    const h1 = document.createElement('h1')
     h1.innerHTML = harden_makaf(titles.title)
     h1.title = titles.alt
     header.appendChild(h1)
@@ -327,18 +327,18 @@ function make_header() {
 
 
 function make_author() {
-    let page = get_page()
-    let lang = get_lang()
-    let key = pages[page].author || Object.keys(authors)[0]
+    const page = get_page()
+    const lang = get_lang()
+    const key = pages[page].author || Object.keys(authors)[0]
     if (!key)
         return
-    let author = authors[key]
-    let names = author?.name
+    const author = authors[key]
+    const names = author?.name
     let name = key
-    let h2 = document.createElement('h2')
+    const h2 = document.createElement('h2')
     if (names) {
         name = names[lang] || names[''] || Object.values(names)[0] || name
-        let alt_names = Object.entries(names).filter(([k, v]) => k != lang && v).map(x => x[1])
+        const alt_names = Object.entries(names).filter(([k, v]) => k != lang && v).map(x => x[1])
         if (lang in names && alt_names.length)
             h2.title = alt_names[0]
     }
@@ -346,10 +346,10 @@ function make_author() {
     if (flip(lang))
         h2.dir = ui[lang].dir
     if (author) {
-        let networks = Object.entries(author).filter(([k, v]) => k != 'name' && k in social && v).map(x => x[0])
+        const networks = Object.entries(author).filter(([k, v]) => k != 'name' && k in social && v).map(x => x[0])
         if (networks.length) {
         h2.innerHTML += '&emsp;'
-        let span = document.createElement('span')
+            const span = document.createElement('span')
         span.classList.add('social', 'green')
         let a
             for (const net of networks) {
@@ -366,16 +366,16 @@ function make_author() {
 
 
 function make_footer() {
-    let lang = get_lang()
-    let f = flip(lang) & 1
-    let refs = document.querySelector('.refs:last-of-type')
+    const lang = get_lang()
+    const f = flip(lang) & 1
+    const refs = document.querySelector('.refs:last-of-type')
     if (refs) {
         refs.dataset.label = ui[lang].refs + ':'
         if (f)
             refs.dir = ui[lang].dir
     }
 
-    let flex = document.createElement('div')
+    const flex = document.createElement('div')
     if (f)
         flex.dir = ui[lang].dir
 
@@ -389,14 +389,14 @@ function make_footer() {
     a = create_link('https://creativecommons.org/licenses/by/4.0/', ui[lang].copyright, 'nowrap')
     span.appendChild(a)
     span.innerHTML += '&nbsp;'
-    let span2 = document.createElement('span')
+    const span2 = document.createElement('span')
     span2.className = 'nowrap'
     span2.dir = 'ltr'
     span2.innerHTML = '(CC)(&#xc6c3;)'
     span.appendChild(span2)
     flex.appendChild(span)
 
-    let footer = document.createElement('footer')
+    const footer = document.createElement('footer')
     footer.appendChild(flex)
     document.body.appendChild(footer)
 }
