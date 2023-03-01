@@ -16,7 +16,7 @@
     <script>make_header()</script>
     <p>
         <a href="https://en.wikipedia.org/wiki/Cyclic_cellular_automaton">אוטומט תאי ציקלי</a> מבוסס אותיות.
-        אות תתקדם לאות שבאה אחריה באלף־בית, אם לפחות אחת משמונת האותיות הסובבות היא האות החדשה הזו. בנוסף, אני מאפשר למילים מסוימות כשהן נוצרות באופן ספונטני (בכיוון אופקי או אנכי), לקפוא ויותר לא להשתנות. הקליקי בשביל לאתחל.
+        אות תתקדם לאות הבאה באלף־בית, אם לפחות אחד משמונת שכניה הסובבים זהה לאותה האות הבאה. בנוסף, אני מאפשר למילים מסוימות כשהן נוצרות באופן ספונטני אופקית או אנכית, לקפוא ויותר לא להשתנות. הקליקי על הלוח בשביל לאתחל.
     </p>
     <div class="sliders">
         <label>
@@ -31,7 +31,7 @@
         </label>
         <label>
             <span onclick="freeze_slider.value = 0">Melt</span>
-            <input type="range" id="freeze_slider" max="1" value="1" autocomplete="off" oninput="frozen = Array(w * h).fill(0)">
+            <input type="range" id="freeze_slider" max="1" value="1" autocomplete="off" oninput="melt">
             <span onclick="freeze_slider.value = 1">Freeze</span>
         </label>
         <label>
@@ -43,7 +43,7 @@
     <pre id="grid" onclick="reset_flag = true" title="Click to restart"></pre>
     <p dir="ltr">
         Letter-based <a href="https://en.wikipedia.org/wiki/Cyclic_cellular_automaton">cyclic cellular automata</a>.
-        A letter will advance to the letter that follows it in the alphabet, if at least one of the eight surrounding letters is that new letter. In addition, I allow certain words as they form spontaneously (in a horizontal or vertical direction), to freeze and not change anymore. Click to restart.
+        A letter will advance to the next letter in the alphabet, if at least one of its eight surrounding neighbours is that next letter. In addition, I allow certain words as they form spontaneously horizontally or vertically, to freeze and not change anymore. Click the grid to restart.
     </p>
     <p>
         ב־"להט החרב המתהפכת" ניסיתי להשתמש בזה בשביל לחולל <a href="#magicspell" onclick="open_internal_link(event)">לחשקסם</a>:
@@ -59,9 +59,35 @@
         const w = 160;
         const h = 80;
         const chars = ['abcdefghijklmnopqrstuvwxyz', 'אבגדהוזחטיכלמנסעפצקרשת'];
-        const words = [['foo', 'bar'], ['לחש', 'קסם']];
+        const words = [['foo', 'bar'], ['ברקת' ,'לחש', 'קסם']];
 
         let lang, freeze, glitch;
+        ind_grid = Array(w * h).fill();
+        frozen = new Uint8Array(w * h);
+
+        function melt() {
+            frozen.fill(0);
+        }
+
+        function freeze_words(text_frozen_w_h) {
+            let start, end;
+            for (const match of text_frozen_w_h[0].matchAll(regexp))
+            {
+                start = match.index - (match.index/(text_frozen_w_h[2]+1)|0);
+                end = start + match[0].length - 1;
+                text_frozen_w_h[1].fill(2, start, end);
+                text_frozen_w_h[1][end] = Math.max(text_frozen_w_h[1][end], 1);
+            }
+            return text_frozen_w_h;
+        }
+
+        function transpose(str_arr_w_h) {
+            [str_arr_w_h[2], str_arr_w_h[3]] = [str_arr_w_h[3], str_arr_w_h[2]];
+            const char_grid = str_arr_w_h[0].replace(/\n/g, '').split('');
+            str_arr_w_h[0] = char_grid.map((_, k) => (k % str_arr_w_h[2] || !k ? '' : '\n') + char_grid[k%str_arr_w_h[2]*str_arr_w_h[3] + k/str_arr_w_h[2] | 0]).join('');
+            str_arr_w_h[1] = str_arr_w_h[1].map((_, k) => str_arr_w_h[1][k%str_arr_w_h[2]*str_arr_w_h[3] + k/str_arr_w_h[2] | 0]);
+            return str_arr_w_h;
+        }
 
         function next(x, k) {
             if (freeze && frozen[k])
@@ -77,39 +103,19 @@
             return x;
         }
 
-        function transpose(str_arr_w) {
-            const str_trans = [];
-            const lines = str_arr_w[0].split('\n');
-            lines.forEach(line => line.split('').forEach((c, i) => str_trans[i] = (str_trans[i] || '') + c));
-            const new_w = lines.length;
-            const arr_trans = str_arr_w[1].map((_, i) => str_arr_w[1][i%new_w*str_arr_w[2] + i/new_w | 0]);
-            return [str_trans.join('\n'), arr_trans, new_w];
-        }
-
-        function freeze_words(text_frozen_w) {
-            let start, end;
-            for (const match of text_frozen_w[0].matchAll(regexp))
-            {
-                start = match.index - (match.index/(text_frozen_w[2]+1)|0);
-                end = start + match[0].length;
-                text_frozen_w[1] = text_frozen_w[1].map((x, i) => i >= start && i < end ? i < end - 1 ? 2 : Math.max(x, 1) : x);
-            }
-            return text_frozen_w;
-        }
-
         function update() {
             const start_time = performance.now();
                 if (lang != lang_slider.value || reset_flag) {
                     lang = lang_slider.value;
                     reset_flag = false;
-                    ind_grid = Array(w * h).fill().map(() => Math.random() * chars[lang].length | 0);
-                frozen = Array(w * h).fill(0);
-                regexp = words[lang].length ? new RegExp(words[lang].join('|').replace(/ך/g, 'כ').replace(/ם/g, 'מ').replace(/ן/g, 'נ').replace(/ף/g, 'פ').replace(/ץ/g, 'צ'), 'g') : null;
+                ind_grid = ind_grid.map(() => Math.random() * chars[lang].length | 0);
+                melt();
+                regexp = words[lang].length ? RegExp(words[lang].join('|').replace(/ך/g, 'כ').replace(/ם/g, 'מ').replace(/ן/g, 'נ').replace(/ף/g, 'פ').replace(/ץ/g, 'צ'), 'g') : null;
                 }
             let text = ind_grid.map((x, k) => (k % w || !k ? '' : '\n') + chars[lang][x]).join('');
             freeze = freeze_slider.value == '1';
             if (freeze && regexp) {
-                [text, frozen, _] = transpose(freeze_words(transpose(freeze_words([text, frozen, w]))));
+                [text, frozen, _, _] = transpose(freeze_words(transpose(freeze_words([text, frozen, w, h]))));
                 if (lang == '1') {
                     const chars = text.split('');
                     frozen.forEach((x, k) => {

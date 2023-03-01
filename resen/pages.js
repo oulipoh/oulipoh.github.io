@@ -380,7 +380,7 @@ function make_footer() {
         flex.dir = ui[lang].dir
 
     let span = document.createElement('span')
-    let a = create_link((new Error).fileName, ui[lang].theme_name, 'nowrap')
+    let a = create_link(Error().fileName, ui[lang].theme_name, 'nowrap')
     span.innerHTML += ui[lang].theme + ':&nbsp;'
     span.appendChild(a)
     flex.appendChild(span)
