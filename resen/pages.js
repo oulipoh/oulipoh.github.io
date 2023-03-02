@@ -2,7 +2,7 @@ pages = {
     index: {title: 'רֶסֶן', alt: 'Resen', author: 'oulipoh', special: true},
 
     eyal: {title: 'אֱיָליטרציה', alt: 'Eyalliteration', author: 'eyal', keywords: ['constraint combo', 'discourse', 'poem', 'self-referral']},
-    otomat: {title: 'אות־וֹמט תאי', alt: 'Letter cellular automata', author: 'eyal', keywords: ['2D', 'math', 'new constraint', 'software']},
+    otomat: {title: 'אות־וֹמט תאי', alt: 'OT-o-mata: letter cellular automata', author: 'eyal', keywords: ['2D', 'math', 'new constraint', 'software']},
     taz: {title: 'תחום אוטונומי זמני', alt: 'Temporary Autonomous Zone', author: 'eyal', keywords: ['cypher', 'math', 'new constraint', 'software']},
 }
 
