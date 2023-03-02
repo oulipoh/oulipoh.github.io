@@ -12,6 +12,10 @@
     src: url("Alef-Monospace.woff2");
 }
 
+html {
+    scroll-padding-top: 5rem;
+}
+
 body {
     background: var(--bg);
     box-sizing: border-box;
