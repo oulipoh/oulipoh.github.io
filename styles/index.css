@@ -3,10 +3,9 @@ body {
     display: flex;
     flex-direction: column;
     font-family: Alef, Arial, sans-serif;
-    min-height: 100vh;
     justify-content: space-evenly;
     margin: 0;
-    text-align: center;
+    min-height: 100vh;
     text-underline-position: under;
 }
 

@@ -16,77 +16,92 @@
     <script>make_header()</script>
     <p>
         <a href="https://en.wikipedia.org/wiki/Cyclic_cellular_automaton">אוטומט תאי ציקלי</a> מבוסס אותיות.
-        אות תתקדם לאות הבאה באלף־בית, אם לפחות אחד משמונת שכניה הסובבים זהה לאותה האות הבאה. בנוסף, אני מאפשר למילים מסוימות כשהן נוצרות באופן ספונטני אופקית או אנכית, לקפוא ויותר לא להשתנות. הקליקי על הלוח בשביל לאתחל.
+        אות תתקדם לאות הבאה באלף־בית, אם לפחות אחד משמונת שכניה הסובבים זהה לאותה האות הבאה (כאשר אחרי ת' תבוא א'). בנוסף, נאפשר למילים מסוימות כשהן נוצרות באופן ספונטני בכיוון אופקי או אנכי, לקפוא למשך מספר מסוים של מחזורים כתלות בטמפרטורה. הקליקי על הלוח בשביל לאתחל, או הקליקימנית למסך מלא.
     </p>
+    <div id="otomat">
     <div class="sliders">
         <label>
-            <span onclick="lang_slider.value = 0; reset_flag = true">English</span>
+            <span onclick="lang_slider.value = 0; reset = true">English</span>
             <input type="range" id="lang_slider" max="1" value="1" autocomplete="off">
-            <span onclick="lang_slider.value = 1; reset_flag = true">Hebrew</span>
+            <span onclick="lang_slider.value = lang_slider.max || 100; reset = true">Hebrew</span>
         </label>
-        <label>
-            <span onclick="rate_slider.value = 0">Slow</span>
+        <label for="size_slider">
+            <button onclick="size_slider.value = 0;">160&times;80</button>
+            <input type="range" id="size_slider" max="10" value="0" autocomplete="off">
+            <button onclick="size_slider.value = size_slider.max || 100;">320&times;160</button>
+        </label>
+        <div>
+            <div>
+                <label for="rate_slider">
+                    <button onclick="rate_slider.value = 0">Slow</button>
             <input type="range" id="rate_slider" value="50" autocomplete="off">
-            <span onclick="rate_slider.value = 100">Fast</span>
+                    <button onclick="rate_slider.value = rate_slider.max || 100">Fast</button>
         </label>
         <label>
-            <span onclick="freeze_slider.value = 0">Melt</span>
-            <input type="range" id="freeze_slider" max="1" value="1" autocomplete="off" oninput="melt">
-            <span onclick="freeze_slider.value = 1">Freeze</span>
+                        <button onclick="freeze_slider.value = 0">Hot</button>
+                    <input type="range" id="freeze_slider" max="64" value="48" autocomplete="off">
+                        <button onclick="freeze_slider.value = freeze_slider.max || 100">Cold</button>
         </label>
+            </div>
         <label>
             <span onclick="glitch_slider.value = 0">Normal</span>
             <input type="range" id="glitch_slider" max="1" value="0" autocomplete="off">
-            <span onclick="glitch_slider.value = 1">Glitch</span>
+                <span onclick="glitch_slider.value = glitch_slider.max || 100">Glitch</span>
         </label>
     </div>
-    <pre id="grid" onclick="reset_flag = true" title="Click to restart"></pre>
+    </div>
+        <button class="grid_button" onclick="reset = true" oncontextmenu="toggle_fullscreen(event, otomat)" title="Click to restart. Right-click to enter/exit fullscreen" tabindex="-1" onkeypress="if (event.key == ' ') event.preventDefault()">
+        <!-- Intercept space key to prevent Chrome from scrolling the page -->
+        <span id="grid" tabindex="0"></span>
+    </button>
+    </div>
     <p dir="ltr">
         Letter-based <a href="https://en.wikipedia.org/wiki/Cyclic_cellular_automaton">cyclic cellular automata</a>, or "OT-o-mata" as OT means letter in Hebrew.
-        A letter will advance to the next letter in the alphabet, if at least one of its eight surrounding neighbours is that next letter. In addition, I allow certain words as they form spontaneously horizontally or vertically, to freeze and not change anymore. Click the grid to restart.
+        A letter will advance to the next letter in the alphabet (where after z comes a), if at least one of its eight surrounding neighbours is that next letter. In addition, we allow certain words as they form spontaneously in a horizontal or vertical direction, to freeze for a certain number of cycles depending on the temperature. Click the grid to restart, or right-click for fullscreen.
     </p>
     <p>
         ב־"להט החרב המתהפכת" ניסיתי להשתמש בזה בשביל לחולל <a href="#magicspell" onclick="open_internal_link(event)">לחשקסם</a>:
     </p>
     <iframe id="iframe" allow="fullscreen; web-share" class="video"></iframe>
     <div class="refs">
-        <blockquote>Saskia Hiltemann, <a href="https://theses.liacs.nl/pdf/16-SaskiaHiltemann.pdf">Multi-coloured Cellular Automata</a>.</blockquote>
+        <blockquote>Robert Fisch, Janko Gravner and David Griffeath, <a href="https://math.ucdavis.edu/~gravner/papers/cca.pdf">Cyclic Cellular Automata in Two Dimensions</a>, Spatial Stochastic Processes (1991).</blockquote>
+        <blockquote>Saskia Hiltemann, <a href="https://theses.liacs.nl/pdf/16-SaskiaHiltemann.pdf">Multi-coloured Cellular Automata</a> (2008).</blockquote>
         <blockquote>Laurel O'Brien, <a href="https://github.com/laurelobrien/typo-automata">typo-automata</a>.</blockquote>
     </div>
     <script>
         make_footer()
 
-        const w = 160;
-        const h = 80;
+        const font_size_base = 12;
+        const width_base = 160;
+        const height_base = 80;
         const chars = ['abcdefghijklmnopqrstuvwxyz', 'אבגדהוזחטיכלמנסעפצקרשת'];
-        const words = [['foo', 'bar'], ['ברקת' ,'לחש', 'קסם']];
+        const words = [['foo', 'bar', 'baz'], ['הוזח' ,'לחש', 'קסם']];
+        const large = 1024;
 
-        let lang, freeze, glitch;
-        ind_grid = Array(w * h).fill();
-        frozen = new Uint8Array(w * h);
+        let size;
 
-        function melt() {
-            frozen.fill(0);
-        }
-
-        function freeze_words(text_frozen_w_h) {
+        function freeze_words(frozen_text_axis) {
             let start, end;
-            for (const match of text_frozen_w_h[0].matchAll(regexp))
+            const this_w = frozen_text_axis[2] ? h : w;
+            for (const match of frozen_text_axis[1].join('').matchAll(regexp))
             {
-                start = match.index - (match.index/(text_frozen_w_h[2]+1)|0);
+                start = match.index;
                 end = start + match[0].length - 1;
-                text_frozen_w_h[1].fill(2, start, end);
-                text_frozen_w_h[1][end] = Math.max(text_frozen_w_h[1][end], 1);
+                if ((start / this_w | 0) != (end / this_w | 0) || frozen_text_axis[1].slice(start, end).toString() == old_text[frozen_text_axis[2]].slice(start, end).toString())
+                    continue;
+                frozen_text_axis[0].fill(2 * large, start, end);
+                frozen_text_axis[0][end] = Math.max(frozen_text_axis[0][end], 2*large - 1);
             }
-            return text_frozen_w_h;
+            return frozen_text_axis;
         }
 
-        function transpose(str_arr_w_h) {
-            [str_arr_w_h[2], str_arr_w_h[3]] = [str_arr_w_h[3], str_arr_w_h[2]];
-            const char_grid = str_arr_w_h[0].replace(/\n/g, '').split('');
-            str_arr_w_h[0] = char_grid.map((_, k) => (k % str_arr_w_h[2] || !k ? '' : '\n') + char_grid[k%str_arr_w_h[2]*str_arr_w_h[3] + k/str_arr_w_h[2] | 0]).join('');
-            str_arr_w_h[1] = str_arr_w_h[1].map((_, k) => str_arr_w_h[1][k%str_arr_w_h[2]*str_arr_w_h[3] + k/str_arr_w_h[2] | 0]);
-            return str_arr_w_h;
+        function transpose(arr_arr_axis) {
+            arr_arr_axis[2] = 1 - arr_arr_axis[2];
+            const this_w = arr_arr_axis[2] ? h : w;
+            const this_h = arr_arr_axis[2] ? w : h;
+            for (let i = 0; i < arr_arr_axis[2] + 1; i++)
+                arr_arr_axis[i] = arr_arr_axis[i].map((_, k) => arr_arr_axis[i][k%this_w*this_h + k/this_w | 0]);
+            return arr_arr_axis;
         }
 
         function next(x, k) {
@@ -95,9 +110,8 @@
             const i = glitch ? k/w | h : k/w + h | 0;
             const j = k%w + w;
             const next_ind = (x+1) % chars[lang].length;
-            let m, n;
-            for (m = -1; m < 2; m++)
-                for (n = -1; n < 2; n++)
+            for (let m = -1; m < 2; m++)
+                for (let n = -1; n < 2; n++)
                     if (ind_grid[(i+m)%h*w + (j+n)%w] == next_ind)
                         return next_ind;
             return x;
@@ -105,31 +119,50 @@
 
         function update() {
             const start_time = performance.now();
-                if (lang != lang_slider.value || reset_flag) {
-                    lang = lang_slider.value;
-                    reset_flag = false;
-                ind_grid = ind_grid.map(() => Math.random() * chars[lang].length | 0);
-                melt();
-                regexp = words[lang].length ? RegExp(words[lang].join('|').replace(/ך/g, 'כ').replace(/ם/g, 'מ').replace(/ן/g, 'נ').replace(/ף/g, 'פ').replace(/ץ/g, 'צ'), 'g') : null;
-                }
-            let text = ind_grid.map((x, k) => (k % w || !k ? '' : '\n') + chars[lang][x]).join('');
-            freeze = freeze_slider.value == '1';
-            if (freeze && regexp) {
-                [text, frozen, _, _] = transpose(freeze_words(transpose(freeze_words([text, frozen, w, h]))));
-                if (lang == '1') {
-                    const chars = text.split('');
-                    frozen.forEach((x, k) => {
-                        const start = k + k/w | 0;
-                        if (x == 1)
-                            chars[start] = chars[start].replace(/כ/, 'ך').replace(/מ/, 'ם').replace(/נ/, 'ן').replace(/פ/, 'ף').replace(/צ/, 'ץ');
-                    });
-                    text = chars.join('');
-                }
+            if (size != size_slider.value) {
+                size = size_slider.value;
+                let factor = 1 + size/(size_slider.max || 100);
+                grid.style.fontSize = font_size_base/factor + 'px';
+                w = width_base * factor | 0;
+                h = height_base * factor | 0;
+                ind_grid = Array(w * h).fill();
+                frozen = Array(w * h);
+                old_text = [Array(w * h), Array(w * h)];
+                lang = null;
             }
-            grid.textContent = text;
-            glitch = glitch_slider.value == '1';
+            if (lang != lang_slider.valueAsNumber || reset) {
+                lang = lang_slider.valueAsNumber;
+                reset = false;
+                ind_grid = ind_grid.map(() => Math.random() * chars[lang].length | 0);
+                regexp = words[lang].length ? RegExp(words[lang].join('|').replace(/ך/g, 'כ').replace(/ם/g, 'מ').replace(/ן/g, 'נ').replace(/ף/g, 'פ').replace(/ץ/g, 'צ'), 'g') : null;
+                freeze = null;
+            }
+            if (freeze != freeze_slider.valueAsNumber) {
+                if (freeze === null || !freeze_slider.valueAsNumber) {
+                    frozen.fill(0);
+                    old_text[0].fill();
+                    old_text[1].fill();
+                }
+                freeze = freeze_slider.valueAsNumber;
+                }
+            if (freeze && regexp) {
+                let char_grid = ind_grid.map(x => chars[lang][x]);
+                let temp = Math.min(Math.ceil(large / freeze), freeze_slider.max - freeze);
+                frozen = frozen.map(x => Math.max(x - 2*temp, 0));
+                [frozen, old_text[1], _] = transpose(freeze_words(transpose(freeze_words([frozen, char_grid, 0]))));
+                old_text[0] = char_grid;
+                if (lang)
+                    frozen.forEach((x, k) => {
+                        if (x % 2)
+                            char_grid[k] = char_grid[k].replace(/כ/, 'ך').replace(/מ/, 'ם').replace(/נ/, 'ן').replace(/פ/, 'ף').replace(/צ/, 'ץ');
+                    });
+                grid.textContent = char_grid.map((x, k) => (k % w || !k ? '' : '\n') + x).join('');
+                }
+            else
+                grid.textContent = ind_grid.map((x, k) => (k % w || !k ? '' : '\n') + chars[lang][x]).join('');
+            glitch = glitch_slider.valueAsNumber;
             ind_grid = ind_grid.map(next);
-            setTimeout(update, 1000 - Math.log10(rate_slider.value*99.99 + 1)*250 - (performance.now()-start_time));
+            setTimeout(update, 1000 - Math.log10(rate_slider.value/(rate_slider.max || 100)*9999 + 1)*250 - (performance.now()-start_time));
         }
         update();
     </script>

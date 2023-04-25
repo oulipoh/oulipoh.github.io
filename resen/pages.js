@@ -246,7 +246,7 @@ function make_header() {
         div = document.createElement('div')
         div.className = 'keywords'
         url_hash = 'kw_' + location.hash.slice(1).replace(/%/g, '')
-        let hash, css, found, i, buttons_on
+        let hash, css, found, buttons_on
         for (const kw of keywords) {
             button = document.createElement('button')
             button.id = get_hash(kw)
@@ -264,7 +264,7 @@ function make_header() {
                     hash = get_hash(kw)
                     css = document.getElementById('mystyle').sheet
                     found = false
-                    for (i = css.cssRules.length - 1; i >= 0; i--)
+                    for (let i = css.cssRules.length - 1; i >= 0; i--)
                         if (css.cssRules[i].selectorText?.slice(1) == hash) {
                             css.deleteRule(i)
                             found = true
@@ -399,4 +399,19 @@ function make_footer() {
     const footer = document.createElement('footer')
     footer.appendChild(flex)
     document.body.appendChild(footer)
+}
+
+
+function toggle_fullscreen(event, elem=null) {
+    event.preventDefault()
+    elem = elem || event.currentTarget
+    if (!document.fullscreenElement) {
+        elem.requestFullscreen()
+        screen.orientation.lock('landscape-primary')
+    }
+    else if (document.exitFullscreen) {
+        document.exitFullscreen()
+        screen.orientation.unlock()
+    }
+    elem.classList.toggle('fullscreen')
 }

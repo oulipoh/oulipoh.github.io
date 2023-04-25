@@ -13,7 +13,7 @@
 }
 
 html {
-    scroll-padding-top: 5rem;
+    scroll-padding-block: 5rem 3rem;
 }
 
 body {
@@ -49,6 +49,12 @@ cite, footer, nav, .sliders, .small, .table {
 }
 
 @media (hover: hover) {
+    :focus-visible {
+        outline-color: var(--fg);
+        outline-offset: 8px;
+        outline-style: solid;
+    }
+
     @keyframes symbol_rarr {
         100% { translate: .12em }
     }
@@ -74,32 +80,28 @@ cite, footer, nav, .sliders, .small, .table {
         66% { text-decoration-style: dotted }
     }
 
-    a:hover, a:focus-visible {
+    a:is(:hover, :focus-visible) {
         animation: .3s infinite deco;
     }
 
-    a:hover > .symbol_rarr > span, .mail:hover {
+    a:is(:hover, :focus-visible) > .symbol_rarr > span, .mail:is(:hover, :focus-visible) {
         animation: .3s infinite alternate symbol_rarr;
     }
 
-    a:hover > .symbol_larr > span {
+    a:is(:hover, :focus-visible) > .symbol_larr > span {
         animation: .3s infinite alternate symbol_larr;
     }
 
-    a:hover > .symbol_uarr > span, .github:hover {
+    a:is(:hover, :focus-visible) > .symbol_uarr > span, .github:is(:hover, :focus-visible) {
         animation: .3s infinite alternate symbol_uarr;
     }
 
-    a:hover > .symbol_darr > span {
+    a:is(:hover, :focus-visible) > .symbol_darr > span {
         animation: .3s infinite alternate symbol_darr;
     }
 
-    a:hover > .symbol_x1f310 > span {
+    a:is(:hover, :focus-visible) > .symbol_x1f310 > span {
         animation: 1.2s linear infinite symbol_x1f310;
-    }
-
-    a:focus-visible {
-        outline: transparent;
     }
 
     .bigsquare > span:hover > b {
@@ -111,46 +113,37 @@ cite, footer, nav, .sliders, .small, .table {
         66% { border-style: dotted }
     }
 
-    button:hover, button:focus-visible {
+    button:not(.grid_button, .sliders *):is(:hover, :focus-visible) {
         animation: .3s infinite border;
         border-color: var(--fg);
     }
 
-    button.always_on:hover, button.on:hover, button.always_on:focus-visible, button.on:focus-visible {
+    button:is(.always_on, .on):is(:hover, :focus-visible) {
         border-color: var(--fg_dull);
-    }
-
-    button:focus-visible {
-        outline: transparent;
-    }
-
-    #grid:focus-visible {
-        outline-color: var(--fg);
-        outline-style: solid;
     }
 
     @keyframes stroke {
         50% { -webkit-text-stroke-color: var(--fg_dull) }
     }
 
-    #dot:hover, #dot:focus-visible {
+    #dot:is(:hover, :focus-visible) {
         animation: .3s infinite stroke;
         -webkit-text-stroke-width: 1px;
     }
 
-    .table tr:hover {
-        background: var(--fg_verydull);
+    .sliders :is(button:is(:hover, :focus-visible), span:hover) {
+        color: var(--fg_highlight);
     }
 
-    .sliders span:hover {
-        color: var(--fg_highlight);
+    .table tr:not(:first-child):hover {
+        background: var(--fg_verydull);
     }
 
     @keyframes twitter {
         100% { rotate: -15deg }
     }
 
-    .twitter:hover {
+    .twitter:is(:hover, :focus-visible) {
         animation: .3s infinite alternate twitter;
     }
 
@@ -158,8 +151,12 @@ cite, footer, nav, .sliders, .small, .table {
         100% { scale: 1.1 }
     }
 
-    .web:hover {
+    .web:is(:hover, :focus-visible) {
         animation: .3s infinite alternate web;
+    }
+
+    :is(a, button):focus-visible {
+        outline: transparent;
     }
 }
 
@@ -169,31 +166,13 @@ a {
     text-underline-position: under;
 }
 
-.bigbutton {
-    text-align: center;
-}
-
-.bigbutton > button {
-    font-size: 1.3em;
-    margin-bottom: 6ex;
-    padding-inline: 1em;
-}
-
-.bigmono, .bigsquare, .cogram {
-    overflow-x: auto;
-}
-
-.bigmono, .bigsquare, .cogram, .square {
+.bigmono, .bigsquare, .cogram, .square, .magicspell {
     font-family: Alef Mono, Courier New, monospace;
     letter-spacing: .7em;
 }
 
 .bigmono, .cogram {
     font-size: clamp(1.3em, 2rem, 2vw);
-}
-
-.bigmono > * {
-    margin-block: 3ex !important;
 }
 
 .bigsquare {
@@ -204,6 +183,10 @@ a {
 
 blockquote {
     margin-block: 3ex;
+}
+
+blockquote, p {
+    text-align: justify;
 }
 
 button {
@@ -220,14 +203,14 @@ button {
     text-decoration: none;
 }
 
-button:active, button.always_on, button.on {
+button:is(:active, .always_on, .on) {
     background: var(--fg);
     border-color: var(--fg);
     color: var(--fg_verydull);
 }
 
 @media (forced-colors: active) {
-    button:active, button.always_on, button.on {
+    button:is(:active, .always_on, .on) {
         outline-color: var(--fg);
         outline-style: solid;
         outline-width: 5px;
@@ -240,10 +223,6 @@ button.on:active {
     color: inherit;
 }
 
-blockquote, p {
-    text-align: justify;
-}
-
 cite {
     color: var(--fg_dull);
     display: inline-block;
@@ -251,12 +230,8 @@ cite {
 }
 
 .cogram {
-    text-align: center;
-}
-
-.cogram > pre {
-    display: inline-block;
     line-height: 1.8;
+    margin-block: 3ex;
     text-align: center;
 }
 
@@ -274,12 +249,8 @@ cite {
 }
 
 #declaration {
-    text-align: center;
-}
-
-#declaration > blockquote {
-    display: inline-block;
-    margin-block: 8ex 8ex;
+    margin-block: 10ex 8ex;
+    margin-inline: auto;
     max-width: 30em;
     text-align: justify;
     white-space: pre-line;
@@ -300,6 +271,7 @@ cite {
 
 footer {
     display: table-row;
+    height: 1px;
 }
 
 footer > div {
@@ -320,24 +292,39 @@ footer > div {
     display: inline-block;
 }
 
+.fullscreen {
+    display: grid;
+    overflow-y: auto;
+}
+
+.fullscreen > :first-child {
+    margin-top: auto;
+}
+
+.fullscreen > :last-child {
+    margin-bottom: auto;
+}
+
 .green, input[type=range] {
     filter: sepia() saturate(3.5) hue-rotate(59deg);
 }
 
 #grid {
-    cursor: pointer;
+    display: block;
     font-family: Alef Mono, Courier New, monospace;
-    font-size: 12px;
     font-variant-ligatures: none;
     letter-spacing: 0;
     line-height: .66;
-    margin-bottom: 3rem;
-    overflow-x: auto;
-    overflow-y: hidden;
-    padding-bottom: 1rem;
-    text-align: center;
-    user-select: none;
-    -webkit-user-select: none;
+    white-space: pre;
+}
+
+.grid_button {
+    background: none;
+    border: none;
+    border-radius: 0;
+    margin-bottom: 1rem;
+    padding: 0;
+    width: 100%;
 }
 
 h1, h2 {
@@ -351,6 +338,10 @@ h1, .subhuge {
 
 h2 {
     margin-bottom: 4ex;
+}
+
+h2:not(:is(header, .small, :is(header, .small) + script) + *) {
+    margin-top: 6ex;
 }
 
 header {
@@ -397,31 +388,72 @@ iframe {
 
 li {
     margin-block: 2ex;
+}
+
+li:not(.mono *) {
     margin-inline-start: 2.5em;
 }
 
-.magicspell > pre {
+.magicspell {
     background: black;
     color: white;
+    font-size: 2rem;
+    margin-inline: auto;
+    margin-block: 5ex;
     outline-color: black;
     outline-style: solid;
     outline-width: .5em;
+    width: fit-content;
+}
+
+.mintz {
+    display: table-row;
+    height: 100%;
+}
+
+.mintz > pre {
+    display: table-cell;
+    font-size: 8.9vw;
+    font-weight: bold;
+    letter-spacing: -.1em;
+    line-height: .6;
+    vertical-align: middle;
 }
 
 .mono {
     font-family: Alef Mono, Courier New, monospace;
-    overflow-x: auto;
 }
 
-.mono li, .nowrap {
-    white-space: nowrap;
+.mono > li {
+    letter-spacing: .5em;
+}
+
+.mono > li span {
+    display: inline-block;
+}
+
+@counter-style pad {
+    system: extends decimal;
+    pad: 2 '\00a0';
+    suffix: ': ';
+}
+
+ol.mono {
+    list-style-position: inside;
+    list-style-type: pad;
+    padding-inline: 0;
+    text-align: center;
+}
+
+ul.mono {
+    list-style: none;
+    padding-inline: 0;
+    text-align: center;
 }
 
 @keyframes flash {
-    99.00% {background: var(--bg); color: var(--fg)}
-    99.01% {background: var(--fg); color: var(--fg_highlight)}
-    99.40% {background: var(--bg); color: var(--fg)}
-    99.41% {background: var(--fg); color: var(--fg_highlight)}
+    99%, 99.4% {background: var(--bg); color: var(--fg) }
+    99.01%, 99.41% {background: var(--fg); color: var(--fg_highlight) }
 }
 
 #namretla {
@@ -442,8 +474,12 @@ nav {
     z-index: 99;
 }
 
+.nowrap {
+    white-space: nowrap;
+}
+
 ol, ul {
-    margin-block: 4ex;
+    margin-block: 4ex 6ex;
 }
 
 p:not([dir=ltr]) + p[dir=ltr],
@@ -456,39 +492,22 @@ p[dir=ltr] + p:not([dir=ltr]) {
     text-align: center;
 }
 
+#play_button {
+    display: block;
+    font-size: 1.3em;
+    margin-bottom: 6ex;
+    margin-inline: auto;
+    padding-inline: 1em;
+}
+
 .poem {
-    text-align: center;
+    margin-block: 4ex 4rem;
+    margin-inline: auto;
+    max-width: fit-content;
 }
 
-@counter-style pad {
-    system: extends decimal;
-    pad: 2 '\00a0';
-    suffix: ': ';
-}
-
-.poem > ol {
-    list-style-position: inside;
-    list-style-type: pad;
-    padding-inline: 0;
-}
-
-.poem > ul {
-    list-style-type: none;
-    padding-inline: 0;
-}
-
-.poem li {
-    letter-spacing: .5em;
-    margin-inline: 0;
-}
-
-.poem > pre, .square > pre {
-    display: inline-block;
-    text-align: start;
-}
-
-.poem > pre {
-    margin-block: 2ex 5ex;
+header + .poem {
+    padding-top: 2ex;
 }
 
 pre.square + p {
@@ -512,6 +531,22 @@ pre.square + p {
     direction: ltr;
 }
 
+#screenshot {
+    border-style: solid;
+    border-width: 2px;
+    font-size: .75em;
+    margin-inline: auto;
+    width: 80%;
+}
+
+#screenshot .undercover {
+    border-radius: 1em;
+    outline-color: var(--fg_highlight);
+    outline-offset: .5em;
+    outline-style: solid;
+    outline-width: 2px;
+}
+
 .sidebyside {
     display: flex;
     flex-wrap: wrap;
@@ -522,39 +557,49 @@ pre.square + p {
 
 .signonet {
     background: white;
-    height: 770px;
+    height: 800px;
 }
 
 .sliders {
     direction: ltr;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1em 3em;
-    justify-content: center;
     margin-block: 5ex 3ex;
 }
 
-.sliders > label {
+.sliders, .sliders div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em 4em;
+    justify-content: center;
+}
+
+.sliders button {
+    background: none;
+    border: none;
+    font-size: inherit;
+    padding: 0;
+}
+
+.sliders label {
     align-items: center;
     display: flex;
     user-select: none;
     -webkit-user-select: none;
-    min-width: 10.5em;
+    min-width: 12.5em;
 }
 
-.sliders > label > * {
+.sliders label > * {
     cursor: pointer;
 }
 
-.sliders > label > :first-child {
+.sliders label > :first-child {
     text-align: start;
 }
 
-.sliders > label > :last-child {
+.sliders label > :last-child {
     text-align: end;
 }
 
-.sliders > label > span {
+.sliders label > :is(:first-child, :last-child) {
     flex-basis: 0;
     flex-grow: 1;
 }
@@ -565,8 +610,12 @@ input[type=range] {
     width: 2.5em;
 }
 
-#rate_slider {
-    width: 6em;
+button + input[type=range] {
+    width: 8em;
+}
+
+#size_slider {
+    width: 4.5em;
 }
 
 .social {
@@ -585,10 +634,6 @@ input[type=range] {
     text-align: center;
 }
 
-.square > pre {
-    margin-block: 0;
-}
-
 [class^=symbol] {
     display: inline-block;
     margin-inline-end: .3em;
@@ -605,21 +650,14 @@ input[type=range] {
 }
 
 .table {
-    overflow-x: auto;
-    text-align: center;
-}
-
-.table > table {
-    border-color: var(--fg_dull);
     border-collapse: collapse;
-    border-style: solid;
-    border-width: 2px;
-    display: inline-table;
+    display: block;
     margin-block: 3ex 5ex;
-    text-align: start;
+    margin-inline: auto;
+    max-width: fit-content;
 }
 
-.table td, .table th {
+.table :is(td, th) {
     border-color: var(--fg_dull);
     border-style: solid;
     border-width: 1px;
@@ -634,12 +672,18 @@ input[type=range] {
 
 #xx17n {
     direction: ltr;
-    overflow-x: auto;
+    margin-top: 2rem;
 }
 
 #xx17n > iframe {
     height: 965px;
+    margin-top: 0;
     min-width: 1280px;
+}
+
+.bigmono, .bigsquare, .cogram, #grid, .table, #xx17n {
+    overflow-x: auto;
+    padding-bottom: 16px;
 }
 
 @media (hover: none), (max-device-width: 500px), (max-device-height: 500px) {
@@ -653,10 +697,15 @@ input[type=range] {
 
     .dialog {
         margin-block: 6ex;
+        margin-inline: 0;
     }
 
-    .github {
+    .github, .web {
         font-size: .5em !important;
+    }
+
+    li:not(.mono *) {
+        margin-inline-start: 0;
     }
 
     .mail {
@@ -665,9 +714,6 @@ input[type=range] {
 
     .refs > blockquote {
         font-size: initial;
-    }
-
-    .web {
-        font-size: .5em !important;
+        margin-inline: 0;
     }
 }
