@@ -26,6 +26,7 @@ body {
     height: 100vh;
     letter-spacing: .03em;
     margin: 0;
+    overscroll-behavior: none;
     padding-inline: max(5vw, 2rem);
     padding-bottom: 8px;
     table-layout: fixed;
