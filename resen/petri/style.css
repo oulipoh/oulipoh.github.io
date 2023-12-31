@@ -1,0 +1,94 @@
+.petri {
+    --background: black;
+    --color: white;
+    --enabled: #ffff64;
+    --firing: #64ff64;
+    background: var(--background);
+    color: var(--color);
+    display: grid;
+    font-size: initial;
+    margin-block: 4rem 6rem;
+    overflow-x: auto;
+    outline-style: none;
+    padding-bottom: 3em;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.fullscreen petri {
+    margin-inline: var(--anti_margin);
+}
+
+.petri > div {
+    display: grid;
+    grid-template-columns: repeat(var(--cols), 13.5em);
+    font-family: 'IBM Plex Mono', 'Courier New', monospace;
+    justify-self: stretch;
+    letter-spacing: initial;
+    line-height: 1.5;
+    margin-inline: auto;
+    text-align: center;
+    --hor_offset: -2ch;
+    --ver_offset: -1.5em;
+}
+
+.petri pre {
+    align-items: center;
+    aspect-ratio: 1;
+    display: flex;
+    justify-content: center;
+    margin-block: auto;
+    position: relative;
+}
+
+.petri span {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.petri pre::before, .petri pre::after {
+   color: var(--color);
+}
+
+.petri [data-before]::before {
+    content: attr(data-before);
+    position: absolute;
+}
+
+.petri pre[data-before].vertical::before {
+    inset-inline-start: 0;
+}
+
+.petri pre span[data-before]::before {
+    inset-inline-start: var(--hor_offset);
+}
+
+.petri pre[data-before]:not(.vertical)::before {
+    top: 0;
+}
+
+.petri pre[data-before].place::before {
+    top: var(--ver_offset);
+}
+
+.petri [data-after]::after {
+    content: attr(data-after);
+    position: absolute;
+}
+
+.petri pre[data-after].vertical::after {
+    inset-inline-end: 0;
+}
+
+.petri pre span[data-after]::after {
+    inset-inline-end: var(--hor_offset);
+}
+
+.petri pre[data-after]:not(.vertical)::after {
+    bottom: 0;
+}
+
+.petri pre[data-after].place::after {
+    bottom: var(--ver_offset);
+}

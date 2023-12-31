@@ -5,13 +5,15 @@ body {
 
 figure {
     margin: 0;
+    position: relative;
 }
 
 figcaption {
-    bottom: 4ex;
+    bottom: 7%;
     font-size: max(5vw, 3em);
-    height: 0;
-    position: relative;
+    left: 0;
+    position: absolute;
+    right: 0;
     text-align: center;
 }
 

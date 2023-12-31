@@ -34,11 +34,11 @@
 
             cap = document.createElement('figcaption')
             cap.innerHTML = people[person].name
-            div = document.createElement('div')
             a = document.createElement('a')
             a.dir = 'ltr'
             a.href = a.innerHTML = people[person].url
-            a.innerHTML = decodeURI(a.innerHTML.split(/https?:\/\/(www\.)?/).slice(-1)[0])
+            a.innerHTML = decodeURI(a.innerHTML.split(/https?:\/\/(www\.)?/).pop())
+            div = document.createElement('div')
             div.appendChild(a)
             cap.appendChild(div)
 
