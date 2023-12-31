@@ -1,5 +1,6 @@
 #sketch {
     aspect-ratio: 12 / 5;
     margin-inline: auto;
-    max-height: 50vh;
+    max-height: 45vh;
+    margin-bottom: 4rem;
 }

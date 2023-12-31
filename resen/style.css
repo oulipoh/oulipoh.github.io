@@ -268,14 +268,15 @@ cite {
 }
 
 .contents {
-    column-gap: 4em;
+    --column-gap: 4em;
+    column-gap: var(--column-gap);
     --columns: 3;
     columns: var(--columns);
 }
 
 .rows_first {
     display: grid;
-    grid-template-columns: repeat(var(--columns), 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(max(250px, (var(--media_width) - (var(--columns) - 1) * var(--column-gap)) / var(--columns)), 1fr));
     row-gap: 3em;
 }
 
@@ -879,7 +880,7 @@ a.sponsors {
     }
 
     .kw, nav {
-        margin-inline: var(--anti_margin);
+        margin-inline: calc(var(--anti_margin) + 8px);
     }
 
     .social > a {

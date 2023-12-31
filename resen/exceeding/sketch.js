@@ -81,7 +81,7 @@ function setup() {
   const myCanvas = createCanvas(sketch.clientWidth, sketch.clientWidth * 5 / 12);
   myCanvas.parent("sketch");
   // digitSize = min(width, height) / 20;
-  digitSize = min(width, height) / 7;
+  digitSize = height / 6;
   textFont("Fira Code");
 }
 
@@ -95,5 +95,5 @@ function draw() {
 function windowResized() {
   // resizeCanvas(windowWidth, windowWidth)
   resizeCanvas(sketch.clientWidth, sketch.clientWidth * 5 / 12);
-  digitSize = min(width, height) / 7;
+  digitSize = height / 6;
 }
