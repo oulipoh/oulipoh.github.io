@@ -1,4 +1,4 @@
-:root {
+:root, ::backdrop {  /* In Chrome ::backdrop does not inherit from :root. See: https://bugs.chromium.org/p/chromium/issues/detail?id=827397 */
     --bg: #f6e5d5;
     --fg_rgb: 0 0 0;
     --fg: rgb(var(--fg_rgb));
@@ -15,9 +15,7 @@
     --nav_lh: 2rem;
     --nav_pad_top: 4px;
     --nav_pad_bottom: 16px;
-    --rem_margin: 2rem;
-    --vw_margin: 5vw;
-    --main_margin: max(var(--rem_margin), var(--vw_margin));
+    --main_margin: max(2rem, 5vw);
     --anti_margin: calc(-1 * var(--main_margin));
 }
 
@@ -129,19 +127,19 @@ button, cite, footer, nav, .sliders {
         color: var(--fg_highlight);
     }
 
-    nav > .back[href]:is(:hover, :focus-visible)::before, .mail:is(:hover, :focus-visible) {
+    nav .back[href]:is(:hover, :focus-visible)::before, .mail:is(:hover, :focus-visible) {
         animation: var(--icon_dur) infinite alternate sideways;
     }
 
-    nav > .prev[href]:is(:hover, :focus-visible)::before {
+    nav .prev[href]:is(:hover, :focus-visible)::before {
         animation: var(--icon_dur) infinite alternate up;
     }
 
-    nav > .next[href]:is(:hover, :focus-visible)::before {
+    nav .next[href]:is(:hover, :focus-visible)::before {
         animation: var(--icon_dur) infinite alternate down;
     }
 
-    nav > .trans:is(:hover, :focus-visible)::before {
+    nav .trans:is(:hover, :focus-visible)::before {
         animation: 1.2s linear infinite globe;
     }
 
@@ -190,6 +188,10 @@ a {
     color: inherit;
     text-decoration-color: var(--fg_dim);
     text-underline-position: under;
+}
+
+nav * {
+    display: inline-block;
 }
 
 nav a:not([href]) {
@@ -276,7 +278,7 @@ cite {
 
 .rows_first {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(max(250px, (var(--media_width) - (var(--columns) - 1) * var(--column-gap)) / var(--columns)), 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(max(250px, (var(--media_width) - (var(--columns) - 1) * var(--column-gap)) / var(--columns)), 100%), 1fr));
     row-gap: 3em;
 }
 
@@ -367,7 +369,7 @@ nav[dir=rtl] ~ .contents {
     width: 100%;
 }
 
-.fg_filter, input:is([type=range], [type=checkbox]), .social, nav > .trans::before {
+.fg_filter, input:is([type=range], [type=checkbox]), .social, nav .trans::before {
     filter: var(--fg_filter);
 }
 
@@ -417,6 +419,10 @@ nav[dir=rtl] ~ footer > div {
     grid-template-columns: 100% !important;
     justify-content: center !important;
     justify-items: center;
+}
+
+.fullscreen::backdrop {
+    background-color: var(--bg);
 }
 
 .fullscreen > :first-child {
@@ -498,7 +504,7 @@ iframe {
 
 .images {  /* Note you should order images vertically and use dir to control the horizontal order */
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(var(--min_width, 300px), 100%), 1fr));
     margin-inline: auto;
     place-items: center;
     width: var(--media_width);
@@ -506,6 +512,7 @@ iframe {
 
 .images img {
     height: 90%;  /* Assumes difference between images aspect ratios is less than 10% */
+    max-height: var(--max_height);
     object-fit: contain;
     width: 100%;
 }
@@ -595,48 +602,48 @@ nav {
     }
 }
 
-nav > a::before {
+nav a::before {
     display: inline-block;
     line-height: 0;
     margin-inline-end: .3rem;
 }
 
-nav > a:not(.trans)::before {
+nav a:not(.trans)::before {
     text-align: end;
     width: 1.1rem;
 }
 
-nav > .back::before {
+nav .back::before {
     content: '\2192';
 }
 
-nav[dir=ltr] > .back::before {
+nav[dir=ltr] .back::before {
     content: '\2190';
 }
 
-nav > .back:not([href])::before {
+nav .back:not([href])::before {
     visibility: hidden;
 }
 
-nav > .prev::before {
+nav .prev::before {
     content: '\2191';
 }
 
-nav > .next::before {
+nav .next::before {
     content: '\2193';
 }
 
-nav > .trans::before {
+nav .trans::before {
     content: '\1f310\fe0e';
     font-size: .7em;
 }
 
-nav[dir=ltr] > .trans {
+nav[dir=ltr] .trans {
     direction: rtl;
     float: right;
 }
 
-nav > .trans {
+nav .trans {
     direction: ltr;
     float: left;
 }
@@ -674,7 +681,7 @@ button#play.on::before {
 }
 
 .poem {
-    margin-block: 4em;
+    margin-block: 4ex 4rem;
     margin-inline: auto;
     max-width: fit-content;
 }
@@ -792,10 +799,6 @@ nav[dir=rtl] ~ :nth-last-child(1 of .refs):not([data-title]) {
 .sliders :is(label:not(.checkboxes > *), .checkboxes) > :is(:first-child, :last-child) {
     flex-basis: 0;
     flex-grow: 1;
-}
-
-#size_slider {
-    width: 4.5em;
 }
 
 .social {

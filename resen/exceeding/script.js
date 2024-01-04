@@ -1,11 +1,11 @@
 //  Exceeding the Entirety 2023 by Mika and Avi Milgrom
-// let Fira;
+let Fira;
 let digitSize;
+function preload() {
+  Fira = loadFont("FiraCode-Light.ttf");
+}
 const bg = getComputedStyle(document.documentElement).getPropertyValue('--bg');
 const sketch = document.getElementById("sketch")
-// function preload() {
-//   Fira = loadFont("FiraCode-Light.ttf");
-// }
 
 // Birthdays, Month is zero-based
 let startDateAvi = new Date(1978, 10, 27, 22, 10, 10);
@@ -28,15 +28,10 @@ function drawDigit(digit, x, y) {
   stroke(0);
   strokeWeight(1);
   fill(255);
-  // rect(x, y, digitSize, digitSize + 7);
   rect(x, y, digitSize, digitSize * 1.1);
   noStroke();
   fill(40);
-  // textFont(Fira);
-  textSize(digitSize);
-  textAlign(CENTER, CENTER);
-  //text(digit, x + digitSize / 2, y + digitSize / 2);
-  text(digit, x + digitSize/2, y + digitSize*.63);
+  text(digit, x + digitSize/2, y + digitSize*.4);
 }
 
 // Present time on the screen
@@ -64,10 +59,11 @@ function drawTime(index, PersonDate) {
   // Split time into digits
   let digits = formattedTime.split("");
 
+  digitSize = height / 6;
+  textSize(digitSize)
+
   // Calculate starting positions for each clock
-  //let startX = width / 2 - (digits.length * digitSize + digitSize) / 2;
   let startX = width / 2 - (digits.length * digitSize) / 2;
-  // let startY = height / 6 + (index * height) / 6;
   let startY = height/2 - (digitSize*1.1)*(2.5-index*2);
 
   // Draw each digit with a square
@@ -77,12 +73,10 @@ function drawTime(index, PersonDate) {
 }
 
 function setup() {
-  // const myCanvas = createCanvas(windowWidth, windowHeight);
   const myCanvas = createCanvas(sketch.clientWidth, sketch.clientWidth * 5 / 12);
   myCanvas.parent("sketch");
-  // digitSize = min(width, height) / 20;
-  digitSize = height / 6;
-  textFont("Fira Code");
+  textFont(Fira);
+  textAlign(CENTER, CENTER);
 }
 
 function draw() {
@@ -93,7 +87,5 @@ function draw() {
 }
 
 function windowResized() {
-  // resizeCanvas(windowWidth, windowWidth)
   resizeCanvas(sketch.clientWidth, sketch.clientWidth * 5 / 12);
-  digitSize = height / 6;
 }

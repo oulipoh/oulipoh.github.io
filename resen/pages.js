@@ -1,19 +1,18 @@
 const pages = {
     "/": {title: "רֶסֶן", alt: "Resen", author: "oulipoh", skip: true},
 
-    "achshav/": {title: "אָח־שָׁב – עַכְ־שָׁו", alt: "Ach-Shav", author: "brunogrife", kw: ["issue 0", "sound"]},
-    "cent/": {title: "מתוך \"מאה תמונות מלחמה\"", alt: "From \"One hundred visions of war\"", author: ["julienvocance", "rotematar"], kw: ["issue 0", "poem"]},
-    "disappearance/": {title: "היעלמות", alt: "Disappearance", author: "rotematar", kw: ["issue 0", "text"]},
-    "exceeding/": {title: "מֵעֵבר לַשלם", alt: "Exceeding the entirety", author: ["mikamilgrom", "avimilgrom"], kw: ["issue 0", "audiovisual", "live code", "open source", "software"]},
-    "imagine/": {title: "דמיין", alt: "/imagine", author: "liorzalmanson", kw: ["issue 0", "poem"]},
-    "petri/": {title: "פואטיקת פטרי פטריוטית", alt: "Patriotic Petri Poetry", author: "eyalgruss", kw: ["issue 0", "audiovisual", "live code", "open source", "poem", "software"]},
-    "things/": {title: "קורים עכשיו דברים עם השפה", alt: "Things are happening now with the language", author: "noashaham", kw: ["issue 0", "poem"]},
-    "systems/": {title: "מערכות", alt: "Systems", author: "noashaham", kw: ["issue 0", "poem"]},
+    "achshav/": {title: "אָח־שָׁב – עַכְ־שָׁו", alt: "Ach-Shav", author: "brunogrife", kw: [0, "sound"]},
+    "cent/": {title: "מתוך \"מאה תמונות מלחמה\"", alt: "From \"One hundred visions of war\"", author: ["julienvocance", "rotematar"], kw: [0, "poem"]},
+    "disappearance/": {title: "היעלמות", alt: "Disappearance", author: "rotematar", kw: [0, "text"]},
+    "exceeding/": {title: "מֵעֵבר לַשלם", alt: "Exceeding the entirety", author: ["mikamilgrom", "avimilgrom"], kw: [0, "audiovisual", "live code", "open source", "software"]},
+    "imagine/": {title: "דמיין", alt: "/imagine", author: "liorzalmanson", kw: [0, "poem"]},
+    "petri/": {title: "פואטיקת פטרי פטריוטית", alt: "Patriotic Petri Poetry", author: "eyalgruss", kw: [0, "audiovisual", "live code", "open source", "poem", "software"]},
+    "things/": {title: "קורים עכשיו דברים עם השפה", alt: "Things are happening now with the language", author: "noashaham", kw: [0, "poem"]},
+    "systems/": {title: "מערכות", alt: "Systems", author: "noashaham", kw: [0, "poem"]},
     "journal": {title: "אודות כתב העת", alt: "About this journal", author: "oulipoh"}
 }
 
-const kw_trans = {
-    "issue 0": "גיליון 0",
+const kw_labels = {
     "2d 3d": "רב־ממדי",
     "audiovisual": "אורקולי",
     "biblical": "תורני",
@@ -113,9 +112,11 @@ function get_lang() {
 }
 
 
-function reorder(list_of_strings, lang='', trans=kw_trans) {
-    const issue = Object.values(ui).map(x => x.issue)
-    return [...new Set(list_of_strings)].filter(n => n).sort((a, b) => {if (!lang) {a = trans[a] || a, b = trans[b] || b} return issue.includes(b.split(' ')[0]) - issue.includes(a.split(' ')[0]) || a.localeCompare(b, document.documentElement.lang, {numeric: true})})
+const collator = Intl.Collator(document.documentElement.lang, {numeric: true})
+
+
+function reorder(list_of_strings, lang='', labels=kw_labels) {
+    return [...new Set(list_of_strings)].map(String).sort((a, b) => {if (!lang) {a = labels[a] || a, b = labels[b] || b} return collator.compare(a, b)})
 }
 
 
@@ -172,21 +173,21 @@ function make_link(url, label, cls, title, new_tab=false, force_new_tab_for_mail
 
 
 function get_set_titles(page, lang='', elem) {
-    const titles = {title: pages[page]?.title ?? page.split('/')[0], alt: ''}
+    const titles = {label: pages[page]?.title ?? page.split('/')[0], alt: ''}
     if (pages[page]?.alt) {
         titles.alt = pages[page].alt
         if (lang)
-            [titles.title, titles.alt] = [titles.alt, titles.title]
+            [titles.label, titles.alt] = [titles.alt, titles.label]
     }
     if (elem) {
         if (page) {
             const suffix = elem.title.match(/\[.*/)
             if (suffix) {
-                titles.title += ' ' + suffix
+                titles.label += ' ' + suffix
                 titles.alt += ' ' + suffix
             }
         }
-        elem.title = titles.title
+        elem.title = titles.label
     }
     return titles
 }
@@ -211,7 +212,7 @@ function open_internal_link(elem) {
 
 
 function sanitize(kw) {
-    return kw.replace(/[^\w]/g, '').toLowerCase()
+    return String(kw).replace(/[^\w]/g, '').toLowerCase()
 }
 
 
@@ -228,11 +229,11 @@ function make_contents(show_snippet=default_show_snippet, show_author=default_sh
             continue
 
         const titles = get_set_titles(page, lang)
-        const a = make_link(page2url(page, lang, contents), titles.title, null, titles.alt)
+        const a = make_link(page2url(page, lang, contents), titles.label, null, titles.alt)
 
         if (show_snippet && page.endsWith('/')) {
             const img = new Image()
-            img.alt = 'תצוגה מקדימה של ' + titles.title
+            img.alt = 'תצוגה מקדימה של ' + titles.label
             img.onload = () => a.prepend(img)
             img.src = page + 'snippet'
         }
@@ -246,7 +247,7 @@ function make_contents(show_snippet=default_show_snippet, show_author=default_sh
 
         const p = document.createElement('p')
         p.classList.add(...all_keywords.filter(kw => !pages[page].kw?.includes(kw)).map(kw => 'non_' + sanitize(kw)))
-        p.id = div.children.length
+        p.id = 'page_' + div.children.length
         p.appendChild(a)
 
         if (show_author) {
@@ -313,11 +314,8 @@ function shortcut(elem, key) {
 
 function add_nav_element(nav, url, label, cls, delta=null, key) {
     const elem = nav.appendChild(make_link(url, label, ['nowrap', cls], key ? `[${key}]` : ''))
-    if (delta !== null) {
+    if (delta !== null)
         elem.style.marginInlineEnd = 1.5 + Math.max(delta, 0) + 'em'
-        if (delta)
-            nav.appendChild(document.createElement('wbr'))
-    }
     shortcut(elem, key)
     return elem
 }
@@ -373,8 +371,8 @@ function make_header(reorder_contents=default_reorder_contents) {
     const lang = get_lang()
     const all_keywords_stats = get_all_keywords(lang, page)
     const titles = get_set_titles(page, lang)
-    document.title = titles.title
-    let index_title = get_set_titles('/', lang).title
+    document.title = titles.label
+    let index_title = get_set_titles('/', lang).label
     let is_mobile = false;
     if (matchMedia('(hover: none), (max-device-width: 500px), (max-device-height: 500px)').matches) {
         index_title = index_title.split(' ').slice(0, lang ? 1 : 2).join(' ')
@@ -383,15 +381,15 @@ function make_header(reorder_contents=default_reorder_contents) {
     const parent_title = decodeURI(location).split('/').slice(-3)[0]
     const nav = document.body.appendChild(document.createElement('nav'))
     let diff = get_width(index_title, nav) - get_width(parent_title, nav)
-    let back, keywords, trans
+    let span, back, keywords, trans
     const desc = []
     if (page == '/') {
-        const span = document.createElement('span')
+        span = document.createElement('span')
         span.dir = 'ltr'
         span.innerHTML = parent_title
         add_nav_element(nav, parent_title ? '..' : '', span, 'back', diff, shortcuts.back)
         keywords = Object.keys(all_keywords_stats)
-        const en_title = lang == 'en' ? titles.title : titles.alt
+        const en_title = lang == 'en' ? titles.label : titles.alt
         if (en_title)
             desc.push(en_title)
     } else {
@@ -405,8 +403,10 @@ function make_header(reorder_contents=default_reorder_contents) {
     if (page != '/' && url_kw)
         keywords.unshift(keywords.splice(keywords.map(sanitize).indexOf(url_kw), 1)[0])
 
-    const next = add_nav_element(nav, '', ui[lang].next, 'next', 0, shortcuts.next)
-    const prev = add_nav_element(nav, '', ui[lang].prev, 'prev', 0, shortcuts.prev)
+    span = document.createElement('span')
+    const next = add_nav_element(span, '', ui[lang].next, 'next', 0, shortcuts.next)
+    const prev = add_nav_element(span, '', ui[lang].prev, 'prev', 0, shortcuts.prev)
+    nav.appendChild(span)
     set_next_prev_page(page, next, prev, lang, url_kw)
 
     const alt_langs = Object.keys(ui).filter(x => x != lang)
@@ -450,23 +450,31 @@ function make_header(reorder_contents=default_reorder_contents) {
             const fg_rgb = `rgb(${getComputedStyle(document.documentElement).getPropertyValue('--fg_rgb').replace(/ /g, ', ')})`
             page_items.forEach(p => {const enabled = getComputedStyle(p).color == fg_rgb; p.querySelectorAll('a').forEach(a => {if (enabled) a.removeAttribute('aria-disabled'); else a.ariaDisabled = 'true'})})
             if (reorder_contents)
-                document.querySelector('.contents').append(...[...page_items].sort((a, b) => (getComputedStyle(b).color == fg_rgb) - (getComputedStyle(a).color == fg_rgb) || a.id - b.id))
-            if (on && this.id.startsWith('kw_issue'))
-                buttons_on.forEach(e => {if (e != this && e.id.startsWith('kw_issue')) e.click()})
+                document.querySelector('.contents').append(...[...page_items].sort((a, b) => (getComputedStyle(b).color == fg_rgb) - (getComputedStyle(a).color == fg_rgb) || a.id.split('_')[1] - b.id.split('_')[1]))
+            if (on && this.id.match(/^kw_\d+$/))
+                buttons_on.forEach(e => {if (e != this && e.id.match(/^kw_\d+$/)) e.click()})
         }
 
         keywords.forEach((kw, button_index) => {
             button = document.createElement(page == '/' ? 'button' : 'a')
             button.id = 'kw_' + sanitize(kw)
-            let kw_title
-            if (lang) {
-                button.innerHTML = kw
-                kw_title = kw_trans[kw] || kw
-            } else {
-                button.innerHTML = kw_trans[kw] || kw
-                kw_title = kw
+            let label = kw_labels[kw] || kw
+            if (kw.match(/\d+/))
+                label = ui[lang].issue + ' ' + kw
+
+            let alt = ''
+            if (trans) {
+                alt = kw
+                if (kw.match(/\d+/))
+                    alt = ui[alt_langs[0]].issue + ' ' + kw
+                else if (lang)
+                    [label, alt] = [alt, label]
+                if (alt == label)
+                    alt = ''
             }
-            button.title = `[pages=${all_keywords_stats[kw].count} info=${(all_keywords_stats[kw].info * 100).toFixed(1)}%] ${kw_title}`
+
+            button.innerHTML = label
+            button.title = `[pages=${all_keywords_stats[kw].count} info=${(all_keywords_stats[kw].info * 100).toFixed(1)}%] ${alt}`.trim()
             if (page == '/')
                 button.onclick = kw_handler
             else {
@@ -488,7 +496,7 @@ function make_header(reorder_contents=default_reorder_contents) {
     }
     const h1 = document.createElement('h1')
     h1.id = 'h1'
-    h1.innerHTML = harden(titles.title)
+    h1.innerHTML = harden(titles.label)
     if (titles.alt)
         h1.title = titles.alt
     header.appendChild(h1)
@@ -496,17 +504,14 @@ function make_header(reorder_contents=default_reorder_contents) {
         nav.dir = ui[lang].dir
     document.body.appendChild(header)
     if (pages[page].author) {
-        const cur_authors = get_make_author(page, lang, true)
-        if (page == '/') {
-            const en_authors = cur_authors[lang != 'en' & !!cur_authors[1].length].join(', ')
-            if (en_authors)
-                desc.push('by ' + en_authors)
-        }
+        const current_authors = get_make_author(page, lang, true)[lang != 'en' | 0].join(', ')
+        if (page == '/' && current_authors)
+            desc.push(current_authors)
     }
     if (desc.length) {
         meta = document.createElement('meta')
         meta.name = 'description'
-        meta.content = desc.join(' ')
+        meta.content = desc.join(', ')
         document.head.appendChild(meta)
     }
     if (page == '/')
@@ -519,7 +524,7 @@ function make_header(reorder_contents=default_reorder_contents) {
         })
     else
         delete sessionStorage.kw
-    return titles.title
+    return titles.label
 }
 
 
@@ -543,16 +548,15 @@ function get_make_author(page, lang, make=false, author_pages_folder=default_aut
                 h2.className = 'author'
             }
 
+            let alt_name
             if (names) {
                 name = names[lang] || names[''] || Object.values(names)[0] || name
-                const alt_names = Object.entries(names).filter(([k, v]) => k != lang && v).map(x => x[1])
-                if (lang in names && alt_names.length) {
-                    if (make)
-                        h2.title = alt_names[0]
-                    all_alt_names.push(alt_names[0])
-                }
+                alt_name = Object.entries(names).filter(([k, v]) => k != lang && v).map(x => x[1])[0]
+                if (make && lang in names && alt_name)
+                    h2.title = alt_name
             }
             all_names.push(name)
+            all_alt_names.push(alt_name || name)
 
             if (make) {
                 const a = make_link('', name)

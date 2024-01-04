@@ -1,9 +1,8 @@
 .petri {
-    --background: black;
+    background: black;
     --color: white;
     --enabled: #ffff64;
     --firing: #64ff64;
-    background: var(--background);
     color: var(--color);
     display: grid;
     font-size: initial;
@@ -11,8 +10,6 @@
     overflow-x: auto;
     outline-style: none;
     padding-bottom: 3em;
-    user-select: none;
-    -webkit-user-select: none;
 }
 
 .fullscreen petri {

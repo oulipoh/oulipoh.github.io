@@ -4,18 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Miriam+Libre:wght@400;700&family=Fira+Code:wght@300&display=block">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Miriam+Libre:wght@400;700&family=Fira+Code:wght@300&display=block">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Miriam+Libre:wght@400;700&display=block">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Miriam+Libre:wght@400;700&display=block">
     <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="style.css">
     <script src="../pages.js"></script>
     <script src="p5.min.js"></script>
-    <link rel="stylesheet" href="style.css">
     <meta property="og:image" content="https://oulipoh.com/resen/exceeding/snippet">
     <noscript><style>body {visibility: visible}</style></noscript>
 </head>
 <body onload="document.body.style.visibility = 'visible'">
     <script>make_header()</script>
-    <div id="sketch"></div>
+    <div id="sketch" oncontextmenu="toggle_fullscreen(event)"></div>
     <p>
         על המסך מוצגים שלושה מונים הסופרים את השעות מאז נולדנו, שלושת בני המשפחה.
         מספר המקומות המוקצה לספירת השעות הוא שישה בלבד, כך שהספירה מתאפשרת רק עד 999,999 שעות, שהן כ־114 שנים. כאשר תעבור שעה מעבר לכך,  המונה כולו יתאפס והספירה תתחיל מחדש. המצב הזה של הגעה לגבול והתאפסות מעבר לו נקרא בצרפתית trop-plein, שמשמעותו המילולית "מעבר לשלם".
@@ -24,6 +24,6 @@
         בפריכות הקיום הנוכחית, כל שנייה יכולה להפוך להרת גורל. "מעבר לשלם" מגלמת בתוכה את האיום שבסופניות כמו גם את הנחמה שבהמשכיות. השניות שעוברות במעין מקצב מדיטטיבי הן בה בעת אשליה מנחמת של סדירות והנכחה מתמדת של האִבחה הבלתי נמנעת של הקץ הקרב ובא.
     </p>
     <script>make_footer()</script>
-    <script src="sketch.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
