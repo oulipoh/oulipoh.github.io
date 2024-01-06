@@ -459,9 +459,6 @@ h2:not(:is(header, .preface_he) + *) {
 
 .harden {
     display: inline-block;
-}
-
-span.harden {
     text-decoration: inherit;
 }
 
@@ -612,6 +609,10 @@ nav a::before {
 nav a:not(.trans)::before {
     text-align: end;
     width: 1.1rem;
+}
+
+nav .back > span {
+    text-decoration: inherit;
 }
 
 nav .back::before {

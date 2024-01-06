@@ -125,7 +125,7 @@ function get_all_keywords(lang='', page) {
     const ordered = reorder(keywords, lang)
     if (page) {
         const counts = keywords.reduce((acc, kw) => (acc[kw] = ++acc[kw] || 1, acc), {})
-        const len = Object.values(pages).filter(x => !x.skip).length
+        const len = Object.values(pages).filter(v => !v.skip).length
         const freq = Object.fromEntries(Object.entries(counts).map(([kw, c]) => [kw, c / len]))
         const entropy = Object.fromEntries(Object.entries(freq).map(([kw, f]) => [kw, -f * Math.log2(f)]))
         const maxent = Math.log2(len)
@@ -246,7 +246,7 @@ function make_contents(show_snippet=default_show_snippet, show_author=default_sh
         }
 
         const p = document.createElement('p')
-        p.classList.add(...all_keywords.filter(kw => !pages[page].kw?.includes(kw)).map(kw => 'non_' + sanitize(kw)))
+        p.classList.add(...all_keywords.filter(kw => !pages[page].kw?.map(String).includes(kw)).map(kw => 'non_' + sanitize(kw)))
         p.id = 'page_' + div.children.length
         p.appendChild(a)
 
@@ -351,7 +351,7 @@ function get_width(text, elem, units='em') {
 
 
 function set_next_prev_page(page, next, prev, lang, url_kw) {
-    let list = Object.keys(pages).filter(x => !pages[x].skip && (!url_kw || pages[x].kw?.map(sanitize).includes(url_kw)))
+    let list = Object.keys(pages).filter(p => !pages[p].skip && (!url_kw || pages[p].kw?.map(sanitize).includes(url_kw)))
     const index = list.indexOf(page)
     let next_page = ''
     let prev_page = ''
@@ -409,7 +409,7 @@ function make_header(reorder_contents=default_reorder_contents) {
     nav.appendChild(span)
     set_next_prev_page(page, next, prev, lang, url_kw)
 
-    const alt_langs = Object.keys(ui).filter(x => x != lang)
+    const alt_langs = Object.keys(ui).filter(k => k != lang)
     if (alt_langs.length)
         trans = add_nav_element(nav, page2url(page, alt_langs[0], page, location.hash), ui[alt_langs[0]].lang.slice(0, is_mobile ? 2 : undefined), 'trans')
 
