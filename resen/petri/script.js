@@ -162,9 +162,9 @@ function step(grid, json, steps=0, max_tokens={}, result_counter={}, reset_count
                 const pelem = grid.querySelector(`[data-id="${place}"]`)
                 if (inp + out)
                     if (is_vertical(grid, elem.dataset.id)) {
-                        if (elem.previousElementSibling == pelem && index % cols)
+                        if (elem.previousSibling == pelem && index % cols)
                             elem.dataset.before = arrows(inp, out, label)
-                        else if (elem.nextElementSibling == pelem && (index+1) % cols)
+                        else if (elem.nextSibling == pelem && (index+1) % cols)
                             elem.dataset.after = arrows(out, inp, label)
                         else if (elem.parentElement.children[index - cols] == pelem)
                             elem.parentElement.children[index - cols].dataset.after = arrows(inp, out)
@@ -173,10 +173,10 @@ function step(grid, json, steps=0, max_tokens={}, result_counter={}, reset_count
                         else
                             long_arrows.push([elem, pelem, inp, out])
                     } else if (!comp)
-                        if (elem.previousElementSibling == pelem && index % cols)
-                            elem.previousElementSibling.children[0].dataset.after = arrows(inp, out, '')
-                        else if (elem.nextElementSibling == pelem && (index+1) % cols)
-                            elem.nextElementSibling.children[0].dataset.before = arrows(out, inp, '')
+                        if (elem.previousSibling == pelem && index % cols)
+                            elem.previousSibling.firstChild.dataset.after = arrows(inp, out, '')
+                        else if (elem.nextSibling == pelem && (index+1) % cols)
+                            elem.nextSibling.firstChild.dataset.before = arrows(out, inp, '')
                         else if (elem.parentElement.children[index - cols] == pelem)
                             elem.dataset.before = arrows(inp, out, 1)
                         else if (elem.parentElement.children[index + cols] == pelem)
@@ -185,7 +185,7 @@ function step(grid, json, steps=0, max_tokens={}, result_counter={}, reset_count
                             long_arrows.push([elem, pelem, inp, out])
             })
         } else {
-            elem.children[0].textContent = place_symbol(label, tokens[elem.dataset.id], elem.classList.contains('above'))
+            elem.firstChild.textContent = place_symbol(label, tokens[elem.dataset.id], elem.classList.contains('above'))
             if (!steps) {
                 max_tokens[elem.dataset.id] ??= []
                 max_tokens[elem.dataset.id].push(tokens[elem.dataset.id] || 0)

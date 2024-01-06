@@ -218,8 +218,9 @@ blockquote {
     margin-block: 3ex;
 }
 
-blockquote, p {
+blockquote, li, p {
     text-align: justify;
+    text-wrap: pretty;
 }
 
 button, [id^=kw_] {
@@ -865,7 +866,7 @@ a.sponsors {
 }
 
 @media (hover: none), (max-device-width: 500px), (max-device-height: 500px) {
-    blockquote, p {
+    blockquote, li, p {
         text-align: start;
     }
 

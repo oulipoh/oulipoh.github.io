@@ -275,7 +275,7 @@ function iframe_load_handler() {
     const footer = this.contentDocument.querySelector('footer')
     if (footer)
         footer.style.display = 'hidden'
-    this.contentDocument.documentElement.style.overflowY = 'hidden'  // Prevent redundant scrollbars in Chrome
+    this.contentDocument.documentElement.style.overflowY = 'clip'  // Prevent redundant scrollbars in Chrome
     const observer = new ResizeObserver(() => this.style.height = this.contentDocument.documentElement.scrollHeight + 'px')
     observer.observe(this.contentDocument.documentElement)
 }
@@ -445,7 +445,7 @@ function make_header(reorder_contents=default_reorder_contents) {
                 if (trans)
                     trans.hash = url_kw
                 set_next_prev_page(page, next, prev, lang, url_kw)
-                page_items.forEach(p => p.firstElementChild.hash = p.firstElementChild.classList.contains('non_' + url_kw) ? '' : url_kw)
+                page_items.forEach(p => p.firstChild.hash = p.classList.contains('non_' + url_kw) ? '' : url_kw)
             }
             const fg_rgb = `rgb(${getComputedStyle(document.documentElement).getPropertyValue('--fg_rgb').replace(/ /g, ', ')})`
             page_items.forEach(p => {const enabled = getComputedStyle(p).color == fg_rgb; p.querySelectorAll('a').forEach(a => {if (enabled) a.removeAttribute('aria-disabled'); else a.ariaDisabled = 'true'})})
