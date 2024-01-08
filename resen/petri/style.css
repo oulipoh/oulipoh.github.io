@@ -12,10 +12,6 @@
     padding-bottom: 3em;
 }
 
-.fullscreen petri {
-    margin-inline: var(--anti_margin);
-}
-
 .petri > div {
     display: grid;
     grid-template-columns: repeat(var(--cols), 13.5em);

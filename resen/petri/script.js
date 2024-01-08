@@ -2,7 +2,7 @@ const json_file = 'petri.json'
 const grid_columns = 5
 const halfstep_secs = .5
 const restart_secs = 5
-const fast = false
+const fast = location.hash.slice(1) == 'fast'
 
 const auto_vertical = true
 const fix_above = true
@@ -10,9 +10,7 @@ const label_location = ''  // Can be: 'half' (half above and half below, favorin
 const default_token_symbol = 'o'  // Cannot be of 1-9 or capital A-N
 const arrow_width = 6
 const arrow_height = 1
-
-const comp_marking = 3
-const comp_overflow = 23
+const comp_marking = 5
 
 const lang = get_lang()
 let global_reset_counter = 0;
@@ -39,6 +37,7 @@ function sanitized_len(string, split=false) {
 const place_template = "\n   .-'''-.   \n \\ JD645CI / \n| NHB312AGM |\n / LF978EK \\ \n   `-...-`   \n"
 const place_lines = place_template.trim().split('\n')
 const place_width = Math.max(...place_lines.map(l => sanitized_len(l)))
+const place_max_tokens = place_template.match(/[0-9A-Z]/g).length
 
 function center(label, width, align_start=false) {
     return label.padEnd((width+sanitized_len(label)+align_start) / 2).padStart(width)
@@ -198,14 +197,15 @@ function step(grid, json, steps=0, max_tokens={}, result_counter={}, reset_count
         reset_counter = global_reset_counter
         max_tokens = Object.fromEntries(Object.entries(max_tokens).map(([p, counts]) => ([p, counts.slice(0, -1)])))
         step(grid, json, 0, max_tokens, result_counter, reset_counter)
-    } else if (!enabled.length || comp && Object.values(tokens).some(n => n > comp_overflow) || !comp && !json.require?.every(require => require.some(t => tokens[t]))) {
+    } else if (!enabled.length || comp && Object.values(tokens).some(n => n > place_max_tokens) || !comp && !json.require?.every(require => require.some(t => tokens[t]))) {
         const result = json?.require.map(side => side.some(p => tokens[p]) | 0)
         result_counter[result] = (result_counter[result] || []).concat(steps).sort((a, b) => a - b)
         if (!comp) {
             const all_steps = Object.values(result_counter).flat()
             const sides = result.map((_, i) => Object.entries(result_counter).filter(x => x[0].split(',')[i] == 1).map(x => x[1]).flat().length)
             const avg_tokens = Object.fromEntries(Object.entries(max_tokens).map(([p, counts]) => [p, counts.reduce((a, b) => a + b, 0) / counts.length]).sort((a, b) => a[1] - b[1] || a[0].localeCompare(b[0])))
-            console.log(all_steps.length, all_steps.reduce((a, b) => a + b, 0) / all_steps.length, sides[1] / sides.reduce((a, b) => a + b, 0), avg_tokens, Object.fromEntries(Object.entries(result_counter).sort((a, b) => compare_lists(a[1], b[1]) || compare_lists(a[0], b[0]))))
+            const sum = sides.reduce((a, b) => a + b, 0)
+            console.log(all_steps.length, all_steps.reduce((a, b) => a + b, 0) / all_steps.length, sum ? sides[1] / sum : .5, avg_tokens, Object.fromEntries(Object.entries(result_counter).sort((a, b) => compare_lists(a[1], b[1]) || compare_lists(a[0], b[0]))))
         }
         setTimeout(step, restart_secs * 1000 * !fast, grid, json, 0, max_tokens, result_counter, reset_counter)
     } else
