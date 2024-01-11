@@ -49,7 +49,6 @@ function diagonals(trans, ts, te, bs, be) {
     trans_lines = trans.trim().split('\n')
     const width = Math.max(...trans_lines.map(l => sanitized_len(l))) + 6
     let arrow_ts = arrow_te = arrow_bs = arrow_be = '   '
-    ts = te = bs = be = -1
     if (ts)
         arrow_ts = ts == 1 ? '//v' : '^//'
     if (te)
@@ -144,6 +143,11 @@ function step(grid, json, steps=0, max_tokens={}, result_counter={}, reset_count
     const transitions = comp ? [comp] : Object.keys(json.transitions)
     if (tokens == undefined)
         tokens = comp ? Object.fromEntries(json.transitions[comp][0].map(p => [p, comp_marking])) : {...json.marking}
+    grid.querySelectorAll('[data-clicks]').forEach(place => {
+        const clicks = place.dataset.clicks | 0
+        place.removeAttribute('data-clicks')
+        tokens[place.dataset.id] = (tokens[place.dataset.id] || 0) + clicks
+    })
 
     const enabled = transitions.filter(t => is_enabled(json.transitions[t][0], tokens))
     const width = max_len(transitions.filter(t => !is_vertical(grid, t)), json.labels)
@@ -302,6 +306,7 @@ fetch(json_file).then(response => response.json()).then(json => {
                 }
             } else {
                 pre.classList.add('place')
+                pre.addEventListener('click', () => pre.dataset.clicks = (pre.dataset.clicks | 0) + 1)
                 const span = document.createElement('span')
                 pre.appendChild(span)
                 if (json.above?.includes(label) || !anti_above.includes(label) && (label_location == 'above' || label_location == 'half' && index < (labels.length/cols/2 | 0) * cols))

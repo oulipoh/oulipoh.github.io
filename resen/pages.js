@@ -239,7 +239,7 @@ function make_contents(show_snippet=default_show_snippet, show_author=default_sh
             img.src = page + 'snippet'
         }
 
-        [...new Set([pages[page].hazard || [], pages[page].hazards || []].flat())].forEach(hazard => {
+        [...new Set([pages[page].hazard ?? [], pages[page].hazards ?? []].flat())].forEach(hazard => {
             const meta = document.createElement('meta')
             meta.setAttribute('itemprop', 'accessibilityHazard')
             meta.content = hazard
@@ -531,7 +531,7 @@ function make_header(reorder_contents=default_reorder_contents, new_tab_for_soci
 function get_make_author(page, lang, make, new_tab_for_social=default_new_tab_for_social) {
     page ??= get_page()
     lang ??= get_lang()
-    let keys = [...new Set([pages[page].author || [], pages[page].authors || [], pages[page].translator || [], pages[page].translators || []].flat())]
+    let keys = [...new Set([pages[page].author ?? [], pages[page].authors ?? [], pages[page].translator ?? [], pages[page].translators ?? []].flat())]
     if (make && authors && !keys.length)
         keys = Object.keys(authors).slice(0, 1)
     let all_names = []

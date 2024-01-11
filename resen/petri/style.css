@@ -10,6 +10,8 @@
     overflow-x: auto;
     outline-style: none;
     padding-bottom: 3em;
+    user-select: none;
+    -webkit-user-select: none;
 }
 
 .petri > div {
@@ -21,7 +23,7 @@
     line-height: 1.5;
     margin-inline: auto;
     text-align: center;
-    --hor_offset: -1.33em;
+    --hor_offset: calc(-2ch - .15em);
     --ver_offset: -1.5em;
 }
 
