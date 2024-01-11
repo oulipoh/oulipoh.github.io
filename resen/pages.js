@@ -2,11 +2,11 @@ const pages = {
     "/": {title: "רֶסֶן", alt: "Resen", author: "oulipoh", skip: true},
 
     "achshav/": {title: "אָח־שָׁב – עַכְ־שָׁו", alt: "Ach-Shav", author: "brunogrife", kw: [0, "sound"]},
-    "cent/": {title: "מתוך \"מאה תמונות מלחמה\"", alt: "From \"One hundred visions of war\"", author: ["julienvocance", "rotematar"], kw: [0, "poem"]},
-    "disappearance/": {title: "היעלמות", alt: "Disappearance", author: "rotematar", kw: [0, "text"]},
-    "exceeding/": {title: "מֵעֵבר לַשלם", alt: "Exceeding the entirety", author: ["mikamilgrom", "avimilgrom"], kw: [0, "audiovisual", "live code", "open source", "software"]},
+    "cent/": {title: "מתוך \"מאה תמונות מלחמה\"", alt: "From \"One hundred visions of war\"", author: "julienvocance", translator: "rotematar", kw: [0, "poem"]},
+    "disappearance/": {title: "היעלמות", alt: "Disappearance", author: "rotematar", kw: [0, "story"]},
+    "exceeding/": {title: "מֵעֵבר לַשלם", alt: "Exceeding the entirety", author: ["mikamilgrom", "avimilgrom"], kw: [0, "audiovisual", "live code", "software"]},
     "imagine/": {title: "דמיין", alt: "/imagine", author: "liorzalmanson", kw: [0, "poem"]},
-    "petri/": {title: "פואטיקת פטרי פטריוטית", alt: "Patriotic Petri Poetry", author: "eyalgruss", kw: [0, "audiovisual", "live code", "open source", "poem", "software"]},
+    "petri/": {title: "פואטיקת פטרי פטריוטית", alt: "Patriotic Petri Poetry", author: "eyalgruss", kw: [0, "audiovisual", "live code", "poem", "software"]},
     "things/": {title: "קורים עכשיו דברים עם השפה", alt: "Things are happening now with the language", author: "noashaham", kw: [0, "poem"]},
     "systems/": {title: "מערכות", alt: "Systems", author: "noashaham", kw: [0, "poem"]},
     "journal": {title: "אודות כתב העת", alt: "About this journal", author: "oulipoh"}
@@ -24,7 +24,6 @@ const kw_labels = {
     "hebrew cheatery": "מִרמת העברית",
     "live code": "קוד חי",
     "new constraint": "אילוץ חדש",
-    "open source": "קוד פתוח",
     "palindrome": "פלינדרום",
     "pangram": "פנגרמה",
     "poem": "שיר",
@@ -32,7 +31,7 @@ const kw_labels = {
     "self-referral": "מתייחס לעצמו",
     "software": "תוכנה",
     "sound": "צלילים",
-    "text": "מלל"
+    "story": "סיפור"
 }
 
 const social = {
@@ -77,18 +76,20 @@ const authors = {
         "name": {"": "מיקה מילגרום", "en": "Mika Milgrom"}
     },
     "noashaham": {
-        "name": {"": "נעה שחם", "en": "Mika Noa Shaham"}
+        "name": {"": "נעה שחם", "en": "Noa Shaham"}
     },
     "rotematar": {
         "name": {"": "רותם עטר", "en": "Rotem Atar"}
     }
 }
 
+let author_pages_folder = ''
+author_pages_folder = author_pages_folder.replace(/^[./]+|[./]+$/g, '')
+
 const default_show_snippet = true
 const default_show_author = true
 const default_rows_first = true
 const default_reorder_contents = true
-const default_author_pages_folder = '.'
 const default_force_new_tab_for_mailto_tel = true
 const default_new_tab_for_social = true
 const default_new_tab_for_footer = true
@@ -96,8 +97,8 @@ const default_copyright_url = "https://creativecommons.org/licenses/by/4.0/"
 const default_copyright_symbol = "(CC)(&#xc6c3;)"
 
 const ui = {
-    "": {"next": "הבא", "prev": "הקודם", "lang": "עברית", "theme_name": "עיצוב של מתכנת", "theme": "תבנית", "copyright": "", "issue": "גיליון"},
-    "en": {"next": "next", "prev": "prev", "lang": "english", "theme_name": "Designed by a programmer", "theme": "Theme", "copyright": "", "issue": "issue", "dir": "ltr"}
+    "": {"next": "הבא", "prev": "הקודם", "lang": "עברית", "theme_name": "עיצוב של מתכנת", "theme": "תבנית", "copyright": "", "issue": "גיליון", "translator": "תורגם על ידי"},
+    "en": {"next": "next", "prev": "prev", "lang": "english", "theme_name": "Designed by a programmer", "theme": "Theme", "copyright": "", "issue": "issue", "translator": "translated by", "dir": "ltr"}
 }
 
 const shortcuts = {
@@ -156,11 +157,11 @@ function make_link(url, label, cls, title, new_tab=false, force_new_tab_for_mail
     const a = document.createElement('a')
     update_href(a, url)
     if (cls) {
-        if (typeof cls !== 'string')
+        if (typeof cls != 'string')
             cls = cls.join(' ')
         a.className = cls
     }
-    if (typeof label === 'string')
+    if (typeof label == 'string')
         a.innerHTML = harden(label)
     else
         a.appendChild(label)
@@ -199,7 +200,7 @@ function page2url(page, lang, current, hash) {
     current ??= get_page()
     lang ??= get_lang()
     let url = (page == '/' ? '.' : page) + (page.includes('.') || page.endsWith('/') ? '' : '.html') + (lang && '?' + lang) + (hash ? '#' + hash.replace(/^#/, '') : '')
-    if (current.match(/.\//))
+    if (current.match(/.\//) || author_pages_folder && decodeURI(location.pathname).includes('/' + author_pages_folder + '/'))
         url = '../' + url
     return url
 }
@@ -238,12 +239,12 @@ function make_contents(show_snippet=default_show_snippet, show_author=default_sh
             img.src = page + 'snippet'
         }
 
-        if (pages[page].hazard) {
+        [...new Set([pages[page].hazard || [], pages[page].hazards || []].flat())].forEach(hazard => {
             const meta = document.createElement('meta')
             meta.setAttribute('itemprop', 'accessibilityHazard')
-            meta.content = pages[page].hazard
+            meta.content = hazard
             a.appendChild(meta)
-        }
+        })
 
         const p = document.createElement('p')
         p.classList.add(...all_keywords.filter(kw => !pages[page].kw?.map(String).includes(kw)).map(kw => 'non_' + sanitize(kw)))
@@ -312,9 +313,9 @@ function shortcut(elem, key) {
 }
 
 
-function add_nav_element(nav, url, label, cls, delta=null, key) {
+function add_nav_element(nav, url, label, cls, delta, key) {
     const elem = nav.appendChild(make_link(url, label, ['nowrap', cls], key ? `[${key}]` : ''))
-    if (delta !== null)
+    if (delta != undefined)
         elem.style.marginInlineEnd = 1.5 + Math.max(delta, 0) + 'em'
     shortcut(elem, key)
     return elem
@@ -323,8 +324,7 @@ function add_nav_element(nav, url, label, cls, delta=null, key) {
 
 function get_page() {
     const page = decodeURI(location.pathname).match(/([^/]*?\/?)(index)?(\.html)?$/)[1]
-    const keys = Object.keys(pages)
-    if (keys.includes(page))
+    if (page in pages)
         return page
     return '/'
 }
@@ -351,7 +351,7 @@ function get_width(text, elem, units='em') {
 
 
 function set_next_prev_page(page, next, prev, lang, url_kw) {
-    let list = Object.keys(pages).filter(p => !pages[p].skip && (!url_kw || pages[p].kw?.map(sanitize).includes(url_kw)))
+    const list = Object.keys(pages).filter(p => !pages[p].skip && (!url_kw || pages[p].kw?.map(sanitize).includes(url_kw)))
     const index = list.indexOf(page)
     let next_page = ''
     let prev_page = ''
@@ -366,7 +366,7 @@ function set_next_prev_page(page, next, prev, lang, url_kw) {
 }
 
 
-function make_header(reorder_contents=default_reorder_contents) {
+function make_header(reorder_contents=default_reorder_contents, new_tab_for_social=default_new_tab_for_social) {
     const page = get_page()
     const lang = get_lang()
     const all_keywords_stats = get_all_keywords(lang, page)
@@ -503,8 +503,8 @@ function make_header(reorder_contents=default_reorder_contents) {
     if (ui[lang].dir && ui[lang].dir != document.documentElement.dir)
         nav.dir = ui[lang].dir
     document.body.appendChild(header)
-    if (pages[page].author) {
-        const current_authors = get_make_author(page, lang, true)[lang != 'en' | 0].join(', ')
+    if (pages[page].author || pages[page].authors || pages[page].translator || pages[page].translators) {
+        const current_authors = get_make_author(page, lang, true, new_tab_for_social)[lang != 'en' | 0].join(', ')
         if (page == '/' && current_authors)
             desc.push(current_authors)
     }
@@ -528,70 +528,73 @@ function make_header(reorder_contents=default_reorder_contents) {
 }
 
 
-function get_make_author(page, lang, make=false, author_pages_folder=default_author_pages_folder, new_tab_for_social=default_new_tab_for_social) {
+function get_make_author(page, lang, make, new_tab_for_social=default_new_tab_for_social) {
     page ??= get_page()
     lang ??= get_lang()
-    let keys = pages[page].author || pages[page].authors
-    if (make)
-        keys ||= Object.keys(authors)[0]
+    let keys = [...new Set([pages[page].author || [], pages[page].authors || [], pages[page].translator || [], pages[page].translators || []].flat())]
+    if (make && authors && !keys.length)
+        keys = Object.keys(authors).slice(0, 1)
     let all_names = []
     let all_alt_names = []
-    if (keys)
-        [...new Set([keys].flat())].forEach(key => {
-            const author = authors[key]
-            const names = author?.name
-            let name = key
+    keys.forEach(key => {
+        const author = authors[key]
+        const names = author?.name
+        let name = key
 
-            let h2
-            if (make) {
-                h2 = document.createElement('h2')
-                h2.className = 'author'
+        let h2
+        if (make) {
+            h2 = document.createElement('h2')
+            h2.className = 'author'
+        }
+
+        let alt_name
+        if (names) {
+            name = names[lang] || names[''] || Object.values(names)[0] || name
+            alt_name = Object.entries(names).filter(([k, v]) => k != lang && v).map(x => x[1])[0]
+            if (make && lang in names && alt_name)
+                h2.title = alt_name
+        }
+        all_names.push(name)
+        all_alt_names.push(alt_name || name)
+
+        if (make) {
+            const a = make_link('', name)
+            h2.appendChild(a)
+            let url = key
+            if (author_pages_folder)
+                url = author_pages_folder + '/' + url
+            url = page2url(url, lang, page, key)
+            fetch(url, {method: 'HEAD'}).then(response => {if (response.ok) update_href(a, url)})
+
+            const networks = Object.keys(author || {}).filter(k => k != 'name' && k in social)
+            if (networks.length) {
+                const span = document.createElement('span')
+                span.className = 'social'
+                networks.forEach(net => {
+                    if (span.innerHTML)
+                        span.innerHTML += '&ensp;'
+                    let prefix = ''
+                    if (!author[net].match(/[:/]/) && social[net].url)
+                        prefix = social[net].url
+                        if (!prefix.match(/:(?!\/\/)|[/=]$/))
+                            prefix += '/'
+                    if (!prefix.includes(':'))
+                        prefix = 'https://' + prefix
+                    if (author[net].match(/([.@]|$)/))
+                        author[net] = key + author[net]
+                    const a = span.appendChild(make_link(prefix + author[net] + (social[net].suffix || ''), social[net].label, net, net[0].toUpperCase() + net.slice(1), new_tab_for_social))
+                    a.dataset.label = a.textContent
+                })
+                h2.appendChild(span)
             }
-
-            let alt_name
-            if (names) {
-                name = names[lang] || names[''] || Object.values(names)[0] || name
-                alt_name = Object.entries(names).filter(([k, v]) => k != lang && v).map(x => x[1])[0]
-                if (make && lang in names && alt_name)
-                    h2.title = alt_name
-            }
-            all_names.push(name)
-            all_alt_names.push(alt_name || name)
-
-            if (make) {
-                const a = make_link('', name)
-                h2.appendChild(a)
-                fetch(page2url(author_pages_folder + '/' + key, lang, page), {method: 'HEAD'}).then(response => {if (response.ok) update_href(a, response.url)})
-
-                const networks = Object.keys(author || {}).filter(k => k != 'name' && k in social)
-                if (networks.length) {
-                    const span = document.createElement('span')
-                    span.className = 'social'
-                    networks.forEach(net => {
-                        if (span.innerHTML)
-                            span.innerHTML += '&ensp;'
-                        let prefix = ''
-                        if (!author[net].match(/[:/]/) && social[net].url)
-                            prefix = social[net].url
-                            if (!prefix.match(/:(?!\/\/)|[/=]$/))
-                                prefix += '/'
-                        if (!prefix.includes(':'))
-                            prefix = 'https://' + prefix
-                        if (author[net].match(/(\.|@|$)/))
-                            author[net] = key + author[net]
-                        const a = span.appendChild(make_link(prefix + author[net] + (social[net].suffix || ''), social[net].label, net, net[0].toUpperCase() + net.slice(1), new_tab_for_social))
-                        a.dataset.label = a.textContent
-                    })
-                    h2.appendChild(span)
-                }
-                document.body.appendChild(h2)
-            }
-        })
+            document.body.appendChild(h2)
+        }
+    })
     return [all_names, all_alt_names]
 }
 
 
-function make_footer(new_tab_for_footer=default_new_tab_for_footer, copyright_url=default_copyright_url, copyright_symbol=default_copyright_symbol)
+function make_footer(copyright_url=default_copyright_url, copyright_symbol=default_copyright_symbol, new_tab_for_footer=default_new_tab_for_footer)
 {
     const lang = get_lang()
     let span = document.createElement('span')
@@ -627,7 +630,7 @@ function show_cursor(elem) {
 // FULLSCREEN
 
 
-let wake_lock = null;
+let wake_lock
 
 
 function request_wake_lock() {
@@ -636,7 +639,7 @@ function request_wake_lock() {
 
 
 function visibility_change_handler() {
-    if (wake_lock !== null && document.visibilityState == 'visible')
+    if (wake_lock && document.visibilityState == 'visible')
         request_wake_lock()
 }
 

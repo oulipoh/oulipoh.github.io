@@ -21,7 +21,7 @@
     line-height: 1.5;
     margin-inline: auto;
     text-align: center;
-    --hor_offset: -2ch;
+    --hor_offset: -1.33em;
     --ver_offset: -1.5em;
 }
 

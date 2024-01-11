@@ -106,7 +106,7 @@ button, cite, footer, nav, .sliders {
         66% { border-style: dotted }
     }
 
-    :is([id^=kw_], button.bottom):is(:hover, :focus-visible) {
+    :is([id^=kw_], button.big):is(:hover, :focus-visible) {
         animation: var(--icon_dur) infinite border;
         border-color: initial;
     }
@@ -256,10 +256,10 @@ button:not(.on, .no_active, .no_active *, .sliders *):active, .always_on, button
     color: var(--anti_on);
 }
 
-button.bottom {
+button.big {
     display: block;
     font-size: 1.3em;
-    margin-bottom: 3rem;
+    margin-block: 1.5em;
     margin-inline: auto;
     padding-inline: 1em;
 }
@@ -690,6 +690,26 @@ button#play.on::before {
 
 header + .poem {
     padding-top: 2ex;
+}
+
+.rafe, .taam {
+    position: relative;
+}
+
+.rafe::after, .taam::after {
+    font-size: .5em;
+    inset-inline: 0;
+    position: absolute;
+    text-align: center;
+    top: -.6em;
+}
+
+.rafe::after {
+    content: '_';
+}
+
+.taam::after {
+    content: '>';
 }
 
 .refs {

@@ -13,7 +13,7 @@ const arrow_height = 1
 const comp_marking = 5
 
 const lang = get_lang()
-let global_reset_counter = 0;
+let global_reset_counter = 0
 document.addEventListener('keydown', e => global_reset_counter += is_key(e, 'Backspace'))
 
 function compare_lists(a, b) {
@@ -41,6 +41,24 @@ const place_max_tokens = place_template.match(/[0-9A-Z]/g).length
 
 function center(label, width, align_start=false) {
     return label.padEnd((width+sanitized_len(label)+align_start) / 2).padStart(width)
+}
+
+function diagonals(trans, ts, te, bs, be) {
+    if (!ts && !te && !bs && !be)
+        return trans
+    trans_lines = trans.trim().split('\n')
+    const width = Math.max(...trans_lines.map(l => sanitized_len(l))) + 6
+    let arrow_ts = arrow_te = arrow_bs = arrow_be = '   '
+    ts = te = bs = be = -1
+    if (ts)
+        arrow_ts = ts == 1 ? '//v' : '^//'
+    if (te)
+        arrow_te = te == 1 ? '\\\\v' : '^\\\\'
+    if (bs)
+        arrow_bs = bs == 1 ? '\\\\^' : 'v\\\\'
+    if (be)
+        arrow_be = be == 1 ? '//^' : 'v//'
+    return [arrow_ts[0] + ' '.repeat(width + 4) + arrow_te[0], arrow_ts[1] + ' '.repeat(width + 2) + arrow_te[1], arrow_ts[2] + ' '.repeat(width) + arrow_te[2], '', trans, '', arrow_bs[2] + ' '.repeat(width) + arrow_be[2], arrow_bs[1] + ' '.repeat(width + 2) + arrow_be[1], arrow_bs[0] + ' '.repeat(width + 4) + arrow_be[0]].join('\n')
 }
 
 function trans_hor_symbol(label, len) {
@@ -98,7 +116,7 @@ function is_vertical(grid, trans) {
 
 function arrows(inside, outside, clue) {
     let arrow_body, inside_head, outside_head
-    const is_hor = typeof clue === 'string'
+    const is_hor = typeof clue == 'string'
     if (is_hor) {
         arrow_body = '-'.repeat(arrow_width - clue.split(' ').length*1.5)
         inside_head = '>'
@@ -121,10 +139,10 @@ function arrows(inside, outside, clue) {
     return [...arrows[0]].map((_, c) => arrows.map(row => row[c])).map(c => c.join(' ')).join('\n')
 }
 
-function step(grid, json, steps=0, max_tokens={}, result_counter={}, reset_counter=0, tokens=null) {
+function step(grid, json, steps=0, max_tokens={}, result_counter={}, reset_counter=0, tokens) {
     const comp = grid.parentElement.id
     const transitions = comp ? [comp] : Object.keys(json.transitions)
-    if (tokens === null)
+    if (tokens == undefined)
         tokens = comp ? Object.fromEntries(json.transitions[comp][0].map(p => [p, comp_marking])) : {...json.marking}
 
     const enabled = transitions.filter(t => is_enabled(json.transitions[t][0], tokens))
@@ -153,14 +171,22 @@ function step(grid, json, steps=0, max_tokens={}, result_counter={}, reset_count
             elem.title = alt
         }
         if (transitions.includes(elem.dataset.id)) {
-            elem.textContent = is_vertical(grid, elem.dataset.id) ? trans_ver_symbol(label, height) : trans_hor_symbol(label, width)
             elem.style.color = enabled.includes(elem.dataset.id) ? 'var(--enabled)' : 'inherit'
+            let ts = te = bs = be = 0
             new Set(json.transitions[elem.dataset.id].slice(0, 2).flat()).forEach(place => {
                 const inp = json.transitions[elem.dataset.id][0].filter(p => p == place).length
                 const out = json.transitions[elem.dataset.id][1].filter(p => p == place).length
                 const pelem = grid.querySelector(`[data-id="${place}"]`)
                 if (inp + out)
-                    if (is_vertical(grid, elem.dataset.id)) {
+                    if (elem.parentElement.children[index - cols - 1] == pelem && index % cols && inp + out == 1)
+                        ts = inp ? 1 : -1
+                    else if (elem.parentElement.children[index - cols + 1] == pelem && (index+1) % cols && inp + out == 1)
+                        te = inp ? 1 : -1
+                    else if (elem.parentElement.children[index + cols - 1] == pelem && index % cols && inp + out == 1)
+                        bs = inp ? 1 : -1
+                    else if (elem.parentElement.children[index + cols + 1] == pelem && (index+1) % cols && inp + out == 1)
+                        be = inp ? 1 : -1
+                    else if (is_vertical(grid, elem.dataset.id)) {
                         if (elem.previousSibling == pelem && index % cols)
                             elem.dataset.before = arrows(inp, out, label)
                         else if (elem.nextSibling == pelem && (index+1) % cols)
@@ -182,6 +208,7 @@ function step(grid, json, steps=0, max_tokens={}, result_counter={}, reset_count
                             elem.dataset.after = arrows(out, inp)
                         else
                             long_arrows.push([elem, pelem, inp, out])
+                elem.textContent = diagonals(is_vertical(grid, elem.dataset.id) ? trans_ver_symbol(label, height) : trans_hor_symbol(label, width), ts, te, bs, be)
             })
         } else {
             elem.firstChild.textContent = place_symbol(label, tokens[elem.dataset.id], elem.classList.contains('above'))
@@ -275,11 +302,11 @@ fetch(json_file).then(response => response.json()).then(json => {
                 }
             } else {
                 pre.classList.add('place')
+                const span = document.createElement('span')
+                pre.appendChild(span)
                 if (json.above?.includes(label) || !anti_above.includes(label) && (label_location == 'above' || label_location == 'half' && index < (labels.length/cols/2 | 0) * cols))
                     pre.classList.add('above')
             }
-            const span = document.createElement('span')
-            pre.appendChild(span)
             grid.appendChild(pre)
         })
         step(grid, json)
