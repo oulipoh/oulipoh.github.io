@@ -1,0 +1,21 @@
+html {
+    overscroll-behavior: none;
+}
+
+body {
+    background-image: url('down.jpg');
+    background-position: 43% 40%;
+    background-repeat: no-repeat;
+    background-size: 500%;
+    --fg_dim: var(--fg);
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+footer, h1, h2, nav {
+    text-shadow: var(--bg) 0 0 2px;
+}
+
+nav {
+    background: none;
+}

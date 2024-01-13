@@ -584,7 +584,7 @@ ul.mono {
 }
 
 nav {
-    background: inherit;
+    background-color: inherit;
     inset-inline: 0;
     line-height: var(--nav_lh);
     padding-block: var(--nav_pad_top) var(--nav_pad_bottom);

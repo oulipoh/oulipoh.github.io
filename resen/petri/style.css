@@ -16,14 +16,14 @@
 
 .petri > div {
     display: grid;
-    grid-template-columns: repeat(var(--cols), 13.5em);
+    grid-template-columns: repeat(var(--cols), 23ch);
     font-family: 'IBM Plex Mono', 'Courier New', monospace;
     justify-self: stretch;
     letter-spacing: initial;
     line-height: 1.5;
     margin-inline: auto;
     text-align: center;
-    --hor_offset: calc(-2ch - .15em);
+    --hor_offset: -2ch;
     --ver_offset: -1.5em;
 }
 
@@ -36,10 +36,15 @@
     position: relative;
 }
 
-.petri span {
+.petri pre.place span {
     align-items: center;
     display: flex;
-    justify-content: center;
+}
+
+.petri pre:not(.place) span[data-before]::before {
+    left: 50%;
+    top: 50%;
+    translate: -50% -50%;
 }
 
 .petri pre::before, .petri pre::after {
@@ -55,7 +60,7 @@
     inset-inline-start: 0;
 }
 
-.petri pre span[data-before]::before {
+.petri pre.place span[data-before]::before {
     inset-inline-start: var(--hor_offset);
 }
 
@@ -76,7 +81,7 @@
     inset-inline-end: 0;
 }
 
-.petri pre span[data-after]::after {
+.petri pre.place span[data-after]::after {
     inset-inline-end: var(--hor_offset);
 }
 

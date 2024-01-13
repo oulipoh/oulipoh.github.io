@@ -2,11 +2,12 @@ const pages = {
     "/": {title: "רֶסֶן", alt: "Resen", author: "oulipoh", skip: true},
 
     "achshav/": {title: "אָח־שָׁב – עַכְ־שָׁו", alt: "Ach-Shav", author: "brunogrife", kw: [0, "sound"]},
-    "cent/": {title: "מתוך \"מאה תמונות מלחמה\"", alt: "From \"One hundred visions of war\"", author: "julienvocance", translator: "rotematar", kw: [0, "poem"]},
+    "cent/": {title: "מתוך מאה תמונות מלחמה", alt: "From One hundred visions of war", author: "julienvocance", translator: "rotematar", kw: [0, "poem"]},
     "disappearance/": {title: "היעלמות", alt: "Disappearance", author: "rotematar", kw: [0, "story"]},
-    "exceeding/": {title: "מֵעֵבר לַשלם", alt: "Exceeding the entirety", author: ["mikamilgrom", "avimilgrom"], kw: [0, "audiovisual", "live code", "software"]},
+    "down/": {title: "רע", alt: "Down", author: "alexbenari", kw: [0, "interactive", "poem", "visual"]},
+    "exceeding/": {title: "מֵעֵבר לַשלם", alt: "Exceeding the entirety", author: ["mikamilgrom", "avimilgrom"], kw: [0, "live code", "visual"]},
     "imagine/": {title: "דמיין", alt: "/imagine", author: "liorzalmanson", kw: [0, "poem"]},
-    "petri/": {title: "פואטיקת פטרי פטריוטית", alt: "Patriotic Petri Poetry", author: "eyalgruss", kw: [0, "audiovisual", "live code", "poem", "software"]},
+    "petri/": {title: "פואטיקת פטרי פטריוטית", alt: "Patriotic Petri Poetry", author: "eyalgruss", kw: [0, "live code", "poem", "software", "visual"]},
     "things/": {title: "קורים עכשיו דברים עם השפה", alt: "Things are happening now with the language", author: "noashaham", kw: [0, "poem"]},
     "systems/": {title: "מערכות", alt: "Systems", author: "noashaham", kw: [0, "poem"]},
     "journal": {title: "אודות כתב העת", alt: "About this journal", author: "oulipoh"}
@@ -14,7 +15,6 @@ const pages = {
 
 const kw_labels = {
     "2d 3d": "רב־ממדי",
-    "audiovisual": "אורקולי",
     "biblical": "תורני",
     "cipher": "צופן",
     "combinatorial": "קומבינטורי",
@@ -22,16 +22,18 @@ const kw_labels = {
     "data available": "נתונים להורדה",
     "discourse": "שיח באילוצים",
     "hebrew cheatery": "מִרמת העברית",
+    "interactive": "אינטראקטיבי",
     "live code": "קוד חי",
     "new constraint": "אילוץ חדש",
     "palindrome": "פלינדרום",
     "pangram": "פנגרמה",
     "poem": "שיר",
     "record": "שיא",
-    "self-referral": "מתייחס לעצמו",
+    "self referral": "מתייחס לעצמו",
     "software": "תוכנה",
     "sound": "צלילים",
-    "story": "סיפור"
+    "story": "סיפור",
+    "visual": "חזותי"
 }
 
 const social = {
@@ -50,6 +52,9 @@ const authors = {
         "mail": "eyalgruss+oulipoh@gmail.com",
         "github": "",
         "subscribe": "ayPSSeHk3KL4ALGa9"
+    },
+    "alexbenari": {
+        "name": {"": "אלכס בן־ארי", "en": "Alex Ben Ari"}
     },
     "avimilgrom": {
         "name": {"": "אבי מילגרום", "en": "Avi Milgrom"}
@@ -97,8 +102,8 @@ const default_copyright_url = "https://creativecommons.org/licenses/by/4.0/"
 const default_copyright_symbol = "(CC)(&#xc6c3;)"
 
 const ui = {
-    "": {"next": "הבא", "prev": "הקודם", "lang": "עברית", "theme_name": "עיצוב של מתכנת", "theme": "תבנית", "copyright": "", "issue": "גיליון", "translator": "תורגם על ידי"},
-    "en": {"next": "next", "prev": "prev", "lang": "english", "theme_name": "Designed by a programmer", "theme": "Theme", "copyright": "", "issue": "issue", "translator": "translated by", "dir": "ltr"}
+    "": {"next": "הבא", "prev": "הקודם", "lang": "עברית", "theme_name": "עיצוב של מתכנת", "theme": "תבנית", "copyright": "", "issue": "גיליון", "translator": "(תרגום)"},
+    "en": {"next": "next", "prev": "prev", "lang": "english", "theme_name": "Designed by a programmer", "theme": "Theme", "copyright": "", "issue": "issue", "translator": "(translator)", "dir": "ltr"}
 }
 
 const shortcuts = {
@@ -213,7 +218,12 @@ function open_internal_link(elem) {
 
 
 function sanitize(kw) {
-    return String(kw).replace(/[^\w]/g, '').toLowerCase()
+    return String(kw).replace(/\W/g, '').toLowerCase()
+}
+
+
+function merge(...lists) {
+    return lists.map(list => list ?? []).flat();
 }
 
 
@@ -239,7 +249,7 @@ function make_contents(show_snippet=default_show_snippet, show_author=default_sh
             img.src = page + 'snippet'
         }
 
-        [...new Set([pages[page].hazard ?? [], pages[page].hazards ?? []].flat())].forEach(hazard => {
+        [...new Set(merge(pages[page].hazard, pages[page].hazards))].forEach(hazard => {
             const meta = document.createElement('meta')
             meta.setAttribute('itemprop', 'accessibilityHazard')
             meta.content = hazard
@@ -252,12 +262,16 @@ function make_contents(show_snippet=default_show_snippet, show_author=default_sh
         p.appendChild(a)
 
         if (show_author) {
-            const authors = get_make_author(page, lang)[0].map(harden)
+            let [authors, alt_authors] = get_make_author(page, lang)
+            authors = authors.map(harden)
+            alt_authors = alt_authors.map(harden)
             if (authors && authors.join() != contents_authors) {
                 const span = document.createElement('span')
                 authors.forEach((author, i) => {
                     const s = document.createElement('span')
                     s.innerHTML = author
+                    if (alt_authors[i] != author)
+                        s.title = alt_authors[i]
                     span.appendChild(s)
                 })
                 p.appendChild(span)
@@ -531,7 +545,8 @@ function make_header(reorder_contents=default_reorder_contents, new_tab_for_soci
 function get_make_author(page, lang, make, new_tab_for_social=default_new_tab_for_social) {
     page ??= get_page()
     lang ??= get_lang()
-    let keys = [...new Set([pages[page].author ?? [], pages[page].authors ?? [], pages[page].translator ?? [], pages[page].translators ?? []].flat())]
+    const translators = merge(pages[page].translator, pages[page].translators)
+    let keys = [...new Set(merge(pages[page].author, pages[page].authors, translators))]
     if (make && authors && !keys.length)
         keys = Object.keys(authors).slice(0, 1)
     let all_names = []
@@ -551,9 +566,17 @@ function get_make_author(page, lang, make, new_tab_for_social=default_new_tab_fo
         if (names) {
             name = names[lang] || names[''] || Object.values(names)[0] || name
             alt_name = Object.entries(names).filter(([k, v]) => k != lang && v).map(x => x[1])[0]
+            if (translators.includes(key)) {
+                const alt_langs = Object.keys(ui).filter(k => k != lang)
+                if (alt_langs.length)
+                    alt_name += ' ' + ui[alt_langs[0]].translator
+            }
             if (make && lang in names && alt_name)
                 h2.title = alt_name
         }
+        if (translators.includes(key))
+            name += ' ' + ui[lang].translator
+
         all_names.push(name)
         all_alt_names.push(alt_name || name)
 
@@ -600,8 +623,8 @@ function make_footer(copyright_url=default_copyright_url, copyright_symbol=defau
     let span = document.createElement('span')
     span.innerHTML += ui[lang].theme + ':&nbsp;'
     span.appendChild(make_link([...document.scripts].flatMap(s => s.src || [])[0], ui[lang].theme_name, 'nowrap', null, new_tab_for_footer))
-    const flex = document.createElement('div')
-    flex.appendChild(span)
+    const div = document.createElement('div')
+    div.appendChild(span)
 
     if (ui[lang].copyright) {
         span = document.createElement('span')
@@ -611,11 +634,11 @@ function make_footer(copyright_url=default_copyright_url, copyright_symbol=defau
         bdi.className = 'nowrap'
         bdi.innerHTML = copyright_symbol
         span.appendChild(bdi)
-        flex.appendChild(span)
+        div.appendChild(span)
     }
 
     const footer = document.createElement('footer')
-    footer.appendChild(flex)
+    footer.appendChild(div)
     document.body.appendChild(footer)
 }
 

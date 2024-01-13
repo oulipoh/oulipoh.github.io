@@ -10,6 +10,8 @@ const label_location = ''  // Can be: 'half' (half above and half below, favorin
 const default_token_symbol = 'o'  // Cannot be of 1-9 or capital A-N
 const arrow_width = 6
 const arrow_height = 1
+const arrow_diagonal = 4
+const diagonal_offset = 19
 const comp_marking = 5
 
 const lang = get_lang()
@@ -43,21 +45,24 @@ function center(label, width, align_start=false) {
     return label.padEnd((width+sanitized_len(label)+align_start) / 2).padStart(width)
 }
 
-function diagonals(trans, ts, te, bs, be) {
-    if (!ts && !te && !bs && !be)
-        return trans
-    trans_lines = trans.trim().split('\n')
-    const width = Math.max(...trans_lines.map(l => sanitized_len(l))) + 6
-    let arrow_ts = arrow_te = arrow_bs = arrow_be = '   '
+function diagonal_arrows(ts, te, bs, be) {
+    let arrow_ts = arrow_te = arrow_bs = arrow_be = ' '.repeat(arrow_diagonal + 1)
+    const slashes = '/'.repeat(arrow_diagonal)
+    const backslashes = '\\'.repeat(arrow_diagonal)
     if (ts)
-        arrow_ts = ts == 1 ? '//v' : '^//'
+        arrow_ts = ts == 1 ? 'v' + slashes : slashes + '^'
     if (te)
-        arrow_te = te == 1 ? '\\\\v' : '^\\\\'
+        arrow_te = te == 1 ? 'v' + backslashes : backslashes + '^'
     if (bs)
-        arrow_bs = bs == 1 ? '\\\\^' : 'v\\\\'
+        arrow_bs = bs == 1 ? '^' + backslashes : backslashes + 'v'
     if (be)
-        arrow_be = be == 1 ? '//^' : 'v//'
-    return [arrow_ts[0] + ' '.repeat(width + 4) + arrow_te[0], arrow_ts[1] + ' '.repeat(width + 2) + arrow_te[1], arrow_ts[2] + ' '.repeat(width) + arrow_te[2], '', trans, '', arrow_bs[2] + ' '.repeat(width) + arrow_be[2], arrow_bs[1] + ' '.repeat(width + 2) + arrow_be[1], arrow_bs[0] + ' '.repeat(width + 4) + arrow_be[0]].join('\n')
+        arrow_be = be == 1 ? '^' + slashes : slashes + 'v'
+    diagonals = Array(3).fill('')
+    for (const i in arrow_ts) {
+        const spaces = ' '.repeat(diagonal_offset + 2*i)
+        diagonals = [arrow_ts[i] + spaces + arrow_te[i] , ...diagonals, arrow_bs[i] + spaces + arrow_be[i]]
+    }
+    return diagonals.join('\n')
 }
 
 function trans_hor_symbol(label, len) {
@@ -153,7 +158,7 @@ function step(grid, json, steps=0, max_tokens={}, result_counter={}, reset_count
     const width = max_len(transitions.filter(t => !is_vertical(grid, t)), json.labels)
     const height = max_len(transitions.filter(t => is_vertical(grid, t)), json.labels, true)
 
-    const long_arrows = []
+    const other_arrows = []
     const elems = grid.querySelectorAll('pre')
     let cols = grid_columns
     if (comp)
@@ -178,6 +183,7 @@ function step(grid, json, steps=0, max_tokens={}, result_counter={}, reset_count
             elem.style.color = enabled.includes(elem.dataset.id) ? 'var(--enabled)' : 'inherit'
             let ts = te = bs = be = 0
             new Set(json.transitions[elem.dataset.id].slice(0, 2).flat()).forEach(place => {
+                elem.firstChild.textContent = is_vertical(grid, elem.dataset.id) ? trans_ver_symbol(label, height) : trans_hor_symbol(label, width)
                 const inp = json.transitions[elem.dataset.id][0].filter(p => p == place).length
                 const out = json.transitions[elem.dataset.id][1].filter(p => p == place).length
                 const pelem = grid.querySelector(`[data-id="${place}"]`)
@@ -200,7 +206,7 @@ function step(grid, json, steps=0, max_tokens={}, result_counter={}, reset_count
                         else if (elem.parentElement.children[index + cols] == pelem)
                             elem.parentElement.children[index + cols].dataset.before = arrows(out, inp, 1)
                         else
-                            long_arrows.push([elem, pelem, inp, out])
+                            other_arrows.push([elem, pelem, inp, out])
                     } else if (!comp)
                         if (elem.previousSibling == pelem && index % cols)
                             elem.previousSibling.firstChild.dataset.after = arrows(inp, out, '')
@@ -211,9 +217,10 @@ function step(grid, json, steps=0, max_tokens={}, result_counter={}, reset_count
                         else if (elem.parentElement.children[index + cols] == pelem)
                             elem.dataset.after = arrows(out, inp)
                         else
-                            long_arrows.push([elem, pelem, inp, out])
-                elem.textContent = diagonals(is_vertical(grid, elem.dataset.id) ? trans_ver_symbol(label, height) : trans_hor_symbol(label, width), ts, te, bs, be)
+                            other_arrows.push([elem, pelem, inp, out])
             })
+            if (ts || te || bs || be)
+                elem.firstChild.dataset.before = diagonal_arrows(ts, te, bs, be)
         } else {
             elem.firstChild.textContent = place_symbol(label, tokens[elem.dataset.id], elem.classList.contains('above'))
             if (!steps) {
@@ -307,11 +314,11 @@ fetch(json_file).then(response => response.json()).then(json => {
             } else {
                 pre.classList.add('place')
                 pre.addEventListener('click', () => pre.dataset.clicks = (pre.dataset.clicks | 0) + 1)
-                const span = document.createElement('span')
-                pre.appendChild(span)
                 if (json.above?.includes(label) || !anti_above.includes(label) && (label_location == 'above' || label_location == 'half' && index < (labels.length/cols/2 | 0) * cols))
                     pre.classList.add('above')
             }
+            const span = document.createElement('span')
+            pre.appendChild(span)
             grid.appendChild(pre)
         })
         step(grid, json)
