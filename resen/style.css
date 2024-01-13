@@ -750,15 +750,6 @@ nav[dir=rtl] ~ :nth-last-child(1 of .refs):not([data-title]) {
     unicode-bidi: plaintext;
 }
 
-#screenshot {
-    border-style: solid;
-    border-width: 2px;
-    font-size: .75em;
-    margin-bottom: 5ex;
-    margin-inline: auto;
-    width: 80%;
-}
-
 @keyframes show_cursor {
     0%, 100% {cursor: pointer}
 }
@@ -887,7 +878,7 @@ a.sponsors {
 }
 
 @media (hover: none), (max-device-width: 500px), (max-device-height: 500px) {
-    blockquote, li, p {
+    blockquote, li, p:not(.story) {
         text-align: start;
     }
 
