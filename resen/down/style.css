@@ -1,6 +1,5 @@
 html {
     overflow: clip;
-    overscroll-behavior: none;
 }
 
 body {
@@ -8,6 +7,7 @@ body {
     background-position: 43% 40%;
     background-size: 500%;
     --fg_dim: var(--fg);
+    pointer-events: none;
     user-select: none;
     -webkit-user-select: none;
 }
