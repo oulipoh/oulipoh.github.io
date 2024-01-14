@@ -5,7 +5,6 @@ html {
 body {
     background-image: url('down.jpg');
     background-position: 43% 40%;
-    background-repeat: no-repeat;
     background-size: 500%;
     --fg_dim: var(--fg);
     user-select: none;
