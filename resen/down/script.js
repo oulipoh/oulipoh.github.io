@@ -15,6 +15,10 @@ document.addEventListener('pointerup', () => {
     down = false
 })
 
+document.addEventListener('pointercancel', () => {
+    down = false
+})
+
 document.addEventListener('pointermove', e => {
     if (!down)
         return
@@ -27,4 +31,5 @@ document.addEventListener('pointermove', e => {
         dy *= 100 / (bg_size_factor*innerWidth/aspect_ratio-innerHeight)
     document.body.style.backgroundPositionX = Math.max(0, Math.min(bg_pos_pct_x + dx, 100)) + '%'
     document.body.style.backgroundPositionY = Math.max(0, Math.min(bg_pos_pct_y + dy, 100)) + '%'
+    // Note: not doing this in CSS due to bug in Firefox. See: https://bugzilla.mozilla.org/show_bug.cgi?id=1874606
 })
