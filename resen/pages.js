@@ -51,6 +51,7 @@ const authors = {
         "name": {"": "כתב עת מקוון ליצירה אילוצית וחישובית בעברית (בהקמה)", "en": "An online journal for constrained and computational creation in Hebrew (under construction)"},
         "mail": "eyalgruss+oulipoh@gmail.com",
         "github": "",
+        "sponsors": "",
         "subscribe": "ayPSSeHk3KL4ALGa9"
     },
     "alexbenari": {
@@ -465,21 +466,21 @@ function make_header(reorder_contents=default_reorder_contents, new_tab_for_soci
             page_items.forEach(p => {const enabled = getComputedStyle(p).color == fg_rgb; p.querySelectorAll('a').forEach(a => {if (enabled) a.removeAttribute('aria-disabled'); else a.ariaDisabled = 'true'})})
             if (reorder_contents)
                 document.querySelector('.contents').append(...[...page_items].sort((a, b) => (getComputedStyle(b).color == fg_rgb) - (getComputedStyle(a).color == fg_rgb) || a.id.split('_')[1] - b.id.split('_')[1]))
-            if (on && this.id.match(/kw_\d+$/))
-                buttons_on.forEach(e => {if (e != this && e.id.match(/kw_\d+$/)) e.click()})
+            if (on && this.id.match(/^kw_\d+$/))
+                buttons_on.forEach(e => {if (e != this && e.id.match(/^kw_\d+$/)) e.click()})
         }
 
         keywords.forEach((kw, button_index) => {
             button = document.createElement(page == '/' ? 'button' : 'a')
             button.id = 'kw_' + sanitize(kw)
             let label = kw_labels[kw] || kw
-            if (kw.match(/\d+$/))
+            if (kw.match(/^\d+$/))
                 label = ui[lang].issue + ' ' + kw
 
             let alt = ''
             if (trans) {
                 alt = kw
-                if (kw.match(/\d+$/))
+                if (kw.match(/^\d+$/))
                     alt = ui[alt_langs[0]].issue + ' ' + kw
                 else if (lang)
                     [label, alt] = [alt, label]
@@ -603,7 +604,7 @@ function get_make_author(page, lang, make, new_tab_for_social=default_new_tab_fo
                             prefix += '/'
                     if (!prefix.includes(':'))
                         prefix = 'https://' + prefix
-                    if (author[net].match(/([.@]|$)/))
+                    if (author[net].match(/^([.@]|$)/))
                         author[net] = key + author[net]
                     const a = span.appendChild(make_link(prefix + author[net] + (social[net].suffix || ''), social[net].label, net, net[0].toUpperCase() + net.slice(1), new_tab_for_social))
                     a.dataset.label = a.textContent
