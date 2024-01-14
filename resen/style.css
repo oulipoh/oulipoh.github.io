@@ -29,7 +29,7 @@ html {
 }
 
 body {
-    background: var(--bg);
+    background-color: var(--bg);
     box-sizing: border-box;
     color: var(--fg);
     display: table;
@@ -787,7 +787,6 @@ nav[dir=rtl] ~ :nth-last-child(1 of .refs):not([data-title]) {
 
 .sliders input[type=range] {
     margin-inline: -1px;
-    touch-action: none;
     width: 2.5em;
 }
 
@@ -829,7 +828,7 @@ a.sponsors {
 }
 
 .subscribe {
-    background: linear-gradient(90deg, currentColor 50%, transparent 50%), linear-gradient(90deg, currentColor 50%, transparent 50%), linear-gradient(0, currentColor 50%, transparent 50%), linear-gradient(0, currentColor 50%, transparent 50%);
+    background-image: linear-gradient(90deg, currentColor 50%, transparent 50%), linear-gradient(90deg, currentColor 50%, transparent 50%), linear-gradient(0, currentColor 50%, transparent 50%), linear-gradient(0, currentColor 50%, transparent 50%);
     background-position: 0 0, 100% 100%, 0 100%, 100% 0;
     background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
     background-size: .5rem 2px, .5rem 2px, 2px .5rem, 2px .5rem;

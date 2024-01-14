@@ -8,7 +8,7 @@ document.addEventListener('pointerdown', e => {
     const style = getComputedStyle(document.body)
     bg_pos_pct_x = parseFloat(style.backgroundPositionX)
     bg_pos_pct_y = parseFloat(style.backgroundPositionY)
-    bg_size_factor = parseFloat(style.backgroundSize)/100
+    bg_size_factor = parseFloat(style.backgroundSize) / 100
 })
 
 document.addEventListener('pointerup', () => {

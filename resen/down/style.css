@@ -3,7 +3,7 @@ body {
     background-position: 43% 40%;
     background-size: 500%;
     --fg_dim: var(--fg);
-    touch-action: none;
+    touch-action: pinch-zoom;
     user-select: none;
     -webkit-user-select: none;
 }
