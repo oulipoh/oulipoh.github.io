@@ -10,7 +10,7 @@ const label_location = ''  // Can be: 'half' (half above and half below, favorin
 const default_token_symbol = 'o'  // Cannot be of 1-9 or capital A-N
 const arrow_width = 6
 const arrow_height = 1
-const arrow_diagonal = 4
+const arrow_diagonal = 3
 const diagonal_offset = 19
 const comp_marking = 5
 
@@ -158,7 +158,7 @@ function step(grid, json, steps=0, max_tokens={}, result_counter={}, reset_count
     const width = max_len(transitions.filter(t => !is_vertical(grid, t)), json.labels)
     const height = max_len(transitions.filter(t => is_vertical(grid, t)), json.labels, true)
 
-    const other_arrows = []
+    const missing_arrows = []
     const elems = grid.querySelectorAll('pre')
     let cols = grid_columns
     if (comp)
@@ -206,7 +206,7 @@ function step(grid, json, steps=0, max_tokens={}, result_counter={}, reset_count
                         else if (elem.parentElement.children[index + cols] == pelem)
                             elem.parentElement.children[index + cols].dataset.before = arrows(out, inp, 1)
                         else
-                            other_arrows.push([elem, pelem, inp, out])
+                            missing_arrows.push([elem, pelem, inp, out])
                     } else if (!comp)
                         if (elem.previousSibling == pelem && index % cols)
                             elem.previousSibling.firstChild.dataset.after = arrows(inp, out, '')
@@ -217,7 +217,7 @@ function step(grid, json, steps=0, max_tokens={}, result_counter={}, reset_count
                         else if (elem.parentElement.children[index + cols] == pelem)
                             elem.dataset.after = arrows(out, inp)
                         else
-                            other_arrows.push([elem, pelem, inp, out])
+                            missing_arrows.push([elem, pelem, inp, out])
             })
             if (ts || te || bs || be)
                 elem.firstChild.dataset.before = diagonal_arrows(ts, te, bs, be)
@@ -292,7 +292,8 @@ fetch(json_file).then(response => response.json()).then(json => {
                         bottom_arrows |= bottom_arrow
                         const is_ver = top_arrow || bottom_arrow
                         ver += is_ver
-                        if (!is_hor && !is_ver) {
+                        is_diag = (labels[index - cols - 1] == place || labels[index + cols - 1] == place) && index % cols || (labels[index - cols + 1] == place || labels[index + cols + 1] == place) && (index+1) % cols
+                        if (!is_hor && !is_ver && !is_diag) {
                             place_index = labels.indexOf(place)
                             long += place_index % cols == 0 || (place_index+1) % cols == 0 || place_index / cols | 0 == 0 || place_index / cols | 0 == rows - 1
                         }
