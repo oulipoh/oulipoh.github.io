@@ -6,6 +6,7 @@ body {
     background-image: url('down.jpg');
     background-position: 43% 40%;
     background-size: 500%;
+    cursor: grab;
     --fg_dim: var(--fg);
     touch-action: pinch-zoom;
     user-select: none;
@@ -13,7 +14,11 @@ body {
 }
 
 footer, h1, h2, nav {
-    text-shadow: var(--bg) 0 0 2px;
+    text-shadow: white 0 0 2px;
+}
+
+header, h2 {
+    opacity: .7;
 }
 
 nav {
