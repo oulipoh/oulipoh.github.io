@@ -1,3 +1,7 @@
+// Copyright 2023 by Eyal Yehowa Gruss, licensed under CC BY 4.0
+// Please attribute by linking to a version of this file [e.g. as done in make_footer()], containing these comments
+
+
 const pages = {
     "/": {title: "רֶסֶן", alt: "Resen", author: "oulipoh", skip: true},
 
@@ -11,39 +15,6 @@ const pages = {
     "things/": {title: "קורים עכשיו דברים עם השפה", alt: "Things are happening now with the language", author: "noashaham", kw: [0, "poem"]},
     "systems/": {title: "מערכות", alt: "Systems", author: "noashaham", kw: [0, "poem"]},
     "journal": {title: "אודות כתב העת", alt: "About this journal", author: "oulipoh"}
-}
-
-const kw_labels = {
-    "2d 3d": "רב־ממדי",
-    "biblical": "תורני",
-    "cipher": "צופן",
-    "combinatorial": "קומבינטורי",
-    "constraint combo": "שילוב אילוצים",
-    "data available": "נתונים להורדה",
-    "discourse": "שיח באילוצים",
-    "hebrew cheatery": "מִרמת העברית",
-    "interactive": "אינטראקטיבי",
-    "live code": "קוד חי",
-    "new constraint": "אילוץ חדש",
-    "palindrome": "פלינדרום",
-    "pangram": "פנגרמה",
-    "poem": "שיר",
-    "record": "שיא",
-    "self referral": "מתייחס לעצמו",
-    "software": "תוכנה",
-    "sound": "צלילים",
-    "story": "סיפור",
-    "visual": "חזותי"
-}
-
-const social = {
-    "mail": {"url": "mailto:", "label": "&#x2709;"},
-    "web": {"label": "&#x1f3e0;&#xfe0e;"},
-    "twitter": {"url": "twitter.com", "label": "&#x1f426;"},
-    "github": {"url": "github.com", "label": "&#x1f431;"},
-    "sponsors": {"url": "github.com/sponsors", "label": "&hearts;"},
-    "paypal": {"url": "www.paypal.com/donate/?hosted_button_id=", "label": "&#x1f4b8;"},
-    "subscribe": {"url": "forms.gle", "label": "הרשמה לעדכונים"}
 }
 
 const authors = {
@@ -89,22 +60,56 @@ const authors = {
     }
 }
 
-let author_pages_folder = ''
-author_pages_folder = author_pages_folder.replace(/^[./]+|[./]+$/g, '')
-
-const default_show_snippet = true
-const default_show_author = true
-const default_rows_first = true
-const default_reorder_contents = true
-const default_force_new_tab_for_mailto_tel = true
-const default_new_tab_for_social = true
-const default_new_tab_for_footer = true
-const default_copyright_url = "https://creativecommons.org/licenses/by/4.0/"
-const default_copyright_symbol = "(CC)(&#xc6c3;)"
-
 const ui = {
     "": {"next": "הבא", "prev": "הקודם", "lang": "עברית", "theme_name": "עיצוב של מתכנת", "theme": "תבנית", "copyright": "", "issue": "גיליון", "translator": "(תרגום)"},
     "en": {"next": "next", "prev": "prev", "lang": "english", "theme_name": "Designed by a programmer", "theme": "Theme", "copyright": "", "issue": "issue", "translator": "(translator)", "dir": "ltr"}
+}
+
+const default_rows_first = true
+const default_reorder_contents = true
+
+const default_copyright_url = "https://creativecommons.org/licenses/by/4.0/"
+const default_copyright_label = "(CC)(&#xc6c3;)"
+const default_force_new_tab_for_mailto_tel = true
+const default_new_tab_for_social = true
+const default_new_tab_for_footer = true
+const default_show_snippet = true
+const default_show_author = true
+
+let author_pages_folder = ''
+author_pages_folder = author_pages_folder.replace(/^[./]+|[./]+$/g, '')
+
+const social = {
+    "mail": {"url": "mailto:", "label": "&#x2709;"},
+    "web": {"label": "&#x1f3e0;&#xfe0e;"},
+    "twitter": {"url": "twitter.com", "label": "&#x1f426;"},
+    "github": {"url": "github.com", "label": "&#x1f431;"},
+    "sponsors": {"url": "github.com/sponsors", "label": "&hearts;"},
+    "paypal": {"url": "www.paypal.com/donate/?hosted_button_id=", "label": "&#x1f4b8;"},
+    "subscribe": {"url": "forms.gle", "label": "הרשמה לעדכונים"}
+}
+
+const kw_labels = {
+    "2d 3d": "רב־ממדי",
+    "biblical": "תורני",
+    "cipher": "צופן",
+    "combinatorial": "קומבינטורי",
+    "constraint combo": "שילוב אילוצים",
+    "data available": "נתונים להורדה",
+    "discourse": "שיח באילוצים",
+    "hebrew cheatery": "מִרמת העברית",
+    "interactive": "אינטראקטיבי",
+    "live code": "קוד חי",
+    "new constraint": "אילוץ חדש",
+    "palindrome": "פלינדרום",
+    "pangram": "פנגרמה",
+    "poem": "שיר",
+    "record": "שיא",
+    "self referral": "מתייחס לעצמו",
+    "software": "תוכנה",
+    "sound": "צלילים",
+    "story": "סיפור",
+    "visual": "חזותי"
 }
 
 const shortcuts = {
@@ -618,7 +623,7 @@ function get_make_author(page, lang, make, new_tab_for_social=default_new_tab_fo
 }
 
 
-function make_footer(copyright_url=default_copyright_url, copyright_symbol=default_copyright_symbol, new_tab_for_footer=default_new_tab_for_footer)
+function make_footer(copyright_url=default_copyright_url, copyright_label=default_copyright_label, new_tab_for_footer=default_new_tab_for_footer)
 {
     const lang = get_lang()
     let span = document.createElement('span')
@@ -633,7 +638,7 @@ function make_footer(copyright_url=default_copyright_url, copyright_symbol=defau
         span.innerHTML += '&nbsp;'
         const bdi = document.createElement('bdi')
         bdi.className = 'nowrap'
-        bdi.innerHTML = copyright_symbol
+        bdi.innerHTML = copyright_label
         span.appendChild(bdi)
         div.appendChild(span)
     }

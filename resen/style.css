@@ -6,22 +6,29 @@
     --fg_verydim: var(--fg_dim);
     --fg_filter: saturate(0);
     --fg_highlight: white;
+    --complementary: #6580e1;
+    --glow: aliceblue;
     --on: #ff5337;
     --anti_on: var(--bg);
+    --invert: 1;
+    
+    --column_gap: 4em;
+    --columns: 3;
+    --row_gap: 3em;
+    --mono_font: 'Courier New', monospace;
 
     --hor_scrollbar_offset: 16px;
+    --main_margin: max(2rem, 5vw);
+    --anti_margin: calc(-1 * var(--main_margin));
     --media_width: 85%;
-    --mono_font: 'Courier New', monospace;
     --nav_lh: 2rem;
     --nav_pad_top: 4px;
     --nav_pad_bottom: 16px;
-    --main_margin: max(2rem, 5vw);
-    --anti_margin: calc(-1 * var(--main_margin));
 }
 
 ::selection {
     color: var(--anti_on);
-    background-color: #6580e1;
+    background-color: var(--complementary);
 }
 
 html {
@@ -52,7 +59,7 @@ button, pre {
     font-family: inherit;
 }
 
-button, cite, footer, nav, .sliders {
+button, cite, footer, nav, .preface_he, .sliders {
     font-size: initial;
 }
 
@@ -98,7 +105,7 @@ button, cite, footer, nav, .sliders {
     }
 
     a:is(:hover, :focus-visible) > img {
-        box-shadow: aliceblue 0 0 1em .5em;
+        box-shadow: var(--glow) 0 0 1em .5em;
     }
 
     @keyframes border {
@@ -111,12 +118,8 @@ button, cite, footer, nav, .sliders {
         border-color: initial;
     }
 
-    @keyframes stroke {
-        50% { -webkit-text-stroke-color: var(--fg_dim) }
-    }
-
     @keyframes github {
-        100% { filter: invert(0) }
+        100% { filter: invert(calc(1 - var(--invert))) }
     }
 
     .github:is(:hover, :focus-visible) {
@@ -271,16 +274,14 @@ cite {
 }
 
 .contents {
-    --column-gap: 4em;
-    column-gap: var(--column-gap);
-    --columns: 3;
+    column-gap: var(--column_gap);
     columns: var(--columns);
 }
 
 .rows_first {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(clamp(250px, (var(--media_width) - (var(--columns) - 1) * var(--column-gap)) / var(--columns), 100%), 1fr));
-    row-gap: 3em;
+    grid-template-columns: repeat(auto-fit, minmax(clamp(250px, (var(--media_width) - (var(--columns) - 1) * var(--column_gap)) / var(--columns), 100%), 1fr));
+    row-gap: var(--row_gap);
 }
 
 .contents > p {
@@ -356,11 +357,11 @@ nav[dir=rtl] ~ .contents {
 }
 
 .dialog blockquote:not([dir=ltr])::before, .dialog blockquote[dir=ltr]::after {
-    content: var(--data-name1)':';
+    content: var(--data_name1)':';
 }
 
 .dialog blockquote[dir=ltr]::before, .dialog blockquote:not([dir=ltr])::after {
-    content: var(--data-name2)':';
+    content: var(--data_name2)':';
 }
 
 .export {
@@ -437,7 +438,7 @@ nav[dir=rtl] ~ footer > div {
 }
 
 .github, .paypal {
-    filter: invert(1);
+    filter: invert(--invert);
 }
 
 h1, h2 {
@@ -472,10 +473,6 @@ nav[dir=ltr] ~ header {
 
 nav[dir=rtl] ~ header {
     direction: rtl;
-}
-
-header ~ :not(h2, footer) {
-    line-height: 1.5;
 }
 
 .huge, .subhuge {
@@ -692,6 +689,10 @@ header + .poem {
     padding-top: 2ex;
 }
 
+.punct {
+    color: var(--fg_verydim);
+}
+
 .rafe, .taam {
     position: relative;
 }
@@ -813,6 +814,10 @@ nav[dir=rtl] ~ :nth-last-child(1 of .refs):not([data-title]) {
     flex-grow: 1;
 }
 
+nav[dir=ltr] ~ .preface_he {
+    display: none;
+}
+
 .social {
     display: inline-block;
 }
@@ -913,4 +918,11 @@ a.sponsors {
     .refs > blockquote {
         margin-inline: 0;
     }
+}
+
+
+/* stuff for https://oulipoh.com/resen/ */
+
+header ~ :not(h2, footer) {
+    line-height: 1.5;
 }

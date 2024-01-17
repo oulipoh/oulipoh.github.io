@@ -4,11 +4,12 @@ html {
 
 body {
     background-image: url('down.jpg');
-    background-position: 43% 40%;
-    background-size: 500%;
+    background-position: clamp(100%, 43% + var(--dx, 0px), 0%) clamp(100%, 40% + var(--dy, 0px), 0%);
+    background-size: auto 500%;
     cursor: grab;
     --fg_dim: var(--fg);
     touch-action: pinch-zoom;
+    --transparency: 1;
     user-select: none;
     -webkit-user-select: none;
 }
@@ -18,7 +19,7 @@ footer, h1, h2, nav {
 }
 
 header, h2 {
-    opacity: .7;
+    opacity: min(var(--transparency), .7);
 }
 
 nav {
