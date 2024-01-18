@@ -4,22 +4,19 @@ html {
 
 body {
     background-image: url('down.jpg');
-    background-position: clamp(100%, 43% + var(--dx, 0px), 0%) clamp(100%, 40% + var(--dy, 0px), 0%);
-    background-size: auto 500%;
+    background-position: clamp(100%, 43% + var(--dx, 0)*1px, 0%) clamp(100%, 40% + var(--dy, 0)*1px, 0%);  /* Note reverse order is due to the negative difference of element size minus upscaled image size. Avoid the separate -x/-y properties which may be broken in Chrome and Safari. See: https://bugzilla.mozilla.org/show_bug.cgi?id=1874606, https://bugs.chromium.org/p/chromium/issues/detail?id=610627#c25 */
+    background-size: auto 400%;
     cursor: grab;
     --fg_dim: var(--fg);
+    --opacity: 1;
+    opacity: min(var(--opacity), .6);
     touch-action: pinch-zoom;
-    --transparency: 1;
     user-select: none;
     -webkit-user-select: none;
 }
 
 footer, h1, h2, nav {
     text-shadow: white 0 0 2px;
-}
-
-header, h2 {
-    opacity: min(var(--transparency), .7);
 }
 
 nav {

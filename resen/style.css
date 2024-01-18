@@ -17,10 +17,13 @@
     --row_gap: 3em;
     --mono_font: 'Courier New', monospace;
 
+    --h1_size: clamp(1.3em, 5rem, 10vw);
     --hor_scrollbar_offset: 16px;
+    --media_width: 85%;
+
+    /* Following variables must use units that are not relative to elements (i.e. avoid %, em, ex) */
     --main_margin: max(2rem, 5vw);
     --anti_margin: calc(-1 * var(--main_margin));
-    --media_width: 85%;
     --nav_lh: 2rem;
     --nav_pad_top: 4px;
     --nav_pad_bottom: 16px;
@@ -213,10 +216,6 @@ nav[dir=rtl] ~ .author {
     margin-inline-end: 1em;
 }
 
-.author + .author {
-    margin-top: -3ex;
-}
-
 blockquote {
     margin-block: 3ex;
 }
@@ -280,7 +279,7 @@ cite {
 
 .rows_first {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(clamp(250px, (var(--media_width) - (var(--columns) - 1) * var(--column_gap)) / var(--columns), 100%), 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(clamp(250px, (var(--media_width) - (var(--columns) - 1)*var(--column_gap)) / var(--columns), 100%), 1fr));
     row-gap: var(--row_gap);
 }
 
@@ -447,15 +446,11 @@ h1, h2 {
 }
 
 h1, .subhuge {
-    font-size: clamp(1.3em, 5rem, 10vw);
+    font-size: var(--h1_size);
 }
 
-h2 {
-    margin-bottom: 4ex;
-}
-
-h2:not(:is(header, .preface_he) + *) {
-    margin-top: 6ex;
+h2:not(header *) {
+    margin-block: 6ex 4ex;
 }
 
 .harden {
@@ -464,7 +459,7 @@ h2:not(:is(header, .preface_he) + *) {
 }
 
 header {
-    margin-top: calc(var(--nav_pad_top) + var(--nav_pad_bottom) + 2 * var(--nav_lh));  /* variables must use units that will not change computed value */
+    margin-block: calc(var(--nav_pad_top) + var(--nav_pad_bottom) + 2*var(--nav_lh)) calc(var(--h1_size) * .8);
 }
 
 nav[dir=ltr] ~ header {

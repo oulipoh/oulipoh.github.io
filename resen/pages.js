@@ -522,12 +522,12 @@ function make_header(reorder_contents=default_reorder_contents, new_tab_for_soci
     header.appendChild(h1)
     if (ui[lang].dir && ui[lang].dir != document.documentElement.dir)
         nav.dir = ui[lang].dir
-    document.body.appendChild(header)
     if (pages[page].author || pages[page].authors || pages[page].translator || pages[page].translators) {
-        const current_authors = get_make_author(page, lang, true, new_tab_for_social)[lang != 'en' | 0].join(', ')
+        const current_authors = get_make_author(page, lang, header, new_tab_for_social)[lang != 'en' | 0].join(', ')
         if (page == '/' && current_authors)
             desc.push(current_authors)
     }
+    document.body.appendChild(header)
     if (desc.length) {
         meta = document.createElement('meta')
         meta.name = 'description'
@@ -548,12 +548,12 @@ function make_header(reorder_contents=default_reorder_contents, new_tab_for_soci
 }
 
 
-function get_make_author(page, lang, make, new_tab_for_social=default_new_tab_for_social) {
+function get_make_author(page, lang, elem, new_tab_for_social=default_new_tab_for_social) {
     page ??= get_page()
     lang ??= get_lang()
     const translators = merge(pages[page].translator, pages[page].translators)
     let keys = [...new Set(merge(pages[page].author, pages[page].authors, translators))]
-    if (make && authors && !keys.length)
+    if (elem && authors && !keys.length)
         keys = Object.keys(authors).slice(0, 1)
     let all_names = []
     let all_alt_names = []
@@ -563,7 +563,7 @@ function get_make_author(page, lang, make, new_tab_for_social=default_new_tab_fo
         let name = key
 
         let h2
-        if (make) {
+        if (elem) {
             h2 = document.createElement('h2')
             h2.className = 'author'
         }
@@ -577,7 +577,7 @@ function get_make_author(page, lang, make, new_tab_for_social=default_new_tab_fo
                 if (alt_langs.length)
                     alt_name += ' ' + ui[alt_langs[0]].translator
             }
-            if (make && alt_name && alt_name != name)
+            if (elem && alt_name && alt_name != name)
                 h2.title = alt_name
         }
         if (translators.includes(key))
@@ -586,7 +586,7 @@ function get_make_author(page, lang, make, new_tab_for_social=default_new_tab_fo
         all_names.push(name)
         all_alt_names.push(alt_name || name)
 
-        if (make) {
+        if (elem) {
             const a = make_link('', name)
             h2.appendChild(a)
             let url = key
@@ -616,7 +616,7 @@ function get_make_author(page, lang, make, new_tab_for_social=default_new_tab_fo
                 })
                 h2.appendChild(span)
             }
-            document.body.appendChild(h2)
+            elem.appendChild(h2)
         }
     })
     return [all_names, all_alt_names]

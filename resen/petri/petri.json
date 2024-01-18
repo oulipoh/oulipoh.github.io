@@ -52,7 +52,8 @@
     "זעם עזה": 1
   },
 
-  "labels": {"רבייה_ישראל": "BREEDING_ISRAEL", "צבא": "MILITARY", "מבצע": "OPERATION", "עזה": "GAZA", "רבייה_עזה": "BREEDING_GAZA", "ישראל": "ISRAEL", "שחרור": "DISCHARGE", "בית עלמין עזה": "GAZA CEMETERY", "פטירה_עזה": "PASSING_GAZA", "כלא": "PRISON", "הסתה": "INCITEMENT", "פטירה_ישראל": "PASSING_ISRAEL", "בית עלמין ישראל": "ISRAEL CEMETERY", "שבי": "CAPTIVITY", "חילוף": "EXCHANGE", "זעם עזה": "GAZA WRATH", "פיגוע": "TERROR ATTACK", "זעם ישראל": "ISRAEL WRATH", "חטיפה": "ABDUCTION", "ארגון טרור": "TERROR GROUP"},
+  "labels": {"רבייה_ישראל": "BREEDING_ISRAEL", "צבא": "MILITARY", "מבצע": "OPERATION", "עזה": "GAZA", "רבייה_עזה": "BREEDING_GAZA", "ישראל": "ISRAEL", "שחרור": "DISCHARGE", "בית עלמין עזה": "GAZA CEMETERY", "פטירה_עזה": "PASSING_GAZA", "זעם ישראל": "ISRAEL WRATH", "הסתה": "INCITEMENT", "פטירה_ישראל": "PASSING_ISRAEL", "בית עלמין ישראל": "ISRAEL CEMETERY", "שבי": "CAPTIVITY", "חטיפה": "ABDUCTION", "זעם עזה": "GAZA WRATH", "פיגוע": "TERROR ATTACK", "כלא": "PRISON", "חילוף": "EXCHANGE", "ארגון טרור": "TERROR GROUP"}
+,
 
   "require": [
     ["ישראל", "צבא"],
