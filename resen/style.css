@@ -273,8 +273,8 @@ cite {
 }
 
 .contents {
+    column-count: var(--columns);
     column-gap: var(--column_gap);
-    columns: var(--columns);
 }
 
 .rows_first {
@@ -575,6 +575,12 @@ ul.mono {
     text-align: center;
 }
 
+.narrow_poem {
+    margin-block: 8ex;
+    margin-inline: auto;
+    max-width: fit-content;
+}
+
 nav {
     background-color: inherit;
     inset-inline: 0;
@@ -674,14 +680,8 @@ button#play.on::before {
     content: '\25fc';
 }
 
-.poem {
-    margin-block: 4ex 4rem;
-    margin-inline: auto;
-    max-width: fit-content;
-}
-
-header + .poem {
-    padding-top: 2ex;
+nav[dir=ltr] ~ .preface_he {
+    display: none;
 }
 
 .punct {
@@ -809,10 +809,6 @@ nav[dir=rtl] ~ :nth-last-child(1 of .refs):not([data-title]) {
     flex-grow: 1;
 }
 
-nav[dir=ltr] ~ .preface_he {
-    display: none;
-}
-
 .social {
     display: inline-block;
 }
@@ -852,6 +848,15 @@ a.sponsors {
     inset-inline: 0;
     position: absolute;
     text-align: center;
+}
+
+.two_col {
+    column-count: 2;
+    column-gap: min(4em, 5vw);
+}
+
+.two_col > :first-child {
+    margin-top: 0;
 }
 
 .video {
@@ -913,8 +918,11 @@ a.sponsors {
     .refs > blockquote {
         margin-inline: 0;
     }
-}
 
+    .two_col {
+        column-count: 1;
+    }
+}
 
 /* stuff for https://oulipoh.com/resen/ */
 

@@ -333,9 +333,9 @@ function shortcut(elem, key) {
 }
 
 
-function add_nav_element(nav, url, label, cls, delta, key) {
+function add_nav_element(nav, url, label, cls, delta=0, key) {
     const elem = nav.appendChild(make_link(url, label, ['nowrap', cls], key ? `[${key}]` : ''))
-    if (delta != undefined)
+    if (delta != null)
         elem.style.marginInlineEnd = 1.5 + Math.max(delta, 0) + 'em'
     shortcut(elem, key)
     return elem
@@ -425,7 +425,7 @@ function make_header(reorder_contents=default_reorder_contents, new_tab_for_soci
 
     span = document.createElement('span')
     const next = add_nav_element(span, '', ui[lang].next, 'next', 0, shortcuts.next)
-    const prev = add_nav_element(span, '', ui[lang].prev, 'prev', 0, shortcuts.prev)
+    const prev = add_nav_element(span, '', ui[lang].prev, 'prev', null, shortcuts.prev)
     nav.appendChild(span)
     set_next_prev_page(page, next, prev, lang, url_kw)
 
