@@ -19,7 +19,7 @@ const pages = {
 
 const authors = {
     "oulipoh": {
-        "name": {"": "כתב עת מקוון ליצירה אילוצית וחישובית בעברית (בהקמה)", "en": "An online journal for constrained and computational creation in Hebrew (under construction)"},
+        "name": {"": "כתב עת מקוון ליצירה אילוצית וחישובית בעברית", "en": "An online journal for constrained and computational creation in Hebrew"},
         "mail": "eyalgruss+oulipoh@gmail.com",
         "github": "",
         "sponsors": "",
@@ -68,28 +68,8 @@ const ui = {
 const default_rows_first = true
 const default_reorder_contents = true
 
-const default_copyright_url = "https://creativecommons.org/licenses/by/4.0/"
-const default_copyright_label = "(CC)(&#xc6c3;)"
-const default_force_new_tab_for_mailto_tel = true
-const default_new_tab_for_social = true
-const default_new_tab_for_footer = true
-const default_show_snippet = true
-const default_show_author = true
-
-let author_pages_folder = ''
-author_pages_folder = author_pages_folder.replace(/^[./]+|[./]+$/g, '')
-
-const social = {
-    "mail": {"url": "mailto:", "label": "&#x2709;"},
-    "web": {"label": "&#x1f3e0;&#xfe0e;"},
-    "twitter": {"url": "twitter.com", "label": "&#x1f426;"},
-    "github": {"url": "github.com", "label": "&#x1f431;"},
-    "sponsors": {"url": "github.com/sponsors", "label": "&hearts;"},
-    "paypal": {"url": "www.paypal.com/donate/?hosted_button_id=", "label": "&#x1f4b8;"},
-    "subscribe": {"url": "forms.gle", "label": "הרשמה לעדכונים"}
-}
-
 const kw_labels = {
+    0: "אפס – מלחמה",
     "2d 3d": "רב־ממדי",
     "biblical": "תורני",
     "cipher": "צופן",
@@ -112,11 +92,32 @@ const kw_labels = {
     "visual": "חזותי"
 }
 
+const social = {
+    "mail": {"url": "mailto:", "label": "&#x2709;"},
+    "web": {"label": "&#x1f3e0;&#xfe0e;"},
+    "twitter": {"url": "twitter.com", "label": "&#x1f426;"},
+    "github": {"url": "github.com", "label": "&#x1f431;"},
+    "sponsors": {"url": "github.com/sponsors", "label": "&hearts;"},
+    "paypal": {"url": "www.paypal.com/donate/?hosted_button_id=", "label": "&#x1f4b8;"},
+    "subscribe": {"url": "forms.gle", "label": "הרשמה לעדכונים"}
+}
+
 const shortcuts = {
     "back": "Alt+Backspace",
     "next": "Alt+PageDown",
     "prev": "Alt+PageUp"
 }
+
+const default_copyright_url = "https://creativecommons.org/licenses/by/4.0/"
+const default_copyright_label = "(CC)(&#xc6c3;)"
+const default_force_new_tab_for_mailto_tel = true
+const default_new_tab_for_social = true
+const default_new_tab_for_footer = true
+const default_show_snippet = true
+const default_show_author = true
+
+let author_pages_folder = ''
+author_pages_folder = author_pages_folder.replace(/^[./]+|[./]+$/g, '')
 
 
 function get_lang() {
@@ -128,7 +129,7 @@ const collator = Intl.Collator(document.documentElement.lang, {numeric: true})
 
 
 function reorder(list_of_strings, lang='', labels=kw_labels) {
-    return [...new Set(list_of_strings)].map(String).sort((a, b) => {if (!lang) {a = labels[a] || a, b = labels[b] || b} return collator.compare(a, b)})
+    return [...new Set(list_of_strings)].map(String).sort((a, b) => {const issues = !!b.match(/^\d+$/) - !!(a.match(/^\d+$/)); if (!lang) a = labels[a] ?? a, b = labels[b] ?? b; return issues || collator.compare(a, b)})
 }
 
 
@@ -386,6 +387,17 @@ function set_next_prev_page(page, next, prev, lang, url_kw) {
 }
 
 
+function get_kw_label(kw, lang='') {
+    let label = lang ? kw : kw_labels[kw] ?? kw
+    if (kw.match(/^\d+$/)) {
+        if (!lang && !label.includes(' – '))
+            label = kw + ' – ' + label
+        label = ui[lang].issue + ' ' + label
+    }
+    return label
+}
+
+
 function make_header(reorder_contents=default_reorder_contents, new_tab_for_social=default_new_tab_for_social) {
     const page = get_page()
     const lang = get_lang()
@@ -478,17 +490,11 @@ function make_header(reorder_contents=default_reorder_contents, new_tab_for_soci
         keywords.forEach((kw, button_index) => {
             button = document.createElement(page == '/' ? 'button' : 'a')
             button.id = 'kw_' + sanitize(kw)
-            let label = kw_labels[kw] || kw
-            if (kw.match(/^\d+$/))
-                label = ui[lang].issue + ' ' + kw
+            const label = get_kw_label(kw, lang)
 
             let alt = ''
             if (trans) {
-                alt = kw
-                if (kw.match(/^\d+$/))
-                    alt = ui[alt_langs[0]].issue + ' ' + kw
-                else if (lang)
-                    [label, alt] = [alt, label]
+                alt = get_kw_label(kw, alt_langs[0])
                 if (alt == label)
                     alt = ''
             }
@@ -506,7 +512,7 @@ function make_header(reorder_contents=default_reorder_contents, new_tab_for_soci
         })
         if (page == '/') {
             button = document.createElement('button')
-            button.ariaLabel = 'אפס בחירות'
+            button.ariaLabel = 'אַפס בחירות'
             button.id = 'kw_x'
             button.innerHTML = 'X'
             button.onclick = () => div.querySelectorAll('.on').forEach(e => e.click())

@@ -437,7 +437,7 @@ nav[dir=rtl] ~ footer > div {
 }
 
 .github, .paypal {
-    filter: invert(--invert);
+    filter: invert(var(--invert));
 }
 
 h1, h2 {
