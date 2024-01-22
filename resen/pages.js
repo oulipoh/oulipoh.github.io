@@ -7,7 +7,7 @@ const pages = {
 
     "achshav/": {title: "אָח־שָׁב – עַכְ־שָׁו", alt: "Ach-Shav", author: "brunogrife", kw: [0, "sound"]},
     "cent/": {title: "מתוך מאה תמונות מלחמה", alt: "From One hundred visions of war", author: "julienvocance", translator: "rotematar", kw: [0, "poem"]},
-    "disappearance/": {title: "היעלמות", alt: "Disappearance", author: "rotematar", kw: [0, "story"]},
+    "disappearance/": {title: "היעלמות", alt: "Disappearance", author: "rotematar", kw: [0]},
     "down/": {title: "רע", alt: "Down", author: "alexbenari", kw: [0, "interactive", "poem", "visual"]},
     "exceeding/": {title: "מֵעֵבר לַשלם", alt: "Exceeding the entirety", author: ["mikamilgrom", "avimilgrom"], kw: [0, "live code", "visual"]},
     "imagine/": {title: "דמיין", alt: "/imagine", author: "liorzalmanson", kw: [0, "poem"]},
@@ -143,7 +143,7 @@ function get_all_keywords(lang='', page) {
         const entropy = Object.fromEntries(Object.entries(freq).map(([kw, f]) => [kw, -f * Math.log2(f)]))
         const maxent = Math.log2(len)
         const info = Object.fromEntries(Object.entries(entropy).map(([kw, e]) => [kw, e / maxent]))
-        return Object.fromEntries(ordered.map(kw => [kw, {count: counts[kw], info: info[kw]}]))
+        return Object.fromEntries(ordered.map(kw => [kw, {count: counts[kw], info: info[kw]}]))  // Note keys parsing as integers keys will appear first
     }
     return ordered
 }

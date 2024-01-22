@@ -6,7 +6,7 @@ const fast = location.hash.slice(1) == 'fast'
 
 const auto_vertical = true
 const fix_above = true
-const label_location = ''  // Can be: 'half' (half above and half below, favoring the below), 'above', or anything else to indicate below
+const label_location = 'half'  // Can be: 'half' (half above and half below, favoring the below), 'above', or anything else to indicate below
 const default_token_symbol = 'o'  // Cannot be of 1-9 or capital A-N
 const arrow_width = 6
 const arrow_height = 1
@@ -159,7 +159,7 @@ function step(grid, json, steps=0, max_tokens={}, result_counter={}, reset_count
     const height = max_len(transitions.filter(t => is_vertical(grid, t)), json.labels, true)
 
     const missing_arrows = []
-    const elems = grid.querySelectorAll('pre')
+    const elems = [...grid.querySelectorAll('pre')]
     let cols = grid_columns
     if (comp)
         cols = elems.length
@@ -231,6 +231,28 @@ function step(grid, json, steps=0, max_tokens={}, result_counter={}, reset_count
         }
     })
 
+    if (!steps) {
+        const leaderline_options = {color: getComputedStyle(grid.parentElement).getPropertyValue('--color'), dash: {len: 5, gap: 6}, endPlug: 'arrow2', endPlugSize: 2, path: 'straight', size: 1}
+        missing_arrows.forEach(([telem, pelem, inp, out]) => {
+            const tindex = elems.indexOf(telem)
+            const pindex = elems.indexOf(pelem)
+            const trow = tindex / grid_columns | 0
+            const tcol = tindex % grid_columns
+            const prow = pindex / grid_columns | 0
+            const pcol = pindex % grid_columns
+            const dy1 = (1 + (trow-prow)/3)*50 + '%'
+            const dx1 = (1 + (pcol-tcol)/3)*50 + '%'
+            const dy2 = (1 + (prow-trow)/3)*50 + '%'
+            const dx2 = (1 + (tcol-pcol)/3)*50 + '%'
+            let line
+            for (let i = 0; i < inp; i++)
+                line = new LeaderLine(LeaderLine.pointAnchor(pelem, {x: dx1, y: dy1}), LeaderLine.pointAnchor(telem, {x: dx2, y: dy2}), leaderline_options)
+            for (let i = 0; i < out; i++)
+                line = new LeaderLine(LeaderLine.pointAnchor(telem, {x: dx2, y: dy2}), LeaderLine.pointAnchor(pelem, {x: dx1, y: dy1}), leaderline_options)
+        })
+        grid.parentElement.append(...document.querySelectorAll('body > svg'))
+    }
+
     if (reset_counter < global_reset_counter) {
         reset_counter = global_reset_counter
         max_tokens = Object.fromEntries(Object.entries(max_tokens).map(([p, counts]) => ([p, counts.slice(0, -1)])))
@@ -271,7 +293,6 @@ fetch(json_file).then(response => response.json()).then(json => {
             cols = labels.length
         }
         cols = Math.min(cols, labels.length)
-        const rows = labels.length / cols | 0
         elem.style.setProperty('--cols', cols)
         let anti_above = []
         labels.forEach((label, index) => {
@@ -280,42 +301,40 @@ fetch(json_file).then(response => response.json()).then(json => {
             if (transitions.includes(label)) {
                 if (json.vertical?.includes(label) || json.transitions[label][2] == 'vertical' || elem.id)
                     pre.classList.add('vertical')
-                if (auto_vertical && !pre.classList.contains('vertical') || fix_above && !elem.id) {
-                    let hor = ver = long = 0
-                    let top_arrows = bottom_arrows = false
-                    json.transitions[label].slice(0, 2).flat().forEach(place => {
-                        const is_hor = index % cols && labels[index - 1] == place || (index+1) % cols && labels[index + 1] == place
-                        hor += is_hor
-                        const top_arrow = labels[index - cols] == place
-                        top_arrows |= top_arrow
-                        const bottom_arrow = labels[index + cols] == place
-                        bottom_arrows |= bottom_arrow
-                        const is_ver = top_arrow || bottom_arrow
-                        ver += is_ver
-                        is_diag = (labels[index - cols - 1] == place || labels[index + cols - 1] == place) && index % cols || (labels[index - cols + 1] == place || labels[index + cols + 1] == place) && (index+1) % cols
-                        if (!is_hor && !is_ver && !is_diag) {
-                            place_index = labels.indexOf(place)
-                            long += place_index % cols == 0 || (place_index+1) % cols == 0 || place_index / cols | 0 == 0 || place_index / cols | 0 == rows - 1
-                        }
-                    })
-                    if (auto_vertical)
-                        if ((index % cols == 0 || (index+1) % cols == 0) && index / cols | 0 && index / cols | 0 < rows - 1)
-                            hor += long
-                        else if ((index / cols | 0 == 0 || index / cols | 0 == rows - 1) && index % cols && index % cols < cols - 1)
-                            ver += long
-                        if (hor > ver)
-                            pre.classList.add('vertical')
-                    if (fix_above && pre.classList.contains('vertical')) {
-                        if (top_arrows && !anti_above.includes(labels[index - cols]))
-                            grid.children[index - cols].classList.add('above')
-                        if (bottom_arrows)
-                            anti_above.push(labels[index + cols])
-                    }
+                let hor = ver = outer = 0
+                let top_arrows = bottom_arrows = false
+                json.transitions[label].slice(0, 2).flat().forEach(place => {
+                    const is_hor = index % cols && labels[index - 1] == place || (index+1) % cols && labels[index + 1] == place
+                    hor += is_hor
+                    const top_arrow = labels[index - cols] == place
+                    top_arrows |= top_arrow
+                    const bottom_arrow = labels[index + cols] == place
+                    bottom_arrows |= bottom_arrow
+                    const is_ver = top_arrow || bottom_arrow
+                    ver += is_ver
+                    is_diag = (labels[index - cols - 1] == place || labels[index + cols - 1] == place) && index % cols || (labels[index - cols + 1] == place || labels[index + cols + 1] == place) && (index+1) % cols
+                    //if (!is_hor && !is_ver && !is_diag) {
+                    //    place_index = labels.indexOf(place)
+                    //   outer += place_index % cols == 0 || (place_index+1) % cols == 0 || place_index < cols || place_index >= labels.length - cols
+                    //}
+                })
+                if (auto_vertical)
+                    //if ((index % cols == 0 || (index+1) % cols == 0) && index >= cols && index < labels.length - cols)
+                    //    hor += outer
+                    //else if ((index < cols || index >= labels.length - cols) && index % cols && index % cols < cols - 1)
+                    //    ver += outer
+                    if (hor > ver)
+                        pre.classList.add('vertical')
+                if (fix_above && !elem.id && pre.classList.contains('vertical')) {
+                    if (top_arrows && !anti_above.includes(labels[index - cols]))
+                        grid.children[index - cols].classList.add('above')
+                    if (bottom_arrows)
+                        anti_above.push(labels[index + cols])
                 }
             } else {
                 pre.classList.add('place')
                 pre.addEventListener('click', () => pre.dataset.clicks = (pre.dataset.clicks | 0) + 1)
-                if (json.above?.includes(label) || !anti_above.includes(label) && (label_location == 'above' || label_location == 'half' && index < (labels.length/cols/2 | 0) * cols))
+                if (!elem.id && (json.above?.includes(label) || !anti_above.includes(label) && (label_location == 'above' || label_location == 'half' && index < (labels.length/cols/2 | 0) * cols)))
                     pre.classList.add('above')
             }
             const span = document.createElement('span')
