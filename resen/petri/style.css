@@ -14,6 +14,10 @@
     -webkit-user-select: none;
 }
 
+.petri:not([id]) {
+    padding-top: 1em;
+}
+
 .petri > div {
     display: grid;
     grid-template-columns: repeat(var(--cols), 23ch);

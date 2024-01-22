@@ -250,7 +250,7 @@ function step(grid, json, steps=0, max_tokens={}, result_counter={}, reset_count
             for (let i = 0; i < out; i++)
                 line = new LeaderLine(LeaderLine.pointAnchor(telem, {x: dx2, y: dy2}), LeaderLine.pointAnchor(pelem, {x: dx1, y: dy1}), leaderline_options)
         })
-        grid.parentElement.append(...document.querySelectorAll('body > svg'))
+        grid.append(...document.querySelectorAll('body > svg'))
     }
 
     if (reset_counter < global_reset_counter) {
