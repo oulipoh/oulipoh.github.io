@@ -26,6 +26,7 @@
     letter-spacing: initial;
     line-height: 1.5;
     margin-inline: auto;
+    position: relative;
     text-align: center;
     --hor_offset: -2ch;
     --ver_offset: -1.5em;

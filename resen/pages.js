@@ -669,7 +669,7 @@ let wake_lock
 
 
 function request_wake_lock() {
-    navigator.wakeLock?.request('screen').then(lock => wake_lock = lock).catch(e => console.error(e.message))  // Doesn't work in Firefox (< 122)
+    navigator.wakeLock?.request('screen').then(lock => wake_lock = lock).catch(e => console.error(e.message))
 }
 
 

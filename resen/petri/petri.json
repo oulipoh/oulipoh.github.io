@@ -52,7 +52,7 @@
     "איבה עזה": 1
   },
 
-  "labels": {"פטירה_ישראל": "PASSING_ISRAEL", "איבה ישראל": "ISRAEL ENMITY", "רבייה_ישראל": "BREEDING_ISRAEL", "צבא": "MILITARY", "פטירה_עזה": "PASSING_GAZA", "בית עלמין ישראל": "ISRAEL CEMETERY", "שחרור": "DISCHARGE", "ישראל": "ISRAEL", "מבצע": "OPERATION", "בית עלמין עזה": "GAZA CEMETERY", "חטיפה": "ABDUCTION", "ארגון טרור": "TERROR GROUP", "פיגוע": "TERROR ATTACK", "עזה": "GAZA", "רבייה_עזה": "BREEDING_GAZA", "שבי": "CAPTIVITY", "חילוף": "EXCHANGE", "כלא": "PRISON", "הסתה": "INCITING", "איבה עזה": "GAZA ENMITY"},
+  "labels": {"בית עלמין ישראל": "ISRAEL CEMETERY", "פיגוע": "TERROR ATTACK", "כלא": "PRISON", "חילוף": "SWAP", "שבי": "CAPTIVITY", "פטירה_ישראל": "PASSING", "ישראל": "ISRAEL", "חטיפה": "ABDUCTION|ABDUCT", "ארגון טרור": "TERROR GROUP", "רבייה_עזה": "BREEDING|BREED", "איבה ישראל": "ISRAEL ENMITY", "רבייה_ישראל": "BREEDING|BREED", "איבה עזה": "GAZA ENMITY", "הסתה": "INCITEMENT|INCITE", "עזה": "GAZA", "שחרור": "DISCHARGE|DISCHAR", "צבא": "MILITARY", "מבצע": "OPERATION|OPERATE", "בית עלמין עזה": "GAZA CEMETERY", "פטירה_עזה": "PASSING"},
 
   "require": [
     ["ישראל", "צבא"],
