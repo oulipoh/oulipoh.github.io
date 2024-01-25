@@ -20,7 +20,7 @@
 
 .petri > div {
     display: grid;
-    grid-template-columns: repeat(var(--cols), 23ch);
+    grid-template-columns: repeat(var(--cols), 25ch);
     font-family: 'IBM Plex Mono', 'Courier New', monospace;
     justify-self: stretch;
     letter-spacing: initial;
@@ -29,7 +29,7 @@
     position: relative;
     text-align: center;
     --hor_offset: -2ch;
-    --ver_offset: -1.5em;
+    --ver_offset: -.75em;
 }
 
 .petri pre {
