@@ -237,7 +237,7 @@ function sanitize(kw) {
 
 
 function merge(...lists) {
-    return lists.map(list => list ?? []).flat();
+    return lists.map(list => list ?? []).flat()
 }
 
 
@@ -360,7 +360,7 @@ function get_page() {
 
 function get_width(text, elem, units='em') {
     const canvas = document.createElement('canvas')
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext('2d')
     elem ??= document.body
     const style = getComputedStyle(elem)
     ctx.font = style.font
@@ -412,11 +412,9 @@ function make_header(reorder_contents=default_reorder_contents, new_tab_for_soci
     const titles = get_set_titles(page, lang)
     document.title = titles.label
     let index_title = get_set_titles('/', lang).label
-    let is_mobile = false;
-    if (matchMedia('(max-width: 480px)').matches) {
+    let is_mobile
+    if (is_mobile = matchMedia('(max-width: 480px), (max-height: 480px)').matches)
         index_title = index_title.split(' ').slice(0, lang ? 1 : 2).join(' ')
-        is_mobile = true;
-    }
     const parent_title = decodeURI(location).split('/').slice(-3)[0]
     const nav = document.body.appendChild(document.createElement('nav'))
     let diff = get_width(index_title, nav) - get_width(parent_title, nav)
@@ -461,11 +459,10 @@ function make_header(reorder_contents=default_reorder_contents, new_tab_for_soci
         function kw_handler() {
             const on = this.classList.toggle('on')
             const css = [...document.head.querySelectorAll('link[rel=stylesheet]')].pop().sheet
-            let found = false
+            let found
             for (const i in css.cssRules)
-                if (css.cssRules[i].selectorText?.slice(1) == this.id.replace(/^kw_/, 'non_')) {
+                if (found = css.cssRules[i].selectorText?.slice(1) == this.id.replace(/^kw_/, 'non_')) {
                     css.deleteRule(i)
-                    found = true
                     break
                 }
             if (!found)
