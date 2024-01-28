@@ -13,8 +13,7 @@
 </head>
 <body onload="document.body.style.visibility = 'visible'">
     <script>make_header()</script>
-    <audio id="audio" src="achshav.mp3" onended="play.click()" aria-label="אודיו של אָח־שָׁב – עַכְ־שָׁו"></audio>
-    <button id="play" class="big" aria-label="נגן / עצור" onclick="if (classList.toggle('on')) audio.play(); else {audio.pause(); audio.currentTime = 0}" style="font-size: 2.5em"></button>
+    <audio id="audio" src="achshav.mp3" controls onended="play.click()" style="display: block; margin-block: 4rem; margin-inline: auto" aria-label="אודיו של אָח־שָׁב – עַכְ־שָׁו"></audio>
     <p>
         העולם כולו רוטט ללא הרף בתדרים שמשפיעים עלינו במודע או שלא במודע.
         מטרת היצירה היא להביא את המצב התודעתי של השומע לכדי התאספות והתכנסות. זאת על מנת שייווצר מרחב פנימי מוגן בו יוכל המאזין לפגוש את עצמו.

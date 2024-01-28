@@ -406,7 +406,7 @@ function make_header(reorder_contents=default_reorder_contents, new_tab_for_soci
     document.title = titles.label
     let index_title = get_set_titles('/', lang).label
     let is_mobile = false;
-    if (matchMedia('(hover: none), (max-device-width: 500px), (max-device-height: 500px)').matches) {
+    if (matchMedia('max-width: 480px').matches) {
         index_title = index_title.split(' ').slice(0, lang ? 1 : 2).join(' ')
         is_mobile = true;
     }
@@ -512,7 +512,7 @@ function make_header(reorder_contents=default_reorder_contents, new_tab_for_soci
         })
         if (page == '/') {
             button = document.createElement('button')
-            button.ariaLabel = 'אַפס בחירות'
+            button.ariaLabel = 'הסר את כל המסננים'
             button.id = 'kw_x'
             button.innerHTML = 'X'
             button.onclick = () => div.querySelectorAll('.on').forEach(e => e.click())

@@ -1,3 +1,9 @@
+@font-face {
+    font-family: 'Alef Mono';
+    font-display: block;
+    src: url('Alef-Monospace.woff2');
+}
+
 :root, ::backdrop {  /* In Chrome ::backdrop does not inherit from :root. See: https://bugs.chromium.org/p/chromium/issues/detail?id=827397 */
     --bg: #f6e5d5;
     --fg_rgb: 0 0 0;
@@ -15,7 +21,7 @@
     --column_gap: 4em;
     --columns: 3;
     --row_gap: 3em;
-    --mono_font: 'Courier New', monospace;
+    --mono_font: 'Courier New', 'Alef Mono', monospace;
 
     --h1_size: clamp(1.3em, 5rem, 10vw);
     --hor_scrollbar_offset: 16px;
@@ -881,12 +887,12 @@ a.sponsors {
     }
 }
 
-@media (hover: none), (max-device-width: 500px), (max-device-height: 500px) {
+@media max-width: 480px {
     blockquote, li, p:not(.story) {
         text-align: start;
     }
 
-    .contents {
+    .contents:not(.rows_first) {
         --columns: 1;
     }
 
@@ -901,18 +907,6 @@ a.sponsors {
 
     .kw, nav {
         margin-inline: calc(var(--anti_margin) + 8px);
-    }
-
-    .social > a {
-        font-size: .9em;
-    }
-
-    a.github, a.paypal, a.web {
-        font-size: .75em;
-    }
-
-    a.mail {
-        font-size: 1.2em;
     }
 
     .refs > blockquote {

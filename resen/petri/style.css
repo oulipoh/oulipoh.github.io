@@ -1,32 +1,27 @@
 .petri {
-    background: black;
-    --color: white;
+    --bg: black;
+    --fg: white;
     --enabled: #ffff64;
     --firing: #64ff64;
-    color: var(--color);
+    color: var(--fg);
     display: grid;
     font-size: initial;
     margin-block: 4rem 6rem;
     overflow-x: auto;
     outline-style: none;
-    padding-bottom: 3em;
+    padding-block: 1em 3em;
     user-select: none;
     -webkit-user-select: none;
-}
-
-.petri:not([id]) {
-    padding-top: 1em;
 }
 
 .petri > div {
     display: grid;
     grid-template-columns: repeat(var(--cols), 25ch);
-    font-family: 'IBM Plex Mono', 'Courier New', monospace;
+    font-family: 'IBM Plex Mono', 'Courier New', var(--mono_font);
     justify-self: stretch;
     letter-spacing: initial;
     line-height: 1.5;
     margin-inline: auto;
-    position: relative;
     text-align: center;
     --hor_offset: -2ch;
     --ver_offset: -.75em;
@@ -53,7 +48,7 @@
 }
 
 .petri pre::before, .petri pre::after {
-   color: var(--color);
+   color: var(--fg);
 }
 
 .petri [data-before]::before {

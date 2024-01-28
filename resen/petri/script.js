@@ -13,6 +13,9 @@ const arrow_short_diag = 3
 const short_diag_offset = 19
 const leaderline_factor1 = .17
 const leaderline_factor2 = .025
+leaderline_comp_offset = -40
+leaderline_comp_top = 20
+leaderline_comp_bottom = 90
 const comp_marking = 5
 
 const lang = get_lang()
@@ -242,19 +245,34 @@ function step(grid, json, steps=0, max_tokens={}, result_counter={}, reset_count
         }
     })
 
-    if (!comp && !grid.querySelector('.leader-line')) {
-        const leaderline_options = {color: getComputedStyle(grid.parentElement).getPropertyValue('--color'), dash: {len: 15, gap: 10}, endPlug: 'arrow2', endPlugSize: 2, path: 'straight', size: 1}
+    if (!grid.querySelector('.leader-line')) {
+        const leaderline_options = {color: getComputedStyle(grid.parentElement).getPropertyValue('--fg'), dash: {len: 15, gap: 10}, endPlug: 'arrow2', endPlugSize: 2, path: 'straight', size: 1}
+        if (comp)
+            leaderline_options.path = 'bilinear'
         missing_arrows.forEach(([telem, pelem, inp, out]) => {
             const tindex = elems.indexOf(telem)
             const pindex = elems.indexOf(pelem)
-            const trow = tindex / grid_columns | 0
-            const tcol = tindex % grid_columns
-            const prow = pindex / grid_columns | 0
-            const pcol = pindex % grid_columns
-            const y1 = 50 + (trow-prow)*leaderline_factor1*100
-            const x1 = 50 + (pcol-tcol)*leaderline_factor1*100
-            const y2 = 50 + (prow-trow)*leaderline_factor1*100
-            const x2 = 50 + (tcol-pcol)*leaderline_factor1*100
+            const trow = tindex / cols | 0
+            const tcol = tindex % cols
+            const prow = pindex / cols | 0
+            const pcol = pindex % cols
+            let y1 = y2 = leaderline_comp_top
+            let x1 = (pcol-tcol)
+            let x2 = (tcol-pcol)
+            if (comp) {
+                leaderline_options.startSocketGravity = leaderline_comp_offset
+                if (Math.abs(x1) > 2 && Math.abs(x1) % 2) {
+                    leaderline_options.startSocketGravity *= -1
+                    y1 = y2 = leaderline_comp_bottom
+                }
+                x1 = Math.sign(x1)
+                x2 = Math.sign(x2)
+            } else {
+                y1 = 50 + (trow-prow)*leaderline_factor1*100
+                y2 = 50 + (prow-trow)*leaderline_factor1*100
+            }
+            x1 = x1*leaderline_factor1*100 + 50
+            x2 = x2*leaderline_factor1*100 + 50
             const dy = Math.abs(pcol-tcol) * leaderline_factor2 * 100
             const dx = (prow-trow) * Math.sign(pcol - tcol) * leaderline_factor2 * 100
             const c = (inp + out - 1) / 2
@@ -296,6 +314,7 @@ fetch(json_file).then(response => response.json()).then(json => {
 
     document.querySelectorAll('.petri').forEach(elem => {
         const grid = elem.appendChild(document.createElement('div'))
+        grid.classList.add('leader-line-container')
         let transitions = all_transitions
         let labels = all_labels
         let cols = grid_columns
@@ -303,8 +322,7 @@ fetch(json_file).then(response => response.json()).then(json => {
             transitions = [elem.id]
             labels = [...new Set([...json.transitions[elem.id][0], elem.id, ...json.transitions[elem.id][1]])]
             cols = labels.length
-        } else
-            grid.id = 'leader-line-container'
+        }
         cols = Math.min(cols, labels.length)
         elem.style.setProperty('--cols', cols)
         labels.forEach((label, index) => {
@@ -339,6 +357,7 @@ fetch(json_file).then(response => response.json()).then(json => {
             pre.appendChild(span)
             grid.appendChild(pre)
         })
+        elem.style.background = 'var(--bg)'
         step(grid, json)
     })
 })
