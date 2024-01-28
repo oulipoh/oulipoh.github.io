@@ -129,7 +129,14 @@ const collator = Intl.Collator(document.documentElement.lang, {numeric: true})
 
 
 function reorder(list_of_strings, lang='', labels=kw_labels) {
-    return [...new Set(list_of_strings)].map(String).sort((a, b) => {const issues = !!b.match(/^\d+$/) - !!(a.match(/^\d+$/)); if (!lang) a = labels[a] ?? a, b = labels[b] ?? b; return issues || collator.compare(a, b)})
+    return [...new Set(list_of_strings)].map(String).sort((a, b) => {
+        const issues = !!b.match(/^\d+$/) - !!(a.match(/^\d+$/))
+        if (!lang) {
+            a = labels[a] ?? a
+            b = labels[b] ?? b
+        }
+        return issues || collator.compare(a, b)
+    })
 }
 
 
@@ -406,7 +413,7 @@ function make_header(reorder_contents=default_reorder_contents, new_tab_for_soci
     document.title = titles.label
     let index_title = get_set_titles('/', lang).label
     let is_mobile = false;
-    if (matchMedia('max-width: 480px').matches) {
+    if (matchMedia('(max-width: 480px)').matches) {
         index_title = index_title.split(' ').slice(0, lang ? 1 : 2).join(' ')
         is_mobile = true;
     }

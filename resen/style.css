@@ -1,9 +1,3 @@
-@font-face {
-    font-family: 'Alef Mono';
-    font-display: block;
-    src: url('Alef-Monospace.woff2');
-}
-
 :root, ::backdrop {  /* In Chrome ::backdrop does not inherit from :root. See: https://bugs.chromium.org/p/chromium/issues/detail?id=827397 */
     --bg: #f6e5d5;
     --fg_rgb: 0 0 0;
@@ -38,6 +32,12 @@
 ::selection {
     color: var(--anti_on);
     background-color: var(--complementary);
+}
+
+@font-face {
+    font-family: 'Alef Mono';
+    font-display: block;
+    src: url('Alef-Monospace.woff2');
 }
 
 html {
@@ -887,7 +887,7 @@ a.sponsors {
     }
 }
 
-@media max-width: 480px {
+@media (max-width: 480px) {
     blockquote, li, p:not(.story) {
         text-align: start;
     }
