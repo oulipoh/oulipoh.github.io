@@ -64,12 +64,12 @@ body {
     width: 100%;
 }
 
-button, pre {
-    font-family: inherit;
+button, .dim_ref, footer, nav, .preface_he, .sliders {
+    font-size: initial;
 }
 
-button, cite, footer, nav, .preface_he, .sliders {
-    font-size: initial;
+button, pre {
+    font-family: inherit;
 }
 
 @media (hover: hover) {
@@ -272,12 +272,6 @@ button.big {
     padding-inline: 1em;
 }
 
-cite {
-    color: var(--fg_dim);
-    display: inline-block;
-    font-style: normal;
-}
-
 .contents {
     column-count: var(--columns);
     column-gap: var(--column_gap);
@@ -367,6 +361,24 @@ nav[dir=rtl] ~ .contents {
 
 .dialog blockquote[dir=ltr]::before, .dialog blockquote:not([dir=ltr])::after {
     content: var(--data_name2)':';
+}
+
+.dim_ref {
+    color: var(--fg_dim);
+    display: inline-block;
+}
+
+.dim_ref::before, .dim_ref::after {
+    display: inline-block;
+    text-decoration: none;
+}
+
+.dim_ref::before {
+    content: '[';
+}
+
+.dim_ref::after {
+    content: ']';
 }
 
 .export {

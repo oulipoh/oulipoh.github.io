@@ -5,8 +5,9 @@
 const pages = {
     "/": {title: "רֶסֶן", alt: "Resen", author: "oulipoh", skip: true},
 
+    "0/": {title: "פתח דבר לגיליון אפס", alt: "Forward to issue 0", author: ["alexbenari", "eyalgruss"], kw: [0]},
     "achshav/": {title: "אָח־שָׁב – עַכְ־שָׁו", alt: "Ach-Shav", author: "brunogrife", kw: [0, "sound"]},
-    "cent/": {title: "מתוך מאה תמונות מלחמה", alt: "From One hundred visions of war", author: "julienvocance", translator: "rotematar", kw: [0, "poem"]},
+    "cent/": {title: "מתוך מאה תמונות מלחמה", alt: "From One hundred visions of war", author: "julienvocance", translator: "rotematar", kw: [0, "poem", "translation"]},
     "disappearance/": {title: "היעלמות", alt: "Disappearance", author: "rotematar", kw: [0]},
     "down/": {title: "רע", alt: "Down", author: "alexbenari", kw: [0, "interactive", "poem", "visual"]},
     "exceeding/": {title: "מֵעֵבר לַשלם", alt: "Exceeding the entirety", author: ["mikamilgrom", "avimilgrom"], kw: [0, "live code", "visual"]},
@@ -14,7 +15,9 @@ const pages = {
     "petri/": {title: "פואטיקת פטרי פטריוטית", alt: "Patriotic Petri Poetry", author: "eyalgruss", kw: [0, "live code", "poem", "software", "visual"]},
     "things/": {title: "קורים עכשיו דברים עם השפה", alt: "Things are happening now with the language", author: "noashaham", kw: [0, "poem"]},
     "systems/": {title: "מערכות", alt: "Systems", author: "noashaham", kw: [0, "poem"]},
-    "journal": {title: "אודות כתב העת", alt: "About this journal", author: "oulipoh"}
+    "tribe/": {title: "השבט הנושא את עיניו השמיימה", alt: "The tribe with its eyes on the sky", author: "italocalvino", translator: "jonathanfine", kw: [0, "story", "translation"]},
+
+    "journal": {title: "אודות כתב העת", alt: "About this journal", author: "oulipoh", kw: ["live code", "software"]}
 }
 
 const authors = {
@@ -42,6 +45,12 @@ const authors = {
         "github": "eyaler",
         "sponsors": "eyaler",
         "paypal": "LNJ6F3FR79ARE"
+    },
+    "italocalvino": {
+        "name": {"": "איטאלו קאלווינו", "en": "Italo Calvino"}
+    },
+    "jonathanfine": {
+        "name": {"": "יונתן פיין", "en": "Jonathan Fine"}
     },
     "julienvocance": {
         "name": {"": "ז'וליאן ווֹקַנס", "en": "Julien Vocance"}
@@ -89,6 +98,7 @@ const kw_labels = {
     "software": "תוכנה",
     "sound": "צלילים",
     "story": "סיפור",
+    "translation": "תרגום",
     "visual": "חזותי"
 }
 
@@ -161,20 +171,23 @@ function harden(s) {
 }
 
 
-function update_href(a, url='') {
+function update_href(a, url='', rel) {
     if (url) {
         a.href = url
+        if (rel)
+            a.rel = rel
         a.removeAttribute('aria-disabled')
     } else {
         a.removeAttribute('href')
+        a.removeAttribute('rel')
         a.ariaDisabled = 'true'
     }
 }
 
 
-function make_link(url, label, cls, title, new_tab=false, force_new_tab_for_mailto_tel=default_force_new_tab_for_mailto_tel) {
+function make_link(url, label, cls, title, new_tab=false, force_new_tab_for_mailto_tel=default_force_new_tab_for_mailto_tel, rel) {
     const a = document.createElement('a')
-    update_href(a, url)
+    update_href(a, url, rel)
     if (cls) {
         if (typeof cls != 'string')
             cls = cls.join(' ')
@@ -186,7 +199,7 @@ function make_link(url, label, cls, title, new_tab=false, force_new_tab_for_mail
         a.appendChild(label)
     if (title)
         a.title = title
-    if (new_tab || force_new_tab_for_mailto_tel && (url.startsWith('mailto:') || url.startsWith('tel:')))
+    if (new_tab || force_new_tab_for_mailto_tel && (url.startsWith('mailto:') || url.startsWith('tel:')))  // Note that mailto: links in Firefox will not open in new tabs. See: https://bugzilla.mozilla.org/show_bug.cgi?id=646552
         a.target = '_blank'
     return a
 }
@@ -387,9 +400,9 @@ function set_next_prev_page(page, next, prev, lang, url_kw) {
         next_page = list[(index+1) % list.length]
         prev_page = list[(Math.max(index, 0)-1+list.length) % list.length]
     }
-    update_href(next, page2url(next_page, lang, null, url_kw))
+    update_href(next, page2url(next_page, lang, null, url_kw), 'next')
     get_set_titles(next_page, lang, next)
-    update_href(prev, page2url(prev_page, lang, null, url_kw))
+    update_href(prev, page2url(prev_page, lang, null, url_kw), 'prev')
     get_set_titles(prev_page, lang, prev)
 }
 
@@ -493,6 +506,8 @@ function make_header(reorder_contents=default_reorder_contents, new_tab_for_soci
 
         keywords.forEach((kw, button_index) => {
             button = document.createElement(page == '/' ? 'button' : 'a')
+            if (button.tagName.toLowerCase() == 'a')
+                button.rel = 'tag'
             button.id = 'kw_' + sanitize(kw)
             const label = get_kw_label(kw, lang)
 
@@ -603,7 +618,8 @@ function get_make_author(page, lang, elem, new_tab_for_social=default_new_tab_fo
             if (author_pages_folder)
                 url = author_pages_folder + '/' + url
             url = page2url(url, lang, page, key)
-            fetch(url, {method: 'HEAD'}).then(response => {if (response.ok) update_href(a, url)})
+            if (url != page)
+                fetch(url, {method: 'HEAD'}).then(response => {if (response.ok) update_href(a, url, 'author')})
 
             const networks = Object.keys(author || {}).filter(k => k != 'name' && k in social)
             if (networks.length) {
@@ -644,7 +660,7 @@ function make_footer(copyright_url=default_copyright_url, copyright_label=defaul
 
     if (ui[lang].copyright) {
         span = document.createElement('span')
-        span.appendChild(make_link(copyright_url, ui[lang].copyright, 'nowrap', null, new_tab_for_footer))
+        span.appendChild(make_link(copyright_url, ui[lang].copyright, 'nowrap', null, new_tab_for_footer, null, 'license'))
         span.innerHTML += '&nbsp;'
         const bdi = document.createElement('bdi')
         bdi.className = 'nowrap'
