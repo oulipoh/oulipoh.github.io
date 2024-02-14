@@ -1,23 +1,47 @@
-:root, ::backdrop {  /* In Chrome ::backdrop does not inherit from :root. See: https://bugs.chromium.org/p/chromium/issues/detail?id=827397 */
+@font-face {
+    font-family: 'Miriam Libre';
+    font-weight: 400;
+    font-display: block;
+    src: url('fonts/MiriamLibre-Regular.woff2');
+}
+
+@font-face {
+    font-family: 'Miriam Libre';
+    font-weight: 700;
+    font-display: block;
+    src: url('fonts/MiriamLibre-Bold.woff2');
+}
+
+@font-face {
+    font-family: 'Alef Mono';
+    font-display: block;
+    src: url('fonts/Alef-Monospace.woff2');
+}
+
+:root, ::backdrop {  /* In Chrome (<122) ::backdrop does not inherit from :root. See: https://bugs.chromium.org/p/chromium/issues/detail?id=827397 */
     --bg: #f6e5d5;
     --fg_rgb: 0 0 0;
     --fg: rgb(var(--fg_rgb));
+    --on: #ff5337;
     --fg_dim: #a79c91;
     --fg_verydim: var(--fg_dim);
     --fg_filter: saturate(0);
     --fg_highlight: white;
-    --complementary: #6580e1;
     --glow: aliceblue;
-    --on: #ff5337;
-    --anti_on: var(--bg);
+    --inverse_bg: #6580e1;
+    --inverse_fg: var(--bg);
     --invert: 1;
-    
+
     --column_gap: 4em;
     --columns: 3;
     --row_gap: 3em;
+    --h12_letter_spacing: normal;
+    --letter_spacing: normal;
+    --font: 'Miriam Libre', Arial, sans-serif;
     --mono_font: 'Courier New', 'Alef Mono', monospace;
 
-    --h1_size: clamp(1.3em, 5rem, 10vw);
+    --font_size: 1.3rem;
+    --h1_size: clamp(1.5em, 5rem, 10vw);
     --hor_scrollbar_offset: 16px;
     --media_width: 85%;
 
@@ -30,14 +54,8 @@
 }
 
 ::selection {
-    color: var(--anti_on);
-    background-color: var(--complementary);
-}
-
-@font-face {
-    font-family: 'Alef Mono';
-    font-display: block;
-    src: url('Alef-Monospace.woff2');
+    color: var(--inverse_fg);
+    background-color: var(--inverse_bg);
 }
 
 html {
@@ -49,11 +67,11 @@ body {
     box-sizing: border-box;
     color: var(--fg);
     display: table;
-    font-family: 'Miriam Libre', Arial, sans-serif;
-    font-size: 1.3rem;
+    font-family: var(--font);
+    font-size: var(--font_size);
     height: 100vh;
     height: 100dvh;
-    letter-spacing: .03em;
+    letter-spacing: var(--letter_spacing);
     margin: 0;
     padding-inline: var(--main_margin);
     padding-bottom: 8px;
@@ -62,6 +80,12 @@ body {
     -webkit-text-size-adjust: none;
     visibility: hidden;
     width: 100%;
+}
+
+body.todark, .todark ::backdrop {
+    --bg: black;
+    --fg_rgb: 255 255 255;
+    --invert: 0;
 }
 
 button, .dim_ref, footer, nav, .preface_he, .sliders {
@@ -226,7 +250,7 @@ blockquote {
     margin-block: 3ex;
 }
 
-blockquote, li, p {
+blockquote, li:not(.mono *), p {
     text-align: justify;
     text-wrap: pretty;
 }
@@ -261,7 +285,7 @@ button, [id^=kw_] {
 
 button:not(.on, .no_active, .no_active *, .sliders *):active, .always_on, button.on:not(:active) {
     background: var(--on);
-    color: var(--anti_on);
+    color: var(--inverse_fg);
 }
 
 button.big {
@@ -458,9 +482,13 @@ nav[dir=rtl] ~ footer > div {
     filter: invert(var(--invert));
 }
 
+h1 {
+    margin-block: max(.67em, 2.5 * var(--font_size));
+}
+
 h1, h2 {
     font-weight: normal;
-    letter-spacing: .05em;
+    letter-spacing: var(--h12_letter_spacing);
 }
 
 h1, .subhuge {
@@ -469,6 +497,10 @@ h1, .subhuge {
 
 h2:not(header *) {
     margin-block: 6ex 4ex;
+}
+
+h3 {
+    font-size: inherit;
 }
 
 .harden {
@@ -495,7 +527,7 @@ nav[dir=rtl] ~ header {
 }
 
 .huge {
-    font-size: clamp(1.3em, 10rem, 12vw);
+    font-size: clamp(1.5em, 10rem, 12vw);
 }
 
 iframe {
@@ -698,7 +730,7 @@ button#play.on::before {
     content: '\25fc';
 }
 
-nav[dir=ltr] ~ .preface_he {
+nav[dir=ltr] ~ * .preface_he {
     display: none;
 }
 
@@ -841,6 +873,10 @@ a.sponsors {
     font-size: .8em;
 }
 
+.story + :is(h3, p) {
+    margin-top: 5ex;
+}
+
 .subscribe {
     background-image: linear-gradient(90deg, currentColor 50%, transparent 50%), linear-gradient(90deg, currentColor 50%, transparent 50%), linear-gradient(0, currentColor 50%, transparent 50%), linear-gradient(0, currentColor 50%, transparent 50%);
     background-position: 0 0, 100% 100%, 0 100%, 100% 0;
@@ -900,7 +936,7 @@ a.sponsors {
 }
 
 @media (max-width: 480px) {
-    blockquote, li, p:not(.story) {
+    blockquote, li:not(.mono *), p:not(.story) {
         text-align: start;
     }
 

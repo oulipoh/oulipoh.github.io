@@ -5,7 +5,7 @@
 const pages = {
     "/": {title: "רֶסֶן", alt: "Resen", author: "oulipoh", skip: true},
 
-    "0/": {title: "פתח דבר לגיליון אפס", alt: "Forward to issue 0", author: ["alexbenari", "eyalgruss"], kw: [0]},
+    "0/": {title: "פתח דבר לגיליון אפס", alt: "Foreward to Issue 0", author: ["alexbenari", "eyalgruss"], kw: [0]},
     "achshav/": {title: "אָח־שָׁב – עַכְ־שָׁו", alt: "Ach-Shav", author: "brunogrife", kw: [0, "sound"]},
     "cent/": {title: "מתוך מאה תמונות מלחמה", alt: "From One hundred visions of war", author: "julienvocance", translator: "rotematar", kw: [0, "poem", "translation"]},
     "disappearance/": {title: "היעלמות", alt: "Disappearance", author: "rotematar", kw: [0]},
@@ -83,7 +83,7 @@ const kw_labels = {
     "biblical": "תורני",
     "cipher": "צופן",
     "combinatorial": "קומבינטורי",
-    "constraint combo": "שילוב אילוצים",
+    "combined forms": "שילוב אילוצים",
     "data available": "נתונים להורדה",
     "discourse": "שיח באילוצים",
     "hebrew cheatery": "מִרמת העברית",
@@ -120,9 +120,9 @@ const shortcuts = {
 
 const default_copyright_url = "https://creativecommons.org/licenses/by/4.0/"
 const default_copyright_label = "(CC)(&#xc6c3;)"
-const default_force_new_tab_for_mailto_tel = true
-const default_new_tab_for_social = true
-const default_new_tab_for_footer = true
+const default_force_new_tab_for_mailto_tel = false
+const default_new_tab_for_social = false
+const default_new_tab_for_footer = false
 const default_show_snippet = true
 const default_show_author = true
 
@@ -239,8 +239,8 @@ function page2url(page, lang, current, hash) {
 
 
 function open_internal_link(elem) {
-    const [page, ...hash] = elem.hash.slice(1).split('_')
-    elem.href = page2url(page, null, null, hash.join('_'))
+    const [page, ...hash] = elem.hash.slice(1).replace(/\?(.*)/, '').split('_')
+    elem.href = page2url(page, elem.hash.match(/\?(.*)/)?.[1] || elem.search.slice(1) || null, null, hash.join('_'))
 }
 
 
@@ -277,10 +277,9 @@ function make_contents(show_snippet=default_show_snippet, show_author=default_sh
         }
 
         [...new Set(merge(pages[page].hazard, pages[page].hazards))].forEach(hazard => {
-            const meta = document.createElement('meta')
+            const meta = a.appendChild(document.createElement('meta'))
             meta.setAttribute('itemprop', 'accessibilityHazard')
             meta.content = hazard
-            a.appendChild(meta)
         })
 
         const p = document.createElement('p')
@@ -293,15 +292,13 @@ function make_contents(show_snippet=default_show_snippet, show_author=default_sh
             authors = authors.map(harden)
             alt_authors = alt_authors.map(harden)
             if (authors && authors.join() != contents_authors) {
-                const span = document.createElement('span')
+                const span = p.appendChild(document.createElement('span'))
                 authors.forEach((author, i) => {
-                    const s = document.createElement('span')
+                    const s = span.appendChild(document.createElement('span'))
                     s.innerHTML = author
                     if (alt_authors[i] != author)
                         s.title = alt_authors[i]
-                    span.appendChild(s)
                 })
-                p.appendChild(span)
             }
         }
         div.appendChild(p)
@@ -311,24 +308,29 @@ function make_contents(show_snippet=default_show_snippet, show_author=default_sh
 
 
 function iframe_load_handler() {
+    if (this.contentDocument.title == '404 Not Found') {
+        this.remove()
+        return
+    }
     const nav = this.contentDocument.querySelector('nav')
     if (nav)
         nav.style.display = 'none'
     const footer = this.contentDocument.querySelector('footer')
     if (footer)
-        footer.style.display = 'hidden'
+        footer.style.visibility = 'hidden'
     this.contentDocument.documentElement.style.overflowY = 'clip'  // Prevent redundant scrollbars in Chrome
     const observer = new ResizeObserver(() => this.style.height = this.contentDocument.documentElement.scrollHeight + 'px')
     observer.observe(this.contentDocument.documentElement)
 }
 
 
-function export_all(lang, skip=[]) {
+function export_all(lang, skip) {
     document.body.replaceChildren()
     document.body.style.paddingInline = 0
-    skip = [skip].flat()
+    if (skip !== true)
+        skip = [skip].flat()
     for (const page in pages) {
-        if (skip.includes(page))
+        if (Array.isArray(skip) && skip.includes(page) || skip === true && pages[page].skip)
             continue
         const iframe = document.createElement('iframe')
         iframe.className = 'export'
@@ -424,24 +426,24 @@ function make_header(reorder_contents=default_reorder_contents, new_tab_for_soci
     const all_keywords_stats = get_all_keywords(lang, page)
     const titles = get_set_titles(page, lang)
     document.title = titles.label
+
+
+    // nav:
+
     let index_title = get_set_titles('/', lang).label
     let is_mobile
     if (is_mobile = matchMedia('(max-width: 480px), (max-height: 480px)').matches)
         index_title = index_title.split(' ').slice(0, lang ? 1 : 2).join(' ')
     const parent_title = decodeURI(location).split('/').slice(-3)[0]
-    const nav = document.body.appendChild(document.createElement('nav'))
+    const nav = document.createElement('nav')
     let diff = get_width(index_title, nav) - get_width(parent_title, nav)
     let span, back, keywords, trans
-    const desc = []
     if (page == '/') {
         span = document.createElement('span')
         span.dir = 'ltr'
         span.innerHTML = parent_title
         add_nav_element(nav, parent_title ? '..' : '', span, 'back', diff, shortcuts.back)
         keywords = Object.keys(all_keywords_stats)
-        const en_title = lang == 'en' ? titles.label : titles.alt
-        if (en_title)
-            desc.push(en_title)
     } else {
         add_nav_element(nav, page2url('.', lang, page), index_title, 'back', -diff, shortcuts.back)
         keywords = reorder(pages[page].kw, lang)
@@ -462,6 +464,11 @@ function make_header(reorder_contents=default_reorder_contents, new_tab_for_soci
     const alt_langs = Object.keys(ui).filter(k => k != lang)
     if (alt_langs.length)
         trans = add_nav_element(nav, page2url(page, alt_langs[0], page, location.hash), ui[alt_langs[0]].lang.slice(0, is_mobile ? 2 : undefined), 'trans')
+
+    document.body.appendChild(nav)
+
+
+    // header:
 
     const header = document.createElement('header')
     let button
@@ -547,12 +554,18 @@ function make_header(reorder_contents=default_reorder_contents, new_tab_for_soci
     header.appendChild(h1)
     if (ui[lang].dir && ui[lang].dir != document.documentElement.dir)
         nav.dir = ui[lang].dir
+    const desc = []
+    const en_title = lang == 'en' ? titles.label : titles.alt
+    if (en_title)
+        desc.push(en_title)
     if (pages[page].author || pages[page].authors || pages[page].translator || pages[page].translators) {
         const current_authors = get_make_author(page, lang, header, new_tab_for_social)[lang != 'en' | 0].join(', ')
-        if (page == '/' && current_authors)
+        if (current_authors)
             desc.push(current_authors)
     }
     document.body.appendChild(header)
+
+
     if (desc.length) {
         meta = document.createElement('meta')
         meta.name = 'description'
@@ -595,7 +608,7 @@ function get_make_author(page, lang, elem, new_tab_for_social=default_new_tab_fo
 
         let alt_name
         if (names) {
-            name = names[lang] || names[''] || Object.values(names)[0] || name
+        	name = names[lang] || names[''] || Object.values(names)[0] || name
             alt_name = Object.entries(names).filter(([k, v]) => k != lang && v).map(x => x[1])[0]
             if (translators.includes(key)) {
                 const alt_langs = Object.keys(ui).filter(k => k != lang)
@@ -652,25 +665,21 @@ function get_make_author(page, lang, elem, new_tab_for_social=default_new_tab_fo
 function make_footer(copyright_url=default_copyright_url, copyright_label=default_copyright_label, new_tab_for_footer=default_new_tab_for_footer)
 {
     const lang = get_lang()
-    let span = document.createElement('span')
+    const footer = document.createElement('footer')
+    const div = footer.appendChild(document.createElement('div'))
+    let span = div.appendChild(document.createElement('span'))
     span.innerHTML += ui[lang].theme + ':&nbsp;'
     span.appendChild(make_link([...document.scripts].flatMap(s => s.src || [])[0], ui[lang].theme_name, 'nowrap', null, new_tab_for_footer))
-    const div = document.createElement('div')
-    div.appendChild(span)
 
     if (ui[lang].copyright) {
-        span = document.createElement('span')
+        span = div.appendChild(document.createElement('span'))
         span.appendChild(make_link(copyright_url, ui[lang].copyright, 'nowrap', null, new_tab_for_footer, null, 'license'))
         span.innerHTML += '&nbsp;'
-        const bdi = document.createElement('bdi')
+        const bdi = span.appendChild(document.createElement('bdi'))
         bdi.className = 'nowrap'
         bdi.innerHTML = copyright_label
-        span.appendChild(bdi)
-        div.appendChild(span)
     }
 
-    const footer = document.createElement('footer')
-    footer.appendChild(div)
     document.body.appendChild(footer)
 }
 

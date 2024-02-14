@@ -3,24 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Miriam+Libre:wght@400;700&family=IBM+Plex+Mono&display=block">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Miriam+Libre:wght@400;700&family=IBM+Plex+Mono&display=block">
-    <link rel="preload" href="../Alef-Monospace.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../fonts/MiriamLibre-Regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../fonts/Alef-Monospace.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/IBMPlexMono-Regular.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="style.css">
     <script src="../pages.js"></script>
     <meta property="og:image" content="https://oulipoh.com/resen/petri/snippet">
     <noscript><style>body {visibility: visible}</style></noscript>
 </head>
-<body onload="document.body.style.visibility = 'visible'">
+<body class="todark" onload="document.body.style.visibility = 'visible'">
     <script>make_header()</script>
     <p>
         <a href="https://he.wikipedia.org/wiki/%D7%A8%D7%A9%D7%AA_%D7%A4%D7%98%D7%A8%D7%99">רשת פטרי</a> היא מודל מתמטי־גרפי המייצג תהליכים מורכבים הכוללים תנאי קדם שתלויים במצב הדינמי של המערכת. ואפשר שמערכת זו תתנהג באופן סטוכסטי (אקראי).
         משוואות <a href="https://he.wikipedia.org/wiki/%D7%9E%D7%A9%D7%95%D7%95%D7%90%D7%95%D7%AA_%D7%9C%D7%95%D7%98%D7%A7%D7%94-%D7%95%D7%95%D7%9C%D7%98%D7%A8%D7%94">לוטקה-וולטרה</a> הן משוואות דיפרנציאליות המתארות את יחסי הגומלין הכמותניים בין שתי אוכלוסיות: טורפים ונטרפים.
         תהליכים אלו הכוללים רבייה, טרף ומוות, ניתנים למידול באופן איכותני באמצעות רשת פטרי.
-    </p>
-    <p>
         כאשר מדובר ביחסי גומלין בין עמים, יש גם לקחת בחשבון מצבים ואינטראקציות מורכבים יותר כגון זעם ונקמה.
         רשת הפטרי הפטריוטית מייצגת תהליכי רבייה, חיול, לחימה, מוות ונקמה בין שתי אוכלוסיות: ישראל ועזה, ומדמה את מעגל השכול האכזב שהעימות ביניהן מייצר.
         רצף המצבים והמעברים המתחלפים מייצרים מעין פואטיקה של שירה מצבית.
@@ -28,7 +25,12 @@
     <p>
         המערכת רצה באופן חי בדפדפן.
     </p>
-
+    <p dir="ltr">
+        A Petri net is a mathematical-graphical model representing complex stochastic processes, e.g. predator-prey population dynamics, which include behaviors such as breeding, predation and death. When it comes to Human populations, more complex interactions such as wrath and vengeance must also be taken into account. The Patriotic Petri Poetry (PPP) net simulates processes of reproduction, enlistment, fighting, death and revenge between two populations: Israel and Gaza, simulating the vicious cycle of bereavement that the conflict produces.
+    </p>
+    <p dir="ltr">
+        The system runs live in the browser.
+    </p>
     <div class="petri" id="רבייה_ישראל"></div>
     <div class="petri" id="שחרור"></div>
     <div class="petri" id="רבייה_עזה"></div>

@@ -314,7 +314,7 @@ fetch(json_file).then(response => response.json()).then(json => {
 
     document.querySelectorAll('.petri').forEach(elem => {
         const grid = elem.appendChild(document.createElement('div'))
-        grid.classList.add('leader-line-container')
+        grid.className = 'leader-line-container'
         let transitions = all_transitions
         let labels = all_labels
         let cols = grid_columns
@@ -326,11 +326,11 @@ fetch(json_file).then(response => response.json()).then(json => {
         cols = Math.min(cols, labels.length)
         elem.style.setProperty('--cols', cols)
         labels.forEach((label, index) => {
-            const pre = document.createElement('pre')
+            const pre = grid.appendChild(document.createElement('pre'))
             pre.dataset.id = label
             if (transitions.includes(label)) {
                 if (json.vertical?.includes(label) || json.transitions[label][2] == 'vertical' || elem.id in json.transitions)
-                    pre.classList.add('vertical')
+                    pre.className = 'vertical'
                 if (auto_vertical && !(elem.id in json.transitions)) {
                     let hor = ver = 0
                     json.transitions[label].slice(0, 2).flat().forEach(place => {
@@ -343,19 +343,17 @@ fetch(json_file).then(response => response.json()).then(json => {
                         ver += Math.abs(trow - prow) > Math.abs(tcol - pcol)
                     })
                     if (hor > ver)
-                        pre.classList.add('vertical')
+                        pre.className = 'vertical'
                 }
                 if (json.labels[label].includes('|'))
                     json.labels[label] = json.labels[label].split('|')[pre.classList.contains('vertical') | 0]
             } else {
-                pre.classList.add('place')
+                pre.className = 'place'
                 pre.addEventListener('click', () => pre.dataset.clicks = (pre.dataset.clicks | 0) + 1)
                 if (!(elem.id in json.transitions) && (json.above?.includes(label) || label_location == 'above' || label_location == 'half' && index < (labels.length/cols/2 | 0) * cols))
                     pre.classList.add('above')
             }
-            const span = document.createElement('span')
-            pre.appendChild(span)
-            grid.appendChild(pre)
+            pre.appendChild(document.createElement('span'))
         })
         elem.style.background = 'var(--bg)'
         step(grid, json)

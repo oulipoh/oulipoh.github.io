@@ -2,7 +2,7 @@
 let Fira;
 let digitSize;
 function preload() {
-  Fira = loadFont("FiraCode-Light.ttf");
+  Fira = loadFont("fonts/FiraCode-Light.ttf");
 }
 const bg = getComputedStyle(document.documentElement).getPropertyValue('--bg');
 const sketch = document.getElementById("sketch")
@@ -77,6 +77,7 @@ function setup() {
   myCanvas.parent("sketch");
   textFont(Fira);
   textAlign(CENTER, CENTER);
+  sketch.scrollIntoView({block: 'center'});
 }
 
 function draw() {
