@@ -21,7 +21,6 @@
 :root, ::backdrop {  /* In Chrome (<122) ::backdrop does not inherit from :root. See: https://bugs.chromium.org/p/chromium/issues/detail?id=827397 */
     --bg: #f6e5d5;
     --fg_rgb: 0 0 0;
-    --fg: rgb(var(--fg_rgb));
     --on: #ff5337;
     --fg_dim: #a79c91;
     --fg_verydim: var(--fg_dim);
@@ -65,6 +64,7 @@ html {
 body {
     background-color: var(--bg);
     box-sizing: border-box;
+    --fg: rgb(var(--fg_rgb));
     color: var(--fg);
     display: table;
     font-family: var(--font);
