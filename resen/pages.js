@@ -11,11 +11,12 @@ const pages = {
     "disappearance/": {title: "היעלמות", alt: "Disappearance", author: "rotematar", kw: [0]},
     "down/": {title: "רע", alt: "Down", author: "alexbenari", kw: [0, "interactive", "poem", "visual"]},
     "exceeding/": {title: "מֵעֵבר לַשלם", alt: "Exceeding the entirety", author: ["mikamilgrom", "avimilgrom"], kw: [0, "live code", "visual"]},
-    "imagine/": {title: "דמיין", alt: "/imagine", author: "liorzalmanson", kw: [0, "poem"]},
+    "imagine/": {title: "דמיין", alt: "Imagine", author: "liorzalmanson", kw: [0, "poem"]},
     "petri/": {title: "פואטיקת פטרי פטריוטית", alt: "Patriotic Petri Poetry", author: "eyalgruss", kw: [0, "live code", "poem", "software", "visual"]},
     "things/": {title: "קורים עכשיו דברים עם השפה", alt: "Things are happening now with the language", author: "noashaham", kw: [0, "poem"]},
     "systems/": {title: "מערכות", alt: "Systems", author: "noashaham", kw: [0, "poem"]},
     "tribe/": {title: "השבט הנושא את עיניו השמיימה", alt: "The tribe with its eyes on the sky", author: "italocalvino", translator: "jonathanfine", kw: [0, "story", "translation"]},
+    "seasons/": {title: "כאילו המלחמה הייתה לחלק מעונות השנה", alt: "As if the war were part of the seasons", author: "adisorek", kw: [0]},
 
     "journal": {title: "אודות כתב העת", alt: "About this journal", author: "oulipoh", kw: ["live code", "software"]}
 }
@@ -27,6 +28,9 @@ const authors = {
         "github": "",
         "sponsors": "",
         "subscribe": "ayPSSeHk3KL4ALGa9"
+    },
+    "adisorek": {
+        "name": {"": "עדי שורק", "en": "Adi Sorek"},
     },
     "alexbenari": {
         "name": {"": "אלכס בן־ארי", "en": "Alex Ben Ari"}

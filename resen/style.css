@@ -425,6 +425,11 @@ figcaption:not(.images > figure > *) {
     margin-inline-start: calc((100% - var(--media_width)) / 2);
 }
 
+.images > figure > img + figcaption {
+    font-size: .7em;
+    text-align: center;
+}
+
 footer {
     display: table-row;
     height: 1px;  /* This is needed when page height is smaller than viewport. Firefox will not work with 0 */
@@ -527,7 +532,7 @@ nav[dir=rtl] ~ header {
 }
 
 .huge {
-    font-size: clamp(1.5em, 10rem, 12vw);
+    font-size: clamp(var(--h1_size), 10rem, 12vw);
 }
 
 iframe {
@@ -557,8 +562,13 @@ iframe {
     width: 100%;
 }
 
+.images > :is(figure:first-child:last-child > img, img:first-child:last-child) {
+    height: 100%;
+}
+
 img {
     font-style: italic;
+    white-space: pre-line;
 }
 
 input[type=checkbox] {
@@ -717,8 +727,8 @@ ol, ul {
     padding-bottom: var(--hor_scrollbar_offset);
 }
 
-p:not([dir=ltr]) + :is(blockquote, p)[dir=ltr],
-p[dir=ltr] + :is(blockquote, p):not([dir=ltr]) {
+:is(p:not([dir=ltr]), p:not([dir=ltr]) + br) + :is(blockquote, p)[dir=ltr],
+:is(p[dir=ltr], p[dir=ltr] + br) + :is(blockquote, p):not([dir=ltr]) {
     margin-top: 6ex;
 }
 

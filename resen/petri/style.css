@@ -11,7 +11,6 @@
     color: var(--fg);
     display: grid;
     font-size: initial;
-    margin-block: 4rem 6rem;
     overflow-x: auto;
     outline-style: none;
     padding-block: 1em 3em;
