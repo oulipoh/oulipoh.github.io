@@ -1,13 +1,18 @@
 @font-face {
+    font-family: 'David Libre';
+    font-display: block;
+    src: url('fonts/DavidLibre-Medium.woff2');
+}
+
+@font-face {
     font-family: 'Miriam Libre';
-    font-weight: 400;
     font-display: block;
     src: url('fonts/MiriamLibre-Regular.woff2');
 }
 
 @font-face {
     font-family: 'Miriam Libre';
-    font-weight: 700;
+    font-weight: bold;
     font-display: block;
     src: url('fonts/MiriamLibre-Bold.woff2');
 }
@@ -19,10 +24,10 @@
 }
 
 :root, ::backdrop {  /* In Chrome (<122) ::backdrop does not inherit from :root. See: https://bugs.chromium.org/p/chromium/issues/detail?id=827397 */
-    --bg: #f6e5d5;
+    --bg: white;
     --fg_rgb: 0 0 0;
     --on: #ff5337;
-    --fg_dim: #a79c91;
+    --fg_dim: #cdc2b7;
     --fg_verydim: var(--fg_dim);
     --fg_filter: saturate(0);
     --fg_highlight: white;
@@ -38,6 +43,7 @@
     --letter_spacing: normal;
     --font: 'Miriam Libre', Arial, sans-serif;
     --mono_font: 'Courier New', 'Alef Mono', monospace;
+    --title_font: 'David Libre', 'Times New Roman', serif;
 
     --font_size: 1.3rem;
     --h1_size: clamp(1.5em, 5rem, 10vw);
@@ -133,7 +139,7 @@ button, pre {
         66% { text-decoration-style: dotted }
     }
 
-    a:is(:hover, :focus-visible) {
+    a:not(.social *)is(:hover, :focus-visible) {
         animation: var(--icon_dur) infinite deco;
     }
 
@@ -195,12 +201,8 @@ button, pre {
         animation: var(--icon_dur) infinite alternate sponsors;
     }
 
-    @keyframes border-dance {
-        100% { background-position: 100% 0, 0 100%, 0 0, 100% 100% }
-    }
-
     .subscribe:is(:hover, :focus-visible) {
-        animation: .7s linear infinite border-dance;
+        animation-duration: .7s;
     }
 
     @keyframes twitter {
@@ -275,7 +277,7 @@ button, [id^=kw_] {
 }
 
 .persistent {
-    font-size: 1.8em;
+    font-size: 1.5em;
     margin-inline-end: .45em;
 }
 
@@ -299,6 +301,7 @@ button.big {
 .contents {
     column-count: var(--columns);
     column-gap: var(--column_gap);
+    font-family: var(--title_font, --font);
 }
 
 .rows_first {
@@ -491,7 +494,14 @@ h1 {
     margin-block: max(.67em, 2.5 * var(--font_size));
 }
 
+h1 img {
+    max-height: 8rem;
+    display: block;
+    margin-inline: auto;
+}
+
 h1, h2 {
+    font-family: var(--title_font, --font);
     font-weight: normal;
     letter-spacing: var(--h12_letter_spacing);
 }
@@ -871,9 +881,10 @@ nav[dir=rtl] ~ :nth-last-child(1 of .refs):not([data-title]) {
 
 .social {
     display: inline-block;
+    font-family: var(--font);
 }
 
-.social > a {
+.social a {
     display: inline-block;
     font-size: .6em;
     text-decoration: none;
@@ -887,7 +898,12 @@ a.sponsors {
     margin-top: 5ex;
 }
 
+@keyframes border_dance {
+    100% { background-position: 100% 0, 0 100%, 0 0, 100% 100% }
+}
+
 .subscribe {
+    animation: 50s linear infinite border_dance;
     background-image: linear-gradient(90deg, currentColor 50%, transparent 50%), linear-gradient(90deg, currentColor 50%, transparent 50%), linear-gradient(0, currentColor 50%, transparent 50%), linear-gradient(0, currentColor 50%, transparent 50%);
     background-position: 0 0, 100% 100%, 0 100%, 100% 0;
     background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;

@@ -1,15 +1,14 @@
 @font-face {
     font-family: Alef;
-    font-weight: 400;
     font-display: block;
-    src: url('fonts/Alef-Regular.woff2');
+    src: url('../fonts/Alef-Regular.woff2');
 }
 
 @font-face {
     font-family: Alef;
-    font-weight: 700;
+    font-weight: bold;
     font-display: block;
-    src: url('fonts/Alef-Bold.woff2');
+    src: url('../fonts/Alef-Bold.woff2');
 }
 
 body {
@@ -26,14 +25,14 @@ body {
     visibility: hidden;
 }
 
-@keyframes border-dance {
-    0% { background-position: 0 0, 100% 100%, 0 100%, 100% 0 }
+@keyframes border_dance {
     100% { background-position: 100% 0, 0 100%, 0 0, 100% 100% }
 }
 
-.rotating-border {
-    animation: 5s linear infinite border-dance;
+.rotating_border {
+    animation: 5s linear infinite border_dance;
     background-image: linear-gradient(90deg, currentColor 50%, transparent 50%), linear-gradient(90deg, currentColor 50%, transparent 50%), linear-gradient(0, currentColor 50%, transparent 50%), linear-gradient(0, currentColor 50%, transparent 50%);
+    background-position: 0 0, 100% 100%, 0 100%, 100% 0;
     background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
     background-size: 1rem .2rem, 1rem .2rem, .2rem 1rem, .2rem 1rem;
     padding-bottom: .5em;
@@ -41,7 +40,7 @@ body {
     width: max-content;
 }
 
-.rotating-border:hover {
+.rotating_border:hover {
     animation-duration: 1s;
 }
 

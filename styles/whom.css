@@ -1,15 +1,14 @@
 @font-face {
     font-family: Alef;
-    font-weight: 400;
     font-display: block;
-    src: url('fonts/Alef-Regular.woff2');
+    src: url('../fonts/Alef-Regular.woff2');
 }
 
 @font-face {
     font-family: Alef;
-    font-weight: 700;
+    font-weight: bold;
     font-display: block;
-    src: url('fonts/Alef-Bold.woff2');
+    src: url('../fonts/Alef-Bold.woff2');
 }
 
 body {

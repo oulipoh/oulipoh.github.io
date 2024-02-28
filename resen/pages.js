@@ -3,7 +3,7 @@
 
 
 const pages = {
-    "/": {title: "רֶסֶן", alt: "Resen", author: "oulipoh", skip: true},
+    "/": {title: "רֶסֶן", alt: "Resen", author: "resen", logo: "media/resen.svg", skip: true},
 
     "0/": {title: "פתח דבר לגיליון אפס", alt: "Foreward to Issue 0", author: ["alexbenari", "eyalgruss"], kw: [0]},
     "achshav/": {title: "אָח־שָׁב – עַכְ־שָׁו", alt: "Ach-Shav", author: "brunogrife", kw: [0, "sound"]},
@@ -16,15 +16,15 @@ const pages = {
     "things/": {title: "קורים עכשיו דברים עם השפה", alt: "Things are happening now with the language", author: "noashaham", kw: [0, "poem"]},
     "systems/": {title: "מערכות", alt: "Systems", author: "noashaham", kw: [0, "poem"]},
     "tribe/": {title: "השבט הנושא את עיניו השמיימה", alt: "The tribe with its eyes on the sky", author: "italocalvino", translator: "jonathanfine", kw: [0, "story", "translation"]},
-    "seasons/": {title: "כאילו המלחמה הייתה לחלק מעונות השנה", alt: "As if the war were part of the seasons", author: "adisorek", kw: [0]},
+    "seasons/": {title: "כאילו המלחמה הייתה לחלק מעונות השנה", alt: "As if the war were part of the seasons", author: "adisorek", kw: [0, "interactive", "sound"]},
 
-    "journal": {title: "אודות כתב העת", alt: "About this journal", author: "oulipoh", kw: ["live code", "software"]}
+    "journal": {title: "אודות כתב העת", alt: "About this journal", author: "resen", kw: ["live code", "software"]}
 }
 
 const authors = {
-    "oulipoh": {
-        "name": {"": "כתב עת מקוון ליצירה אילוצית וחישובית בעברית", "en": "An online journal for constrained and computational creation in Hebrew"},
-        "mail": "eyalgruss+oulipoh@gmail.com",
+    "resen": {
+        "name": {"": "רֶסֶן – כתב עת מקוון ליצירה אילוצית וחישובית בעברית", "en": "Resen - an online journal for constrained and computational creation in Hebrew"},
+        "mail": "eyalgruss+resen@gmail.com",
         "github": "",
         "sponsors": "",
         "subscribe": "ayPSSeHk3KL4ALGa9"
@@ -157,7 +157,7 @@ function reorder(list_of_strings, lang='', labels=kw_labels) {
 function get_all_keywords(lang='', page) {
     const keywords = Object.entries(pages).flatMap(([k, v]) => (k == page || !v.skip) && v.kw || [])
     const ordered = reorder(keywords, lang)
-    if (page) {
+    if (page != null) {
         const counts = keywords.reduce((acc, kw) => (acc[kw] = ++acc[kw] || 1, acc), {})
         const len = Object.values(pages).filter(v => !v.skip).length
         const freq = Object.fromEntries(Object.entries(counts).map(([kw, c]) => [kw, c / len]))
@@ -217,7 +217,7 @@ function get_set_titles(page, lang='', elem) {
             [titles.label, titles.alt] = [titles.alt, titles.label]
     }
     if (elem) {
-        if (page) {
+        if (page != null) {
             const suffix = elem.title.match(/\[.*/)
             if (suffix) {
                 titles.label += ' ' + suffix
@@ -550,16 +550,24 @@ function make_header(reorder_contents=default_reorder_contents, new_tab_for_soci
         }
         header.appendChild(div)
     }
+    const en_title = lang == 'en' ? titles.label : titles.alt
     const h1 = document.createElement('h1')
     h1.id = 'h1'
-    h1.innerHTML = harden(titles.label)
-    if (titles.alt)
-        h1.title = titles.alt
+    if (pages[page].logo) {
+        const img = new Image()
+        img.alt = titles.label
+        img.src = pages[page].logo
+        h1.appendChild(img)
+        h1.title = en_title ?? titles.label
+    } else {
+        h1.innerHTML = harden(titles.label)
+        if (titles.alt)
+            h1.title = titles.alt
+    }
     header.appendChild(h1)
     if (ui[lang].dir && ui[lang].dir != document.documentElement.dir)
         nav.dir = ui[lang].dir
     const desc = []
-    const en_title = lang == 'en' ? titles.label : titles.alt
     if (en_title)
         desc.push(en_title)
     if (pages[page].author || pages[page].authors || pages[page].translator || pages[page].translators) {
