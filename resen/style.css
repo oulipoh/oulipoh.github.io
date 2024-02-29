@@ -23,6 +23,18 @@
     src: url('fonts/Alef-Monospace.woff2');
 }
 
+@font-face {
+    font-family: 'Noto Sans Symbols';
+    size-adjust: 160%;
+    unicode-range: U+2709;
+}
+
+@font-face {
+    font-family: 'Zapf Dingbats';
+    size-adjust: 160%;
+    unicode-range: U+2709;
+}
+
 :root, ::backdrop {  /* In Chrome (<122) ::backdrop does not inherit from :root. See: https://bugs.chromium.org/p/chromium/issues/detail?id=827397 */
     --bg: white;
     --fg_rgb: 0 0 0;
@@ -42,8 +54,8 @@
     --h12_letter_spacing: normal;
     --letter_spacing: normal;
     --font: 'Miriam Libre', Arial, sans-serif;
+    --heading_font: 'David Libre', 'Times New Roman', serif;
     --mono_font: 'Courier New', 'Alef Mono', monospace;
-    --title_font: 'David Libre', 'Times New Roman', serif;
 
     --font_size: 1.3rem;
     --h1_size: clamp(1.5em, 5rem, 10vw);
@@ -301,7 +313,7 @@ button.big {
 .contents {
     column-count: var(--columns);
     column-gap: var(--column_gap);
-    font-family: var(--title_font, --font);
+    font-family: var(--heading_font);
 }
 
 .rows_first {
@@ -495,13 +507,14 @@ h1 {
 }
 
 h1 img {
-    max-height: 8rem;
+    caret-color: transparent;
     display: block;
     margin-inline: auto;
+    max-height: 7rem;
 }
 
 h1, h2 {
-    font-family: var(--title_font, --font);
+    font-family: var(--heading_font);
     font-weight: normal;
     letter-spacing: var(--h12_letter_spacing);
 }
