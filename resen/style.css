@@ -26,12 +26,14 @@
 @font-face {
     font-family: 'Noto Sans Symbols';
     size-adjust: 160%;
+    src: local('Noto Sans Symbols');
     unicode-range: U+2709;
 }
 
 @font-face {
     font-family: 'Zapf Dingbats';
     size-adjust: 160%;
+    src: local('Zapf Dingbats');
     unicode-range: U+2709;
 }
 
