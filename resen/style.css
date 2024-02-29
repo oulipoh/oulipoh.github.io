@@ -24,16 +24,16 @@
 }
 
 @font-face {
-    font-family: 'Arial';  /* MacOS, iOS */
+    font-family: Arial;  /* MacOS, iOS */
     size-adjust: 160%;
-    src: local('Arial');
+    src: local(Arial);
     unicode-range: U+2709;
 }
 
 @font-face {
     font-family: 'Noto Sans Symbols';  /* Android */
     size-adjust: 160%;
-    src: local('Noto Sans Symbols');
+    src: local('NotoSansSymbols-Regular-Subsetted');  /* Chrome requires full PostScript name */
     unicode-range: U+2709;
 }
 
