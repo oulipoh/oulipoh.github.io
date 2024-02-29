@@ -24,16 +24,16 @@
 }
 
 @font-face {
-    font-family: 'Noto Sans Symbols';
+    font-family: 'Arial';  /* MacOS, iOS */
     size-adjust: 160%;
-    src: local('Noto Sans Symbols');
+    src: local('Arial');
     unicode-range: U+2709;
 }
 
 @font-face {
-    font-family: 'Zapf Dingbats';
+    font-family: 'Noto Sans Symbols';  /* Android */
     size-adjust: 160%;
-    src: local('Zapf Dingbats');
+    src: local('Noto Sans Symbols');
     unicode-range: U+2709;
 }
 
@@ -630,7 +630,7 @@ li:not(.mono *) {
 }
 
 .mail {
-    font-family: var(--font), 'Noto Sans Symbols', 'Zapf Dingbats';
+    font-family: var(--font), 'Noto Sans Symbols';
 }
 
 .mono, .number {
