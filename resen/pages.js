@@ -107,7 +107,7 @@ const kw_labels = {
 }
 
 const social = {
-    "mail": {"url": "mailto:", "label": "&#x2709;&#xfe0e;"},
+    "mail": {"url": "mailto:", "label": "&#x2709;"},  // don't add &#xfe0e; as it prevents targeting with CSS on iOS
     "web": {"label": "&#x1f3e0;&#xfe0e;"},
     "twitter": {"url": "twitter.com", "label": "&#x1f426;"},
     "github": {"url": "github.com", "label": "&#x1f431;"},
