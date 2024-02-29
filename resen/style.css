@@ -627,6 +627,10 @@ li:not(.mono *) {
     margin-inline-start: 40px;
 }
 
+.mail {
+    font-family: var(--font), 'Noto Sans Symbols', 'Zapf Dingbats';
+}
+
 .mono, .number {
     font-family: var(--mono_font);
 }
