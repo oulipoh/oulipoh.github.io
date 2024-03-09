@@ -154,7 +154,7 @@ button, pre {
         66% { text-decoration-style: dotted }
     }
 
-    a:not(.social *)is(:hover, :focus-visible) {
+    a:not(.social *):is(:hover, :focus-visible) {
         animation: var(--icon_dur) infinite deco;
     }
 
