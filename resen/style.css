@@ -534,6 +534,11 @@ h3 {
     font-size: inherit;
 }
 
+h4 {
+    font-size: initial;
+    margin-bottom: 2em;
+}
+
 .harden {
     display: inline-block;
     text-decoration: inherit;
@@ -757,9 +762,9 @@ ol, ul {
     padding-bottom: var(--hor_scrollbar_offset);
 }
 
-:is(p:not([dir=ltr]), p:not([dir=ltr]) + br) + :is(blockquote, p)[dir=ltr],
-:is(p[dir=ltr], p[dir=ltr] + br) + :is(blockquote, p):not([dir=ltr]) {
-    margin-top: 6ex;
+:is(p:not([dir=ltr]), p:not([dir=ltr]) + br) + :is(blockquote, h3, h4, p)[dir=ltr],
+:is(p[dir=ltr], p[dir=ltr] + br) + :is(blockquote, h3, h4, p):not([dir=ltr]) {
+    margin-top: max(6ex, 4.5rem);
 }
 
 button#play::before {
