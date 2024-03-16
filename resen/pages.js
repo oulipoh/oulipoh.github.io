@@ -345,17 +345,23 @@ function export_all(lang, skip) {
 }
 
 
-// Note: this accounts for lettercase and works cross keyboard layouts, but may miss keys due to input language change
-function is_key(event, key) {
-    const keys = key.toLowerCase().split(/\+(?!$)/)
-    return event.altKey == keys.includes('alt') && (event.ctrlKey || event.metaKey) == keys.includes('ctrl') && event.shiftKey == keys.includes('shift') && event.key.toLowerCase() == keys.pop()
+function is_shortcut(event, shortcut) {
+    shortcut = shortcut.toLowerCase().split(/[+-](?!$)/)
+    const shortcut_key = shortcut.pop()
+    let event_key = event.key.toLowerCase()
+    if (shortcut_key == '+' && event.code == 'Equal' && !'-_'.includes(event.key)
+        || shortcut_key == '-' && event.code == 'Minus' && !'+?\\'.includes(event.key)
+        || event.code == 'Digit' + shortcut_key  // For AZERTY keyboard
+        || !event_key.match(/^[a-z]$/) && event.code == 'Key' + shortcut_key.toUpperCase())  // For Hebrew keyboard
+        event_key = shortcut_key
+    return event_key == shortcut_key && event.altKey == shortcut.includes('alt') && (event.ctrlKey || event.metaKey) == shortcut.includes('ctrl') && event.shiftKey == shortcut.includes('shift')
 }
 
 
-function shortcut(elem, key) {
-    if (key) {
-        elem.ariaKeyshortcuts = key
-        document.addEventListener('keydown', e => {if (is_key(e, key)) elem.click()})
+function add_shortcut(elem, shortcut) {
+    if (shortcut) {
+        elem.ariaKeyshortcuts = shortcut
+        document.addEventListener('keydown', e => {if (is_shortcut(e, shortcut)) elem.click()})
     }
 }
 
@@ -364,7 +370,7 @@ function add_nav_element(nav, url, label, cls, delta=0, key) {
     const elem = nav.appendChild(make_link(url, label, ['nowrap', cls], key ? `[${key}]` : ''))
     if (delta != null)
         elem.style.marginInlineEnd = 1.5 + Math.max(delta, 0) + 'em'
-    shortcut(elem, key)
+    add_shortcut(elem, key)
     return elem
 }
 
