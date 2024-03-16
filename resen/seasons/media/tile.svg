@@ -51,7 +51,7 @@
     <path d="M190.8 59v19.4h30.6V59z"/>
     <path class="deco" d="M190.8 78.4h30.6"/>
   </a>
-  <a href="#" onclick="document.querySelectorAll('image').forEach(i => i.style.visibility = 'hidden'); event.currentTarget.lastElementChild.style.visibility = event.currentTarget.lastElementChild.style.visibility == 'visible' ? 'hidden' : 'visible'" role="button">
+  <a href="#" onclick="document.querySelectorAll('image').forEach(i => i.style.visibility = i == event.currentTarget.lastElementChild &amp;&amp; getComputedStyle(i).visibility == 'hidden' ? 'visible' : 'hidden')" role="button">
     <path d="M464 437.7v64h95.2v-47.8h-57.7v-16.2z"/>
     <path class="deco" d="M464 453.9h37.5"/>
     <path class="deco" d="M464 469h95.2"/>
@@ -59,18 +59,18 @@
     <path class="deco" d="M464 501.4h95.2"/>
     <image width="40%" x="37%" y="24%" href="tiles.jpg"/>
   </a>
-  <a href="#" onclick="document.querySelectorAll('image').forEach(i => i.style.visibility = 'hidden'); event.currentTarget.lastElementChild.style.visibility = event.currentTarget.lastElementChild.style.visibility == 'visible' ? 'hidden' : 'visible'" role="button">
+  <a href="#" onclick="document.querySelectorAll('image').forEach(i => i.style.visibility = i == event.currentTarget.lastElementChild &amp;&amp; getComputedStyle(i).visibility == 'hidden' ? 'visible' : 'hidden')" role="button">
     <path d="M166.3 536.8v30.9h164v-30.9z"/>
     <path class="deco" d="M166.3 567.7h164"/>
     <image width="70%" x="30%" y="29%" href="safa.jpg"/>
   </a>
-  <a href="#" onclick="document.querySelectorAll('image').forEach(i => i.style.visibility = 'hidden'); event.currentTarget.lastElementChild.style.visibility = event.currentTarget.lastElementChild.style.visibility == 'visible' ? 'hidden' : 'visible'" role="button">
+  <a href="#" onclick="document.querySelectorAll('image').forEach(i => i.style.visibility = i == event.currentTarget.lastElementChild &amp;&amp; getComputedStyle(i).visibility == 'hidden' ? 'visible' : 'hidden')" role="button">
     <path d="M35 662v32.2h95.2V662z"/>
     <path class="deco" d="M35 677.5h95.2"/>
     <path class="deco" d="M35 694.2h95.2"/>
     <image width="35%" x="18%" y="44%" href="veen.svg"/>
   </a>
-  <a href="#" onclick="document.querySelectorAll('image').forEach(i => i.style.visibility = 'hidden'); event.currentTarget.lastElementChild.style.visibility = event.currentTarget.lastElementChild.style.visibility == 'visible' ? 'hidden' : 'visible'" role="button">
+  <a href="#" onclick="document.querySelectorAll('image').forEach(i => i.style.visibility = i == event.currentTarget.lastElementChild &amp;&amp; getComputedStyle(i).visibility == 'hidden' ? 'visible' : 'hidden')" role="button">
     <path d="M35 774.5v32.2h95.1v-17H68.4v-15.2z"/>
     <path class="deco" d="M35 789.7H68.4"/>
     <path class="deco" d="M35 806.7h95.1"/>
