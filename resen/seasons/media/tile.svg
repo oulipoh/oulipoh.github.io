@@ -22,7 +22,7 @@
         66% { stroke-dasharray: 1, 1 }
       }
 
-      a[href]:hover .deco {
+      a[href]:is(:focus-visible, :hover) .deco {
         animation: var(--icon_dur) infinite deco;
       }
     }
