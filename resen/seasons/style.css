@@ -1,0 +1,12 @@
+object {
+    display: block;
+    margin-inline: auto;
+    max-width: var(--media_width);
+}
+
+@media (max-width: 480px) {
+    object {
+        margin-inline: var(--anti_margin);
+        max-width: none;
+    }
+}

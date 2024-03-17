@@ -6,6 +6,7 @@
     <link rel="preload" href="../fonts/MiriamLibre-Regular.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="../fonts/DavidLibre-Medium.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="style.css">
     <script src="../pages.js"></script>
     <link rel="icon" href="../media/resen.svg">
     <meta property="og:image" content="https://oulipoh.com/resen/seasons/snippet">
@@ -67,6 +68,9 @@
     <p dir="ltr">
         The author thanks Yosefa Raz for her help with the English translation of this passage, and Almog Behar for his help in choosing the liturgical hymn.
     </p>
-    <script>make_footer()</script>
+    <script>
+        make_footer()
+        document.addEventListener('scroll', () => audio.volume = 1 - (scrollY|0)/(document.body.scrollHeight-innerHeight))
+    </script>
 </body>
 </html>
