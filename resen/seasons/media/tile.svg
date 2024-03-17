@@ -2,7 +2,7 @@
   <style>
     :root {
       --on: #ff5337;
-      --fg_dim: #cdc2b7;
+      --fg_dim: black;
     }
 
     @media (hover: hover) {

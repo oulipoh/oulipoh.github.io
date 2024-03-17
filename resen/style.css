@@ -321,7 +321,7 @@ button.big {
 
 .rows_first {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(clamp(250px, (var(--media_width) - (var(--columns) - 1)*var(--column_gap)) / var(--columns), 100%), 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(clamp((100% - (var(--columns) - 1)*var(--column_gap)) / var(--columns), 250px, 100%), 1fr));
     row-gap: var(--row_gap);
 }
 
