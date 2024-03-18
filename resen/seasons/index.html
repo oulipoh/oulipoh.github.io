@@ -70,7 +70,7 @@
     </p>
     <script>
         make_footer()
-        document.addEventListener('scroll', () => audio.volume = 1 - (scrollY|0)/(document.body.scrollHeight-innerHeight))
+        document.addEventListener('scroll', () => audio.volume = (10**(1 - (scrollY|0)/(document.body.scrollHeight-innerHeight))-1)/9)
     </script>
 </body>
 </html>

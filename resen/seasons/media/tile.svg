@@ -23,7 +23,7 @@
       }
 
       a:is(:focus-visible, :hover) .deco {
-        animation: var(--icon_dur) infinite deco;
+        animation: var(--icon_dur) steps(1) infinite deco;
       }
     }
 
