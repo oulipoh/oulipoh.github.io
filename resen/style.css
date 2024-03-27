@@ -988,7 +988,7 @@ a.sponsors {
 }
 
 @media (max-width: 480px) {
-    blockquote, li:not(.mono *), p:not(.story) {
+    blockquote, li:not(.mono *), p:not(div *, .story) {
         text-align: start;
     }
 
