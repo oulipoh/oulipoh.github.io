@@ -3,6 +3,10 @@
     :root {
       --on: #ff5337;
       --fg_dim: black;
+      -webkit-tap-highlight-color: transparent;
+      -webkit-touch-callout: none;
+      user-select: none;
+      -webkit-user-select: none;
     }
 
     @media (hover: hover) {
@@ -43,7 +47,7 @@
     }
 
     .show {
-      opacity: .97;
+      opacity: .95;
       visibility: visible;
       transition: none;
     }
@@ -67,7 +71,7 @@
     <path class="deco" d="M464 469h95.2"/>
     <path class="deco" d="M464 485h95.2"/>
     <path class="deco" d="M464 501.4h95.2"/>
-    <image width="40%" x="37%" y="24%" href="tiles.jpg" aria-label="רישום מרצפות: עדי שורק, מתוך פנקס שחור, 2015."/>
+    <image width="40%" x="32%" y="26%" href="tiles.jpg" aria-label="רישום מרצפות: עדי שורק, מתוך פנקס שחור, 2015."/>
   </a>
   <a href="#" onclick="document.querySelectorAll('image').forEach(i => i.classList.toggle('show', i == event.currentTarget.lastElementChild &amp;&amp; !i.classList.contains('show')))" role="button">
     <path d="M166.3 536.8v30.9h164v-30.9z"/>
@@ -78,12 +82,12 @@
     <path d="M35 662v32.2h95.2V662z"/>
     <path class="deco" d="M35 677.5h95.2"/>
     <path class="deco" d="M35 694.2h95.2"/>
-    <image width="35%" x="18%" y="44%" href="veen.svg" aria-label="מתוך מסכת מכות י א" aria-description="ואין מוכרין בהן לא כלי זין ולא כלי מצודה (מסכת מכות י א)"/>
+    <image width="35%" x="18%" y="44%" href="veen.svg" aria-label="מתוך מסכת מכות י א" aria-description="ואין מוכרין בהן לא כלי זיין ולא כלי מצודה (מסכת מכות י א)"/>
   </a>
   <a href="#" onclick="document.querySelectorAll('image').forEach(i => i.classList.toggle('show', i == event.currentTarget.lastElementChild &amp;&amp; !i.classList.contains('show')))" role="button">
     <path d="M35 774.5v32.2h95.1v-17H68.4v-15.2z"/>
     <path class="deco" d="M35 789.7H68.4"/>
     <path class="deco" d="M35 806.7h95.1"/>
-    <image width="35%" x="12%" y="59%" href="arim.svg" aria-label="מתוך מסכת מכות י א" aria-description="ערים הללו אין עושין אותן לא טירין קטנים ולא כרכים גדולים אלא עיירות בינוניות (מסכת מכות י א)"/>
+    <image width="35%" x="12%" y="59%" href="arim.svg" aria-label="מתוך מסכת מכות י א" aria-description="ערים הללו אין עושין אותן לא טירין קטנים ולא כרכין גדולים אלא עיירות בינוניות (מסכת מכות י א)"/>
   </a>
 </svg>
