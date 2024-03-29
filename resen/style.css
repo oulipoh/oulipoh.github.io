@@ -988,6 +988,10 @@ a.sponsors {
 }
 
 @media (max-width: 480px) {
+    :root {
+        --media_width: 100%;
+    }
+
     blockquote, li:not(.mono *), p:not(div *, .story) {
         text-align: start;
     }
