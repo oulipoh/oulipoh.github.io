@@ -572,9 +572,12 @@ iframe {
     background-repeat: no-repeat;
     border-color: var(--on);
     border-style: solid;
+    margin-top: 2rem;
+}
+
+iframe, object {
     display: block;
     margin-inline: auto;
-    margin-top: 2rem;
     width: var(--media_width);
 }
 
@@ -1005,12 +1008,17 @@ a.sponsors {
         margin-inline: 0;
     }
 
+    .kw, nav {
+        margin-inline: calc(var(--anti_margin) + 8px);
+    }
+
     li:not(.mono *) {
         margin-inline-start: 0;
     }
 
-    .kw, nav {
-        margin-inline: calc(var(--anti_margin) + 8px);
+    object {
+        margin-inline: var(--anti_margin);
+        --media_width: none;
     }
 
     .refs > blockquote {
