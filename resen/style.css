@@ -1018,7 +1018,7 @@ a.sponsors {
 
     object {
         margin-inline: var(--anti_margin);
-        --media_width: none;
+        --media_width: auto;
     }
 
     .refs > blockquote {
