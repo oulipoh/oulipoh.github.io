@@ -20,7 +20,7 @@ const comp_marking = 5
 
 const lang = get_lang()
 let global_reset_counter = 0
-document.addEventListener('keydown', e => global_reset_counter += is_key(e, 'Backspace'))
+document.addEventListener('keydown', e => global_reset_counter += is_shortcut(e, 'Backspace'))
 
 function compare_lists(a, b) {
     if (a.length != b.length)

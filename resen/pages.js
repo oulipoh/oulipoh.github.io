@@ -243,8 +243,8 @@ function page2url(page, lang, current, hash) {
 
 
 function open_internal_link(elem) {
-    const [page, ...hash] = elem.hash.slice(1).replace(/\?(.*)/, '').split('_')
-    elem.href = page2url(page, elem.hash.match(/\?(.*)/)?.[1] || elem.search.slice(1) || null, null, hash.join('_'))
+    const [page, ...hash] = elem.hash.slice(1).replace(/\?(.*)/, '').split('#')
+    elem.href = page2url(page, elem.hash.match(/\?(.*)/)?.[1] || elem.search.slice(1) || null, null, hash.join('#'))
 }
 
 
@@ -658,7 +658,7 @@ function get_make_author(page, lang, elem, new_tab_for_social=default_new_tab_fo
                 span.className = 'social'
                 networks.forEach(net => {
                     if (span.innerHTML)
-                        span.innerHTML += '&ensp;'
+                        span.innerHTML += ' '
                     let prefix = ''
                     if (!author[net].match(/[:/]/) && social[net].url)
                         prefix = social[net].url

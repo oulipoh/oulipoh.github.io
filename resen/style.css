@@ -911,6 +911,7 @@ nav[dir=rtl] ~ :nth-last-child(1 of .refs):not([data-title]) {
 .social {
     display: inline-block;
     font-family: var(--font);
+    word-spacing: .2em;
 }
 
 .social a {
