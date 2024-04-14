@@ -17,7 +17,7 @@
 <body class="todark" onload="document.body.style.visibility = 'visible'">
     <script>make_header()</script>
     <p>
-        <a href="https://he.wikipedia.org/wiki/%D7%A8%D7%A9%D7%AA_%D7%A4%D7%98%D7%A8%D7%99">רשת פטרי</a> היא מודל מתמטי־גרפי המייצג תהליכים מורכבים הכוללים תנאי קדם שתלויים במצב הדינמי של המערכת. ואפשר שמערכת זו תתנהג באופן סטוכסטי (אקראי).
+        <a href="https://he.wikipedia.org/wiki/%D7%A8%D7%A9%D7%AA_%D7%A4%D7%98%D7%A8%D7%99">רשת פטרי</a> היא מודל מתמטי־גרפי שמייצג תהליכים מורכבים וסטוכסטיים, הכוללים תנאי קדם התלויים במצב הדינמי של המערכת.
         <a href="https://he.wikipedia.org/wiki/%D7%9E%D7%A9%D7%95%D7%95%D7%90%D7%95%D7%AA_%D7%9C%D7%95%D7%98%D7%A7%D7%94-%D7%95%D7%95%D7%9C%D7%98%D7%A8%D7%94">משוואות לוטקה-וולטרה</a> הן משוואות דיפרנציאליות המתארות את יחסי הגומלין הכמותניים בין שתי אוכלוסיות: טורפים ונטרפים.
         תהליכים אלו הכוללים רבייה, טרף ומוות, ניתנים למידול באופן איכותני באמצעות רשת פטרי.
         כאשר מדובר ביחסי גומלין בין עמים, יש גם לקחת בחשבון מצבים ואינטראקציות מורכבים יותר כגון זעם ונקמה.
@@ -25,16 +25,17 @@
         רצף המצבים והמעברים המתחלפים מייצרים מעין פואטיקה של שירה מצבית.
     </p>
     <p>
-        ברשת פטרי, המעגלים הגדולים מתארים מצבים והמלבנים מתארים מעברים. חיצים מחברים בין מצבים ומעברים, והמצבים יכולים להכיל אסימונים.
+        ברשת פטרי, המעגלים הגדולים מתארים מצבים והמלבנים מתארים מעברים. חיצים מחברים בין מצבים ומעברים, והמצבים יכולים להכיל אסימונים, שבמקרה שלנו אפשר לחשוב עליהם כעל מנות קטנות של חוסן.
         מעבר הוא במצב משופעל (צהוב) אם עבור כל חץ נכנס קיים אסימון במצב הכניסה המתאים.
         באופן אקראי, אחד מן המעברים המשופעלים יורה (ירוק), ואז עבור כל חץ נכנס נגרע אסימון במצב הכניסה המתאים, ועבור כל חץ יוצא מתווסף אסימון במצב המוצא המתאים.
         המערכת רצה באופן חי בדפדפן. האם תרצה לדעת עוד?
     </p>
     <p dir="ltr">
         A <a href="https://he.wikipedia.org/wiki/%D7%A8%D7%A9%D7%AA_%D7%A4%D7%98%D7%A8%D7%99">Petri net</a> is a mathematical-graphical model representing complex stochastic processes. For example, predator-prey population dynamics which can include behaviors such as breeding, predation and death, as described by the <a href="https://en.wikipedia.org/wiki/Lotka%E2%80%93Volterra_equations">Lotka-Volterra equations</a>. When it comes to Human populations, more complex interactions such as wrath or vengeance might need to be taken into account. The Patriotic Petri Poetry (PPP) net simulates processes of reproduction, enlistment, fighting, death and revenge between two populations: Israel and Gaza, simulating the vicious cycle of bereavement induced by the conflict.
+        The sequence of alternating states and transitions produce a kind poetics of situational poetry.
     </p>
     <p dir="ltr">
-        In the Petri net, the large circles describe states and the rectangles describe transitions. Arrows connect states and transitions, and the states can contain tokens.
+        In the Petri net, the large circles describe states and the rectangles describe transitions. Arrows connect states and transitions, and the states can contain tokens, which in our case can be considered as small rations of resilience.
         A transition is enabled (yellow) if for each incoming arrow there is a token in the corresponding entry state.
         At random, one of the activated transitions fires (green), then for each incoming arrow a token is deducted from the corresponding entry state, and for each outgoing arrow a token is added to the corresponding exit state.
         The system runs live in the browser. Would you like to know more?
@@ -133,8 +134,11 @@
 
     <br>
     <div class="petri" oncontextmenu="toggle_fullscreen(event)"></div>
+
+    <textarea id="poem" autocomplete="off" readonly rows="15" spellcheck="false"></textarea>
+
     <p>
-        העבודה נוצרה עבור  <a href="https://oulipoh.com/resen#0">רֶסֶן אפס</a>.
+        העבודה נוצרה עבור  <a href="https://oulipoh.com/resen/#0">רֶסֶן אפס</a>.
     </p>
     <div class="refs">
         <blockquote>Susan Stepney, <a href="https://susan-stepney.blogspot.com/2012/12/ode-to-petri-net.html">ODE to a Petri net</a> (2012).</blockquote>

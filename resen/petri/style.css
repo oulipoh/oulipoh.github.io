@@ -10,18 +10,21 @@
     --firing: #64ff64;
     color: var(--fg);
     display: grid;
-    font-size: initial;
     overflow-x: auto;
-    outline-style: none;
     padding-block: 1em 3em;
     user-select: none;
     -webkit-user-select: none;
 }
 
+.petri, #poem {
+    font-family: 'IBM Plex Mono', 'Courier New', var(--mono_font);
+    font-size: initial;
+    outline-style: none;
+}
+
 .petri > div {
     display: grid;
     grid-template-columns: repeat(var(--cols), 25ch);
-    font-family: 'IBM Plex Mono', 'Courier New', var(--mono_font);
     justify-self: stretch;
     letter-spacing: initial;
     line-height: 1.5;
@@ -95,4 +98,13 @@
 
 .petri pre[data-after].place::after {
     bottom: var(--ver_offset);
+}
+
+#poem {
+    box-sizing: border-box;
+    line-height: 2;
+    margin-block: 3em;
+    padding-inline: 1em;
+    resize: none;
+    width: 100%;
 }

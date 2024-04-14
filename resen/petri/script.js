@@ -19,6 +19,8 @@ leaderline_comp_bottom = 90
 const comp_marking = 5
 
 const lang = get_lang()
+if (poem && lang)
+    poem.dir = 'ltr'
 let global_reset_counter = 0
 document.addEventListener('keydown', e => global_reset_counter += is_shortcut(e, 'Backspace'))
 
@@ -110,13 +112,48 @@ function is_enabled(places, tokens) {
     return true
 }
 
-function fire(grid, json, steps, max_tokens, result_counter, reset_counter, tokens, enabled) {
-    const trans = enabled[Math.random() * enabled.length | 0]
+function poem_generator(json, trans, place) {
+    let article, verbs, verb, obj
+    if (lang) {
+        trans = json.full_labels[trans] || trans
+        place = json.labels[place] || place
+        article = 'THE '
+        verbs = ['BOOSTED', 'ENHANCED', 'FORTIFIED', 'INCREASED', 'STRENGTHENED']
+        verb = verbs[Math.random() * verbs.length | 0]
+        obj = 'THE RESILIENCE ' + (place.startsWith('ENMITY') ? 'OF' : 'IN') + ' '
+        if (!['ISRAEL', 'GAZA'].includes(place))
+            obj += 'THE '
+    } else {
+        article = 'ה'
+        verbs = ['ביצר', 'הגביר', 'הגדיל', 'העצים', 'חיזק']
+        verb = verbs[Math.random() * verbs.length | 0]
+        if (trans.match(/ה($| |_)/))
+            verb = verb.replace(/ם$/, 'מ') + 'ה'
+        obj = 'את החוסן ' + (place.startsWith('איבה') ? 'של ה' : 'ב')
+    }
+    trans = trans.replace('_', lang ? ' IN ' : ' ב').split('_')[0]
+    place = place?.split('_')[0]
+    return article + trans + ' ' + verb + ' ' + obj + place
+}
+function fire(grid, json, steps, max_tokens, result_counter, reset_counter, tokens, enabled, comp) {
+    let trans = enabled[Math.random() * enabled.length | 0]
     const elem = grid.querySelector(`[data-id="${trans}"]`)
     if (elem)
         elem.style.color = 'var(--firing)'
     json.transitions[trans][0].forEach(p => tokens[p]--)
-    json.transitions[trans][1].forEach(p => tokens[p] = (tokens[p] || 0) + 1)
+    const out = json.transitions[trans][1]
+    out.forEach(p => tokens[p] = (tokens[p] || 0) + 1)
+    if (!comp && poem) {
+        const selection_start = poem.selectionStart
+        const selection_end = poem.selectionEnd
+        const should_scroll = poem.scrollTop + 1 >= poem.scrollHeight - poem.clientHeight && selection_start == selection_end
+        poem.value += poem_generator(json, trans, out[Math.random() * out.length | 0]) + '\n'
+        if (should_scroll)
+            poem.scrollTop = poem.scrollHeight
+        else
+            poem.setSelectionRange(selection_start, selection_end)
+    }
+
     setTimeout(step, halfstep_secs * 1000 * !fast, grid, json, steps, max_tokens, result_counter, reset_counter, tokens)
 }
 
@@ -288,9 +325,11 @@ function step(grid, json, steps=0, max_tokens={}, result_counter={}, reset_count
         max_tokens = Object.fromEntries(Object.entries(max_tokens).map(([p, counts]) => ([p, counts.slice(0, -1)])))
         step(grid, json, 0, max_tokens, result_counter, reset_counter)
     } else if (!enabled.length || comp && Object.values(tokens).some(n => n > place_max_tokens) || !comp && !json.require?.every(require => require.some(t => tokens[t]))) {
-        const result = json?.require.map(side => side.some(p => tokens[p]) | 0)
+        const result = json.require?.map(side => side.some(p => tokens[p]) | 0)
         result_counter[result] = (result_counter[result] || []).concat(steps).sort((a, b) => a - b)
         if (!comp) {
+            if (poem)
+                poem.value += '\n'
             const all_steps = Object.values(result_counter).flat()
             const sides = result.map((_, i) => Object.entries(result_counter).filter(x => x[0].split(',')[i] == 1).map(x => x[1]).flat().length)
             const avg_tokens = Object.fromEntries(Object.entries(max_tokens).map(([p, counts]) => [p, counts.reduce((a, b) => a + b, 0) / counts.length]).sort((a, b) => a[1] - b[1] || a[0].localeCompare(b[0])))
@@ -299,11 +338,13 @@ function step(grid, json, steps=0, max_tokens={}, result_counter={}, reset_count
         }
         setTimeout(step, restart_secs * 1000 * !fast, grid, json, 0, max_tokens, result_counter, reset_counter)
     } else
-        setTimeout(fire, halfstep_secs * 1000 * !fast, grid, json, steps + 1, max_tokens, result_counter, reset_counter, tokens, enabled)
+        setTimeout(fire, halfstep_secs * 1000 * !fast, grid, json, steps + 1, max_tokens, result_counter, reset_counter, tokens, enabled, comp)
 }
 
 fetch(json_file).then(response => response.json()).then(json => {
-    const all_labels = Object.keys(json.labels || {})
+    json.labels ??= {}
+    json.full_labels = {...json.labels}
+    const all_labels = Object.keys(json.labels)
     const all_transitions = Object.keys(json.transitions)
     Object.values(json.transitions).map(v => v.slice(0, 2)).flat(2).forEach(place => {
         if (!all_labels.includes(place)) {
@@ -345,8 +386,11 @@ fetch(json_file).then(response => response.json()).then(json => {
                     if (hor > ver)
                         pre.className = 'vertical'
                 }
-                if (json.labels[label].includes('|'))
-                    json.labels[label] = json.labels[label].split('|')[pre.classList.contains('vertical') | 0]
+                if (json.labels[label]?.includes('|')) {
+                    const forms = json.labels[label].split('|')
+                    json.full_labels[label] = forms[0]
+                    json.labels[label] = forms[pre.classList.contains('vertical') | 0]
+                }
             } else {
                 pre.className = 'place'
                 pre.addEventListener('click', () => pre.dataset.clicks = (pre.dataset.clicks | 0) + 1)
