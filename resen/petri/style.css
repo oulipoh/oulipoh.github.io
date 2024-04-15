@@ -101,6 +101,7 @@
 }
 
 #poem {
+    border: none;
     box-sizing: border-box;
     line-height: 2;
     margin-block: 3em;
