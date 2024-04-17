@@ -109,6 +109,17 @@ body.todark, .todark ::backdrop {
     --invert: 0;
 }
 
+.banner {
+    display: flex;
+    gap: 1em;
+    justify-content: space-around;
+    overflow-x: clip;
+}
+
+.banner > * {
+    flex-shrink: 0;
+}
+
 button, .dim_ref, footer, nav, .preface_he, .sliders {
     font-size: initial;
 }
@@ -1033,6 +1044,23 @@ a.sponsors {
 
 
 /* stuff for https://oulipoh.com/resen/ */
+@keyframes banner_first {
+    50% { margin-inline-start: 100% }
+    100% { margin-inline-start: 0 }
+}
+
+@keyframes banner_last {
+    50% { margin-inline-end: 0 }
+    100% { margin-inline-end: 100% }
+}
+
+.banner > :first-child {
+    animation: 10s infinite alternate banner_first;
+}
+
+.banner > :last-child {
+    animation: 12s infinite alternate banner_last;
+}
 
 header ~ :not(h2, footer) {
     line-height: 1.5;
