@@ -1055,11 +1055,11 @@ a.sponsors {
 }
 
 .banner > :first-child {
-    animation: 10s infinite alternate banner_first;
+    animation: 23s infinite alternate banner_first;
 }
 
 .banner > :last-child {
-    animation: 12s infinite alternate banner_last;
+    animation: 24s infinite alternate banner_last;
 }
 
 header ~ :not(h2, footer) {
