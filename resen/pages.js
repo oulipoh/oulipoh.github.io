@@ -296,7 +296,7 @@ function make_contents(show_snippet=default_show_snippet, show_author=default_sh
             let [authors, alt_authors] = get_make_author(page, lang)
             authors = authors.map(harden)
             alt_authors = alt_authors.map(harden)
-            if (authors && authors.join() != contents_authors) {
+            if (authors.join() != contents_authors) {
                 const span = p.appendChild(document.createElement('span'))
                 authors.forEach((author, i) => {
                     const s = span.appendChild(document.createElement('span'))
@@ -612,8 +612,8 @@ function get_make_author(page, lang, elem, new_tab_for_social=default_new_tab_fo
     let keys = [...new Set(merge(pages[page].author, pages[page].authors, translators))]
     if (elem && authors && !keys.length)
         keys = Object.keys(authors).slice(0, 1)
-    let all_names = []
-    let all_alt_names = []
+    const all_names = []
+    const all_alt_names = []
     keys.forEach(key => {
         const author = authors[key]
         const names = author?.name
@@ -700,6 +700,20 @@ function make_footer(copyright_url=default_copyright_url, copyright_label=defaul
     }
 
     document.body.appendChild(footer)
+}
+
+
+function textarea_writeln(textarea, line='') {
+    if (typeof textarea == 'undefined')
+        return
+    const selection_start = textarea.selectionStart
+    const selection_end = textarea.selectionEnd
+    const should_scroll = textarea.scrollTop + 1 >= textarea.scrollHeight - textarea.clientHeight && selection_start == selection_end
+    textarea.value += line + '\n'
+    if (should_scroll)
+        textarea.scrollTop = textarea.scrollHeight
+    else
+        textarea.setSelectionRange(selection_start, selection_end)
 }
 
 

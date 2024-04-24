@@ -328,6 +328,7 @@ button.big {
     column-count: var(--columns);
     column-gap: var(--column_gap);
     font-family: var(--heading_font);
+    margin-top: var(--row_gap);
 }
 
 .rows_first {
@@ -1044,6 +1045,7 @@ a.sponsors {
 
 
 /* stuff for https://oulipoh.com/resen/ */
+
 @keyframes banner_first {
     50% { margin-inline-start: 100% }
     100% { margin-inline-start: 0 }

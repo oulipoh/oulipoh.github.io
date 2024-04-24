@@ -1,8 +1,13 @@
 const json_file = 'petri.json'
 const grid_columns = 5
-const halfstep_secs = .5
-const restart_secs = 5
-const fast = location.hash.slice(1) == 'fast'
+let halfstep_secs = .5
+let restart_secs = 5
+if (location.hash.slice(1) == 'fast')
+    halfstep_secs = restart_secs = 0
+else if (location.hash.slice(1) == 'slow') {
+    halfstep_secs = 3
+    restart_secs = halfstep_secs * 6
+}
 
 const auto_vertical = true
 const label_location = 'half'  // Can be: 'half' (half above and half below, favoring the below), 'above', or anything else to indicate below
@@ -19,8 +24,11 @@ leaderline_comp_bottom = 90
 const comp_marking = 5
 
 const lang = get_lang()
-if (poem && lang)
+if (typeof poem != 'undefined') {
+    poem.value = '\n'
+    if (lang)
     poem.dir = 'ltr'
+}
 let global_reset_counter = 0
 document.addEventListener('keydown', e => global_reset_counter += is_shortcut(e, 'Backspace'))
 
@@ -143,24 +151,14 @@ function fire(grid, json, steps, max_tokens, result_counter, reset_counter, toke
     json.transitions[trans][0].forEach(p => tokens[p]--)
     const out = json.transitions[trans][1]
     out.forEach(p => tokens[p] = (tokens[p] || 0) + 1)
-    if (!comp && poem) {
-        const selection_start = poem.selectionStart
-        const selection_end = poem.selectionEnd
-        const should_scroll = poem.scrollTop + 1 >= poem.scrollHeight - poem.clientHeight && selection_start == selection_end
-        poem.value += poem_generator(json, trans, out[Math.random() * out.length | 0]) + '\n'
-        if (should_scroll)
-            poem.scrollTop = poem.scrollHeight
-        else
-            poem.setSelectionRange(selection_start, selection_end)
+    if (!comp)
+        textarea_writeln(poem, poem_generator(json, trans, out[Math.random() * out.length | 0]) + '.')
+    setTimeout(step, halfstep_secs * 1000, grid, json, steps, max_tokens, result_counter, reset_counter, tokens)
     }
 
-    setTimeout(step, halfstep_secs * 1000 * !fast, grid, json, steps, max_tokens, result_counter, reset_counter, tokens)
-}
 
 function max_len(transitions, labels, split=false) {
-    if (!transitions)
-        return 0
-    return Math.max(...transitions.map(t => sanitized_len(lang && labels[t] ? labels[t] : t, split)))
+    return Math.max(...transitions.map(t => sanitized_len(lang && labels[t] ? labels[t] : t, split)), 0)
 }
 
 function is_vertical(grid, trans) {
@@ -322,23 +320,24 @@ function step(grid, json, steps=0, max_tokens={}, result_counter={}, reset_count
 
     if (reset_counter < global_reset_counter) {
         reset_counter = global_reset_counter
+        if (typeof poem != 'undefined' && !comp)
+            poem.value = '\n'
         max_tokens = Object.fromEntries(Object.entries(max_tokens).map(([p, counts]) => ([p, counts.slice(0, -1)])))
         step(grid, json, 0, max_tokens, result_counter, reset_counter)
     } else if (!enabled.length || comp && Object.values(tokens).some(n => n > place_max_tokens) || !comp && !json.require?.every(require => require.some(t => tokens[t]))) {
         const result = json.require?.map(side => side.some(p => tokens[p]) | 0)
         result_counter[result] = (result_counter[result] || []).concat(steps).sort((a, b) => a - b)
         if (!comp) {
-            if (poem)
-                poem.value += '\n'
+            textarea_writeln(poem)
             const all_steps = Object.values(result_counter).flat()
             const sides = result.map((_, i) => Object.entries(result_counter).filter(x => x[0].split(',')[i] == 1).map(x => x[1]).flat().length)
             const avg_tokens = Object.fromEntries(Object.entries(max_tokens).map(([p, counts]) => [p, counts.reduce((a, b) => a + b, 0) / counts.length]).sort((a, b) => a[1] - b[1] || a[0].localeCompare(b[0])))
             const sum = sides.reduce((a, b) => a + b, 0)
             console.log(all_steps.length, all_steps.reduce((a, b) => a + b, 0) / all_steps.length, sum ? sides[1] / sum : .5, avg_tokens, Object.fromEntries(Object.entries(result_counter).sort((a, b) => compare_lists(a[1], b[1]) || compare_lists(a[0], b[0]))))
         }
-        setTimeout(step, restart_secs * 1000 * !fast, grid, json, 0, max_tokens, result_counter, reset_counter)
+        setTimeout(step, restart_secs * 1000, grid, json, 0, max_tokens, result_counter, reset_counter)
     } else
-        setTimeout(fire, halfstep_secs * 1000 * !fast, grid, json, steps + 1, max_tokens, result_counter, reset_counter, tokens, enabled, comp)
+        setTimeout(fire, halfstep_secs * 1000, grid, json, steps + 1, max_tokens, result_counter, reset_counter, tokens, enabled, comp)
 }
 
 fetch(json_file).then(response => response.json()).then(json => {

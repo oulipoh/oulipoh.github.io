@@ -103,9 +103,11 @@
 #poem {
     border: none;
     box-sizing: border-box;
-    line-height: 2;
-    margin-block: 3em;
-    padding-inline: 1em;
+    display: block;
+    line-height: 2.5;
+    margin-block: 4em 6em;
+    margin-inline: auto;
+    padding-inline: 3em;
     resize: none;
-    width: 100%;
+    width: var(--media_width);
 }
