@@ -143,20 +143,19 @@ function poem_generator(json, trans, place) {
     place = place?.split('_')[0]
     return article + trans + ' ' + verb + ' ' + obj + place
 }
+
 function fire(grid, json, steps, max_tokens, result_counter, reset_counter, tokens, enabled, comp) {
     let trans = enabled[Math.random() * enabled.length | 0]
-    const elem = grid.querySelector(`[data-id="${trans}"]`)
-    if (elem)
-        elem.style.color = 'var(--firing)'
-    json.transitions[trans][0].forEach(p => tokens[p]--)
+    grid.querySelectorAll('pre').forEach(e => e.style.color = e.dataset.id == trans ? 'var(--firing)' : 'inherit')
+    const inp = json.transitions[trans][0]
     const out = json.transitions[trans][1]
+    inp.forEach(p => tokens[p]--)
     out.forEach(p => tokens[p] = (tokens[p] || 0) + 1)
     if (!comp)
         textarea_writeln(poem, poem_generator(json, trans, out[Math.random() * out.length | 0]) + '.')
     setTimeout(step, halfstep_secs * 1000, grid, json, steps, max_tokens, result_counter, reset_counter, tokens)
     }
-
-
+    
 function max_len(transitions, labels, split=false) {
     return Math.max(...transitions.map(t => sanitized_len(lang && labels[t] ? labels[t] : t, split)), 0)
 }

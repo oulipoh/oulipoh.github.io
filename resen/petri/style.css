@@ -4,8 +4,14 @@
     src: url('fonts/IBMPlexMono-Regular.woff2');
 }
 
+.petri, #poem {
+    --fg: #e0e0e0;
+    font-family: 'IBM Plex Mono', 'Courier New', var(--mono_font);
+    font-size: initial;
+    outline-style: none;
+}
+
 .petri {
-    --fg: white;
     --enabled: #ffff64;
     --firing: #64ff64;
     color: var(--fg);
@@ -14,12 +20,6 @@
     padding-block: 1em 3em;
     user-select: none;
     -webkit-user-select: none;
-}
-
-.petri, #poem {
-    font-family: 'IBM Plex Mono', 'Courier New', var(--mono_font);
-    font-size: initial;
-    outline-style: none;
 }
 
 .petri > div {
@@ -101,6 +101,7 @@
 }
 
 #poem {
+    background-color: var(--fg);
     border: none;
     box-sizing: border-box;
     display: block;

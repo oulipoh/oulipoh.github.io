@@ -384,7 +384,7 @@ function get_page() {
 }
 
 
-function get_width(text, elem, units='em') {
+function get_width(text, elem, units='em') {  // Note: If the font has not completed loading, this may cause CSS parsing errors and return an inaccurate result
     const canvas = document.createElement('canvas')
     const ctx = canvas.getContext('2d')
     elem ??= document.body
@@ -720,7 +720,7 @@ function textarea_writeln(textarea, line='') {
 function show_cursor(elem) {
     elem.classList.remove('show_cursor')
     elem.offsetWidth  // Restart animation, see: https://css-tricks.com/restart-css-animation/
-    elem.className = 'show_cursor'
+    elem.classList.add('show_cursor')
 }
 
 

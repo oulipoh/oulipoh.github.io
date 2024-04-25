@@ -864,6 +864,10 @@ nav[dir=rtl] ~ :nth-last-child(1 of .refs):not([data-title]) {
     animation: 3s show_cursor;
 }
 
+[onmousemove*=show_cursor] {  /* Note this will not capture element where the handler was added programmatically */
+    cursor: none;
+}
+
 .sidebyside {
     display: flex;
     flex-wrap: wrap;
@@ -954,7 +958,7 @@ a.sponsors {
     padding-inline: .3em;
 }
 
-[oncontextmenu*=toggle_fullscreen] {  /* Note this will not capture element where the handler was add programmatically */
+[oncontextmenu*=toggle_fullscreen] {  /* Note this will not capture element where the handler was added programmatically */
     user-select: none;
     -webkit-user-select: none;
 }
