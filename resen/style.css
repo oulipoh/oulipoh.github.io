@@ -45,12 +45,12 @@
     --fg_dim: #cdc2b7;
     --fg_verydim: var(--fg_dim);
     --fg_filter: saturate(0);
-    --fg_highlight: white;
+    --fg_highlight: var(--on);
     --glow: aliceblue;
     --inverse_bg: #6580e1;
     --inverse_fg: var(--bg);
     --invert: 1;
-
+	--whitish: 224 224 224;
     --column_gap: 4em;
     --columns: 3;
     --row_gap: 3em;
@@ -105,7 +105,7 @@ body {
 
 body.todark, .todark ::backdrop {
     --bg: black;
-    --fg_rgb: 255 255 255;
+    --fg_rgb: var(--whitish);
     --invert: 0;
 }
 
