@@ -857,11 +857,15 @@ nav[dir=rtl] ~ :nth-last-child(1 of .refs):not([data-title]) {
 }
 
 @keyframes show_cursor {
-    0%, 100% {cursor: pointer}
+    0%, 100% {cursor: var(--cursor)}
 }
 
 .show_cursor {
     animation: 3s show_cursor;
+}
+
+button.show_cursor {
+    --cursor: pointer;
 }
 
 [onmousemove*=show_cursor] {  /* Note this will not capture element where the handler was added programmatically */
