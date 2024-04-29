@@ -6,7 +6,7 @@ if (location.hash.slice(1) == 'fast')
     halfstep_secs = restart_secs = 0
 else if (location.hash.slice(1) == 'slow') {
     halfstep_secs = 3
-    restart_secs = halfstep_secs * 6
+    restart_secs = halfstep_secs * 3
 }
 
 const auto_vertical = true
@@ -120,28 +120,31 @@ function is_enabled(places, tokens) {
     return true
 }
 
+function add_prefixes(label, is_obj) {
+    const sep = is_obj ? (lang ? null : ' ') : '_'
+    const in_prefix = lang ? (is_obj && label != 'ISRAEL' && label != 'GAZA' ? 'IN THE ' : 'IN ') : 'ב'
+    const article = lang ? 'THE ' : 'ה'
+    return label.split(sep).map((w, i, arr) => ((i + !!is_obj) % 2 ? in_prefix : article) + w).join(' ')
+}
+
 function poem_generator(json, trans, place) {
-    let article, verbs, verb, obj
+    let verbs, verb, dobj
     if (lang) {
         trans = json.full_labels[trans] || trans
         place = json.labels[place] || place
-        article = 'THE '
         verbs = ['BOOSTED', 'ENHANCED', 'FORTIFIED', 'INCREASED', 'STRENGTHENED']
         verb = verbs[Math.random() * verbs.length | 0]
-        obj = 'THE RESILIENCE ' + (place.startsWith('ENMITY') ? 'OF' : 'IN') + ' '
-        if (!['ISRAEL', 'GAZA'].includes(place))
-            obj += 'THE '
+        dobj = 'THE RESILIENCE'
+        place = place.startsWith('ENMITY') ? 'OF THE ' + place : add_prefixes(place, true)
     } else {
-        article = 'ה'
         verbs = ['ביצר', 'הגביר', 'הגדיל', 'העצים', 'חיזק']
         verb = verbs[Math.random() * verbs.length | 0]
         if (trans.match(/ה($| |_)/))
             verb = verb.replace(/ם$/, 'מ') + 'ה'
-        obj = 'את החוסן ' + (place.startsWith('איבה') ? 'של ה' : 'ב')
+        dobj = 'את החוסן'
+        place = place.startsWith('איבה') ? 'של ה' + place : add_prefixes(place, true)
     }
-    trans = trans.replace('_', lang ? ' IN ' : ' ב').split('_')[0]
-    place = place?.split('_')[0]
-    return article + trans + ' ' + verb + ' ' + obj + place
+    return [add_prefixes(trans), verb, dobj, place].join(' ')
 }
 
 function fire(grid, json, steps, max_tokens, result_counter, reset_counter, tokens, enabled, comp) {
@@ -152,7 +155,7 @@ function fire(grid, json, steps, max_tokens, result_counter, reset_counter, toke
     inp.forEach(p => tokens[p]--)
     out.forEach(p => tokens[p] = (tokens[p] || 0) + 1)
     if (!comp)
-        textarea_writeln(poem, poem_generator(json, trans, out[Math.random() * out.length | 0]) + '.')
+        textarea_writeln(poem, poem_generator(json, trans, out[Math.random() * out.length | 0]))
     setTimeout(step, halfstep_secs * 1000, grid, json, steps, max_tokens, result_counter, reset_counter, tokens)
     }
     

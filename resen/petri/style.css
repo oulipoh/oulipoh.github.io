@@ -101,7 +101,7 @@
 }
 
 #poem {
-    background-color: var(--fg);
+    background-color: white;
     border: none;
     box-sizing: border-box;
     display: block;
