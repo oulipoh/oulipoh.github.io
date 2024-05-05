@@ -69,7 +69,12 @@
     </p>
     <script>
         make_footer()
-        document.addEventListener('scroll', () => audio.volume = (10**(1 - (scrollY|0)/(document.body.scrollHeight-innerHeight))-1)/9, {passive: true})
+
+        const audioCtx = new AudioContext()
+        const gainNode = audioCtx.createGain()
+        audioCtx.createMediaElementSource(audio).connect(gainNode)
+        gainNode.connect(audioCtx.destination)
+        document.addEventListener('scroll', () => gainNode.gain.value = (10**(1 - (scrollY|0)/(document.body.scrollHeight-innerHeight))-1)/9, {passive: true})
     </script>
 </body>
 </html>

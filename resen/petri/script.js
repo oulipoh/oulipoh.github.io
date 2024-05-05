@@ -23,12 +23,14 @@ leaderline_comp_top = 20
 leaderline_comp_bottom = 90
 const comp_marking = 5
 
+
 const lang = get_lang()
 if (typeof poem != 'undefined') {
     poem.value = '\n'
     if (lang)
     poem.dir = 'ltr'
 }
+
 let global_reset_counter = 0
 document.addEventListener('keydown', e => global_reset_counter += is_shortcut(e, 'Backspace'))
 
@@ -332,10 +334,10 @@ function step(grid, json, steps=0, max_tokens={}, result_counter={}, reset_count
         if (!comp) {
             textarea_writeln(poem)
             const all_steps = Object.values(result_counter).flat()
-            const sides = result.map((_, i) => Object.entries(result_counter).filter(x => x[0].split(',')[i] == 1).map(x => x[1]).flat().length)
-            const avg_tokens = Object.fromEntries(Object.entries(max_tokens).map(([p, counts]) => [p, counts.reduce((a, b) => a + b, 0) / counts.length]).sort((a, b) => a[1] - b[1] || a[0].localeCompare(b[0])))
-            const sum = sides.reduce((a, b) => a + b, 0)
-            console.log(all_steps.length, all_steps.reduce((a, b) => a + b, 0) / all_steps.length, sum ? sides[1] / sum : .5, avg_tokens, Object.fromEntries(Object.entries(result_counter).sort((a, b) => compare_lists(a[1], b[1]) || compare_lists(a[0], b[0]))))
+            const sides = result?.map((_, i) => Object.entries(result_counter).filter(x => x[0].split(',')[i] == 1).map(x => x[1]).flat().length)
+            const avg_tokens = Object.fromEntries(Object.entries(max_tokens).map(([p, counts]) => [p, counts.reduce((a, b) => a + b) / counts.length]).sort((a, b) => a[1] - b[1] || a[0].localeCompare(b[0])))
+            const sum = sides?.reduce((a, b) => a + b, 0)
+            console.log(all_steps.length, all_steps.reduce((a, b) => a + b) / all_steps.length, sum ? sides[1] / sum : .5, avg_tokens, Object.fromEntries(Object.entries(result_counter).sort((a, b) => compare_lists(a[1], b[1]) || compare_lists(a[0], b[0]))))
         }
         setTimeout(step, restart_secs * 1000, grid, json, 0, max_tokens, result_counter, reset_counter)
     } else
@@ -347,10 +349,10 @@ fetch(json_file).then(response => response.json()).then(json => {
     json.full_labels = {...json.labels}
     const all_labels = Object.keys(json.labels)
     const all_transitions = Object.keys(json.transitions)
-    Object.values(json.transitions).map(v => v.slice(0, 2)).flat(2).forEach(place => {
-        if (!all_labels.includes(place)) {
-            console.warn(`Adding place ${place} found in transitions but missing from labels`)
-            all_labels.push(place)
+    Object.entries(json.transitions).map(l => l.flat().slice(0, 3)).flat(2).forEach(label => {
+        if (!all_labels.includes(label)) {
+            console.warn(`Adding label ${label} found in transitions but missing from labels`)
+            all_labels.push(label)
         }
     })
 
