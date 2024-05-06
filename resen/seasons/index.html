@@ -69,12 +69,7 @@
     </p>
     <script>
         make_footer()
-
-        const audioCtx = new AudioContext()
-        const gainNode = audioCtx.createGain()
-        audioCtx.createMediaElementSource(audio).connect(gainNode)
-        gainNode.connect(audioCtx.destination)
-        document.addEventListener('scroll', () => gainNode.gain.value = (10**(1 - (scrollY|0)/(document.body.scrollHeight-innerHeight))-1)/9, {passive: true})
+        document.addEventListener('scroll', () => audio.volume = (10**(1 - (scrollY|0)/(document.body.scrollHeight-innerHeight))-1)/9, {passive: true})  // volume not supported on iOS
     </script>
 </body>
 </html>
