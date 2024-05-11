@@ -63,6 +63,7 @@
     --font_size: 1.3rem;
     --h1_size: clamp(1.5em, 5rem, 10vw);
     --hor_scrollbar_offset: 16px;
+    --larger_font: clamp(1.3em, 2rem, 2vw);
     --media_width: 85%;
 
     /* Following variables must use units that are not relative to elements (i.e. avoid %, em, ex) */
@@ -322,6 +323,13 @@ button.big {
     margin-block: 1.5em;
     margin-inline: auto;
     padding-inline: 1em;
+}
+
+.cogram {
+    font-size: var(--larger_font);
+    line-height: 1.8;
+    margin-block: 3ex;
+    text-align: center;
 }
 
 .contents {
@@ -772,11 +780,6 @@ ol, ul {
     margin-block: 4ex 6ex;
 }
 
-.overflow {
-    overflow-x: auto;
-    padding-bottom: var(--hor_scrollbar_offset);
-}
-
 :is(p:not([dir=ltr]), p:not([dir=ltr]) + br) + :is(blockquote, h3, h4, p)[dir=ltr],
 :is(p[dir=ltr], p[dir=ltr] + br) + :is(blockquote, h3, h4, p):not([dir=ltr]) {
     margin-top: max(6ex, 4.5rem);
@@ -792,6 +795,11 @@ button#play.on::before {
 
 nav[dir=ltr] ~ * .preface_he {
     display: none;
+}
+
+.overflow, .cogram {
+    overflow-x: auto;
+    padding-bottom: var(--hor_scrollbar_offset);
 }
 
 .punct {
@@ -938,6 +946,11 @@ button.show_cursor {
     display: inline-block;
     font-size: .6em;
     text-decoration: none;
+}
+
+.spaced_mono, .cogram {
+    font-family: var(--mono_font);
+    letter-spacing: .7em;
 }
 
 a.sponsors {
