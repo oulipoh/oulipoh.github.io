@@ -635,7 +635,7 @@ function get_make_author(page, lang, elem, new_tab_for_social=default_new_tab_fo
                 if (alt_langs.length) {
                     if (translators.includes(key))
                     alt_name += ' ' + ui[alt_langs[0]].translator
-                    if (!have_with && pages[page].with.includes(key))
+                    if (!have_with && pages[page].with?.includes(key))
                         alt_name = ui[alt_langs[0]].with + ' ' + alt_name
                 }
             }
