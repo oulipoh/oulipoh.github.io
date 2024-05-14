@@ -53,9 +53,11 @@
 	--whitish: 224 224 224;
     --column_gap: 4em;
     --columns: 3;
-    --row_gap: 3em;
     --h12_letter_spacing: normal;
     --letter_spacing: normal;
+    --line_height: 1.5;
+    --row_gap: 3em;
+    
     --font: 'Miriam Libre', Arial, sans-serif;
     --heading_font: 'David Libre', 'Times New Roman', serif;
     --mono_font: 'Courier New', 'Alef Mono', monospace;
@@ -575,6 +577,10 @@ nav[dir=rtl] ~ header {
     direction: rtl;
 }
 
+header ~ :not(h2, footer) {
+    line-height: var(--line_height);
+}
+
 .huge, .subhuge {
     letter-spacing: .1em;
     text-align: center;
@@ -1082,8 +1088,4 @@ a.sponsors {
 
 .banner > :last-child {
     animation: 24s infinite alternate banner_last;
-}
-
-header ~ :not(h2, footer) {
-    line-height: 1.5;
 }
