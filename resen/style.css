@@ -172,8 +172,8 @@ button, pre {
         animation: var(--icon_dur) infinite deco;
     }
 
-    a:is(:hover, :focus-visible) > img {
-        box-shadow: var(--glow) 0 0 1em .5em;
+    .contents a:is(:hover, :focus-visible) > img {
+        box-shadow: 0 0 1em .5em var(--glow);
     }
 
     @keyframes border {
@@ -619,10 +619,6 @@ iframe, object {
     max-height: var(--max_height);
     object-fit: contain;
     width: 100%;
-}
-
-.images > :is(figure:first-child:last-child > img, img:first-child:last-child) {
-    height: 100%;
 }
 
 img {
