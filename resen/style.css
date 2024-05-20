@@ -173,7 +173,7 @@ button, pre {
     }
 
     .contents a:is(:hover, :focus-visible) > img {
-        box-shadow: 0 0 1em .5em var(--glow);
+        box-shadow: 0 0 .8rem .4rem var(--glow);
     }
 
     @keyframes border {
