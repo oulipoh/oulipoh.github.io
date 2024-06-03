@@ -28,7 +28,7 @@ const lang = get_lang()
 if (typeof poem != 'undefined') {
     poem.value = '\n'
     if (lang)
-    poem.dir = 'ltr'
+		poem.dir = 'ltr'
 }
 
 let global_reset_counter = 0
@@ -159,8 +159,8 @@ function fire(grid, json, steps, max_tokens, result_counter, reset_counter, toke
     if (!comp)
         textarea_writeln(poem, poem_generator(json, trans, out[Math.random() * out.length | 0]))
     setTimeout(step, halfstep_secs * 1000, grid, json, steps, max_tokens, result_counter, reset_counter, tokens)
-    }
-    
+}
+
 function max_len(transitions, labels, split=false) {
     return Math.max(...transitions.map(t => sanitized_len(lang && labels[t] ? labels[t] : t, split)), 0)
 }

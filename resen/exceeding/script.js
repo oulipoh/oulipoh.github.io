@@ -1,11 +1,12 @@
 //  Exceeding the Entirety 2023 by Mika and Avi Milgrom
+
 let Fira;
 let digitSize;
 function preload() {
   Fira = loadFont("fonts/FiraCode-Light.ttf");
 }
 const bg = getComputedStyle(document.documentElement).getPropertyValue('--bg');
-const sketch = document.getElementById("sketch")
+const sketch = document.getElementById("sketch");
 
 // Birthdays, Month is zero-based
 let startDateAvi = new Date(1978, 10, 27, 22, 10, 10);
@@ -60,10 +61,10 @@ function drawTime(index, PersonDate) {
   let digits = formattedTime.split("");
 
   digitSize = height / 6;
-  textSize(digitSize)
+  textSize(digitSize);
 
   // Calculate starting positions for each clock
-  let startX = width / 2 - (digits.length * digitSize) / 2;
+  let startX = width/2 - (digits.length*digitSize)/2;
   let startY = height/2 - (digitSize*1.1)*(2.5-index*2);
 
   // Draw each digit with a square

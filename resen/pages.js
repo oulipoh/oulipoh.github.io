@@ -281,7 +281,7 @@ function make_contents(show_snippet=default_show_snippet, show_author=default_sh
             img.src = page + 'snippet'
         }
 
-        [...new Set(merge(pages[page].hazard, pages[page].hazards))].forEach(hazard => {
+        ;[...new Set(merge(pages[page].hazard, pages[page].hazards))].forEach(hazard => {
             const meta = a.appendChild(document.createElement('meta'))
             meta.setAttribute('itemprop', 'accessibilityHazard')
             meta.content = hazard
@@ -324,25 +324,24 @@ function iframe_load_handler() {
     if (footer)
         footer.style.visibility = 'hidden'
     this.contentDocument.documentElement.style.overflowY = 'clip'  // Prevent redundant scrollbars in Chrome
-    const observer = new ResizeObserver(() => this.style.height = this.contentDocument.documentElement.scrollHeight + 'px')
+    const observer = new ResizeObserver(() => {const h = this.contentDocument.documentElement.scrollHeight; if (h >= 10800) console.warn(`Truncated height of ${this.contentDocument.title} from ${h}`); this.style.height = h + 'px'})  // Note: vh units will be relative to the iframe and may cause excessive heights
     observer.observe(this.contentDocument.documentElement)
 }
 
 
-function export_all(lang, skip) {
+function export_all(lang, skip=true) {
     document.body.replaceChildren()
     document.body.style.paddingInline = 0
-    if (skip !== true)
+    if (skip !== true && skip !== false)
         skip = [skip].flat()
-    for (const page in pages) {
-        if (Array.isArray(skip) && skip.includes(page) || skip === true && pages[page].skip)
-            continue
-        const iframe = document.createElement('iframe')
-        iframe.className = 'export'
-        iframe.onload = iframe_load_handler
-        iframe.src = page2url(page, lang)
-        document.body.appendChild(iframe)
-    }
+    for (const page in pages)
+        if (page == '/' || (skip !== true || !pages[page].skip) && (!Array.isArray(skip) || !skip.includes(page))) {
+            const iframe = document.createElement('iframe')
+            iframe.className = 'export'
+            iframe.onload = iframe_load_handler
+            iframe.src = page2url(page, lang)
+            document.body.appendChild(iframe)
+        }
 }
 
 
@@ -567,9 +566,9 @@ function make_header(reorder_contents=default_reorder_contents, new_tab_for_soci
         h1.appendChild(img)
         h1.title = en_title ?? titles.label
     } else {
-        h1.innerHTML = harden(titles.label)
-        if (titles.alt)
-            h1.title = titles.alt
+    	h1.innerHTML = harden(titles.label)
+    	if (titles.alt)
+        	h1.title = titles.alt
     }
     header.appendChild(h1)
     if (ui[lang].dir && ui[lang].dir != document.documentElement.dir)
@@ -634,7 +633,7 @@ function get_make_author(page, lang, elem, new_tab_for_social=default_new_tab_fo
                 const alt_langs = Object.keys(ui).filter(k => k != lang)
                 if (alt_langs.length) {
                     if (translators.includes(key))
-                    alt_name += ' ' + ui[alt_langs[0]].translator
+                    	alt_name += ' ' + ui[alt_langs[0]].translator
                     if (!have_with && pages[page].with?.includes(key))
                         alt_name = ui[alt_langs[0]].with + ' ' + alt_name
                 }
@@ -740,7 +739,7 @@ let wake_lock
 
 
 function request_wake_lock() {
-    navigator.wakeLock?.request('screen').then(lock => wake_lock = lock).catch(e => console.error(e.message))
+    navigator.wakeLock?.request('screen').then(lock => wake_lock = lock).catch(e => console.warn(e.message))
 }
 
 
@@ -761,14 +760,14 @@ function toggle_fullscreen(event_or_elem, landscape=true, elem) {
             elem.addEventListener('fullscreenchange', () => {
                 if (elem.classList.toggle('fullscreen')) {
                     if (landscape)
-                        screen.orientation.lock('landscape').catch(e => console.error(e.message))  // Works only in Chrome Android. See: https://bugzilla.mozilla.org/show_bug.cgi?id=1744125
+                        screen.orientation.lock('landscape').catch(e => console.warn(e.message))  // Works only in Chrome Android. See: https://bugzilla.mozilla.org/show_bug.cgi?id=1744125
                     request_wake_lock()
                     document.addEventListener('visibilitychange', visibility_change_handler)
                 } else
                     wake_lock?.release().then(() => wake_lock = null)
             })
         }
-        elem.requestFullscreen({navigationUI: 'hide'}).catch(e => console.error(e.message))
+        elem.requestFullscreen({navigationUI: 'hide'}).catch(e => console.warn(e.message))
     } else
         document.exitFullscreen()
     return was_not_fullscreen_before

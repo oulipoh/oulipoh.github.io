@@ -38,7 +38,7 @@
     unicode-range: U+2709;
 }
 
-:root, ::backdrop {  /* In Chrome (<122) ::backdrop does not inherit from :root. See: https://bugs.chromium.org/p/chromium/issues/detail?id=827397 */
+:root, ::backdrop {  /* In Chrome (<122) and Firefox (<120) ::backdrop did not inherit from :root. See: https://issues.chromium.org/issues/40569411, https://bugzilla.mozilla.org/show_bug.cgi?id=1855668 */
     --bg: white;
     --fg_rgb: 0 0 0;
     --on: #ff5337;
@@ -448,6 +448,8 @@ nav[dir=rtl] ~ .contents {
     border-block-width: 1px;
     border-inline: none;
     margin: 0;
+    max-height: 10800px;
+    min-height: 1080px;
     width: 100%;
 }
 
@@ -866,7 +868,7 @@ nav[dir=rtl] ~ :nth-last-child(1 of .refs):not([data-title]) {
 }
 
 @keyframes show_cursor {
-    0%, 100% {cursor: var(--cursor)}
+    0%, 100% { cursor: var(--cursor) }
 }
 
 .show_cursor {
