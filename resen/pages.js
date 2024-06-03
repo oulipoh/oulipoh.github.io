@@ -10,7 +10,7 @@ const pages = {
     "imagine/": {title: "דמיין", alt: "Imagine", author: "liorzalmanson", kw: [0, "poem"]},
     "cent/": {title: "מתוך מאה תמונות מלחמה", alt: "From One hundred visions of war", author: "julienvocance", translator: "rotematar", kw: [0, "poem", "translation"]},
     "petri/": {title: "פואטיקת פטרי פטריוטית", alt: "Patriotic Petri Poetry", author: "eyalgruss", kw: [0, "live code", "poem", "software", "visual"]},
-    "exceeding/": {title: "מֵעֵבר לַשלם", alt: "Exceeding the entirety", author: ["mikamilgrom", "avimilgrom"], kw: [0, "live code", "visual"]},
+    "exceeding/": {title: "מעֵבר לַשלם", alt: "Exceeding the entirety", author: ["mikamilgrom", "avimilgrom"], kw: [0, "live code", "visual"]},
     "things/": {title: "קורים עכשיו דברים עם השפה", alt: "Things are happening now with the language", author: "noashaham", kw: [0, "poem"]},
     "systems/": {title: "מערכות", alt: "Systems", author: "noashaham", kw: [0, "poem"]},
     "disappearance/": {title: "היעלמות", alt: "Disappearance", author: "rotematar", kw: [0]},
