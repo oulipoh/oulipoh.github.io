@@ -18,8 +18,8 @@
     <script>
         make_header()
         let target_screen
-        if (typeof getScreenDetails != 'undefined')  // Only works in Chromium desktop
-            getScreenDetails().then(result => target_screen = result.screens.find(s => !s.isPrimary))
+        // if (typeof getScreenDetails != 'undefined')  // Only works in Chromium desktop
+        //     getScreenDetails().then(result => target_screen = result.screens.find(s => !s.isPrimary))
     </script>
     <textarea id="poem" autocomplete="off" readonly rows="15" spellcheck="false" oncontextmenu="toggle_fullscreen(event, true, target_screen)"></textarea>
     <script>
