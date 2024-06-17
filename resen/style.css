@@ -533,7 +533,6 @@ h1 {
 }
 
 h1 img {
-    caret-color: transparent;
     display: block;
     margin-inline: auto;
     max-height: 7rem;
@@ -879,7 +878,7 @@ button.show_cursor {
     --cursor: pointer;
 }
 
-[onmousemove*=show_cursor] {  /* Note this will not capture element where the handler was added programmatically */
+[onmousemove*=show_cursor] {  /* Note this will miss elements where the handler was added programmatically */
     cursor: none;
 }
 
@@ -978,7 +977,7 @@ a.sponsors {
     padding-inline: .3em;
 }
 
-[oncontextmenu*=toggle_fullscreen] {  /* Note this will not capture element where the handler was added programmatically */
+[oncontextmenu*=toggle_fullscreen] {  /* Note this will miss elements where the handler was added programmatically, as well as different elements passed to the handler */
     user-select: none;
     -webkit-user-select: none;
 }

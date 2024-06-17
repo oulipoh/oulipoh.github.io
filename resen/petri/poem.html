@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preload" href="../fonts/MiriamLibre-Regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../fonts/DavidLibre-Medium.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../fonts/Alef-Monospace.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/IBMPlexMono-Regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="../pages.js"></script>
+    <link rel="icon" href="../media/resen.svg">
+    <meta property="og:image" content="https://oulipoh.com/resen/petri/snippet">
+    <noscript><style>body {visibility: visible}</style></noscript>
+</head>
+<body class="todark" onload="document.body.style.visibility = 'visible'">
+    <script>
+        make_header()
+        let target_screen
+        if (typeof getScreenDetails != 'undefined')  // Only works in Chromium desktop
+            getScreenDetails().then(result => target_screen = result.screens.find(s => !s.isPrimary))
+    </script>
+    <textarea id="poem" autocomplete="off" readonly rows="15" spellcheck="false" oncontextmenu="toggle_fullscreen(event, true, target_screen)"></textarea>
+    <script>
+        make_footer()
+        new BroadcastChannel('bc').onmessage = e => textarea_writeln(poem, e.data)
+        toggle_fullscreen(poem, true, target_screen)  // works only in Firefox, after setting: full-screen-api.allow-trusted-requests-only = false
+    </script>
+</body>
+</html>

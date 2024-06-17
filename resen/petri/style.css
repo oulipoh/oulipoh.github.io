@@ -110,5 +110,14 @@
     margin-inline: auto;
     padding-inline: 3em;
     resize: none;
+    white-space: pre-line;
     width: var(--media_width);
+}
+
+nav[dir=ltr] ~ #poem {
+    direction: ltr;
+}
+
+nav[dir=rtl] ~ #poem {
+    direction: rtl;
 }

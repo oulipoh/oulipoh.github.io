@@ -628,7 +628,7 @@ function get_make_author(page, lang, elem, new_tab_for_social=default_new_tab_fo
         let alt_name
         if (names) {
         	name = names[lang] || names[''] || Object.values(names)[0] || name
-            alt_name = Object.entries(names).filter(([k, v]) => k != lang && v).map(x => x[1])[0]
+            alt_name = Object.entries(names).find(([k, v]) => k != lang && v)?.[1]
             if (translators.includes(key) || pages[page].with?.includes(key)) {
                 const alt_langs = Object.keys(ui).filter(k => k != lang)
                 if (alt_langs.length) {
@@ -720,8 +720,8 @@ function textarea_writeln(textarea, line='') {
     textarea.value += line + '\n'
     if (should_scroll)
         textarea.scrollTop = textarea.scrollHeight
-    else
-        textarea.setSelectionRange(selection_start, selection_end)
+    else if (selection_start != selection_end)
+        textarea.setSelectionRange(selection_start, selection_end)  // Needed to restore the selection after value change. Note: In Firefox this will scroll the selection into view
 }
 
 
@@ -749,7 +749,7 @@ function visibility_change_handler() {
 }
 
 
-function toggle_fullscreen(event_or_elem, landscape=true, elem) {
+function toggle_fullscreen(event_or_elem, landscape=true, target_screen, elem) {
     if (event_or_elem.preventDefault)
         event_or_elem.preventDefault()
     elem ??= event_or_elem?.currentTarget || event_or_elem
@@ -767,7 +767,7 @@ function toggle_fullscreen(event_or_elem, landscape=true, elem) {
                     wake_lock?.release().then(() => wake_lock = null)
             })
         }
-        elem.requestFullscreen({navigationUI: 'hide'}).catch(e => console.warn(e.message))
+        elem.requestFullscreen({navigationUI: 'hide', screen: target_screen}).catch(e => console.warn(e.message))
     } else
         document.exitFullscreen()
     return was_not_fullscreen_before

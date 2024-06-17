@@ -25,11 +25,8 @@ const comp_marking = 5
 
 
 const lang = get_lang()
-if (typeof poem != 'undefined') {
-    poem.value = '\n'
-    if (lang)
-		poem.dir = 'ltr'
-}
+const bc = new BroadcastChannel('bc')
+bc.postMessage('\n')
 
 let global_reset_counter = 0
 document.addEventListener('keydown', e => global_reset_counter += is_shortcut(e, 'Backspace'))
@@ -156,8 +153,11 @@ function fire(grid, json, steps, max_tokens, result_counter, reset_counter, toke
     const out = json.transitions[trans][1]
     inp.forEach(p => tokens[p]--)
     out.forEach(p => tokens[p] = (tokens[p] || 0) + 1)
-    if (!comp)
-        textarea_writeln(poem, poem_generator(json, trans, out[Math.random() * out.length | 0]))
+    if (!comp) {
+        const verse = poem_generator(json, trans, out[Math.random() * out.length | 0])
+        textarea_writeln(poem, verse)
+        bc.postMessage(verse)
+    }
     setTimeout(step, halfstep_secs * 1000, grid, json, steps, max_tokens, result_counter, reset_counter, tokens)
 }
 
@@ -333,6 +333,7 @@ function step(grid, json, steps=0, max_tokens={}, result_counter={}, reset_count
         result_counter[result] = (result_counter[result] || []).concat(steps).sort((a, b) => a - b)
         if (!comp) {
             textarea_writeln(poem)
+            bc.postMessage('')
             const all_steps = Object.values(result_counter).flat()
             const sides = result?.map((_, i) => Object.entries(result_counter).filter(x => x[0].split(',')[i] == 1).map(x => x[1]).flat().length)
             const avg_tokens = Object.fromEntries(Object.entries(max_tokens).map(([p, counts]) => [p, counts.reduce((a, b) => a + b) / counts.length]).sort((a, b) => a[1] - b[1] || a[0].localeCompare(b[0])))
