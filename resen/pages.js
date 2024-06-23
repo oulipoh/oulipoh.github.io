@@ -210,7 +210,8 @@ function make_link(url, label, cls, title, new_tab=false, force_new_tab_for_mail
 }
 
 
-function get_set_titles(page, lang='', elem) {
+function get_set_titles(page, lang, elem) {
+    lang ??= get_lang()
     const titles = {label: pages[page]?.title ?? page.split('/')[0], alt: ''}
     if (pages[page]?.alt) {
         titles.alt = pages[page].alt

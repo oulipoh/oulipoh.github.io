@@ -4,11 +4,11 @@
     src: url('fonts/IBMPlexMono-Regular.woff2');
 }
 
-.petri, #poem {
+.petri, textarea {
     --fg: rgb(var(--whitish));
     font-family: 'IBM Plex Mono', 'Courier New', var(--mono_font);
     font-size: initial;
-    outline-style: none;
+    outline-style: none !important;
 }
 
 .petri {
@@ -100,24 +100,16 @@
     bottom: var(--ver_offset);
 }
 
-#poem {
+textarea {
     background-color: white;
     border: none;
     box-sizing: border-box;
     display: block;
-    line-height: 2.5;
+    line-height: 2.5 !important;
     margin-block: 4em 6em;
     margin-inline: auto;
     padding-inline: 3em;
     resize: none;
     white-space: pre-line;
     width: var(--media_width);
-}
-
-nav[dir=ltr] ~ #poem {
-    direction: ltr;
-}
-
-nav[dir=rtl] ~ #poem {
-    direction: rtl;
 }

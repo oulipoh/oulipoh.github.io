@@ -15,17 +15,11 @@
     <noscript><style>body {visibility: visible}</style></noscript>
 </head>
 <body class="todark" onload="document.body.style.visibility = 'visible'">
+    <textarea id="title" dir="auto" readonly rows="1" spellcheck="false" style="margin-block: 4em -1em"></textarea>
+    <textarea id="poem" dir="auto" readonly rows="15" spellcheck="false"></textarea>
     <script>
-        make_header()
-        let target_screen
-        // if (typeof getScreenDetails != 'undefined')  // Only works in Chromium desktop
-        //     getScreenDetails().then(result => target_screen = result.screens.find(s => !s.isPrimary))
-    </script>
-    <textarea id="poem" autocomplete="off" readonly rows="15" spellcheck="false" oncontextmenu="toggle_fullscreen(event, true, target_screen)"></textarea>
-    <script>
-        make_footer()
+        title.value = get_set_titles('petri/').label
         new BroadcastChannel('bc').onmessage = e => textarea_writeln(poem, e.data)
-        toggle_fullscreen(poem, true, target_screen)  // works only in Firefox, after setting: full-screen-api.allow-trusted-requests-only = false
     </script>
 </body>
 </html>
