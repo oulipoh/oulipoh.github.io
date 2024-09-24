@@ -1,4 +1,4 @@
-// Copyright 2023 by Eyal Yehowa Gruss, licensed under CC BY 4.0
+// Copyright 2023-2024 by Eyal Yehowa Gruss, licensed under CC BY 4.0
 // Please attribute by linking to a version of this file [e.g. as done in make_footer()], containing these comments
 
 
@@ -6,10 +6,12 @@ const pages = {
     "/": {title: "רֶסֶן", alt: "Resen", author: "resen", logo: "media/resen.svg", skip: true},
     "open-call-kmeot/": {title: "קול קורא: קמעות", alt: "Open call: Amulets", author: "resen"},
 
+    "snark/": {title: "כרחש אבמ\"ח וכרחש אדו\"ש", alt: "ABMḤ snark and ADWŠ", kw: [1, "2d 3d", "combinatorial", "interactive", "new constraint", "pangram", "software", "sound", "visual"]},
+
     "0/": {title: "פתח דבר לגיליון אפס – מלחמה", alt: "Foreward to Issue 0 – War", author: "alexbenari", kw: [0]},
     "imagine/": {title: "דמיין", alt: "Imagine", author: "liorzalmanson", kw: [0, "poem"]},
     "cent/": {title: "מתוך מאה תמונות מלחמה", alt: "From One hundred visions of war", author: "julienvocance", translator: "rotematar", kw: [0, "poem", "translation"]},
-    "petri/": {title: "פואטיקת פטרי פטריוטית", alt: "Patriotic Petri Poetry", author: "eyalgruss", kw: [0, "live code", "poem", "software", "visual"]},
+    "petri/": {title: "פואטיקת פטרי פטריוטית", alt: "Patriotic Petri Poetry", author: "eyalgruss", kw: [0, "generative", "live code", "poem", "software", "visual"]},
     "exceeding/": {title: "מעֵבר לַשלם", alt: "Exceeding the entirety", author: ["mikamilgrom", "avimilgrom"], kw: [0, "live code", "visual"]},
     "things/": {title: "קורים עכשיו דברים עם השפה", alt: "Things are happening now with the language", author: "noashaham", kw: [0, "poem"]},
     "systems/": {title: "מערכות", alt: "Systems", author: "noashaham", kw: [0, "poem"]},
@@ -83,6 +85,7 @@ const default_rows_first = true
 const default_reorder_contents = true
 
 const kw_labels = {
+    1: "א – קמעות",
     0: "אפס – מלחמה",
     "2d 3d": "רב־ממדי",
     "biblical": "תורני",
@@ -91,6 +94,7 @@ const kw_labels = {
     "combined forms": "שילוב אילוצים",
     "data available": "נתונים להורדה",
     "discourse": "שיח באילוצים",
+    "generative": "מחולל",
     "hebrew cheatery": "מִרמת העברית",
     "interactive": "אינטראקטיבי",
     "live code": "קוד חי",
@@ -211,17 +215,22 @@ function make_link(url, label, cls, title, new_tab=false, force_new_tab_for_mail
 
 
 function get_set_titles(page, lang, elem) {
+    page ??= get_page()
     lang ??= get_lang()
     const titles = {label: pages[page]?.title ?? page.split('/')[0], alt: ''}
+    if (titles.label.match(/\p{P}$/u))
+        titles.label = '⁨' + titles.label
     if (pages[page]?.alt) {
         titles.alt = pages[page].alt
+        if (titles.alt.match(/\p{P}$/u))
+            titles.alt = '⁨' + titles.alt
         if (lang)
             [titles.label, titles.alt] = [titles.alt, titles.label]
     }
     if (elem) {
         if (page != null) {
             const suffix = elem.title.match(/\[.*/)
-            if (suffix) {
+            if (suffix) {  // keyboard shortcut
                 titles.label += ' ' + suffix
                 titles.alt += ' ' + suffix
             }
@@ -407,12 +416,8 @@ function get_width(text, elem, units='em') {  // Note: If the font has not compl
 function set_next_prev_page(page, next, prev, lang, url_kw) {
     const list = Object.keys(pages).filter(p => !pages[p].skip && (!url_kw || pages[p].kw?.map(sanitize).includes(url_kw)))
     const index = list.indexOf(page)
-    let next_page = ''
-    let prev_page = ''
-    if (list.length) {
-        next_page = list[(index+1) % list.length]
-        prev_page = list[(Math.max(index, 0)-1+list.length) % list.length]
-    }
+    const next_page = list[(index+1) % list.length] ?? ''
+    const prev_page = list[(Math.max(index, 0)-1+list.length) % list.length] ?? ''
     update_href(next, page2url(next_page, lang, null, url_kw), 'next')
     get_set_titles(next_page, lang, next)
     update_href(prev, page2url(prev_page, lang, null, url_kw), 'prev')
@@ -537,7 +542,8 @@ function make_header(reorder_contents=default_reorder_contents, new_tab_for_soci
             }
 
             button.innerHTML = label
-            button.title = `[pages=${all_keywords_stats[kw].count} info=${(all_keywords_stats[kw].info * 100).toFixed(1)}%] ${alt}`.trim()
+            button.dir = 'ltr'  // For left alignment of the multi-line title
+            button.title = `${alt}\npages=${all_keywords_stats[kw].count}\ninfo=${(all_keywords_stats[kw].info * 100).toFixed(1)}%`.trim()
             if (page == '/')
                 button.onclick = kw_handler
             else {
@@ -586,7 +592,7 @@ function make_header(reorder_contents=default_reorder_contents, new_tab_for_soci
 
 
     if (desc.length) {
-        meta = document.createElement('meta')
+        const meta = document.createElement('meta')
         meta.name = 'description'
         meta.content = desc.join(', ')
         document.head.appendChild(meta)
@@ -712,21 +718,27 @@ function make_footer(copyright_url=default_copyright_url, copyright_label=defaul
 }
 
 
-function textarea_writeln(textarea, line='') {
+function textarea_writeln(textarea, line='', chars_for_reset=500000) {
     if (typeof textarea == 'undefined')
         return
     const selection_start = textarea.selectionStart
     const selection_end = textarea.selectionEnd
-    const should_scroll = textarea.scrollTop + 1 >= textarea.scrollHeight - textarea.clientHeight && selection_start == selection_end
+    const should_scroll = (textarea.scrollTop + 1 >= textarea.scrollHeight - textarea.clientHeight || textarea.clientHeight != textarea.dataset.height || textarea.clientWidth != textarea.dataset.width) && selection_start == selection_end
+    if (!line && textarea.value.length > chars_for_reset) {
+        should_scroll = true
+        textarea.value = textarea.value.match(/(^|\n)\n/) ? textarea.value.split(/(^|\n)(?=\n)/).pop() : ''
+    }
     textarea.value += line + '\n'
-    if (should_scroll)
+    if (should_scroll) {
         textarea.scrollTop = textarea.scrollHeight
-    else if (selection_start != selection_end)
+        textarea.dataset.height = textarea.clientHeight
+        textarea.dataset.width = textarea.clientWidth
+    } else if (selection_start != selection_end)
         textarea.setSelectionRange(selection_start, selection_end)  // Needed to restore the selection after value change. Note: In Firefox this will scroll the selection into view
 }
 
 
-function show_cursor(elem) {
+function show_hide_cursor(elem) {
     elem.classList.remove('show_cursor')
     elem.offsetWidth  // Restart animation, see: https://css-tricks.com/restart-css-animation/
     elem.classList.add('show_cursor')

@@ -2,12 +2,16 @@ const json_file = 'petri.json'
 const grid_columns = 5
 let halfstep_secs = .5
 let restart_secs = 5
-if (location.hash.slice(1) == 'fast')
+let stats = false
+const hash = location.hash.slice(1)
+if (hash == 'fast') {
     halfstep_secs = restart_secs = 0
-else if (location.hash.slice(1) == 'slow') {
+    stats = true
+} else if (hash == 'slow') {
     halfstep_secs = 3
     restart_secs = halfstep_secs * 3
-}
+} else if (hash.startsWith('full'))
+    toggle_fullscreen(petri);  // works only in Firefox, after setting: full-screen-api.allow-trusted-requests-only = false
 
 const auto_vertical = true
 const label_location = 'half'  // Can be: 'half' (half above and half below, favoring the below), 'above', or anything else to indicate below
@@ -18,18 +22,25 @@ const arrow_short_diag = 3
 const short_diag_offset = 19
 const leaderline_factor1 = .17
 const leaderline_factor2 = .025
-leaderline_comp_offset = -40
-leaderline_comp_top = 20
-leaderline_comp_bottom = 90
+const leaderline_comp_offset = -40
+const leaderline_comp_top = 20
+const leaderline_comp_bottom = 90
 const comp_marking = 5
-
-
-const lang = get_lang()
-const bc = new BroadcastChannel('bc')
-bc.postMessage('\n')
 
 let global_reset_counter = 0
 document.addEventListener('keydown', e => global_reset_counter += is_shortcut(e, 'Backspace'))
+
+const lang = get_lang()
+const bc = new BroadcastChannel('bc')
+
+function reset_poem() {
+    if (typeof poem != 'undefined')
+        poem.value = '\n'
+    if (typeof bc != 'undefined')
+        bc.postMessage('')
+}
+
+reset_poem()
 
 function compare_lists(a, b) {
     if (a.length != b.length)
@@ -59,7 +70,8 @@ function center(label, width, align_start=false) {
 }
 
 function short_diag_arrows(ts, te, bs, be) {
-    let arrow_ts = arrow_te = arrow_bs = arrow_be = ' '.repeat(arrow_short_diag + 1)
+    let arrow_ts, arrow_te, arrow_bs, arrow_be
+    arrow_ts = arrow_te = arrow_bs = arrow_be = ' '.repeat(arrow_short_diag + 1)
     const slashes = '/'.repeat(arrow_short_diag)
     const backslashes = '\\'.repeat(arrow_short_diag)
     if (ts)
@@ -155,7 +167,9 @@ function fire(grid, json, steps, max_tokens, result_counter, reset_counter, toke
     out.forEach(p => tokens[p] = (tokens[p] || 0) + 1)
     if (!comp) {
         const verse = poem_generator(json, trans, out[Math.random() * out.length | 0])
+        if (typeof poem != 'undefined')
         textarea_writeln(poem, verse)
+        if (typeof bc != 'undefined')
         bc.postMessage(verse)
     }
     setTimeout(step, halfstep_secs * 1000, grid, json, steps, max_tokens, result_counter, reset_counter, tokens)
@@ -234,7 +248,8 @@ function step(grid, json, steps=0, max_tokens={}, result_counter={}, reset_count
         }
         if (transitions.includes(elem.dataset.id)) {
             elem.style.color = enabled.includes(elem.dataset.id) ? 'var(--enabled)' : 'inherit'
-            let ts = te = bs = be = 0
+            let ts, te, bs, be
+            ts = te = bs = be = 0
             new Set(json.transitions[elem.dataset.id].slice(0, 2).flat()).forEach(place => {
                 elem.firstChild.textContent = is_vertical(grid, elem.dataset.id) ? trans_ver_symbol(label, height) : trans_hor_symbol(label, width)
                 const inp = json.transitions[elem.dataset.id][0].filter(p => p == place).length
@@ -295,7 +310,8 @@ function step(grid, json, steps=0, max_tokens={}, result_counter={}, reset_count
             const tcol = tindex % cols
             const prow = pindex / cols | 0
             const pcol = pindex % cols
-            let y1 = y2 = leaderline_comp_top
+            let y1 = leaderline_comp_top
+            let y2 = leaderline_comp_top
             let x1 = (pcol-tcol)
             let x2 = (tcol-pcol)
             if (comp) {
@@ -324,21 +340,25 @@ function step(grid, json, steps=0, max_tokens={}, result_counter={}, reset_count
 
     if (reset_counter < global_reset_counter) {
         reset_counter = global_reset_counter
-        if (typeof poem != 'undefined' && !comp)
-            poem.value = '\n'
+        if (!comp)
+            reset_poem()
         max_tokens = Object.fromEntries(Object.entries(max_tokens).map(([p, counts]) => ([p, counts.slice(0, -1)])))
         step(grid, json, 0, max_tokens, result_counter, reset_counter)
     } else if (!enabled.length || comp && Object.values(tokens).some(n => n > place_max_tokens) || !comp && !json.require?.every(require => require.some(t => tokens[t]))) {
+        if (!comp) {
+            if (typeof poem != 'undefined')
+                textarea_writeln(poem)
+            if (typeof bc != 'undefined')
+                bc.postMessage('\n')
+            if (stats) {
         const result = json.require?.map(side => side.some(p => tokens[p]) | 0)
         result_counter[result] = (result_counter[result] || []).concat(steps).sort((a, b) => a - b)
-        if (!comp) {
-            textarea_writeln(poem)
-            bc.postMessage('')
             const all_steps = Object.values(result_counter).flat()
             const sides = result?.map((_, i) => Object.entries(result_counter).filter(x => x[0].split(',')[i] == 1).map(x => x[1]).flat().length)
             const avg_tokens = Object.fromEntries(Object.entries(max_tokens).map(([p, counts]) => [p, counts.reduce((a, b) => a + b) / counts.length]).sort((a, b) => a[1] - b[1] || a[0].localeCompare(b[0])))
             const sum = sides?.reduce((a, b) => a + b, 0)
             console.log(all_steps.length, all_steps.reduce((a, b) => a + b) / all_steps.length, sum ? sides[1] / sum : .5, avg_tokens, Object.fromEntries(Object.entries(result_counter).sort((a, b) => compare_lists(a[1], b[1]) || compare_lists(a[0], b[0]))))
+        }
         }
         setTimeout(step, restart_secs * 1000, grid, json, 0, max_tokens, result_counter, reset_counter)
     } else
@@ -377,7 +397,8 @@ fetch(json_file).then(response => response.json()).then(json => {
                 if (json.vertical?.includes(label) || json.transitions[label][2] == 'vertical' || elem.id in json.transitions)
                     pre.className = 'vertical'
                 if (auto_vertical && !(elem.id in json.transitions)) {
-                    let hor = ver = 0
+                    let hor = 0
+                    let ver = 0
                     json.transitions[label].slice(0, 2).flat().forEach(place => {
                         const pindex = labels.indexOf(place)
                         const trow = index / cols | 0

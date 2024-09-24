@@ -18,6 +18,19 @@
 }
 
 @font-face {
+    font-family: Alef;
+    font-display: block;
+    src: url('fonts/Alef-Regular.woff2');
+}
+
+@font-face {
+    font-family: Alef;
+    font-weight: bold;
+    font-display: block;
+    src: url('fonts/Alef-Bold.woff2');
+}
+
+@font-face {
     font-family: 'Alef Mono';
     font-display: block;
     src: url('fonts/Alef-Monospace.woff2');
@@ -50,7 +63,9 @@
     --inverse_bg: #6580e1;
     --inverse_fg: var(--bg);
     --invert: 1;
-	--whitish: 224 224 224;
+	--whitish_rgb: 224 224 224;
+    --whitish: rgb(var(--whitish_rgb));
+
     --column_gap: 4em;
     --columns: 3;
     --h12_letter_spacing: normal;
@@ -108,7 +123,7 @@ body {
 
 body.todark, .todark ::backdrop {
     --bg: black;
-    --fg_rgb: var(--whitish);
+    --fg_rgb: var(--whitish_rgb);
     --invert: 0;
 }
 
@@ -466,6 +481,10 @@ figcaption:not(.images > figure > *) {
     margin-inline-start: calc((100% - var(--media_width)) / 2);
 }
 
+figure > figcaption + * {
+    margin-top: .5rem;
+}
+
 .images > figure > img + figcaption {
     font-size: .7em;
     text-align: center;
@@ -598,7 +617,7 @@ iframe {
     background-repeat: no-repeat;
     border-color: var(--on);
     border-style: solid;
-    margin-top: 2rem;
+    margin-top: 3rem;
 }
 
 iframe, object {
@@ -616,10 +635,13 @@ iframe, object {
 }
 
 .images img {
-    height: 90%;  /* Assumes difference between images aspect ratios is less than 10% */
     max-height: var(--max_height);
     object-fit: contain;
     width: 100%;
+}
+
+.images > img:not(:first-child:last-child) {
+    height: 90%;  /* Assumes difference between images aspect ratios is less than 10% */
 }
 
 img {
@@ -878,7 +900,8 @@ button.show_cursor {
     --cursor: pointer;
 }
 
-[onmousemove*=show_cursor] {  /* Note this will miss elements where the handler was added programmatically */
+[onmousemove*=show_hide_cursor],  /* Note this will miss elements where the handler was added programmatically */
+.hide_cursor {
     cursor: none;
 }
 
@@ -975,6 +998,17 @@ a.sponsors {
     background-size: .5rem 2px, .5rem 2px, 2px .5rem, 2px .5rem;
     padding-bottom: .1em;
     padding-inline: .3em;
+}
+
+textarea {
+    border: none;
+    box-sizing: border-box;
+    display: block;
+    margin-block: 4em 6em;
+    margin-inline: auto;
+    padding-block: 0;
+    resize: none;
+    width: var(--media_width);
 }
 
 [oncontextmenu*=toggle_fullscreen] {  /* Note this will miss elements where the handler was added programmatically, as well as different elements passed to the handler */

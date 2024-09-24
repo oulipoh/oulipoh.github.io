@@ -14,12 +14,24 @@
     <meta property="og:image" content="https://oulipoh.com/resen/petri/snippet">
     <noscript><style>body {visibility: visible}</style></noscript>
 </head>
-<body class="todark" onload="document.body.style.visibility = 'visible'">
-    <textarea id="title" dir="auto" readonly rows="1" spellcheck="false" style="margin-block: 4em -1em"></textarea>
-    <textarea id="poem" dir="auto" readonly rows="15" spellcheck="false"></textarea>
+<body class="todark" onload="document.body.style.visibility = 'visible'" onmousemove="show_cursor(this)">
+    <textarea id="title" autocomplete="off" dir="auto" readonly rows="1" spellcheck="false"></textarea>
+    <textarea id="poem" autocomplete="off" dir="auto" readonly rows="32" spellcheck="false"></textarea>
     <script>
-        title.value = get_set_titles('petri/').label
-        new BroadcastChannel('bc').onmessage = e => textarea_writeln(poem, e.data)
+        if (location.hash.slice(1).startsWith('full'))
+            toggle_fullscreen(document.documentElement);  // works only in Firefox, after setting: full-screen-api.allow-trusted-requests-only = false
+
+        let prev_lang
+        new BroadcastChannel('bc').onmessage = e => {
+            if (e.data) {
+                textarea_writeln(poem, e.data.replace(/\n$/, ''))
+                const lang = e.data.localeCompare('z') > 0 ? '' : 'en'
+                if (lang != prev_lang)
+                    title.value = get_set_titles('petri/', lang).label + ' / ' + get_make_author('/', lang)[0][0]
+                prev_lang = lang
+            } else
+                poem.value = '\n'
+        }
     </script>
 </body>
 </html>

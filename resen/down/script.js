@@ -1,5 +1,6 @@
 let down = false
-let bg_pos_dx = bg_pos_dy = last_dx = last_dy = 0
+let bg_pos_dx, bg_pos_dy, last_dx, last_dy
+bg_pos_dx = bg_pos_dy = last_dx = last_dy = 0
 let origin_x, origin_y
 
 document.addEventListener('pointerdown', e => {

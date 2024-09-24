@@ -5,7 +5,7 @@
 }
 
 .petri, textarea {
-    --fg: rgb(var(--whitish));
+    --fg: var(--whitish);
     font-family: 'IBM Plex Mono', 'Courier New', var(--mono_font);
     font-size: initial;
     outline-style: none !important;
@@ -101,15 +101,15 @@
 }
 
 textarea {
-    background-color: white;
-    border: none;
-    box-sizing: border-box;
-    display: block;
+    background-color: var(--fg);
     line-height: 2.5 !important;
-    margin-block: 4em 6em;
-    margin-inline: auto;
     padding-inline: 3em;
-    resize: none;
-    white-space: pre-line;
-    width: var(--media_width);
+}
+
+textarea#title {
+    margin-block: 5em 4em;
+}
+
+textarea#title + #poem {
+    margin-block: 4em;
 }
