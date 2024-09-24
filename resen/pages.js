@@ -4,7 +4,7 @@
 
 const pages = {
     "/": {title: "רֶסֶן", alt: "Resen", author: "resen", logo: "media/resen.svg", skip: true},
-    "open-call-kmeot/": {title: "קול קורא: קמעות", alt: "Open call: Amulets", author: "resen"},
+    // "open-call-kmeot/": {title: "קול קורא: קמעות", alt: "Open call: Amulets", author: "resen"},
 
     "snark/": {title: "כרחש אבמ\"ח וכרחש אדו\"ש", alt: "ABMḤ snark and ADWŠ", kw: [1, "2d 3d", "combinatorial", "interactive", "new constraint", "pangram", "software", "sound", "visual"]},
 
