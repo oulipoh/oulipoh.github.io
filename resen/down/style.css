@@ -11,6 +11,7 @@ body {
     --opacity: 1;
     opacity: min(var(--opacity), .6);
     touch-action: pinch-zoom;
+    transition: opacity 1s;
     user-select: none;
     -webkit-user-select: none;
 }
