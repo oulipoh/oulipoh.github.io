@@ -4,12 +4,14 @@ bg_pos_dx = bg_pos_dy = last_dx = last_dy = 0
 let origin_x, origin_y
 
 document.addEventListener('pointerdown', e => {
-    down = true
-    document.body.style.setProperty('--opacity', .07)
-    origin_x = e.clientX
-    origin_y = e.clientY
-    bg_pos_dx += last_dx
-    bg_pos_dy += last_dy
+    if (!e.button) {
+        down = true
+        document.body.style.setProperty('--opacity', .07)
+        origin_x = e.clientX
+        origin_y = e.clientY
+        bg_pos_dx += last_dx
+        bg_pos_dy += last_dy
+    }
 })
 
 document.addEventListener('pointerup', () => {

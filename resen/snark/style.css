@@ -5,6 +5,7 @@
 
 svg {
     --bg: black;
+    --fg_highlight: white;
     background-color: var(--bg);
     display: block;
     fill: var(--bg);
@@ -40,8 +41,8 @@ svg {
     svg:has(.m1 circle:hover) :is(.m1, .n1),
     svg:has(.m0 circle:hover) :is(.m0, .n0) {
         --delay: var(--active_delay_sec);
-        filter: drop-shadow(0 0 1px white);
-        fill: white;
+        filter: drop-shadow(0 0 1px var(--fg));
+        fill: var(--fg_highlight);
         stroke-width: .65;
         transition-duration: var(--active_transition_sec);
     }
@@ -71,8 +72,8 @@ svg {
     [data-selected=m1] :is(.m1, .n1),
     [data-selected=m0] :is(.m0, .n0) {
         --delay: var(--active_delay_sec);
-        filter: drop-shadow(0 0 1px white);
-        fill: white;
+        filter: drop-shadow(0 0 1px var(--fg));
+        fill: var(--fg_highlight);
         stroke-width: .65;
         transition-duration: var(--active_transition_sec);
     }

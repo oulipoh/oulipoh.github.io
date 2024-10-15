@@ -296,7 +296,7 @@ blockquote {
     margin-block: 3ex;
 }
 
-blockquote, li:not(.mono *), p {
+blockquote, h4, li:not(.mono *), p {
     text-align: justify;
     text-wrap: pretty;
 }
@@ -573,6 +573,7 @@ h2:not(header *) {
 
 h3 {
     font-size: inherit;
+    margin-top: 3em;
 }
 
 h4 {
@@ -805,6 +806,7 @@ ol, ul {
 }
 
 :is(p:not([dir=ltr]), p:not([dir=ltr]) + br) + :is(blockquote, h3, h4, p)[dir=ltr],
+:is(p:not([dir=ltr]), p:not([dir=ltr]) + br) + div[dir=ltr] > :is(blockquote, h3, h4, p):first-child,
 :is(p[dir=ltr], p[dir=ltr] + br) + :is(blockquote, h3, h4, p):not([dir=ltr]) {
     margin-top: max(6ex, 4.5rem);
 }
@@ -982,10 +984,6 @@ a.sponsors {
     font-size: .8em;
 }
 
-.story + :is(h3, p) {
-    margin-top: 5ex;
-}
-
 @keyframes border_dance {
     100% { background-position: 100% 0, 0 100%, 0 0, 100% 100% }
 }
@@ -1038,6 +1036,10 @@ textarea {
     margin-top: 0;
 }
 
+ul {
+    list-style-type: square;
+}
+
 .video {
     aspect-ratio: 16 / 9;
     border: none;
@@ -1065,7 +1067,7 @@ textarea {
         --media_width: 100%;
     }
 
-    blockquote, li:not(.mono *), p:not(div *, .story) {
+    blockquote, li:not(.mono *), p:where(:not(.textblock)) {
         text-align: start;
     }
 

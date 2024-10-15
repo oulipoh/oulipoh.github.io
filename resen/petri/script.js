@@ -168,9 +168,9 @@ function fire(grid, json, steps, max_tokens, result_counter, reset_counter, toke
     if (!comp) {
         const verse = poem_generator(json, trans, out[Math.random() * out.length | 0])
         if (typeof poem != 'undefined')
-        textarea_writeln(poem, verse)
+            textarea_writeln(poem, verse)
         if (typeof bc != 'undefined')
-        bc.postMessage(verse)
+            bc.postMessage(verse)
     }
     setTimeout(step, halfstep_secs * 1000, grid, json, steps, max_tokens, result_counter, reset_counter, tokens)
 }
@@ -351,14 +351,14 @@ function step(grid, json, steps=0, max_tokens={}, result_counter={}, reset_count
             if (typeof bc != 'undefined')
                 bc.postMessage('\n')
             if (stats) {
-        const result = json.require?.map(side => side.some(p => tokens[p]) | 0)
-        result_counter[result] = (result_counter[result] || []).concat(steps).sort((a, b) => a - b)
-            const all_steps = Object.values(result_counter).flat()
-            const sides = result?.map((_, i) => Object.entries(result_counter).filter(x => x[0].split(',')[i] == 1).map(x => x[1]).flat().length)
-            const avg_tokens = Object.fromEntries(Object.entries(max_tokens).map(([p, counts]) => [p, counts.reduce((a, b) => a + b) / counts.length]).sort((a, b) => a[1] - b[1] || a[0].localeCompare(b[0])))
-            const sum = sides?.reduce((a, b) => a + b, 0)
-            console.log(all_steps.length, all_steps.reduce((a, b) => a + b) / all_steps.length, sum ? sides[1] / sum : .5, avg_tokens, Object.fromEntries(Object.entries(result_counter).sort((a, b) => compare_lists(a[1], b[1]) || compare_lists(a[0], b[0]))))
-        }
+                const result = json.require?.map(side => side.some(p => tokens[p]) | 0)
+                result_counter[result] = (result_counter[result] || []).concat(steps).sort((a, b) => a - b)
+                const all_steps = Object.values(result_counter).flat()
+                const sides = result?.map((_, i) => Object.entries(result_counter).filter(x => x[0].split(',')[i] == 1).map(x => x[1]).flat().length)
+                const avg_tokens = Object.fromEntries(Object.entries(max_tokens).map(([p, counts]) => [p, counts.reduce((a, b) => a + b) / counts.length]).sort((a, b) => a[1] - b[1] || a[0].localeCompare(b[0])))
+                const sum = sides?.reduce((a, b) => a + b, 0)
+                console.log(all_steps.length, all_steps.reduce((a, b) => a + b) / all_steps.length, sum ? sides[1] / sum : .5, avg_tokens, Object.fromEntries(Object.entries(result_counter).sort((a, b) => compare_lists(a[1], b[1]) || compare_lists(a[0], b[0]))))
+            }
         }
         setTimeout(step, restart_secs * 1000, grid, json, 0, max_tokens, result_counter, reset_counter)
     } else
