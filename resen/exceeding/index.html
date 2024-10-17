@@ -16,15 +16,17 @@
 </head>
 <body onload="document.body.style.visibility = 'visible'">
     <script>make_header()</script>
+    <div id="sketch" oncontextmenu="toggle_fullscreen(event)"></div>
+    <article>
     <p>
         על המסך שלושה מונים סופרים את השעות מאז נולדנו, שלושת בני המשפחה. מספר הספרות המוקצה לספירת השעות הוא שש בלבד.
         כאשר הספירה תגיע ל־999,999 שעות (שהן כ־114 שנים) ועוד שעה אחת, המונה יתאפס והספירה תתחיל מחדש.
         המצב הזה של הגעה לגבול והתאפסות מעבר לו נקרא בצרפתית Dépassement d'entier, שמשמעותו המילולית "מעֵבר לַשלם".
     </p>
-    <div id="sketch" oncontextmenu="toggle_fullscreen(event)"></div>
     <p dir="ltr">
         On the screen, three counters count the hours since we, the three members of our family, were born. Only six digits are assigned to represent the number of hours. Thus, when the count exceeds 999,999 hours (about 114 years), the counter will reset and start over. The French term for this situation is "Dépassement d'entier", whose literal meaning is "moving beyond the whole".
     </p>
+    </article>
     <script>make_footer()</script>
     <script src="script.js"></script>
 </body>

@@ -592,7 +592,7 @@ function make_header(reorder_contents=default_reorder_contents, new_tab_for_soci
         if (current_authors)
             desc.push(current_authors)
     }
-    document.body.appendChild(header)
+    document.currentScript.parentElement.appendChild(header)
 
 
     if (desc.length) {
