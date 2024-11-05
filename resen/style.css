@@ -210,6 +210,15 @@ button, pre {
         animation: var(--icon_dur) infinite alternate github;
     }
 
+    @keyframes instagram {
+        100% { filter: blur(1px) }
+    }
+
+    .instagram:is(:hover, :focus-visible) {
+        animation: var(--icon_dur) infinite alternate instagram;
+    }
+
+
     label > input[type=checkbox]:is(:hover, :focus-visible) + span, :is(label > span, .sliders button):is(:hover, :focus-visible) {
         color: var(--fg_highlight);
     }
@@ -1052,6 +1061,13 @@ textarea {
 
 ul {
     list-style-type: square;
+}
+
+video {
+    display: block;
+    margin-block: 4.5rem;
+    margin-inline: auto;
+    width: var(--media_width);
 }
 
 .video {

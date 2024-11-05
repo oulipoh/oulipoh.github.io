@@ -4,9 +4,12 @@
 
 const pages = {
     "/": {title: "רֶסֶן", alt: "Resen", author: "resen", logo: "media/resen.svg", skip: true},
-    // "open-call-kmeot/": {title: "קול קורא: קמעות", alt: "Open call: Amulets", author: "resen"},
+    // "open-call-kmeot/": {title: "קול קורא: קמעות", alt: "Open call: Talismans", author: "resen"},
 
     "receptacle/": {title: "כלי קיבולת", alt: "Receptacle", author: "amitbenami", kw: ["poem"]},
+
+    //"water/": {title: "מים", alt: "Water", author: "arikweiss", kw: [1, "2d 3d", "visual"]},
+    "talis/": {title: "טליס־מטא", alt: "Talis-Metta", author: ["neorashem", "nimrodkerrett"], kw: [1, "software", "visual"]},
     "snark/": {title: "כרחש אבמ\"ח וכרחש אדו\"ש", alt: "ABMḤ snark and ADWŠ", author: "eyalgruss", kw: [1, "2d 3d", "combinatorial", "interactive", "new constraint", "pangram", "software", "sound", "visual"]},
 
     "0/": {title: "פתח דבר לגיליון אפס – מלחמה", alt: "Foreward to Issue 0 – War", author: "alexbenari", kw: [0]},
@@ -22,7 +25,7 @@ const pages = {
     "tribe/": {title: "השבט הנושא את עיניו השמיימה", alt: "The tribe with its eyes on the sky", author: "italocalvino", translator: "jonathanfine", kw: [0, "story", "translation"]},
     "achshav/": {title: "אָח־שָׁב – עַכְ־שָׁו", alt: "Ach-Shav", author: "brunogrife", kw: [0, "sound"]},
 
-    "about/": {title: "אודות כתב העת", alt: "About this journal", author: "resen"}
+    "about/": {title: "אודות כתב העת", alt: "About this journal", author: "resen"},
 }
 
 const authors = {
@@ -31,22 +34,28 @@ const authors = {
         "mail": "eyalgruss+resen@gmail.com",
         "github": "",
         "sponsors": "",
-        "subscribe": "ayPSSeHk3KL4ALGa9"
+        "subscribe": "ayPSSeHk3KL4ALGa9",
     },
     "adisorek": {
         "name": {"": "עדי שורק", "en": "Adi Sorek"},
+        "web": "adisorek.com",
     },
     "alexbenari": {
-        "name": {"": "אלכס בן־ארי", "en": "Alex Ben Ari"}
+        "name": {"": "אלכס בן־ארי", "en": "Alex Ben Ari"},
+        "web": "alexbenari.com",
     },
     "amitbenami": {
-        "name": {"": "עמית בן עמי", "en": "Amit Ben Ami"}
+        "name": {"": "עמית בן עמי", "en": "Amit Ben Ami"},
     },
     "avimilgrom": {
-        "name": {"": "אבי מילגרום", "en": "Avi Milgrom"}
+        "name": {"": "אבי מילגרום", "en": "Avi Milgrom"},
+    },
+    "arikweiss": {
+        "name": {"": "אריק וייס", "en": "Arik Weiss"},
+        "instagram": "arikw99",
     },
     "brunogrife": {
-        "name": {"": "עידן ברונו גרייף", "en": "Bruno Grife"}
+        "name": {"": "עידן ברונו גרייף", "en": "Bruno Grife"},
     },
     "eyalgruss": {
         "name": {"": "איל יהוה גרוּס", "en": "Eyal Yehowa Gruss"},
@@ -55,34 +64,42 @@ const authors = {
         "twitter": "eyaler",
         "github": "eyaler",
         "sponsors": "eyaler",
-        "paypal": "LNJ6F3FR79ARE"
+        "paypal": "LNJ6F3FR79ARE",
     },
     "italocalvino": {
-        "name": {"": "איטאלו קאלווינו", "en": "Italo Calvino"}
+        "name": {"": "איטאלו קאלווינו", "en": "Italo Calvino"},
     },
     "jonathanfine": {
-        "name": {"": "יונתן פיין", "en": "Jonathan Fine"}
+        "name": {"": "יונתן פיין", "en": "Jonathan Fine"},
     },
     "julienvocance": {
-        "name": {"": "ז'וליאן ווֹקַנס", "en": "Julien Vocance"}
+        "name": {"": "ז'וליאן ווֹקַנס", "en": "Julien Vocance"},
     },
     "liorzalmanson": {
-        "name": {"": "ליאור זלמנסון", "en": "Lior Zalmanson"}
+        "name": {"": "ליאור זלמנסון", "en": "Lior Zalmanson"},
     },
     "mikamilgrom": {
-        "name": {"": "מיקה מילגרום", "en": "Mika Milgrom"}
+        "name": {"": "מיקה מילגרום", "en": "Mika Milgrom"},
+    },
+    "neorashem": {
+        "name": {"": "נאורה שם", "en": "Neora Shem"},
+        "web": "neora.pro/",
+    },
+    "nimrodkerrett": {
+        "name": {"": "נמרוד קרת", "en": "Nimrod Kerrett"},
+        "web": "zzzen.com/#/",
     },
     "noashaham": {
-        "name": {"": "נעה שחם", "en": "Noa Shaham"}
+        "name": {"": "נעה שחם", "en": "Noa Shaham"},
     },
     "rotematar": {
-        "name": {"": "רותם עטר", "en": "Rotem Atar"}
-    }
+        "name": {"": "רותם עטר", "en": "Rotem Atar"},
+    },
 }
 
 const ui = {
     "": {"next": "הבא", "prev": "הקודם", "lang": "עברית", "theme_name": "עיצוב של מתכנת", "theme": "תבנית", "copyright": "", "issue": "גיליון", "translator": "(תרגום)"},
-    "en": {"next": "next", "prev": "prev", "lang": "english", "theme_name": "Designed by a programmer", "theme": "Theme", "copyright": "", "issue": "issue", "translator": "(translator)", "dir": "ltr"}
+    "en": {"next": "next", "prev": "prev", "lang": "english", "theme_name": "Designed by a programmer", "theme": "Theme", "copyright": "", "issue": "issue", "translator": "(translator)", "dir": "ltr"},
 }
 
 const default_rows_first = true
@@ -112,23 +129,24 @@ const kw_labels = {
     "sound": "צלילים",
     "story": "סיפור",
     "translation": "תרגום",
-    "visual": "חזותי"
+    "visual": "חזותי",
 }
 
 const social = {
     "mail": {"url": "mailto:", "label": "&#x2709;&#xfe0e;"},
     "web": {"label": "&#x1f3e0;&#xfe0e;"},
-    "twitter": {"url": "twitter.com", "label": "&#x1f426;"},
+    "twitter": {"url": "x.com", "label": "&#x1f426;"},
+    "instagram": {"url": "instagram.com", "label": "&#x1f4f7;&#xfe0e;"},
     "github": {"url": "github.com", "label": "&#x1f431;"},
     "sponsors": {"url": "github.com/sponsors", "label": "&hearts;"},
     "paypal": {"url": "www.paypal.com/donate/?hosted_button_id=", "label": "&#x1f4b8;"},
-    "subscribe": {"url": "forms.gle", "label": "הרשמה לעדכונים"}
+    "subscribe": {"url": "forms.gle", "label": "הרשמה לעדכונים"},
 }
 
 const shortcuts = {
     "back": "Alt+Backspace",
     "next": "Alt+PageDown",
-    "prev": "Alt+PageUp"
+    "prev": "Alt+PageUp",
 }
 
 const default_copyright_url = "https://creativecommons.org/licenses/by/4.0/"
@@ -469,7 +487,7 @@ function make_header(reorder_contents=default_reorder_contents, new_tab_for_soci
         keywords = reorder(pages[page].kw, lang)
     }
 
-    let url_kw = sanitize(decodeURI(location.hash))
+    let url_kw = sanitize(decodeURIComponent(location.hash))
     if (!keywords.map(sanitize).includes(url_kw))
         url_kw = ''
     if (page != '/' && url_kw)
