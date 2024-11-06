@@ -9,7 +9,7 @@ const pages = {
     "receptacle/": {title: "כלי קיבולת", alt: "Receptacle", author: "amitbenami", kw: ["poem"]},
 
     //"water/": {title: "מים", alt: "Water", author: "arikweiss", kw: [1, "2d 3d", "visual"]},
-    "talis/": {title: "טליס־מטא", alt: "Talis-Metta", author: ["neorashem", "nimrodkerrett"], kw: [1, "software", "visual"]},
+    "talismetta/": {title: "טליס־מטא", alt: "Talis-Metta", author: ["neorashem", "nimrodkerrett"], kw: [1, "software", "visual"]},
     "snark/": {title: "כרחש אבמ\"ח וכרחש אדו\"ש", alt: "ABMḤ snark and ADWŠ", author: "eyalgruss", kw: [1, "2d 3d", "combinatorial", "interactive", "new constraint", "pangram", "software", "sound", "visual"]},
 
     "0/": {title: "פתח דבר לגיליון אפס – מלחמה", alt: "Foreward to Issue 0 – War", author: "alexbenari", kw: [0]},
