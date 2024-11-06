@@ -516,7 +516,7 @@ function make_header(reorder_contents=default_reorder_contents, new_tab_for_soci
 
         function kw_handler() {
             const on = this.classList.toggle('on')
-            const css = [...document.head.querySelectorAll('link[rel=stylesheet]')].pop().sheet
+            const css = document.head.querySelector('link[rel=stylesheet]:not([href^=data])').sheet
             let found
             for (const i in css.cssRules)
                 if (found = css.cssRules[i].selectorText?.slice(1) == this.id.replace(/^kw_/, 'non_')) {

@@ -82,6 +82,7 @@
     --h1_size: clamp(1.5em, 5rem, 10vw);
     --hor_scrollbar_offset: 16px;
     --larger_font: clamp(1.3em, 2rem, 2vw);
+    --media_height: 85vh;
     --media_width: 85%;
 
     /* Following variables must use units that are not relative to elements (i.e. avoid %, em, ex) */
@@ -655,13 +656,16 @@ iframe, object {
 }
 
 .images img {
-    max-height: var(--max_height);
+    --images_container_height: min(var(--media_height), var(--max_height, var(--media_height)));
+    max-height: var(--images_container_height);
     object-fit: contain;
     width: 100%;
 }
 
 .images > img:not(:first-child:last-child) {
-    height: 90%;  /* Assumes difference between images aspect ratios is less than 10% */
+    --multi_image_height_factor: .9;  /* Assumes difference between images aspect ratios is less than 10% */
+    height: calc(100% * var(--multi_image_height_factor));
+    max-height: calc(var(--images_container_height) / var(--multi_image_height_factor));
 }
 
 img {
@@ -1067,6 +1071,7 @@ video {
     display: block;
     margin-block: 4.5rem;
     margin-inline: auto;
+    max-height: var(--media_height);
     width: var(--media_width);
 }
 
@@ -1074,6 +1079,7 @@ video {
     aspect-ratio: 16 / 9;
     border: none;
     margin-block: 3rem;
+    max-height: var(--media_height);
 }
 
 @media (forced-colors: active) {
