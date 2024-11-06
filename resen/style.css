@@ -82,7 +82,7 @@
     --h1_size: clamp(1.5em, 5rem, 10vw);
     --hor_scrollbar_offset: 16px;
     --larger_font: clamp(1.3em, 2rem, 2vw);
-    --media_height: 85vh;
+    --max_media_height: 85vh;
     --media_width: 85%;
 
     /* Following variables must use units that are not relative to elements (i.e. avoid %, em, ex) */
@@ -218,7 +218,6 @@ button, pre {
     .instagram:is(:hover, :focus-visible) {
         animation: var(--icon_dur) infinite alternate instagram;
     }
-
 
     label > input[type=checkbox]:is(:hover, :focus-visible) + span, :is(label > span, .sliders button):is(:hover, :focus-visible) {
         color: var(--fg_highlight);
@@ -656,7 +655,7 @@ iframe, object {
 }
 
 .images img {
-    --images_container_height: min(var(--media_height), var(--max_height, var(--media_height)));
+    --images_container_height: min(var(--max_media_height), var(--max_height, var(--max_media_height)));
     max-height: var(--images_container_height);
     object-fit: contain;
     width: 100%;
@@ -1071,15 +1070,20 @@ video {
     display: block;
     margin-block: 4.5rem;
     margin-inline: auto;
-    max-height: var(--media_height);
+    max-height: var(--max_media_height);
     width: var(--media_width);
+}
+
+video::-webkit-media-controls-enclosure {  /* Not supported in Firefox */
+    max-width: calc(var(--max_media_height) * 16 / 9);
 }
 
 .video {
     aspect-ratio: 16 / 9;
     border: none;
     margin-block: 3rem;
-    max-height: var(--media_height);
+    max-height: var(--max_media_height);
+    max-width: calc(var(--max_media_height) * 16 / 9);
 }
 
 @media (forced-colors: active) {
