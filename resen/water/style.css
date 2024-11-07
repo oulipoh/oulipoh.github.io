@@ -1,0 +1,26 @@
+article {
+    margin-block: 6rem;
+}
+
+img.bg {
+
+  /* Set up proportionate scaling */
+  width: 100%;
+
+}
+
+.model-container {
+    display: flex;
+    justify-content: center;
+    margin-inline: auto;
+    width: var(--media_width);
+}
+
+model-viewer {
+  flex: 1 1 33%;
+  max-width: 33%;
+  height: 100%;
+  aspect-ratio: 1;
+
+
+}
