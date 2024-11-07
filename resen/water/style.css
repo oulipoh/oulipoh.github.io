@@ -4,6 +4,7 @@ article > * {
 }
 
 .model_container {
+    direction: ltr;  /* Due to: https://github.com/google/model-viewer/issues/4930 */
     display: flex;
     justify-content: center;
     margin-inline: auto;
