@@ -67,11 +67,21 @@ document.addEventListener('keydown', event => {
         event.preventDefault()
 })
 
+let voices = speechSynthesis.getVoices()
+if (!voices.length)
+    speechSynthesis.addEventListener('voiceschanged', () => voices = speechSynthesis.getVoices())
+
 play.addEventListener('click', event => {
     if (play.classList.toggle('on')) {
         const utter = new SpeechSynthesisUtterance([...prefix_chars, ...document.querySelectorAll('svg text:not(:empty):not(.blink)')].map((e, i) => (e.textContent ?? e) + nikud_pisuk[i]).join(''))
         console.log(utter.text)
         utter.lang = 'he'
+        const voice = voices.find(v => v.lang.startsWith('he') || v.lang.startsWith('iw'))
+        if (voice) {
+            console.log(voice)
+            utter.voice = voice
+            utter.lang = voice.lang
+        }
         utter.rate = .6
         utter.onend = e => {if (e.charIndex && e.charIndex % utter.text.length == 0) play.click()}
         speechSynthesis.speak(utter)

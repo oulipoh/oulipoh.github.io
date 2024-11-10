@@ -19,12 +19,14 @@ g {
 }
 
 text {
-    font-family: ktiv;
-    text-anchor: end;
     dominant-baseline: hanging;
-    font-size: .45rem;
     fill: #c13a16;
+    font-family: ktiv;
+    font-size: .45rem;
     scroll-margin-top: min(25rem, 50vh);
+    text-anchor: end;
+    user-select: none;
+    -webkit-user-select: none;
 }
 
 @keyframes blink {
