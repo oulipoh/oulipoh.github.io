@@ -71,6 +71,7 @@ let voices = speechSynthesis.getVoices()
 if (!voices.length)
     speechSynthesis.addEventListener('voiceschanged', () => voices = speechSynthesis.getVoices())
 
+let cancel
 play.addEventListener('click', event => {
     if (play.classList.toggle('on')) {
         const utter = new SpeechSynthesisUtterance([...prefix_chars, ...document.querySelectorAll('svg text:not(:empty):not(.blink)')].map((e, i) => (e.textContent ?? e) + nikud_pisuk[i]).join(''))
@@ -82,12 +83,11 @@ play.addEventListener('click', event => {
             utter.lang = voice.lang
         }
         utter.rate = .6
-        utter.onend = e => {console.log('end fired'); if (!e.charLength) play.click()}
-        utter.onerror = (event) => {
-  console.log(
-    `An error has occurred with the speech synthesis: ${event.error}`,
-  );
-};
+        utter.onend = e => {if (!cancel) play.click()}  // Firefox fires end instead of error on cancel. See: https://bugzilla.mozilla.org/show_bug.cgi?id=1637828
+        cancel = false
         speechSynthesis.speak(utter)
-    } else speechSynthesis.cancel()
+    } else {
+        cancel = True
+        speechSynthesis.cancel()
+    }
 })
