@@ -83,7 +83,7 @@ play.addEventListener('click', event => {
         }
         utter.rate = .6
         utter.onend = e => {console.log('end fired'); if (!e.charLength) play.click()}
-        utterThis.onerror = (event) => {
+        utter.onerror = (event) => {
   console.log(
     `An error has occurred with the speech synthesis: ${event.error}`,
   );
