@@ -8,7 +8,8 @@ const pages = {
 
     "receptacle/": {title: "כלי קיבולת", alt: "Receptacle", author: "amitbenami", kw: ["poem"]},
 
-    "water/": {title: "מים", alt: "Water", author: "arikweiss", kw: [1, "2d 3d", "visual"], skip: true},
+    "kadish/": {title: "קדיש", alt: "Kadish", author: "omridanino", kw: [1, "interactive", "poem", "visual"], skip: true},
+    "water/": {title: "מים", alt: "Water", author: "arikweiss", kw: [1, "2d 3d", "interactive", "visual"], skip: true},
     "talismetta/": {title: "טליס־מטא", alt: "Talis-Metta", author: ["neorashem", "nimrodkerrett"], kw: [1, "software", "visual"]},
     "snark/": {title: "כרחש אבמ\"ח וכרחש אדו\"ש", alt: "ABMḤ snark and ADWŠ", author: "eyalgruss", kw: [1, "2d 3d", "combinatorial", "interactive", "new constraint", "pangram", "software", "sound", "visual"]},
 
@@ -91,6 +92,10 @@ const authors = {
     },
     "noashaham": {
         "name": {"": "נעה שחם", "en": "Noa Shaham"},
+    },
+    "omridanino": {
+        "name": {"": "עומרי דנינו", "en": "Omri Danino"},
+        "instagram": 'daninomri',
     },
     "rotematar": {
         "name": {"": "רותם עטר", "en": "Rotem Atar"},

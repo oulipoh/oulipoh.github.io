@@ -4,7 +4,7 @@ article > * {
 }
 
 .model_container {
-    direction: ltr;  /* Due to: https://github.com/google/model-viewer/issues/4930 */
+    direction: ltr;  /* Fix for: https://github.com/google/model-viewer/issues/4930 */
     display: flex;
     justify-content: center;
     margin-inline: auto;
@@ -13,6 +13,7 @@ article > * {
 
 model-viewer {
     aspect-ratio: 1;
+    clip-path: inset(1px);  /* Partial fix for: https://github.com/google/model-viewer/discussions/4935 */
     height: auto;
     min-height: 0;
 }
