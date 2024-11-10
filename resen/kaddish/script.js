@@ -72,7 +72,7 @@ if (!voices.length)
     speechSynthesis.addEventListener('voiceschanged', () => voices = speechSynthesis.getVoices())
 
 let cancel
-play.addEventListener('click', event => {
+play.addEventListener('click', () => {
     if (play.classList.toggle('on')) {
         const utter = new SpeechSynthesisUtterance([...prefix_chars, ...document.querySelectorAll('svg text:not(:empty):not(.blink)')].map((e, i) => (e.textContent ?? e) + nikud_pisuk[i]).join(''))
         console.log(utter.text)
@@ -87,7 +87,7 @@ play.addEventListener('click', event => {
         cancel = false
         speechSynthesis.speak(utter)
     } else {
-        cancel = True
+        cancel = true
         speechSynthesis.cancel()
     }
 })
