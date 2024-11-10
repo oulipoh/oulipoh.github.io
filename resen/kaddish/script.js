@@ -78,12 +78,11 @@ play.addEventListener('click', event => {
         utter.lang = 'he'
         const voice = voices.find(v => v.lang.startsWith('he') || v.lang.startsWith('iw'))
         if (voice) {
-            console.log(voice)
             utter.voice = voice
             utter.lang = voice.lang
         }
         utter.rate = .6
-        utter.onend = e => {if (e.charIndex && e.charIndex % utter.text.length == 0) play.click()}
+        utter.onend = e => {console.log(e.charIndex, utter.text.length); if (e.charIndex == utter.text.length) play.click()}
         speechSynthesis.speak(utter)
     } else speechSynthesis.cancel()
 })

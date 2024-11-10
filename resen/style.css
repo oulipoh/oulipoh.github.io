@@ -1128,7 +1128,7 @@ video::-webkit-media-controls-enclosure {  /* Not supported in Firefox */
         margin-inline-start: 0;
     }
 
-    object, .mobile_wide {
+    object {
         margin-inline: var(--anti_margin);
         --media_width: auto;
     }
