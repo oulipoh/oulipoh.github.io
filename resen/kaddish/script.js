@@ -82,7 +82,7 @@ play.addEventListener('click', event => {
             utter.lang = voice.lang
         }
         utter.rate = .6
-        utter.onend = e => {console.log(e.charIndex, utter.text.length); if (e.charIndex == utter.text.length) play.click()}
+        utter.onend = e => {if (!e.charLength) play.click()}
         speechSynthesis.speak(utter)
     } else speechSynthesis.cancel()
 })
