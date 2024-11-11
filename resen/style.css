@@ -834,11 +834,11 @@ ol, ul {
 }
 
 button#play::before {
-    content: '\25b6';
+    content: '\25b6\fe0e';
 }
 
 button#play.on::before {
-    content: '\25fc';
+    content: '\2b1b\fe0e';
 }
 
 nav[dir=ltr] ~ * .preface_he {
