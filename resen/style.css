@@ -337,7 +337,6 @@ button, [id^=kw_] {
 
 .persistent {
     font-size: 1.5em;
-    margin-inline-end: .45em;
 }
 
 .always_on, button.on {
