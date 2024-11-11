@@ -1020,6 +1020,11 @@ a.sponsors {
     padding-inline: .3em;
 }
 
+svg image {
+    user-select: none;
+    -webkit-user-select: none;
+}
+
 textarea {
     border: none;
     box-sizing: border-box;
