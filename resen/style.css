@@ -1021,7 +1021,7 @@ a.sponsors {
 }
 
 svg image {
-    user-select: none;
+    user-select: none;  /* For Firefox Android */
     -webkit-user-select: none;
 }
 
