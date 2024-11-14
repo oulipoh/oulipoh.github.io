@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preload" href="../fonts/MiriamLibre-Regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../fonts/DavidLibre-Medium.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="../pages.js"></script>
+    <link rel="icon" href="../media/resen.svg">
+    <meta property="og:description" content=".">  <!-- og:description is required for WhatsApp to show og:image -->
+    <meta property="og:image" content="https://oulipoh.com/resen/taase/snippet">
+    <noscript><style>body {visibility: visible}</style></noscript>
+</head>
+<body onload="document.body.style.visibility = 'visible'">
+    <script>make_header()</script>
+    <div id="gif1" class="gif" aria-label="אנימציית סטופ־מושן של קערה מסתובבת שיוצרת אשליה אופטית של המילה תעשה"></div>
+    <div class="sliders" onclick="gif1.style.setProperty('--dt', rate_slider.valueAsNumber + 's')">
+        <label for="rate_slider">
+        <button onclick="rate_slider.value = rate_slider.min">בזריזות</button>
+        <input type="range" id="rate_slider" min="0.01" max="1" value="0.01" step="0.01" autocomplete="off" oninput="gif1.style.setProperty('--dt', this.valueAsNumber + 's')">
+        <button onclick="rate_slider.value = rate_slider.max">בעצלתיים</button>
+        </label>
+    </div>
+    <article>
+        <p>
+            קערת חרס פשוטה לכאורה המעוטרת במה שנראה כקווים וסימנים קטנים ומסתוריים.
+            כאשר מסובבים אותה בקצב מהיר ביותר, מתחברים הסימנים לאותיות המרכיבות את המילה המתגלה: "תעשה".
+            למעשה, המילה מוצפנת במרחב בפירוק לחלקים, וקיימת בשלמותה רק בממד הזמן.
+            זו המילה הפותחת את הביטוי "תעשה בזריזות ותצליח" המופיע ב<a href="https://he.wikipedia.org/wiki/%D7%A1%D7%A4%D7%A8_%D7%94%D7%A8%D7%96%D7%99%D7%9D">ספר הרזים</a>.
+            במסורת קערות הלחש וה<a href="https://he.wikipedia.org/wiki/%D7%A7%D7%A2%D7%A8%D7%AA_%D7%94%D7%A9%D7%91%D7%A2%D7%94">השבעה</a>, צפונה בקערה סגולה מאגית המבטיחה לעושה תעצומות גדולות.
+            ואולם גם נדרש מעשה מיומן מלכתחילה, כדי לחשוף את הצפון בקערה ולהפעיל את כוחה.
+        </p>
+        <p dir="ltr">
+            A seemingly simple clay bowl decorated with what appear to be lines and small mysterious marks.
+            When you spin it at a very fast pace, the marks connect to form letters that make up the revealed word: "ta-a-se", meaning "do" or "perform".
+            In fact, the word is encrypted in space as broken parts, and exists in its entirety only in the time dimension.
+            This is the opening word of the phrase "Perform this rite zealously and you will succeed" that appears in
+            the book "<a href="https://en.wikipedia.org/wiki/Sefer_HaRazim">Sefer HaRazim</a>" (Book of Secrets).
+            In the tradition of the <a href="https://en.wikipedia.org/wiki/Incantation_bowl">incantation bowls</a>, a magical virtue is hidden in the bowl, promising the doer great feats.
+            However, a skillful act is also required in the first place, in order to reveal the bowl's secret and exercise its power.
+        </p>
+    </article>
+    <script>make_footer()</script>
+</body>
+</html>
