@@ -4,9 +4,20 @@
     src: url('fonts/OHSagiIdan-Regular.woff2');
 }
 
-svg {
-    margin-inline: auto;
-    width: 100%;
+@keyframes blink {
+    50% { opacity: 0 }
+}
+
+article {
+    margin-block: 4rem;
+}
+
+.blink {
+    animation: 1.5s steps(1) infinite blink;
+}
+
+g {
+    translate: 1px -1.5px;
 }
 
 image {
@@ -14,8 +25,10 @@ image {
     width: 100%;
 }
 
-g {
-    translate: 1px -1.5px;
+svg {
+    margin-bottom: 4rem;
+    margin-inline: auto;
+    width: 100%;
 }
 
 text {
@@ -25,12 +38,4 @@ text {
     font-size: .45rem;
     scroll-margin-top: min(25rem, 50vh);
     text-anchor: end;
-}
-
-@keyframes blink {
-    50% { opacity: 0 }
-}
-
-.blink {
-    animation: 1.5s infinite steps(1) blink;
 }

@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="style.css">
     <script src="../pages.js"></script>
+    <script type="module" src="model-viewer/model-viewer.min.js"></script>
     <link rel="icon" href="../media/resen.svg">
     <meta property="og:description" content=".">  <!-- og:description is required for WhatsApp to show og:image -->
     <meta property="og:image" content="https://oulipoh.com/resen/water/snippet">
@@ -15,7 +16,6 @@
 </head>
 <body onload="document.body.style.visibility = 'visible'">
     <script>make_header()</script>
-    <script type="module" src="model-viewer/model-viewer.min.js"></script>
     <div class="model_container">
         <model-viewer src="media/group.glb" exposure=".7" camera-controls touch-action="pan-y" disable-pan disable-zoom alt="מודל תלת־ממדי של מקווה הבנוי מצורות אותיות המילה מים">
             <div class="progress-bar hide" slot="progress-bar">
@@ -94,7 +94,6 @@
         מים זה חיים. מים זה מקום. מים זה תקווה.
     </p>
     </article>
-    <br><br>
     <script>make_footer()</script>
 </body>
 </html>

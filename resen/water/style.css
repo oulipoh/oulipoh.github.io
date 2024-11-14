@@ -1,4 +1,4 @@
-article > * {
+article > *:not(p + p) {
     margin-top: 5rem;
     width: 100%;
 }

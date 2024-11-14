@@ -6,12 +6,13 @@ const pages = {
     "/": {title: "רֶסֶן", alt: "Resen", author: "resen", logo: "media/resen.svg", skip: true},
     // "open-call-kmeot/": {title: "קול קורא: קמעות", alt: "Open call: Talismans", author: "resen"},
 
-    "receptacle/": {title: "כלי קיבולת", alt: "Receptacle", author: "amitbenami", kw: ["poem"]},
-
-    "kaddish/": {title: "קדיש", alt: "Kaddish", author: "omridanino", kw: [1, "interactive", "poem", "visual"]},
-    "water/": {title: "קוד מים", alt: "Code of water", author: "arikweiss", kw: [1, "2d 3d", "interactive", "visual"]},
+    "taase/": {title: "תעשה", alt: "Ta-a-se", author: "ayaamikam", kw: [1, "biblical", "cipher", "interactive", "visual"]},
+    "kaddish/": {title: "קדיש (שלד)", alt: "Kaddish (skeleton)", author: "omridanino", kw: [1, "biblical", "interactive", "poem", "visual"]},
+    "water/": {title: "קוד מים | תרשימי זרימה", alt: "Code of water | flow charts", author: "arikweiss", kw: [1, "2d 3d", "biblical", "interactive", "visual"]},
     "talismetta/": {title: "טליס־מטא", alt: "Talis-Metta", author: ["neorashem", "nimrodkerrett"], kw: [1, "software", "visual"]},
     "snark/": {title: "כרחש אבמ\"ח וכרחש אדו\"ש", alt: "ABMḤ snark and ADWŠ", author: "eyalgruss", kw: [1, "2d 3d", "combinatorial", "interactive", "new constraint", "pangram", "software", "sound", "visual"]},
+
+    "receptacle/": {title: "כלי קיבולת", alt: "Receptacle", author: "amitbenami", kw: ["poem"]},
 
     "0/": {title: "פתח דבר לגיליון אפס – מלחמה", alt: "Foreward to Issue 0 – War", author: "alexbenari", kw: [0]},
     "imagine/": {title: "דמיין", alt: "Imagine", author: "liorzalmanson", kw: [0, "poem"]},
@@ -39,17 +40,21 @@ const authors = {
     },
     "adisorek": {
         "name": {"": "עדי שורק", "en": "Adi Sorek"},
-        "web": "adisorek.com",
+        "web": ".com",
     },
     "alexbenari": {
         "name": {"": "אלכס בן־ארי", "en": "Alex Ben Ari"},
-        "web": "alexbenari.com",
+        "web": ".com",
     },
     "amitbenami": {
         "name": {"": "עמית בן עמי", "en": "Amit Ben Ami"},
     },
     "avimilgrom": {
         "name": {"": "אבי מילגרום", "en": "Avi Milgrom"},
+    },
+    "ayaamikam": {
+        "name": {"": "איה עמיקם", "en": "Aya Amikam"},
+        "instagram": "aya_amikam",
     },
     "arikweiss": {
         "name": {"": "אריק וייס", "en": "Arik Weiss"},
