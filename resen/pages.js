@@ -6,6 +6,7 @@ const pages = {
     "/": {title: "רֶסֶן", alt: "Resen", author: "resen", logo: "media/resen.svg", skip: true},
     // "open-call-kmeot/": {title: "קול קורא: קמעות", alt: "Open call: Talismans", author: "resen"},
 
+    "umbilical/": {title: "טבוּר", alt: "Umbilical", author: "nettalevtov", kw: [1, "live code", "poem", "visual"], skip: true},
     "taase/": {title: "תעשה", alt: "Ta-a-se", author: "ayaamikam", kw: [1, "biblical", "cipher", "interactive", "visual"]},
     "kaddish/": {title: "קדיש (שלד)", alt: "Kaddish (skeleton)", author: "omridanino", kw: [1, "biblical", "interactive", "poem", "visual"]},
     "water/": {title: "קוד מים | תרשימי זרימה", alt: "Code of water | flow charts", author: "arikweiss", kw: [1, "2d 3d", "biblical", "interactive", "visual"]},
@@ -90,6 +91,10 @@ const authors = {
     "neorashem": {
         "name": {"": "נאורה שם", "en": "Neora Shem"},
         "web": "neora.pro/",
+    },
+    "nettalevtov": {
+        "name": {"": "נטע לב טוב", "en": "Netta Lev Tov"},
+        "web": "netta-lev-tov.com/"
     },
     "nimrodkerrett": {
         "name": {"": "נמרוד קרת", "en": "Nimrod Kerrett"},
