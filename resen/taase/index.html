@@ -17,10 +17,10 @@
     <script>make_header()</script>
     <div oncontextmenu="toggle_fullscreen(event)">
         <div id="gif1" class="gif" aria-label="אנימציית סטופ־מושן של קערה מסתובבת שיוצרת אשליה אופטית של המילה תעשה"></div>
-        <div class="sliders" onclick="gif1.style.setProperty('--dt', rate_slider.valueAsNumber + 's')">
+        <div class="sliders" onclick="gif1.style.setProperty('--dt', rate_slider.valueAsNumber)">
             <label for="rate_slider">
                 <button onclick="rate_slider.value = rate_slider.min">בזריזות</button>
-                <input type="range" id="rate_slider" min="0.01" max="1" step="0.01" value="0.05" autocomplete="off" oninput="gif1.style.setProperty('--dt', this.valueAsNumber + 's')">
+                <input type="range" id="rate_slider" min="1" max="500" value="16" autocomplete="off" oninput="gif1.style.setProperty('--dt', this.valueAsNumber)">
                 <button onclick="rate_slider.value = rate_slider.max">בעצלתיים</button>
             </label>
         </div>

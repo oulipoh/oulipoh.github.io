@@ -13,7 +13,7 @@ div[oncontextmenu*="toggle_fullscreen"] {
 }
 
 .fullscreen > .gif {
-    width: 100%;
+    width: stretch;
 }
 
 .fullscreen > .sliders {
@@ -29,8 +29,8 @@ div[oncontextmenu*="toggle_fullscreen"] {
 }
 
 .gif {
-    --dt: 0.01s;
-    animation: var(--dt) infinite gif;
+    --dt: 16;
+    animation: calc(var(--dt) * 4ms) steps(1) infinite gif;
     aspect-ratio: 16 / 9;
     background-repeat: no-repeat;
     background-size: contain;
