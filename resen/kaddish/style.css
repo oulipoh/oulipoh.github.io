@@ -8,10 +8,6 @@
     50% { opacity: 0 }
 }
 
-article {
-    margin-block: 4rem;
-}
-
 .blink {
     animation: 1.5s steps(1) infinite blink;
 }

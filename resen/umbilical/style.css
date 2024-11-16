@@ -1,0 +1,193 @@
+:root {
+    --bg: #fdcda3;
+    --fg_dim: --fg;
+}
+
+article {
+    letter-spacing: normal;
+    --line_height: normal;
+}
+
+h3 {
+    font-size: 32px;
+    margin-block: .67em 37px; /* Adjust the value to the desired space */
+}
+
+.poem {
+    margin-bottom: 209px;
+}
+
+.poem p {
+    font-size: 24px;
+    line-height: 1.6;
+    margin: 10px 0;
+}
+
+#yodLamed, #heVav, #vavTav {
+    display: inline-block;
+    vertical-align: bottom;
+}
+
+.hidden {
+    visibility: hidden; /* Initially hidden */
+}
+
+.scale {
+    overflow: hidden;
+    white-space: nowrap;
+    transform: scaleX(0); /* Starts at 0 width */
+    transform-origin: right; /* Grows from right to left */
+    transition: transform 3s; /* Smooth scale animation */
+}
+
+.grow {
+    transform: scaleX(1); /* Grows from 0 to full width */
+}
+
+.scale-from-left {
+    overflow: hidden;
+    white-space: nowrap;
+    transform: translateX(30px) scaleX(0); /* Starts scaled at 0 and shifted to the right */
+    transform-origin: left; /* Grows from left to right */
+    transition: transform 3s;
+}
+
+.grow-left {
+    transform: translateX(30px) scaleX(1); /* Grows from left to right, keeping the right shift */
+}
+
+.disappear {
+    opacity: 0; /* Fades out the element */
+    transition: opacity 1s; /* Smooth fading effect */
+}
+
+.move {
+    animation: moveLeft 1.5s forwards;
+}
+
+#newLine {
+    opacity: 0;
+}
+
+#newLine.show {
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 2s; /* Smooth fade in */
+}
+
+/* Styling for the Shuruk/Dagesh line */
+#lineAnimation {
+    position: absolute;
+    top: 0px;
+	left: 0px;
+    height: 500px; /* Enough height for the symbols to go up */
+}
+
+.shuruk-symbol {
+    position: absolute;
+    font-size: 24px;
+    -webkit-text-stroke: 1px;
+    transition: 1s;
+}
+
+@keyframes moveLeft {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50px); /* Moves 50px to the left */
+    }
+}
+
+.attached {
+	padding: 0px;
+	margin: 0px;
+}
+
+/*-------- part 3 -------------*/
+#poem3 {
+    position: relative; /* Ensure the poem container is positioned relatively */
+}
+
+.movings, .movings2 {
+	font-size: 24px;
+	position: absolute;
+    white-space: nowrap; /* Prevent line breaks */
+}
+
+@keyframes moveUp1 {
+    100% { transform: translateY(-120px); }
+}
+
+@keyframes moveUp2 {
+    100% { transform: translateY(-90px); }
+}
+
+@keyframes moveUp3 {
+    100% { transform: translateY(-60px); }
+}
+
+@keyframes moveUp4 {
+    100% { transform: translateY(-30px); }
+}
+
+.moving-1 {
+    animation: moveUp1 20s forwards;
+    visibility: visible;
+}
+
+.moving-2 {
+    animation: moveUp2 20s forwards;
+    visibility: visible;
+}
+
+.moving-3 {
+    animation: moveUp3 20s forwards;
+    visibility: visible;
+}
+
+.moving-4 {
+    animation: moveUp4 20s forwards;
+    visibility: visible;
+}
+
+@keyframes moveDown1 {
+    100% { transform: translateY(120px); }
+}
+
+@keyframes moveDown2 {
+    100% { transform: translateY(90px); }
+}
+
+@keyframes moveDown3 {
+    100% { transform: translateY(60px); }
+}
+
+@keyframes moveDown4 {
+    100% { transform: translateY(30px); }
+}
+
+.moving2-1 {
+    animation: moveDown1 20s forwards;
+    visibility: visible;
+}
+
+.moving2-2 {
+    animation: moveDown2 20s forwards;
+    visibility: visible;
+}
+
+.moving2-3 {
+    animation: moveDown3 20s forwards;
+    visibility: visible;
+}
+
+.moving2-4 {
+    animation: moveDown4 20s forwards;
+    visibility: visible;
+}
+
+#shins {
+  overflow: hidden;      /* Hide any overflowing text */
+  white-space: nowrap;   /* Prevent text from wrapping to the next line */
+}
