@@ -10,7 +10,7 @@ div[oncontextmenu*="toggle_fullscreen"] {
 }
 
 .fullscreen > .gif {
-    width: stretch;
+    width: 100%;
 }
 
 .fullscreen > .sliders {
@@ -30,7 +30,6 @@ div[oncontextmenu*="toggle_fullscreen"] {
     aspect-ratio: 16 / 9;
     background-repeat: no-repeat;
     background-size: contain;
-    height: 100%;
     margin-inline: auto;
     width: var(--media_width);
 }
@@ -40,5 +39,5 @@ label[for="rate_slider"] {
 }
 
 #rate_slider {
-    width: 15em;
+    width: min(15em, 33vw);
 }
