@@ -26,7 +26,7 @@ div[oncontextmenu*="toggle_fullscreen"] {
 
 .gif {
     --fps: 60;
-    animation: calc(4s / max(var(--fps), 1)) steps(1) infinite gif;
+    animation: calc(4s / var(--fps)) steps(1) infinite gif;
     aspect-ratio: 16 / 9;
     background-repeat: no-repeat;
     background-size: contain;
