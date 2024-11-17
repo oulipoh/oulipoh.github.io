@@ -33,8 +33,6 @@ h3 {
 }
 
 .scale {
-    overflow: hidden;
-    white-space: nowrap;
     transform: scaleX(0); /* Starts at 0 width */
     transform-origin: right; /* Grows from right to left */
     transition: transform 3s; /* Smooth scale animation */
@@ -45,8 +43,6 @@ h3 {
 }
 
 .scale-from-left {
-    overflow: hidden;
-    white-space: nowrap;
     transform: translateX(30px) scaleX(0); /* Starts scaled at 0 and shifted to the right */
     transform-origin: left; /* Grows from left to right */
     transition: transform 3s;
@@ -95,13 +91,8 @@ h3 {
         transform: translateX(0);
     }
     100% {
-        transform: translateX(-50px); /* Moves 50px to the left */
+        transform: translateX(-43px); /* Moves 50px to the left */
     }
-}
-
-.attached {
-	padding: 0px;
-	margin: 0px;
 }
 
 /*-------- part 3 -------------*/
@@ -188,6 +179,6 @@ h3 {
 }
 
 #shins {
-  overflow: hidden;      /* Hide any overflowing text */
+  overflow: clip;      /* Hide any overflowing text */
   white-space: nowrap;   /* Prevent text from wrapping to the next line */
 }

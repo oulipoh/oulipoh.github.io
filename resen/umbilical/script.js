@@ -94,17 +94,14 @@ function animateSecondPoem() {
 // Function to show the Shuruk symbols at predefined positions from an array
 function drawShurukLine() {
 
-    // Get the position of the vavTav element
     const newLineRect = anuVav.getBoundingClientRect();
     const startX = newLineRect.left - 12; // X position of ו
     const startY = newLineRect.top + scrollY;  // Y position of ו
 
-    // Get the position of the vavTav element
     const periodRect = period.getBoundingClientRect();
     const X0 = periodRect.left ; // X position of ו
     const Y0 = periodRect.top + scrollY ;  // Y position of ו
 
-    // Get the position of the vavTav element
     const vavTavRect = vavTav.getBoundingClientRect();
     const X1 = vavTavRect.left + 14; // X position of ו
     const Y1 = vavTavRect.top + 10 + scrollY;  // Y position of ו
@@ -128,7 +125,7 @@ function drawShurukLine() {
 
         // Downward curve (slightly adjust the first few points for curvature)
         { x: startX - space * 11.5, y: startY + space * 0.5 },  // Curve slightly down-right
-        { x: startX - space * 12, y: startY + space * 1 },
+        { x: startX - space * 12, y: startY + space },
         { x: startX - space * 12, y: startY + space * 2 },
         { x: startX - space * 12, y: startY + space * 3 },
         { x: startX - space * 11.5, y: startY + space * 3.5 },  // Curve slightly up-right
@@ -144,9 +141,9 @@ function drawShurukLine() {
         { x: startX - space * 4, y: startY + space * 4 },
         { x: startX - space * 3, y: startY + space * 4 },
         { x: startX - space * 2, y: startY + space * 4 },
-        { x: startX - space * 1, y: startY + space * 4 },
-        { x: startX, y: startY + space * 4 },
-        { x: startX + space * 1, y: startY + space * 4 },
+        { x: startX - space,     y: startY + space * 4 },
+        { x: startX,             y: startY + space * 4 },
+        { x: startX + space,     y: startY + space * 4 },
         { x: startX + space * 2, y: startY + space * 4 },
         { x: startX + space * 3, y: startY + space * 4 },
         { x: startX + space * 4, y: startY + space * 4 },
@@ -157,11 +154,11 @@ function drawShurukLine() {
         { x: startX + space * 5.5, y: startY + space * 2.7 },
         { x: startX + space * 6, y: startY + space * 2.0 },
         { x: startX + space * 6.5, y: startY + space * 1.5 },
-        { x: startX + space * 7, y: startY + space * 1 },
+        { x: startX + space * 7, y: startY + space },
 
         // Straight line up
-        { x: startX + space * 7, y: startY + space * 0 },
-        { x: startX + space * 7, y: startY - space * 1 },
+        { x: startX + space * 7, y: startY },
+        { x: startX + space * 7, y: startY - space },
         { x: startX + space * 7, y: startY - space * 2 },
         { x: startX + space * 7, y: startY - space * 3 },
         { x: startX + space * 7, y: startY - space * 4 },
@@ -178,9 +175,9 @@ function drawShurukLine() {
         { x: startX + space * 4, y: startY - space * 10 },
         { x: startX + space * 3, y: startY - space * 10 },
         { x: startX + space * 2, y: startY - space * 10 },
-        { x: startX + space * 1, y: startY - space * 10 },
-        { x: startX + space * 0, y: startY - space * 10 },         // Curve to straight left
-        { x: startX - space * 1, y: startY - space * 10 },
+        { x: startX + space    , y: startY - space * 10 },
+        { x: startX,             y: startY - space * 10 },         // Curve to straight left
+        { x: startX - space,     y: startY - space * 10 },
         { x: startX - space * 2, y: startY - space * 10 },
         { x: startX - space * 3, y: startY - space * 10 },
         { x: startX - space * 4, y: startY - space * 10 },
@@ -191,7 +188,7 @@ function drawShurukLine() {
         { x: X0 - space * 0.5, y: Y0 - space * 1.5 },
         { x: X0 - space * 0.5, y: Y0 - space },
         { x: X0 - space * 0.5, y: Y0 },
-        { x: X0 - space * 0.5, y: Y0 + space * 1 },
+        { x: X0 - space * 0.5, y: Y0 + space },
         { x: X0 - space * 0.5, y: Y0 + space * 2 },
 
         // Left (slight curve)
@@ -201,19 +198,18 @@ function drawShurukLine() {
         { x: startX - space * 9, y: startY - space * 3 },
         { x: startX - space * 10, y: startY - space * 3 },
         { x: startX - space * 11, y: startY - space * 3 },
-        { x: startX - space * 12, y: startY - space * 3 },
 
         // Upward curve
         { x: X1 + space * 0.5, y: Y1 + space * 1.5 },  // Curve slightly right-down
-        { x: X1, y: Y1 + space },
+        { x: X1,               y: Y1 + space },
         { x: X1 - space * 0.5, y: Y1 },
-        { x: X1 - space * 0.5, y: Y1 - space * 1 },
+        { x: X1 - space * 0.5, y: Y1 - space },
         { x: X1 - space * 0.5, y: Y1 - space * 2 },
         { x: X1 - space * 0.5, y: Y1 - space * 3 },
 
         // Right
-        { x: X1 + space * 0, y: Y1 - space * 4 },
-        { x: X1 + space * 1, y: Y1 - space * 4 },
+        { x: X1,             y: Y1 - space * 4 },
+        { x: X1 + space,     y: Y1 - space * 4 },
         { x: X1 + space * 2, y: Y1 - space * 4 },
         { x: X1 + space * 3, y: Y1 - space * 4 },
         { x: X1 + space * 4, y: Y1 - space * 4 },
@@ -224,71 +220,70 @@ function drawShurukLine() {
         { x: X1 + space * 9, y: Y1 - space * 4 },
         { x: X1 + space * 10, y: Y1 - space * 4 },
         { x: X1 + space * 11, y: Y1 - space * 4 },
-        { x: X1 + space * 12, y: Y1 - space * 4 },
 
         // Upward curve
-        { x: X1 + space * 12.5 - 1, y: Y1 - space * 5 },
-        { x: X1 + space * 12.5 - 2, y: Y1 - space * 6 },
-        { x: X1 + space * 12.5 - 2, y: Y1 - space * 7 },
-        { x: X1 + space * 12.5 - 2, y: Y1 - space * 8 },
-        { x: X1 + space * 12.5 - 2, y: Y1 - space * 9 },
-        { x: X1 + space * 12.5 - 2, y: Y1 - space * 10 },
+        { x: X1 + space * 11.5 - 3, y: Y1 - space * 5 },
+        { x: X1 + space * 11.5 - 2, y: Y1 - space * 6 },
+        { x: X1 + space * 11.5 - 2, y: Y1 - space * 7 },
+        { x: X1 + space * 11.5 - 2, y: Y1 - space * 8 },
+        { x: X1 + space * 11.5 - 2, y: Y1 - space * 9 },
+        { x: X1 + space * 11.5 - 2, y: Y1 - space * 10 },
 
         // Left
-        { x: X1 + space * 12.5 - 1.5, y: Y1 - space * 10 },
+        { x: X1 + space * 11.5 - 1.5, y: Y1 - space * 10 },
 
         // Up (straight)
-        { x: X1 + space * 11.5 - 1, y: Y1 - space * 10 },
-        { x: X1 + space * 11.5 - 1, y: Y1 - space * 10 },
-        { x: X1 + space * 11.5 - 1, y: Y1 - space * 11 },
-        { x: X1 + space * 11.5 - 1, y: Y1 - space * 12 },
-        { x: X1 + space * 11.5 - 1, y: Y1 - space * 13 },
-        { x: X1 + space * 11.5 - 1, y: Y1 - space * 14 },
-        { x: X1 + space * 11.5 - 1, y: Y1 - space * 15 },
-        { x: X1 + space * 11.5 - 1, y: Y1 - space * 16 },
-        { x: X1 + space * 11.5 - 1, y: Y1 - space * 17 },
-        { x: X1 + space * 11.5 - 1, y: Y1 - space * 18 },
-        { x: X1 + space * 11.5 - 1, y: Y1 - space * 19 },
-        { x: X1 + space * 11.5 - 1, y: Y1 - space * 20 },
-        { x: X1 + space * 11.5 - 1, y: Y1 - space * 21 },
-        { x: X1 + space * 11.5 - 1, y: Y1 - space * 22 },
+        { x: X1 + space * 10.5 - 1, y: Y1 - space * 10 },
+        { x: X1 + space * 10.5 - 1, y: Y1 - space * 10 },
+        { x: X1 + space * 10.5 - 1, y: Y1 - space * 11 },
+        { x: X1 + space * 10.5 - 1, y: Y1 - space * 12 },
+        { x: X1 + space * 10.5 - 1, y: Y1 - space * 13 },
+        { x: X1 + space * 10.5 - 1, y: Y1 - space * 14 },
+        { x: X1 + space * 10.5 - 1, y: Y1 - space * 15 },
+        { x: X1 + space * 10.5 - 1, y: Y1 - space * 16 },
+        { x: X1 + space * 10.5 - 1, y: Y1 - space * 17 },
+        { x: X1 + space * 10.5 - 1, y: Y1 - space * 18 },
+        { x: X1 + space * 10.5 - 1, y: Y1 - space * 19 },
+        { x: X1 + space * 10.5 - 1, y: Y1 - space * 20 },
+        { x: X1 + space * 10.5 - 1, y: Y1 - space * 21 },
+        { x: X1 + space * 10.5 - 1, y: Y1 - space * 22 },
         // Right
+        { x: X1 + space * 11.5, y: Y1 - space * 22.5 },
         { x: X1 + space * 12.5, y: Y1 - space * 22.5 },
         { x: X1 + space * 13.5, y: Y1 - space * 22.5 },
         { x: X1 + space * 14.5, y: Y1 - space * 22.5 },
-        { x: X1 + space * 15.5, y: Y1 - space * 22.5 },
         // Up
-        { x: X1 + space * 16, y: Y1 - space * 23.5 },
-        { x: X1 + space * 16, y: Y1 - space * 24 },
-        { x: X1 + space * 16, y: Y1 - space * 25 },
-        { x: X1 + space * 16.5, y: Y1 - space * 26 },
-        { x: X1 + space * 16.5 + 1, y: Y1 - space * 27 },
-        { x: X1 + space * 16.5 + 1, y: Y1 - space * 28 },
-        { x: X1 + space * 16.5 + 1, y: Y1 - space * 29 },
-        { x: X1 + space * 16.5 + 1, y: Y1 - space * 30 },
-        { x: X1 + space * 16.5 + 1, y: Y1 - space * 31 },
-        { x: X1 + space * 16.5 + 1, y: Y1 - space * 32 },
-        { x: X1 + space * 16.5 + 1, y: Y1 - space * 33 },
-        { x: X1 + space * 16.5 + 1, y: Y1 - space * 34 },
-        { x: X1 + space * 16.5 + 1, y: Y1 - space * 35 },
-        { x: X1 + space * 16.5 + 1, y: Y1 - space * 36 },
-        { x: X1 + space * 16.5 + 1, y: Y1 - space * 37 },
-        { x: X1 + space * 16.5 + 1, y: Y1 - space * 38 },
-        { x: X1 + space * 16.5 + 1, y: Y1 - space * 39 },
-        { x: X1 + space * 16.5 + 1, y: Y1 - space * 40 },
-        { x: X1 + space * 16.5 + 1, y: Y1 - space * 41 },
-        { x: X1 + space * 16.5 + 1, y: Y1 - space * 42 },
-        { x: X1 + space * 16.5 + 1, y: Y1 - space * 43 },
-        { x: X1 + space * 16.5 + 1, y: Y1 - space * 44 },
-        { x: X1 + space * 16.5 + 1, y: Y1 - space * 45 },
-        { x: X1 + space * 16.5 + 1, y: Y1 - space * 46 },
-        { x: X1 + space * 16.5 + 1, y: Y1 - space * 47 },
-        { x: X1 + space * 16.5 + 1, y: Y1 - space * 48 },
-        { x: X1 + space * 16.5 + 1, y: Y1 - space * 49 },
-        { x: X1 + space * 16.5 + 1, y: Y1 - space * 50 },
-        { x: X1 + space * 16.5 + 1, y: Y1 - space * 51 },
-        { x: X1 + space * 16.5 + 1, y: Y1 - space * 52 },
-        { x: X1 + space * 16.5 + 1, y: Y1 - space * 53 }
+        { x: X1 + space * 15.5 + 2, y: Y1 - space * 23.5 },
+        { x: X1 + space * 15.5 + 2, y: Y1 - space * 24 },
+        { x: X1 + space * 15.5 + 2, y: Y1 - space * 25 },
+        { x: X1 + space * 15.5 + 2, y: Y1 - space * 26 },
+        { x: X1 + space * 15.5 + 2, y: Y1 - space * 27 },
+        { x: X1 + space * 15.5 + 2, y: Y1 - space * 28 },
+        { x: X1 + space * 15.5 + 2, y: Y1 - space * 29 },
+        { x: X1 + space * 15.5 + 2, y: Y1 - space * 30 },
+        { x: X1 + space * 15.5 + 2, y: Y1 - space * 31 },
+        { x: X1 + space * 15.5 + 2, y: Y1 - space * 32 },
+        { x: X1 + space * 15.5 + 2, y: Y1 - space * 33 },
+        { x: X1 + space * 15.5 + 2, y: Y1 - space * 34 },
+        { x: X1 + space * 15.5 + 2, y: Y1 - space * 35 },
+        { x: X1 + space * 15.5 + 2, y: Y1 - space * 36 },
+        { x: X1 + space * 15.5 + 2, y: Y1 - space * 37 },
+        { x: X1 + space * 15.5 + 2, y: Y1 - space * 38 },
+        { x: X1 + space * 15.5 + 2, y: Y1 - space * 39 },
+        { x: X1 + space * 15.5 + 2, y: Y1 - space * 40 },
+        { x: X1 + space * 15.5 + 2, y: Y1 - space * 41 },
+        { x: X1 + space * 15.5 + 2, y: Y1 - space * 42 },
+        { x: X1 + space * 15.5 + 2, y: Y1 - space * 43 },
+        { x: X1 + space * 15.5 + 2, y: Y1 - space * 44 },
+        { x: X1 + space * 15.5 + 2, y: Y1 - space * 45 },
+        { x: X1 + space * 15.5 + 2, y: Y1 - space * 46 },
+        { x: X1 + space * 15.5 + 2, y: Y1 - space * 47 },
+        { x: X1 + space * 15.5 + 2, y: Y1 - space * 48 },
+        { x: X1 + space * 15.5 + 2, y: Y1 - space * 49 },
+        { x: X1 + space * 15.5 + 2, y: Y1 - space * 50 },
+        { x: X1 + space * 15.5 + 2, y: Y1 - space * 51 },
+        { x: X1 + space * 15.5 + 2, y: Y1 - space * 52 },
+        { x: X1 + space * 15.5 + 2, y: Y1 - space * 53 }
     ];
 
     // Iterate over the array of positions and create Shuruk symbols
@@ -401,6 +396,4 @@ function reset3() {
 }
 
 addEventListener('resize', positionElements, {passive: true});
-addEventListener('scroll', positionElements, {passive: true});
 addEventListener('resize', positionElements2, {passive: true});
-addEventListener('scroll', positionElements2, {passive: true});
