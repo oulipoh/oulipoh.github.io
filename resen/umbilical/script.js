@@ -371,27 +371,44 @@ const minDelay = 90; // Set a minimum delay (fastest speed)
 const accelerationFactor = 0.9; // Factor by which delay decreases each time
 
 function addX() {
-    let currentText = shins.textContent;
+    let currentText = '';
     let delay = initialDelay;
 
     function addCharacter() {
         currentText += 'ש';
         shins.textContent = currentText;
+        delay = Math.max(minDelay, delay * accelerationFactor);
+        if (currentText.length < 120)
+            setTimeout(addCharacter, delay)
+        else
+            addX_right(delay)
+    }
 
-        if (currentText.length < 80) {
+    addCharacter()
+    setTimeout(reset3, 36000)
+}
+
+function addX_right(delay) {
+    let currentText = '';
+
+    function addCharacter() {
+        currentText += 'ש';
+        shins_container.dataset.content = currentText;
+
+        if (currentText.length < 100) {
             delay = Math.max(minDelay, delay * accelerationFactor);
             setTimeout(addCharacter, delay)
         }
     }
 
     addCharacter()
-    setTimeout(reset3, 26000)
 }
 
 function reset3() {
     movingLElements.forEach((element, index) => element.classList.remove("moving-" + (index + 1)))
     movingLElements2.forEach((element, index) => element.classList.remove("moving2-" + (index + 1)))
-    shins.textContent = shins.textContent[0]
+    shins.textContent = ''
+    shins_container.dataset.content = ''
     animateThirdPoem()
 }
 

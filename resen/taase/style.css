@@ -10,11 +10,14 @@ div[oncontextmenu*="toggle_fullscreen"] {
 }
 
 .fullscreen > .gif {
+    background-attachment: fixed;
+    background-position: center;
     width: 100%;
 }
 
 .fullscreen > .sliders {
-    margin-block: auto 2% !important;
+    bottom: 1rem;
+    position: fixed;
 }
 
 @keyframes gif {

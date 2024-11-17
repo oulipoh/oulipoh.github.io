@@ -3,9 +3,17 @@
     --fg_dim: --fg;
 }
 
+body {
+    overflow-x: clip;
+}
+
 article {
     letter-spacing: normal;
     --line_height: normal;
+}
+
+article:first-of-type {
+    --article_width: 20ch;
 }
 
 h3 {
@@ -178,7 +186,12 @@ h3 {
     visibility: visible;
 }
 
-#shins {
-  overflow: clip;      /* Hide any overflowing text */
+#shins_container {
   white-space: nowrap;   /* Prevent text from wrapping to the next line */
+}
+
+#shins_container::before {
+    content: attr(data-content);
+    margin-inline-start: -69.8em;
+    position: absolute;
 }

@@ -6,6 +6,9 @@ const pages = {
     "/": {title: "רֶסֶן", alt: "Resen", author: "resen", logo: "media/resen.svg", skip: true},
     // "open-call-kmeot/": {title: "קול קורא: קמעות", alt: "Open call: Talismans", author: "resen"},
 
+    "fateful/": {title: "שהות הרת־גורל", alt: "Fateful stay", author: "shoeyraz", kw: [1], skip: true},
+    "psychosophy/": {title: "פסיכוסופיה", alt: "Psychsophy", author: ["avinoamsternheim", "menahemgoldenberg"], kw: [1, "visual"], skip: true},
+    "talismother/": {title: "אימא קמעית", alt: "Talis-Mother", author: "sandravalabregue", kw: [1, "visual"], skip: true},
     "umbilical/": {title: "טבוּר", alt: "Umbilical", author: "nettalevtov", kw: [1, "live code", "poem", "visual"], skip: true},
     "taase/": {title: "תעשה", alt: "Ta-a-se", author: "ayaamikam", kw: [1, "biblical", "cipher", "interactive", "visual"]},
     "kaddish/": {title: "קדיש (שלד)", alt: "Kaddish (skeleton)", author: "omridanino", kw: [1, "biblical", "interactive", "poem", "visual"]},
@@ -53,6 +56,10 @@ const authors = {
     "avimilgrom": {
         "name": {"": "אבי מילגרום", "en": "Avi Milgrom"},
     },
+    "avinoamsternheim": {
+        "name": {"": "אבינועם שטרנהיים", "en": "Avinoam Sternheim"},
+        "web": ".com",
+    },
     "ayaamikam": {
         "name": {"": "איה עמיקם", "en": "Aya Amikam"},
         "instagram": "aya_amikam",
@@ -85,30 +92,42 @@ const authors = {
     "liorzalmanson": {
         "name": {"": "ליאור זלמנסון", "en": "Lior Zalmanson"},
     },
+    "menahemgoldenberg": {
+        "name": {"": "מנחם גולדנברג", "en": "Menahem Goldenberg"},
+        "web": "www.menahem.net",
+    },
     "mikamilgrom": {
         "name": {"": "מיקה מילגרום", "en": "Mika Milgrom"},
     },
     "neorashem": {
         "name": {"": "נאורה שם", "en": "Neora Shem"},
-        "web": "neora.pro/",
+        "web": "neora.pro",
     },
     "nettalevtov": {
         "name": {"": "נטע לב טוב", "en": "Netta Lev Tov"},
-        "web": "netta-lev-tov.com/"
+        "web": "netta-lev-tov.com"
     },
     "nimrodkerrett": {
         "name": {"": "נמרוד קרת", "en": "Nimrod Kerrett"},
-        "web": "zzzen.com/#/",
+        "web": "zzzen.com",
     },
     "noashaham": {
         "name": {"": "נעה שחם", "en": "Noa Shaham"},
     },
     "omridanino": {
         "name": {"": "עומרי דנינו", "en": "Omri Danino"},
-        "instagram": 'daninomri',
+        "instagram": "daninomri",
     },
     "rotematar": {
         "name": {"": "רותם עטר", "en": "Rotem Atar"},
+    },
+    "sandravalabregue": {
+        "name": {"": "סנדרה ואלאברג", "en": "Sandra Valabregue"},
+        "web": "sandra-valabregue.com",
+    },
+    "shoeyraz": {
+        "name": {"": "שועי רז", "en": "Shoey Raz"},
+        "web": ".wordpress.com",
     },
 }
 
