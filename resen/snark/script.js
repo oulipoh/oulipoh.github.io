@@ -19,7 +19,13 @@ function get_play(event) {
         const notes_array = notes[svg.id].split(' ')
         const seq = new Tone.Sequence((time, note) => synth.triggerAttackRelease(note, duration_sec, time), path.map(i => notes_array[i]), delay_sec).start('+.05')  // Reduce pops noise and avoid skipping first note. See: https://github.com/Tonejs/Tone.js/wiki/Performance#scheduling-in-advance and https://github.com/Tonejs/Tone.js/issues/403#issuecomment-447663104
 	    seq.loop = false
-	    circle.addEventListener('mouseleave', () => seq.mute = true)  // Will also fire when clicking outside for touch interaction
+        function mute() {
+            seq.mute = true;
+            circle.removeEventListener('click', mute)
+            circle.removeEventListener('mouseleave', mute)
+        }
+	    circle.addEventListener('click', mute)
+	    circle.addEventListener('mouseleave', mute)  // Will also fire when clicking outside for touch interaction
         Tone.Transport.start()
     }
     return [svg, cls]
@@ -29,3 +35,19 @@ function click(event) {
     const [svg, cls] = get_play(event)
     svg.dataset.selected = cls
 }
+
+document.addEventListener('keydown', event => {
+    if (event.altKey || event.ctrlKey || event.metaKey || !event.key.match(/[אבגדהוזחטיכלמנסעפצקרשת]/) && event.key != 'Backspace' && event.key != 'CapsLock')
+        return
+    const svg = document.querySelector('svg')
+    svg.style.setProperty('--delay', 0)
+    svg.classList.remove('keyboard')
+    setTimeout(() => {
+        if (event.key == 'CapsLock')
+            document.querySelectorAll('div[oncontextmenu*=toggle_fullscreen]').forEach((e, i) => e.appendChild(document.querySelectorAll('svg')[1 - i]))
+        else if (event.key != 'Backspace') {
+            svg.classList.add('keyboard')
+            ;[...svg.querySelectorAll('circle')].find(c => c.nextElementSibling.textContent == event.key).dispatchEvent(new MouseEvent('click', {bubbles: true}))
+        }
+    })
+})

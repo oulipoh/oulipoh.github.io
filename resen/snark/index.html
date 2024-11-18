@@ -16,7 +16,8 @@
 </head>
 <body class="todark" onload="document.body.style.visibility = 'visible'">
     <script>make_header()</script>
-    <svg id="ABMH" viewBox="0 0 100 100" style="--fg: #64ff64" onmouseover="get_play(event)" onclick="click(event)" oncontextmenu="toggle_fullscreen(event, false)">
+    <div oncontextmenu="toggle_fullscreen(event, false)">
+    <svg id="ABMH" viewBox="0 0 100 100" style="--fg: #64ff64" onmouseover="get_play(event)" onclick="click(event)">
         <line x1="70" y1="50" x2="60" y2="32.68" />
         <line x1="60" y1="32.68" x2="40" y2="32.68" />
         <line x1="40" y1="32.68" x2="30" y2="50" />
@@ -162,8 +163,9 @@
             <text x="50" y="50">א</text>
         </g>
     </svg>
-
-    <svg id="ADWS" viewBox="0 0 100 100" style="--fg: #ff6464" onmouseover="get_play(event)" onclick="click(event)" oncontextmenu="toggle_fullscreen(event, false)">
+    </div>
+    <div oncontextmenu="toggle_fullscreen(event, false)">
+    <svg id="ADWS" viewBox="0 0 100 100" style="--fg: #ff6464" onmouseover="get_play(event)" onclick="click(event)">
         <line x1="70" y1="50" x2="60" y2="32.68" />
         <line x1="60" y1="32.68" x2="30" y2="15.36" />
         <line x1="70" y1="15.36" x2="40" y2="32.68" />
@@ -310,6 +312,7 @@
             <text x="50" y="50">א</text>
         </g>
     </svg>
+    </div>
     <br>
     <article>
     <p>

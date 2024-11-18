@@ -873,6 +873,16 @@ nav[dir=ltr] ~ * .preface_he {
     content: '>';
 }
 
+.ref {
+    font-family: var(--font);
+    font-size: .7rem;
+    vertical-align: text-top;
+}
+
+.ref::after {
+    content: attr(href);
+}
+
 .refs {
     margin-top: 6ex;
 }
@@ -903,8 +913,18 @@ nav[dir=rtl] ~ :nth-last-child(1 of .refs):not([data-title]) {
 }
 
 .refs > blockquote {
-    direction: ltr;
     font-size: initial;
+    position: relative;
+}
+
+.refs:not([dir=rtl]) > blockquote {
+    direction: ltr;
+}
+
+.refs > blockquote[id]::before {
+    content: attr(id);
+    margin-inline-start: -2em;
+    position: absolute;
 }
 
 .refs > blockquote a {

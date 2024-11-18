@@ -79,6 +79,37 @@ svg {
     }
 }
 
+.keyboard :is(
+    [data-selected=m21] :is(.m21, .n21),
+    [data-selected=m20] :is(.m20, .n20),
+    [data-selected=m19] :is(.m19, .n19),
+    [data-selected=m18] :is(.m18, .n18),
+    [data-selected=m17] :is(.m17, .n17),
+    [data-selected=m16] :is(.m16, .n16),
+    [data-selected=m15] :is(.m15, .n15),
+    [data-selected=m14] :is(.m14, .n14),
+    [data-selected=m13] :is(.m13, .n13),
+    [data-selected=m12] :is(.m12, .n12),
+    [data-selected=m11] :is(.m11, .n11),
+    [data-selected=m10] :is(.m10, .n10),
+    [data-selected=m9] :is(.m9, .n9),
+    [data-selected=m8] :is(.m8, .n8),
+    [data-selected=m7] :is(.m7, .n7),
+    [data-selected=m6] :is(.m6, .n6),
+    [data-selected=m5] :is(.m5, .n5),
+    [data-selected=m4] :is(.m4, .n4),
+    [data-selected=m3] :is(.m3, .n3),
+    [data-selected=m2] :is(.m2, .n2),
+    [data-selected=m1] :is(.m1, .n1),
+    [data-selected=m0] :is(.m0, .n0)) {
+        --delay: var(--active_delay_sec);
+        filter: drop-shadow(0 0 1px var(--fg));
+        fill: var(--fg_highlight);
+        stroke-width: .65;
+        transition-duration: var(--active_transition_sec);
+}
+
+
 circle {
     fill: var(--fg);
     r: 2.2px;

@@ -385,7 +385,6 @@ function addX() {
     }
 
     addCharacter()
-    setTimeout(reset3, 36000)
 }
 
 function addX_right(delay) {
@@ -399,6 +398,8 @@ function addX_right(delay) {
             delay = Math.max(minDelay, delay * accelerationFactor);
             setTimeout(addCharacter, delay)
         }
+        else
+            setTimeout(reset3, 6000)
     }
 
     addCharacter()

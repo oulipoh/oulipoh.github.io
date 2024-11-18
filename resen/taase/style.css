@@ -1,4 +1,4 @@
-div[oncontextmenu*="toggle_fullscreen"] {
+div[oncontextmenu*=toggle_fullscreen] {
     align-content: center;
     display: grid;
     margin-bottom: 4.5rem;
