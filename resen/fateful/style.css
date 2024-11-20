@@ -19,7 +19,7 @@ body {
 }
 
 #canvas {
-  width: 100vw;
+  width: 100%;
   flex: 0 0 60px;
   transform: translateY(1px);
 }
@@ -30,7 +30,7 @@ body {
   }
 
   50% {
-    flex: 0 0 90%;
+    flex: 0 0 calc(100% - 15rem);
   }
 
   100% {

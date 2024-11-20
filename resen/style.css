@@ -923,7 +923,7 @@ nav[dir=rtl] ~ :nth-last-child(1 of .refs):not([data-title]) {
 
 .refs > blockquote[id]::before {
     content: attr(id);
-    margin-inline-start: -2em;
+    margin-inline-start: -1.2em;
     position: absolute;
 }
 

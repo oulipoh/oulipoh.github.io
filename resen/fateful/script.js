@@ -21,7 +21,7 @@ for (let i = 0; i <= n + 1; i++) {
 
 const c = document.getElementById("canvas");
 var ctx = c.getContext("2d");
-c.width = width;
+c.width = Math.min(width, innerWidth);
 c.height = height;
 
 const tick = () => {
@@ -70,7 +70,7 @@ const tick = () => {
 	ctx.stroke();
 
 	// close
-	ctx.lineTo(width + 50, 70);
+	ctx.lineTo(c.width + 50, 70);
 	ctx.lineTo(-50, 70);
 	ctx.lineTo(-50, points[0].y);
 
@@ -84,3 +84,4 @@ const tick = () => {
 tick();
 
 new IntersectionObserver(e => {if (e[0].isIntersecting) filler.classList.add('grow')}).observe(document.querySelector('.refs'))
+addEventListener('resize', () => c.width = Math.min(width, innerWidth), {passive: true});
