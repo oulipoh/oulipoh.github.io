@@ -15,35 +15,36 @@ svg {
     margin-inline: auto;
     max-height: min(100vh, 1080px);
     stroke-width: .5;
+    transition: cursor .5s allow-discrete;
 }
 
 @media (hover: hover) {
-    svg:has(.m21 circle:hover) :is(.m21, .n21),
-    svg:has(.m20 circle:hover) :is(.m20, .n20),
-    svg:has(.m19 circle:hover) :is(.m19, .n19),
-    svg:has(.m18 circle:hover) :is(.m18, .n18),
-    svg:has(.m17 circle:hover) :is(.m17, .n17),
-    svg:has(.m16 circle:hover) :is(.m16, .n16),
-    svg:has(.m15 circle:hover) :is(.m15, .n15),
-    svg:has(.m14 circle:hover) :is(.m14, .n14),
-    svg:has(.m13 circle:hover) :is(.m13, .n13),
-    svg:has(.m12 circle:hover) :is(.m12, .n12),
-    svg:has(.m11 circle:hover) :is(.m11, .n11),
-    svg:has(.m10 circle:hover) :is(.m10, .n10),
-    svg:has(.m9 circle:hover) :is(.m9, .n9),
-    svg:has(.m8 circle:hover) :is(.m8, .n8),
-    svg:has(.m7 circle:hover) :is(.m7, .n7),
-    svg:has(.m6 circle:hover) :is(.m6, .n6),
-    svg:has(.m5 circle:hover) :is(.m5, .n5),
-    svg:has(.m4 circle:hover) :is(.m4, .n4),
-    svg:has(.m3 circle:hover) :is(.m3, .n3),
-    svg:has(.m2 circle:hover) :is(.m2, .n2),
-    svg:has(.m1 circle:hover) :is(.m1, .n1),
-    svg:has(.m0 circle:hover) :is(.m0, .n0) {
+    svg:not(.keyboard):has(.m21 circle:hover) :is(.m21, .n21),
+    svg:not(.keyboard):has(.m20 circle:hover) :is(.m20, .n20),
+    svg:not(.keyboard):has(.m19 circle:hover) :is(.m19, .n19),
+    svg:not(.keyboard):has(.m18 circle:hover) :is(.m18, .n18),
+    svg:not(.keyboard):has(.m17 circle:hover) :is(.m17, .n17),
+    svg:not(.keyboard):has(.m16 circle:hover) :is(.m16, .n16),
+    svg:not(.keyboard):has(.m15 circle:hover) :is(.m15, .n15),
+    svg:not(.keyboard):has(.m14 circle:hover) :is(.m14, .n14),
+    svg:not(.keyboard):has(.m13 circle:hover) :is(.m13, .n13),
+    svg:not(.keyboard):has(.m12 circle:hover) :is(.m12, .n12),
+    svg:not(.keyboard):has(.m11 circle:hover) :is(.m11, .n11),
+    svg:not(.keyboard):has(.m10 circle:hover) :is(.m10, .n10),
+    svg:not(.keyboard):has(.m9 circle:hover) :is(.m9, .n9),
+    svg:not(.keyboard):has(.m8 circle:hover) :is(.m8, .n8),
+    svg:not(.keyboard):has(.m7 circle:hover) :is(.m7, .n7),
+    svg:not(.keyboard):has(.m6 circle:hover) :is(.m6, .n6),
+    svg:not(.keyboard):has(.m5 circle:hover) :is(.m5, .n5),
+    svg:not(.keyboard):has(.m4 circle:hover) :is(.m4, .n4),
+    svg:not(.keyboard):has(.m3 circle:hover) :is(.m3, .n3),
+    svg:not(.keyboard):has(.m2 circle:hover) :is(.m2, .n2),
+    svg:not(.keyboard):has(.m1 circle:hover) :is(.m1, .n1),
+    svg:not(.keyboard):has(.m0 circle:hover) :is(.m0, .n0) {
         --delay: var(--active_delay_sec);
         filter: drop-shadow(0 0 1px var(--fg));
         fill: var(--fg_highlight);
-        stroke-width: .65;
+        stroke-width: .8;
         transition-duration: var(--active_transition_sec);
     }
 }
@@ -74,7 +75,7 @@ svg {
         --delay: var(--active_delay_sec);
         filter: drop-shadow(0 0 1px var(--fg));
         fill: var(--fg_highlight);
-        stroke-width: .65;
+        stroke-width: .8;
         transition-duration: var(--active_transition_sec);
     }
 }
@@ -105,10 +106,13 @@ svg {
         --delay: var(--active_delay_sec);
         filter: drop-shadow(0 0 1px var(--fg));
         fill: var(--fg_highlight);
-        stroke-width: .65;
+        stroke-width: .8;
         transition-duration: var(--active_transition_sec);
 }
 
+.keyboard {
+    cursor: none;
+}
 
 circle {
     fill: var(--fg);

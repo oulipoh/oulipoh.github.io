@@ -73,12 +73,11 @@ function animateSecondPoem() {
 
                                     // Step 8: Show new line after 1.5 seconds
                                     setTimeout(() => {
-                                        newLine.classList.remove("hidden");
                                         newLine.classList.add("show");
-
-                                        // Step 9: Trigger the final Shuruk line animation
-                                        lineAnimation.classList.remove("hidden");
-                                        drawShurukLine();
+                                        setTimeout(() => {
+                                            // Step 9: Trigger the final Shuruk line animation
+                                            drawShurukLine();
+                                        }, 1000);
                                     }, 4000); // Increased the delay to allow proper reset
                                 }, 2000); // Reanimate after a longer delay
                             }, 1000);
@@ -339,7 +338,7 @@ function positionElements() {
 function showAndAnimate() {
     positionElements()
     movingLElements.forEach((e, index) => e.classList.add("moving-" + (index + 1)))
-    setTimeout(showAndAnimate2, 20000)
+    setTimeout(showAndAnimate2, 11000)
 }
 
 function positionElements2() {

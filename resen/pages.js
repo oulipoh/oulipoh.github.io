@@ -38,6 +38,7 @@ const authors = {
     "resen": {
         "name": {"": "רֶסֶן – כתב עת מקוון ליצירה אילוצית וחישובית בעברית", "en": "Resen - an online journal for constrained and computational creation in Hebrew"},
         "mail": "eyalgruss+resen@gmail.com",
+        "instagram": "resen_an_online_journal",
         "github": "",
         "sponsors": "",
         "subscribe": "ayPSSeHk3KL4ALGa9",
