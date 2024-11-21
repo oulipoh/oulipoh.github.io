@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preload" href="../fonts/MiriamLibre-Regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../fonts/DavidLibre-Medium.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="../pages.js"></script>
+    <link rel="icon" href="../media/resen.svg">
+    <meta property="og:description" content=".">  <!-- og:description is required for WhatsApp to show og:image -->
+    <meta property="og:image" content="https://oulipoh.com/resen/seasons/snippet">
+    <noscript><style>body {visibility: visible}</style></noscript>
+</head>
+<body id="gameBody" class="toblack" onload="document.body.style.visibility = 'visible'">
+    <script>make_header()</script>
+    <div id="game">
+      <canvas id="mainCanvas" width="256" height="224"></canvas>
+    </div>
+    <div id="controller">
+      <div id="controller_dpad">
+        <div id="controller_left"></div>
+        <div id="controller_right"></div>
+        <div id="controller_up"></div>
+        <div id="controller_down"></div>
+      </div>
+      <div id="controller_select" class="capsuleBtn">Select</div>
+      <div id="controller_start" class="capsuleBtn">Start</div>
+      <div id="controller_b" class="roundBtn">B</div>
+      <div id="controller_a" class="roundBtn">A</div>
+    </div>
+    <script>
+      const customControls = {}
+    </script>
+    <script src="binjgb.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/additions.js"></script>
+    <script>make_footer()</script>
+</body>
+</html>

@@ -6,12 +6,13 @@ const pages = {
     "/": {title: "רֶסֶן", alt: "Resen", author: "resen", logo: "media/resen.svg", skip: true},
     // "open-call-kmeot/": {title: "קול קורא: קמעות", alt: "Open call: Talismans", author: "resen"},
 
+    "screen/": {title: "קמעות צג", alt: "Screen talismans", author: "eakoukli", kw: [1, "interactive", "live code", "poem", "software", "sound", "visual"]},
     "fateful/": {title: "שהות הרת־גורל", alt: "Fateful stay", author: "shoeyraz", kw: [1]},
     "psychosophy/": {title: "פסיכוסופיה: פתיחה", alt: "Psychsophy: a reading", author: ["avinoamsternheim", "menahemgoldenberg"], kw: [1, "visual"]},
     "talismother/": {title: "אימא קמעית", alt: "Talis-Mother", author: "sandravalabregue", kw: [1, "visual"]},
     "umbilical/": {title: "טבוּר", alt: "Umbilical", author: "nettalevtov", kw: [1, "live code", "poem", "visual"]},
     "taase/": {title: "תעשה", alt: "Ta-a-se", author: "ayaamikam", kw: [1, "biblical", "cipher", "interactive", "visual"]},
-    "kaddish/": {title: "קדיש (שלד)", alt: "Kaddish (skeleton)", author: "omridanino", kw: [1, "biblical", "interactive", "poem", "visual"]},
+    "kaddish/": {title: "קדיש (שלד)", alt: "Kaddish (skeleton)", author: "omridanino", kw: [1, "biblical", "interactive", "poem", "sound", "visual"]},
     "water/": {title: "קוד מים | תרשימי זרימה", alt: "Code of water | flow charts", author: "arikweiss", kw: [1, "2d 3d", "biblical", "interactive", "visual"]},
     "talismetta/": {title: "טליס־מטא", alt: "Talis-Metta", author: ["neorashem", "nimrodkerrett"], kw: [1, "software", "visual"]},
     "snark/": {title: "כרחש אבמ\"ח וכרחש אדו\"ש", alt: "ABMḤ snark and ADWŠ", author: "eyalgruss", kw: [1, "2d 3d", "combinatorial", "interactive", "new constraint", "pangram", "software", "sound", "visual"]},
@@ -71,6 +72,10 @@ const authors = {
     },
     "brunogrife": {
         "name": {"": "עידן ברונו גרייף", "en": "Bruno Grife"},
+    },
+    "eakoukli": {
+        "name": {"": "א. קוּקלי", "en": "E. A. Koukly"},
+        "web": "toonsnake.net",
     },
     "eyalgruss": {
         "name": {"": "איל יהוה גרוּס", "en": "Eyal Yehowa Gruss"},

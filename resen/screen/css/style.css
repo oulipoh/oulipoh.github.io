@@ -1,0 +1,183 @@
+body {
+ --bg: #1d0212 !important;
+}
+
+#game {
+    width: 100%;
+    max-width: 480px;
+    margin-inline: auto;
+}
+
+canvas {
+    width: 100%;
+    margin-inline: auto;
+    image-rendering: crisp-edges;
+}
+
+#controller {
+  display: block;
+  height: 230px;
+  width: 100%;
+  margin-inline: auto;
+  max-width: 480px;
+  touch-action: none;
+  text-align: center;
+  position: relative;
+
+}
+#fullScreenButton span.material-symbols-outlined {
+  color: #f1dcab;
+  vertical-align: bottom;
+}
+#controller_dpad {
+  position: absolute;
+  bottom: 10px;
+  left: 0px;
+  width: 184px;
+  height: 184px;
+}
+#xyzLogo {
+  height: 100px;
+  padding: 25px 0;
+}
+#controller_left,
+#controller_right,
+#controller_up,
+#controller_down,
+#controller_a,
+#controller_b,
+#controller_start,
+#controller_select {
+  cursor: pointer;
+}
+
+#controller_dpad:before {
+  content: "";
+  display: block;
+  width: 42px;
+  height: 42px;
+  background: #e38c89;
+  position: absolute;
+  left: 62px;
+  top: 68px;
+}
+
+#controller_left {
+  position: absolute;
+  left: 20px;
+  top: 68px;
+  width: 42px;
+  height: 42px;
+  background: #e38c89;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+#controller_right {
+  position: absolute;
+  left: 104px;
+  top: 68px;
+  width: 42px;
+  height: 42px;
+  background: #e38c89;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+
+#controller_up {
+  position: absolute;
+  left: 62px;
+  top: 26px;
+  width: 42px;
+  height: 42px;
+  background: #e38c89;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+}
+
+#controller_down {
+  position: absolute;
+  left: 62px;
+  top: 110px;
+  width: 42px;
+  height: 42px;
+  background: #e38c89;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+
+#controller_a {
+  position: absolute;
+  bottom: 110px;
+  right: 20px;
+}
+
+#controller_b {
+  position: absolute;
+  bottom: 80px;
+  right: 90px;
+}
+ul.navigation {
+  width: 85%;
+  direction: rtl;
+  right: 0;
+  margin: 0;
+  padding: 0;
+}
+#logo,
+ul.navigation {
+  display: inline-flex;
+}
+ul.navigation li {
+  margin: 0;
+  padding: 0;
+}
+.roundBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 26px;
+  line-height: 56px;
+  width: 56px;
+  height: 56px;
+  border-radius: 56px;
+  color: #9e3230;
+  background: #e38c89;
+  border: 2px solid #9e3230;
+
+  box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.2);
+}
+
+.capsuleBtn {
+  font-weight: bold;
+  font-size: 10px;
+  color: #9e3230;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 20px;
+  text-transform: uppercase;
+  width: 56px;
+  height: 25px;
+  border-radius: 40px;
+  background: #e38c89;
+  box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.2);
+  vertical-align: middle;
+}
+
+#controller_start {
+  position: absolute;
+  bottom: 20px;
+  right: 15px;
+}
+
+#controller_select {
+  position: absolute;
+  bottom: 20px;
+  right: 90px;
+}
+
+.btnPressed {
+  opacity: 0.5;
+}
