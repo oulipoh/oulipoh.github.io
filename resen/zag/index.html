@@ -15,6 +15,7 @@
 </head>
 <body id="gameBody" class="toblack" onload="document.body.style.visibility = 'visible'">
     <script>make_header()</script>
+    <div oncontextmenu="toggle_fullscreen(event)">
     <div id="game">
       <canvas id="mainCanvas" width="256" height="224"></canvas>
     </div>
@@ -29,6 +30,7 @@
       <div id="controller_start" class="capsuleBtn">Start</div>
       <div id="controller_b" class="roundBtn">B</div>
       <div id="controller_a" class="roundBtn">A</div>
+    </div>
     </div>
     <script>
       const customControls = {}
