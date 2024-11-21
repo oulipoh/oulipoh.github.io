@@ -6,9 +6,9 @@ const pages = {
     "/": {title: "רֶסֶן", alt: "Resen", author: "resen", logo: "media/resen.svg", skip: true},
     // "open-call-kmeot/": {title: "קול קורא: קמעות", alt: "Open call: Talismans", author: "resen"},
 
-    "fateful/": {title: "שהות הרת־גורל", alt: "Fateful stay", author: "shoeyraz", kw: [1], skip: true},
-    "psychosophy/": {title: "פסיכוסופיה", alt: "Psychsophy", author: ["avinoamsternheim", "menahemgoldenberg"], kw: [1, "visual"], skip: true},
-    "talismother/": {title: "אימא קמעית", alt: "Talis-Mother", author: "sandravalabregue", kw: [1, "visual"], skip: true},
+    "fateful/": {title: "שהות הרת־גורל", alt: "Fateful stay", author: "shoeyraz", kw: [1]},
+    "psychosophy/": {title: "פסיכוסופיה: פתיחה", alt: "Psychsophy: a reading", author: ["avinoamsternheim", "menahemgoldenberg"], kw: [1, "visual"]},
+    "talismother/": {title: "אימא קמעית", alt: "Talis-Mother", author: "sandravalabregue", kw: [1, "visual"]},
     "umbilical/": {title: "טבוּר", alt: "Umbilical", author: "nettalevtov", kw: [1, "live code", "poem", "visual"]},
     "taase/": {title: "תעשה", alt: "Ta-a-se", author: "ayaamikam", kw: [1, "biblical", "cipher", "interactive", "visual"]},
     "kaddish/": {title: "קדיש (שלד)", alt: "Kaddish (skeleton)", author: "omridanino", kw: [1, "biblical", "interactive", "poem", "visual"]},
@@ -842,3 +842,6 @@ function toggle_fullscreen(event_or_elem, landscape=true, target_screen, elem) {
         document.exitFullscreen()
     return was_not_fullscreen_before
 }
+
+
+document.addEventListener('keydown', e => {if (e.key == '~') document.body.classList.toggle('psycler')})

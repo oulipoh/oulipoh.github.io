@@ -14,10 +14,10 @@
     <meta property="og:image" content="https://oulipoh.com/resen/snark/snippet">
     <noscript><style>body {visibility: visible}</style></noscript>
 </head>
-<body class="todark" onload="document.body.style.visibility = 'visible'">
+<body class="toblack" onload="document.body.style.visibility = 'visible'">
     <script>make_header()</script>
-    <div oncontextmenu="toggle_fullscreen(event, false)">
-    <svg id="ABMH" viewBox="0 0 100 100" style="--fg: #64ff64" onmouseover="if (!classList.contains('keyboard')) get_play(event)" onclick="click(event)" onmousemove="classList.remove('keyboard')" onmousedown="classList.remove('keyboard')">
+    <div oncontextmenu="toggle_fullscreen(event, false)" onmousemove="classList.remove('keyboard')" onmousedown="classList.remove('keyboard')">
+    <svg id="ABMH" viewBox="0 0 100 100" style="--fg: #64ff64" onmouseover="if (!parentElement.classList.contains('keyboard')) get_play(event)" onclick="click(event)">
         <line x1="70" y1="50" x2="60" y2="32.68" />
         <line x1="60" y1="32.68" x2="40" y2="32.68" />
         <line x1="40" y1="32.68" x2="30" y2="50" />
@@ -164,8 +164,8 @@
         </g>
     </svg>
     </div>
-    <div oncontextmenu="toggle_fullscreen(event, false)">
-    <svg id="ADWS" viewBox="0 0 100 100" style="--fg: #ff6464" onmouseover="if (!classList.contains('keyboard')) get_play(event)" onclick="click(event)" onmousemove="classList.remove('keyboard')" onmousedown="classList.remove('keyboard')">
+    <div oncontextmenu="toggle_fullscreen(event, false)" onmousemove="classList.remove('keyboard')" onmousedown="classList.remove('keyboard')">
+    <svg id="ADWS" viewBox="0 0 100 100" style="--fg: #ff6464" onmouseover="if (!parentElement.classList.contains('keyboard')) get_play(event)" onclick="click(event)">
         <line x1="70" y1="50" x2="60" y2="32.68" />
         <line x1="60" y1="32.68" x2="30" y2="15.36" />
         <line x1="70" y1="15.36" x2="40" y2="32.68" />

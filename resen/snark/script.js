@@ -68,24 +68,23 @@ function click(event) {
     svg.dataset.selected = cls
 }
 
+const containers = document.querySelectorAll('div[oncontextmenu*=toggle_fullscreen]')
+
 document.addEventListener('keydown', event => {
     if (event.altKey || event.ctrlKey || event.metaKey || !event.key.match(/^[א-תa-zA-Z]$/) && event.key != 'Backspace' && event.key != 'CapsLock')
         return
-    const svg = document.querySelector('svg')
-    svg.style.setProperty('--delay', 0)
-    const is_keyboard = svg.classList.contains('keyboard')
-    svg.classList.remove('keyboard')
-    setTimeout(() => {
-        if (event.key == 'CapsLock') {
-            svg.dataset.selected = ''
-            if (is_keyboard)
-                document.querySelectorAll('svg')[1].classList.add('keyboard')
-            document.querySelectorAll('div[oncontextmenu*=toggle_fullscreen]').forEach((e, i) => e.appendChild(document.querySelectorAll('svg')[1 - i]))
-        }
-        else if (event.key != 'Backspace') {
-            svg.classList.add('keyboard')
+    const svgs = document.querySelectorAll('svg')
+    if (event.key == 'CapsLock') {
+        svgs[0].dataset.selected = ''
+        containers.forEach((e, i) => e.appendChild(svgs[1 - i]))
+        return
+    }
+    containers[0].classList.remove('keyboard')
+    if (event.key != 'Backspace')
+        setTimeout(() => {
+            //svgs[0].style.setProperty('--delay', 0)
+            containers[0].classList.add('keyboard')
             const key = keymap[event.key.toLowerCase()] || event.key
-            ;[...svg.querySelectorAll('circle')].find(c => c.nextElementSibling.textContent == key).dispatchEvent(new MouseEvent('click', {bubbles: true}))
-        }
-    }, 1)
+            ;[...svgs[0].querySelectorAll('circle')].find(c => c.nextElementSibling.textContent == key).dispatchEvent(new MouseEvent('click', {bubbles: true}))
+        }, 1)
 })

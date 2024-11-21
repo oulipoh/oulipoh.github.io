@@ -51,6 +51,12 @@
     unicode-range: U+2709;
 }
 
+@font-face {
+    font-family: arabic;
+    font-display: block;
+    src: url('fonts/ReadexPro-Regular.ttf');
+}
+
 :root, ::backdrop {  /* In Chrome (<122) and Firefox (<120) ::backdrop did not inherit from :root. See: https://issues.chromium.org/issues/40569411, https://bugzilla.mozilla.org/show_bug.cgi?id=1855668 */
     --bg: white;
     --fg_rgb: 0 0 0;
@@ -123,9 +129,15 @@ body {
     width: 100%;
 }
 
-body.todark, .todark ::backdrop {
+body.toblack, .toblack ::backdrop {
     --bg: black;
     --fg_rgb: var(--whitish_rgb);
+    --invert: 0;
+}
+
+body.todark, .todark ::backdrop {
+    --bg: #1b1b1b;
+    --fg_rgb: 255 255 255;
     --invert: 0;
 }
 
@@ -826,6 +838,11 @@ ol, ul {
     margin-block: 4ex 6ex;
 }
 
+.overflow, .cogram {
+    overflow-x: auto;
+    padding-bottom: var(--hor_scrollbar_offset);
+}
+
 :is(p:not([dir=ltr]), p:not([dir=ltr]) + br) + :is(blockquote, h3, h4, p)[dir=ltr],
 :is(p:not([dir=ltr]), p:not([dir=ltr]) + br) + div[dir=ltr] > :is(blockquote, h3, h4, p):first-child,
 :is(p[dir=ltr], p[dir=ltr] + br) + :is(blockquote, h3, h4, p):not([dir=ltr]) {
@@ -844,9 +861,14 @@ nav[dir=ltr] ~ * .preface_he {
     display: none;
 }
 
-.overflow, .cogram {
-    overflow-x: auto;
-    padding-bottom: var(--hor_scrollbar_offset);
+@keyframes psycler {
+    0% { filter: hue-rotate(5deg) saturate(2) invert(0) }
+    50% { filter: hue-rotate(160deg) saturate(8) invert(0.25) }
+    100% { filter: hue-rotate(350deg) saturate(2) invert(0) }
+}
+
+.psycler nav ~ * {
+    animation: 8s linear infinite psycler;
 }
 
 .punct {

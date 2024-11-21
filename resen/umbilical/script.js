@@ -84,7 +84,7 @@ function animateSecondPoem() {
                         }, 7000); // Increased disappearance time for both to 4 seconds
                     }, 2000); // Allow 1.5 seconds before starting to scale "(וה)"
                 }, 7000); // Wait 3 seconds for "(יל)" to disappear
-            }, 2000); // After 1 second, trigger the scaling of "יל"
+            }, 4000); // After 1 second, trigger the scaling of "יל"
         }, 2000); // Wait 1.5 seconds for the movement of "ות" to complete
     }, 6000);
 }
@@ -338,7 +338,7 @@ function positionElements() {
 function showAndAnimate() {
     positionElements()
     movingLElements.forEach((e, index) => e.classList.add("moving-" + (index + 1)))
-    setTimeout(showAndAnimate2, 11000)
+    setTimeout(showAndAnimate2, 23000)
 }
 
 function positionElements2() {
