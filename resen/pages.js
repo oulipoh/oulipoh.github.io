@@ -6,7 +6,7 @@ const pages = {
     "/": {title: "רֶסֶן", alt: "Resen", author: "resen", logo: "media/resen.svg", skip: true},
     // "open-call-kmeot/": {title: "קול קורא: קמעות", alt: "Open call: Talismans", author: "resen"},
 
-    "screen/": {title: "קמעות צג", alt: "Screen talismans", author: "eakoukli", kw: [1, "interactive", "live code", "poem", "software", "sound", "visual"]},
+    "zag/": {title: "קמעות צג", alt: "Kmeot zag", author: "eakoukli", kw: [1, "interactive", "live code", "poem", "software", "sound", "visual"]},
     "fateful/": {title: "שהות הרת־גורל", alt: "Fateful stay", author: "shoeyraz", kw: [1]},
     "psychosophy/": {title: "פסיכוסופיה: פתיחה", alt: "Psychsophy: a reading", author: ["avinoamsternheim", "menahemgoldenberg"], kw: [1, "visual"]},
     "talismother/": {title: "אימא קמעית", alt: "Talis-Mother", author: "sandravalabregue", kw: [1, "visual"]},
