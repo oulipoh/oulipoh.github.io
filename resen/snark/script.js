@@ -30,7 +30,7 @@ const keymap = {a: 'א',
                 'ץ': 'צ',
                 q: 'ק',
                 r: 'ר',
-                s: 'ש',
+                x: 'ש',
                 t: 'ת'}
 
 const duration_sec = .125
@@ -73,18 +73,20 @@ const containers = document.querySelectorAll('div[oncontextmenu*=toggle_fullscre
 document.addEventListener('keydown', event => {
     if (event.altKey || event.ctrlKey || event.metaKey || !event.key.match(/^[א-תa-zA-Z]$/) && event.key != 'Backspace' && event.key != 'CapsLock')
         return
+    const index = containers[1].classList.contains('fullscreen') | 0
     const svgs = document.querySelectorAll('svg')
     if (event.key == 'CapsLock') {
-        svgs[0].dataset.selected = ''
+        svgs[index].dataset.selected = ''
         containers.forEach((e, i) => e.appendChild(svgs[1 - i]))
+        svgs[index].dataset.selected = ''
         return
     }
-    containers[0].classList.remove('keyboard')
+    containers[index].classList.remove('keyboard')
     if (event.key != 'Backspace')
         setTimeout(() => {
-            //svgs[0].style.setProperty('--delay', 0)
-            containers[0].classList.add('keyboard')
+            svgs[index].style.setProperty('--delay', 0)
+            containers[index].classList.add('keyboard')
             const key = keymap[event.key.toLowerCase()] || event.key
-            ;[...svgs[0].querySelectorAll('circle')].find(c => c.nextElementSibling.textContent == key).dispatchEvent(new MouseEvent('click', {bubbles: true}))
+            ;[...svgs[index].querySelectorAll('circle')].find(c => c.nextElementSibling.textContent == key).dispatchEvent(new MouseEvent('click', {bubbles: true}))
         }, 1)
 })

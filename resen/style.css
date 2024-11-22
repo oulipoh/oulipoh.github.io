@@ -556,7 +556,7 @@ nav[dir=rtl] ~ footer > div {
 }
 
 .fullscreen::backdrop {
-    background-color: var(--bg);
+    background-color: var(--fullscreen_bg, var(--bg));
 }
 
 .fullscreen > :first-child {
@@ -670,6 +670,10 @@ iframe, object {
     max-height: var(--images_container_height);
     object-fit: contain;
     width: 100%;
+}
+
+.images.fullscreen > img:first-child:last-child {
+    --max_media_height: 100%;
 }
 
 .images > img:not(:first-child:last-child) {
