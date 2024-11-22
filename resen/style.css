@@ -614,6 +614,8 @@ h4:not(article *) {
 .harden {
     display: inline-block;
     text-decoration: inherit;
+    text-decoration-color: inherit;  /* For Safari */
+    text-decoration-style: inherit;  /* For Safari */
 }
 
 header {
@@ -791,6 +793,8 @@ nav a:not(.trans)::before {
 
 nav .back > span {
     text-decoration: inherit;
+    text-decoration-color: inherit;  /* For Safari */
+    text-decoration-style: inherit;  /* For Safari */
 }
 
 nav .back::before {
