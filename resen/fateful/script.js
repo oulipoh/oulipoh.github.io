@@ -1,4 +1,4 @@
-// From: Jos Faber (https://codepen.io/josfabre/pen/QWeVyKb)
+    // From: Jos Faber (https://codepen.io/josfabre/pen/QWeVyKb)
 
 const n = 12;
 const width = 1400;
@@ -65,7 +65,7 @@ const tick = () => {
 		p.t += 0.015;
 	});
 
-	ctx.lineWidth = 16;
+	ctx.lineWidth = 8;
 	ctx.strokeStyle = "#AFE1EF";
 	ctx.stroke();
 
@@ -85,3 +85,9 @@ tick();
 
 new IntersectionObserver(e => {if (e[0].isIntersecting) filler.classList.add('grow')}).observe(document.querySelector('.refs'))
 addEventListener('resize', () => c.width = Math.min(width, innerWidth), {passive: true});
+
+const floatElements = document.querySelectorAll('h2, p, .refs, blockquote, footer > div')
+new ResizeObserver(() => {
+    const top = canvas.getBoundingClientRect().top
+    floatElements.forEach(e => e.style.setProperty('--play', e.getBoundingClientRect().top - 40 > top ? 'running' : 'paused'))
+}).observe(filler)

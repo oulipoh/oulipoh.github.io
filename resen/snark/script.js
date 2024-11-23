@@ -73,20 +73,20 @@ const containers = document.querySelectorAll('div[oncontextmenu*=toggle_fullscre
 document.addEventListener('keydown', event => {
     if (event.altKey || event.ctrlKey || event.metaKey || !event.key.match(/^[א-תa-zA-Z]$/) && event.key != 'Backspace' && event.key != 'CapsLock')
         return
-    const index = containers[1].classList.contains('fullscreen') | 0
+    const current = containers[1].classList.contains('fullscreen') | 0
     const svgs = document.querySelectorAll('svg')
     if (event.key == 'CapsLock') {
-        svgs[index].dataset.selected = ''
+        svgs[current].dataset.selected = ''
         containers.forEach((e, i) => e.appendChild(svgs[1 - i]))
-        svgs[index].dataset.selected = ''
+        svgs[current].dataset.selected = ''
         return
     }
-    containers[index].classList.remove('keyboard')
+    containers[current].classList.remove('keyboard')
     if (event.key != 'Backspace')
         setTimeout(() => {
-            svgs[index].style.setProperty('--delay', 0)
-            containers[index].classList.add('keyboard')
+            svgs[current].style.setProperty('--delay', 0)
+            containers[current].classList.add('keyboard')
             const key = keymap[event.key.toLowerCase()] || event.key
-            ;[...svgs[index].querySelectorAll('circle')].find(c => c.nextElementSibling.textContent == key).dispatchEvent(new MouseEvent('click', {bubbles: true}))
+            ;[...svgs[current].querySelectorAll('circle')].find(c => c.nextElementSibling.textContent == key).dispatchEvent(new MouseEvent('click', {bubbles: true}))
         }, 1)
 })

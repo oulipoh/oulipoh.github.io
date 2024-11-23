@@ -1,8 +1,11 @@
 html {
+    overflow-x: clip;
     overscroll-behavior: none;
 }
 
 body {
+    overflow-x: clip;
+    overscroll-behavior: none;
     position: relative;
 }
 
@@ -43,6 +46,37 @@ body {
 }
 
 #filler {
-  background: #B3E5FC;
+  background: linear-gradient(#B3E5FC, #3649b3 1000px);
   flex: 0 0 0;
+}
+
+@keyframes wave {
+  20% {
+    transform: rotate(-.3deg) translatex(-.7rem);
+  }
+  40% {
+    transform: rotate(.15deg) translatex(.7rem);
+  }
+  60% {
+    transform: rotate(-.15deg) translatex(-.7rem);
+  }
+  80% {
+    transform: rotate(.3deg) translatex(.7rem);
+  }
+}
+
+:is(h2, p, blockquote, footer > div), .refs::before {
+    animation: wave 40s infinite ease-in-out var(--play);
+}
+
+footer {
+    overflow-y: clip;
+}
+
+footer > div > span {
+    margin-bottom: 2px;
+}
+
+.refs::before {
+    display: inline-block;
 }

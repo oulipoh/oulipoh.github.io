@@ -3,17 +3,18 @@
     --fg_dim: --fg;
 }
 
+html {
+    overflow-x: clip;
+}
+
 body {
     overflow-x: clip;
 }
 
-article {
-    letter-spacing: normal;
-    --line_height: normal;
-}
-
 article:first-of-type {
     --article_width: 20ch;
+    letter-spacing: normal;
+    --line_height: normal;
 }
 
 h3 {

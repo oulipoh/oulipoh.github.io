@@ -54,7 +54,7 @@
 @font-face {
     font-family: arabic;
     font-display: block;
-    src: url('fonts/ReadexPro-Regular.ttf');
+    src: url('fonts/ReadexPro-Arabic-Regular.woff2');
 }
 
 :root, ::backdrop {  /* In Chrome (<122) and Firefox (<120) ::backdrop did not inherit from :root. See: https://issues.chromium.org/issues/40569411, https://bugzilla.mozilla.org/show_bug.cgi?id=1855668 */
@@ -758,6 +758,7 @@ ul.mono {
 }
 
 .narrow_poem {
+    line-height: 2;
     margin-block: 8ex;
     margin-inline: auto;
     max-width: fit-content;
@@ -869,7 +870,7 @@ nav[dir=ltr] ~ * .preface_he {
     display: none;
 }
 
-@keyframes psycler {
+@keyframes psycler {  /* From: https://zzzen.com/psycler/ */
     0% { filter: hue-rotate(5deg) saturate(2) invert(0) }
     50% { filter: hue-rotate(160deg) saturate(8) invert(0.25) }
     100% { filter: hue-rotate(350deg) saturate(2) invert(0) }
@@ -969,7 +970,7 @@ nav[dir=rtl] ~ :nth-last-child(1 of .refs):not([data-title]) {
     animation: 3s show_cursor;
 }
 
-button.show_cursor {
+:is(button, video).show_cursor {
     --cursor: pointer;
 }
 

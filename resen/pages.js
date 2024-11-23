@@ -807,6 +807,9 @@ function show_hide_cursor(elem) {
 }
 
 
+document.addEventListener('keydown', e => {if (e.key == '~') document.body.classList.toggle('psycler')})
+
+
 // FULLSCREEN
 
 
@@ -847,6 +850,3 @@ function toggle_fullscreen(event_or_elem, landscape=true, target_screen, elem) {
         document.exitFullscreen()
     return was_not_fullscreen_before
 }
-
-
-document.addEventListener('keydown', e => {if (e.key == '~') document.body.classList.toggle('psycler')})
