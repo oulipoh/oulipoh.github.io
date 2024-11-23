@@ -74,7 +74,7 @@ footer {
 }
 
 footer > div > span {
-    margin-bottom: 2px;
+    margin-bottom: 2px;  /* For Firefox */
 }
 
 .refs::before {
