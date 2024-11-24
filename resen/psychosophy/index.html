@@ -6,6 +6,7 @@
     <link rel="preload" href="../fonts/MiriamLibre-Regular.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="../fonts/DavidLibre-Medium.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="style.css">
     <script src="../pages.js"></script>
     <link rel="icon" href="../media/resen.svg">
     <meta property="og:description" content=".">  <!-- og:description is required for WhatsApp to show og:image -->
@@ -15,11 +16,11 @@
 <body class="todark" onload="document.body.style.visibility = 'visible'">
     <script>make_header()</script>
     <article>
-    <div class="images" dir="ltr" style="display: grid; grid-template-rows: repeat(3, 240px)">
-        <img src="media/diver.png" style="grid-row: 1; grid-column: 2" alt="קלף האמודאי - נסיך העיניים">
-        <img src="media/swirl.png" style="grid-row: 2; grid-column: 1" alt="קלף הסחרור - שלוש נוצות">
-        <img src="media/oracle.png" style="grid-row: 2; grid-column: 3" alt="קלף האורקל - מלכת העיניים">
-        <img src="media/scavengers.png" style="grid-row: 3; grid-column: 2" alt="קלף אוכלי הנבלות - אביר הנוצות">
+    <div id="diamond">
+        <img src="media/scavengers.png" style="grid-area: 16 / 2 / 26 / 3" alt="קלף אוכלי הנבלות - אביר הנוצות">
+        <img src="media/oracle.png" style="grid-area: 7 / 1 / 17 / 2" alt="קלף האורקל - מלכת העיניים">
+        <img src="media/swirl.png" style="grid-area: 7 / 3 / 17 / 4" alt="קלף הסחרור - שלוש נוצות">
+        <img src="media/diver.png" style="grid-area: 1 / 2 / 11 / 3" alt="קלף האמודאי - נסיך העיניים">
     </div>
     <h3><a href="https://www.psychosophytarotcards.com">קלפי הפסיכוסופיה</a> - פתיחה בנושא קמעות - ראיון</h3>
     <p><b>מנחם:</b> בפתיחה המרובעת שלנו, של ארבעה קלפים, הקלף הראשון הוא קלף הנושא, של השאלה. כי אחת הבעיות, כמו שהיידגר אמר לנו, שזה לא התשובה. כבר דרך השאלה אתה מציב את עצמך בתוך מרחב מסוים. השאלה עצמה מכילה את הלוגיקה שלה, ואפשר לפתוח את זה. ואז יש שני קלפים של האדם, של הפרשנות - החיובי והשלילי, המרחב הדיאלקטי שבו התודעה מתחילה להיות מעורבת. ואז יש לנו את קלף הפרספקטיבה.</p>
@@ -29,7 +30,7 @@
     <div class="images">
         <img src="media/scavengers.png" alt="קלף אוכלי הנבלות - אביר הנוצות">
     </div>
-    <h3>1. קלף ה"נושא" - מייצג את השאלה, ויהווה את מרכז התוכן אליו הפתיחה כולה תתרכז</h3>
+    <h3>1. קלף ה"נושא" - מייצג את השאלה, ויהווה את מרכז התוכן אליו הפתיחה כולה תתייחס</h3>
     <p><b>מנחם:</b> פרספקטיבה מעניינת לדבר על קמעות דרך אוכלי הנבלות, ואו. נגיד שהקלף הזה הוא קודם כל שייך לסדרת ה"קיום". נוצות זו סדרה שעוסקת ב־יש, בקיום, מה יש במשמעות קיומית.</p>
     <p><b>מיתר:</b> מציאות אכזרית שנבנית כמאבק על כמות מוגבלת של משאבים. זה קלף הישרדות. מעניין בהקשר של קמעות.</p>
     <p><b>מנחם:</b> זה מחבר אותנו מאוד לצורך. שאלת היחסים בין הקמעות לצרכים שלנו. לא רק במובן הנפשי של נחמה, אלא גם לפרנסה, לזוגיות. יש משהו בקמע שמאוד מחובר לצרכים האנושיים של הקיום שלנו. גם במובן של להעניק לנו ביטחון, שזה תנאי לאינטימיות. וגם במובן של להעניק איזושהי מסגרת.
@@ -79,7 +80,7 @@
     <div class="images">
         <img src="media/diver.png" alt="קלף האמודאי - נסיך העיניים">
     </div>
-    <h3>4. קלף ה"פרספקטיבה" - ה"אני", איך אני ממוקם ביחס לנושא?</h3>
+    <h3>4. קלף ה"אני" - איך אני ממוקם ביחס לנושא? (פרספקטיבה)</h3>
     <p><b>מנחם ואבינועם יחד:</b> אווו.</p>
     <p><b>מנחם:</b> הקלף האהוב ביותר [צוחק]. הקלף שכל אחד מאיתנו חושב שהוא אישי לו. הנה הנסיך של הפעולה. אותו מעמד של לצאת ולחקור מבלי שיש עליך את העול. חשבנו על סוג של צלילה כזאת.</p>
     <p><b>מיתר:</b> יש לו קסדה של צוללן?</p>
@@ -94,6 +95,9 @@
     <p><b>מיתר:</b> זה נהדר ואני חושבת בהקשר של מה שאנחנו עושים עם רֶסֶן, והגיליון הנוכחי של הקמעות, זה נעדר את הטקטיליות. אנחנו בעצם עובדים בפורמט שהוא מאוד דיגיטלי, אלקטרוני, מקוון וזו גם בחירה. אנחנו מתמודדים [בגיליון] עם כל מיני קמעות שהם אובייקטים, או קמעות שדורשים פעולה פיזית, ואז בעצם הפלטפורמה הזו מתווכת משהו שהוא לא התוצר הסופי שלו. אנחנו מודעים לכך ומדברים על זה [מיתר ואיל, עורכי הגיליון], אולי זה נותן לזה את הגושפנקה שזה בסדר.</p>
     <p><b>מנחם:</b> החומריות זה אחד הדברים המעניינים שהקמע מעורר, אפרופו חודורובסקי. מה שעניין אותו זו אצלו זו הגישה המטריאליסטית, או הרגישות החומרית שלו לכל המרחב הרוחני. שוב, אנחנו יודעים את זה ברמה הכי פשוטה: קונוטציות. אנחנו יודעים שמחשבות הם חומריות. הן יכולות להזיז דברים, הן יכולות להתערב. זה חלק מהנחות היסוד של הפרויקט [קלפי הפסיכוסופיה]. אנחנו שותפים להנחות הללו.</p>
     </article>
-    <script>make_footer()</script>
+    <script>
+        make_footer()
+        new IntersectionObserver(e => {if (e[0].intersectionRatio == 1) diamond.querySelectorAll('img').forEach((img, i) => {img.style.animationDelay = `${2 * i}s`; img.classList.add('turn')})}, {threshold: 1}).observe(diamond)
+    </script>
 </body>
 </html>
