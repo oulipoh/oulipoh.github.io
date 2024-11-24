@@ -12,7 +12,7 @@ div[oncontextmenu*=toggle_fullscreen] {
 .fullscreen > .gif {
     background-attachment: fixed;
     background-position: center;
-    width: 100%;
+    --media_width: 100%;
 }
 
 .fullscreen > .sliders {
