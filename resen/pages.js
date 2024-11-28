@@ -426,7 +426,7 @@ function is_shortcut(event, shortcut) {
         || event.code == 'Digit' + shortcut_key  // For AZERTY keyboard
         || !event_key.match(/^[a-z]$/) && event.code == 'Key' + shortcut_key.toUpperCase())  // For Hebrew keyboard
         event_key = shortcut_key
-    return event_key == shortcut_key && event.altKey == shortcut.includes('alt') && (event.ctrlKey || event.metaKey) == shortcut.includes('ctrl') && event.shiftKey == shortcut.includes('shift')
+    return event_key == shortcut_key && (event.altKey || event.getModifierState('AltGraph')) == shortcut.includes('alt') && (event.ctrlKey || event.metaKey) == shortcut.includes('ctrl') && event.shiftKey == shortcut.includes('shift')
 }
 
 

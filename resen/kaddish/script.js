@@ -47,7 +47,7 @@ function update_caret(current) {
 const first = update_caret()
 
 document.addEventListener('keydown', event => {
-    if (event.altKey || event.ctrlKey || event.metaKey)
+    if (event.altKey || event.getModifierState('AltGraph') || event.ctrlKey || event.metaKey)
         return
     const chars = [...document.querySelectorAll('svg text:not(:empty)')]
     const current = chars.pop()
