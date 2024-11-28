@@ -77,7 +77,7 @@ play.addEventListener('click', () => {
         const utter = new SpeechSynthesisUtterance([...prefix_chars, ...document.querySelectorAll('svg text:not(:empty):not(.blink)')].map((e, i) => (e.textContent ?? e) + nikud_pisuk[i]).join(''))
         console.log(utter.text)
         utter.lang = 'he'
-        const voice = voices.find(v => v.lang.startsWith('he') || v.lang.startsWith('iw'))
+        const voice = voices.find(v => v.lang.startsWith('he') || v.lang.startsWith('iw'))  // Firefox Android only works with 'iw': https://bugzilla.mozilla.org/show_bug.cgi?id=1930388
         if (voice) {
             utter.voice = voice
             utter.lang = voice.lang
