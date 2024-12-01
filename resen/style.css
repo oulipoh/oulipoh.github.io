@@ -905,20 +905,23 @@ nav[dir=ltr] ~ * .preface_he {
 }
 
 .ref {
+    display: inline-block;
     font-family: var(--font);
-    font-size: .7rem;
+    font-size: max(.7rem, .2em);
     vertical-align: text-top;
+    text-underline-position: from-font;
+    unicode-bidi: plaintext;
 }
 
 .ref::after {
     content: attr(href);
 }
 
-.refs {
-    margin-top: 6ex;
+:is(.ref, .refs > blockquote[id])::first-letter {
+    font-size: 0;
 }
 
-.refs + p {
+.refs, .refs + p {
     margin-top: 6ex;
 }
 
@@ -945,7 +948,6 @@ nav[dir=rtl] ~ :nth-last-child(1 of .refs):not([data-title]) {
 
 .refs > blockquote {
     font-size: initial;
-    position: relative;
 }
 
 .refs:not([dir=rtl]) > blockquote {
@@ -953,9 +955,8 @@ nav[dir=rtl] ~ :nth-last-child(1 of .refs):not([data-title]) {
 }
 
 .refs > blockquote[id]::before {
-    content: attr(id);
-    margin-inline-start: -1.2em;
-    position: absolute;
+    content: attr(id) '.';
+    padding-inline-end: 1em;
 }
 
 .refs > blockquote a {

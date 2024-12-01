@@ -34,8 +34,8 @@ const lang = get_lang()
 const bc = new BroadcastChannel('bc')
 
 function reset_poem() {
-    if (typeof poem != 'undefined')
-        poem.value = '\n'
+    if (typeof thepoem != 'undefined')
+        thepoem.value = '\n'
     if (typeof bc != 'undefined')
         bc.postMessage('')
 }
@@ -167,8 +167,8 @@ function fire(grid, json, steps, max_tokens, result_counter, reset_counter, toke
     out.forEach(p => tokens[p] = (tokens[p] || 0) + 1)
     if (!comp) {
         const verse = poem_generator(json, trans, out[Math.random() * out.length | 0])
-        if (typeof poem != 'undefined')
-            textarea_writeln(poem, verse)
+        if (typeof thepoem != 'undefined')
+            textarea_writeln(thepoem, verse)
         if (typeof bc != 'undefined')
             bc.postMessage(verse)
     }
@@ -346,8 +346,8 @@ function step(grid, json, steps=0, max_tokens={}, result_counter={}, reset_count
         step(grid, json, 0, max_tokens, result_counter, reset_counter)
     } else if (!enabled.length || comp && Object.values(tokens).some(n => n > place_max_tokens) || !comp && !json.require?.every(require => require.some(t => tokens[t]))) {
         if (!comp) {
-            if (typeof poem != 'undefined')
-                textarea_writeln(poem)
+            if (typeof thepoem != 'undefined')
+                textarea_writeln(thepoem)
             if (typeof bc != 'undefined')
                 bc.postMessage('\n')
             if (stats) {

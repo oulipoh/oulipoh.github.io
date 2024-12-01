@@ -1,6 +1,7 @@
 html {
     overflow-x: clip;
     overscroll-behavior: none;
+    scroll-behavior: smooth;
 }
 
 body {
