@@ -201,7 +201,7 @@ button, pre {
         animation: var(--icon_dur) infinite deco;
     }
 
-    .contents a:is(:hover, :focus-visible) > img {
+    .contents > p > a:is(:hover, :focus-visible) > img {
         box-shadow: 0 0 .8rem .4rem var(--glow);
     }
 
@@ -694,6 +694,10 @@ input[type=checkbox] {
     color-scheme: dark;
 }
 
+input::placeholder {
+    color: var(--fg_verydim);
+}
+
 .kw {
     align-items: end;
     display: flex;
@@ -1153,8 +1157,13 @@ video::-webkit-media-controls-enclosure {  /* Not supported in Firefox */
         outline-width: 5px;
     }
 
-    .contents a[href][aria-disabled=true] {
-        text-decoration: line-through;
+    .contents :is(a[aria-disabled=true], a[aria-disabled=true] ~ span) {
+        opacity: .5;
+    }
+
+    .contents > p {
+        color: CanvasText;
+        --fg_verydim: GrayText;
     }
 }
 

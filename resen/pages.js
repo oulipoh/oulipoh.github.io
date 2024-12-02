@@ -498,7 +498,7 @@ function get_kw_label(kw, lang='') {
 }
 
 
-function make_header(reorder_contents=default_reorder_contents, new_tab_for_social=default_new_tab_for_social) {
+function make_header(nav_only=false, reorder_contents=default_reorder_contents, new_tab_for_social=default_new_tab_for_social) {
     const page = get_page()
     const lang = get_lang()
     const all_keywords_stats = get_all_keywords(lang, page)
@@ -544,7 +544,8 @@ function make_header(reorder_contents=default_reorder_contents, new_tab_for_soci
         trans = add_nav_element(nav, page2url(page, alt_langs[0], page, location.hash), ui[alt_langs[0]].lang.slice(0, is_mobile ? 2 : undefined), 'trans')
 
     document.body.appendChild(nav)
-
+    if (nav_only)
+        return
 
     // header:
 
@@ -564,7 +565,7 @@ function make_header(reorder_contents=default_reorder_contents, new_tab_for_soci
                     break
                 }
             if (!found)
-                css.insertRule(`.${this.id.replace(/^kw_/, 'non_')} {color: var(--fg_verydim)}`)
+                css.insertRule(`.${this.id.replace(/^kw_/, 'non_')} {color: var(--fg_verydim) !important}`)
             const buttons_on = div.querySelectorAll('.on')
             kw_x.style.visibility = buttons_on.length ? 'inherit' : 'hidden'
             if (buttons_on.length > 1)
@@ -581,8 +582,8 @@ function make_header(reorder_contents=default_reorder_contents, new_tab_for_soci
                 set_next_prev_page(page, next, prev, lang, url_kw)
                 page_items.forEach(p => p.firstChild.hash = p.classList.contains('non_' + url_kw) ? '' : url_kw)
             }
-            const fg_rgb = `rgb(${getComputedStyle(document.documentElement).getPropertyValue('--fg_rgb').replace(/ /g, ', ')})`
-            page_items.forEach(p => {const enabled = getComputedStyle(p).color == fg_rgb; p.querySelectorAll('a').forEach(a => {if (enabled) a.removeAttribute('aria-disabled'); else a.ariaDisabled = 'true'})})
+            const fg_rgb = getComputedStyle(document.documentElement).color
+            page_items.forEach(p => {const enabled = getComputedStyle(p).color == fg_rgb; p.querySelectorAll(':scope > a').forEach(a => {if (enabled) a.removeAttribute('aria-disabled'); else a.ariaDisabled = 'true'})})
             if (reorder_contents)
                 document.querySelector('.contents').append(...[...page_items].sort((a, b) => (getComputedStyle(b).color == fg_rgb) - (getComputedStyle(a).color == fg_rgb) || a.id.split('_')[1] - b.id.split('_')[1]))
             if (on && this.id.match(/^kw_\d+$/))
