@@ -20,7 +20,7 @@
         <div class="sliders" onclick="gif1.style.setProperty('--fps', rate_slider.valueAsNumber)">
             <label for="rate_slider">
                 <button onclick="rate_slider.value = rate_slider.min">בזריזות</button>
-                <input type="range" id="rate_slider" dir="rtl" min="1" max="60" step="1.475" value="60" autocomplete="off" oninput="gif1.style.setProperty('--fps', this.valueAsNumber)">
+                <input type="range" id="rate_slider" dir="rtl" min="1" max="60" step="1.475" value="60" autocomplete="off" oninput="gif1.style.setProperty('--fps', valueAsNumber)">
                 <button onclick="rate_slider.value = rate_slider.max">בעצלתיים</button>
             </label>
         </div>

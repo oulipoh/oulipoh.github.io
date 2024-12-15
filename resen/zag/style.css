@@ -2,14 +2,10 @@ body {
  --bg: #1d0212 !important;
 }
 
-#game {
+canvas {
+    display: block;
     width: 100%;
     max-width: 480px;
-    margin-inline: auto;
-}
-
-canvas {
-    width: 100%;
     margin-inline: auto;
     image-rendering: crisp-edges;
     image-rendering: pixelated;

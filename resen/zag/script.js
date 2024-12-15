@@ -7,7 +7,7 @@
 "use strict";
 
 // User configurable.
-let ROM_FILENAME = "rom/kmeot_zag.gb";
+let ROM_FILENAME = "kmeot_zag.gb";
 
 const ENABLE_REWIND = true;
 const ENABLE_PAUSE = false;
@@ -145,9 +145,6 @@ const vm = new VM();
 
 // Load a ROM.
 (async function go() {
-  // if (isIOS()) {
-  //   ROM_FILENAME = "rom/tzag_kmeot_ios.gb";
-  // }
   let response = await fetch(ROM_FILENAME);
   let romBuffer = await response.arrayBuffer();
   const extRam = new Uint8Array(JSON.parse(localStorage.getItem("extram")));
@@ -215,8 +212,6 @@ class Emulator {
 
   destroy() {
     this.gamepad.shutdown();
-    this.unbindTouch();
-    // this.unbindKeys();
     this.cancelAnimationFrame();
     clearInterval(this.rewindIntervalId);
     this.rewind.destroy();
@@ -385,61 +380,45 @@ class Emulator {
 
     this.boundButtonTouchStart = this.buttonTouchStart.bind(this);
     this.boundButtonTouchEnd = this.buttonTouchEnd.bind(this);
+
     selectEl.addEventListener("touchstart", this.boundButtonTouchStart);
     selectEl.addEventListener("touchend", this.boundButtonTouchEnd);
     selectEl.addEventListener("mousedown", this.boundButtonTouchStart);
     selectEl.addEventListener("mouseup", this.boundButtonTouchEnd);
+    selectEl.addEventListener("mouseleave", this.boundButtonTouchEnd);
 
     startEl.addEventListener("touchstart", this.boundButtonTouchStart);
     startEl.addEventListener("touchend", this.boundButtonTouchEnd);
     startEl.addEventListener("mousedown", this.boundButtonTouchStart);
     startEl.addEventListener("mouseup", this.boundButtonTouchEnd);
+    startEl.addEventListener("mouseleave", this.boundButtonTouchEnd);
 
     bEl.addEventListener("touchstart", this.boundButtonTouchStart);
     bEl.addEventListener("touchend", this.boundButtonTouchEnd);
     bEl.addEventListener("mousedown", this.boundButtonTouchStart);
     bEl.addEventListener("mouseup", this.boundButtonTouchEnd);
+    bEl.addEventListener("mouseleave", this.boundButtonTouchEnd);
 
     aEl.addEventListener("touchstart", this.boundButtonTouchStart);
     aEl.addEventListener("touchend", this.boundButtonTouchEnd);
     aEl.addEventListener("mousedown", this.boundButtonTouchStart);
     aEl.addEventListener("mouseup", this.boundButtonTouchEnd);
+    aEl.addEventListener("mouseleave", this.boundButtonTouchEnd);
 
     this.boundDpadTouchStartMove = this.dpadTouchStartMove.bind(this);
     this.boundDpadTouchEnd = this.dpadTouchEnd.bind(this);
+
     dpadEl.addEventListener("touchstart", this.boundDpadTouchStartMove);
     dpadEl.addEventListener("touchmove", this.boundDpadTouchStartMove);
     dpadEl.addEventListener("touchend", this.boundDpadTouchEnd);
     dpadEl.addEventListener("mousedown", this.boundDpadTouchStartMove);
     dpadEl.addEventListener("mousemove", this.boundDpadTouchStartMove);
     dpadEl.addEventListener("mouseup", this.boundDpadTouchEnd);
+    dpadEl.addEventListener("mouseleave", this.boundDpadTouchEnd);
 
     this.boundTouchRestore = this.touchRestore.bind(this);
     window.addEventListener("touchstart", this.boundTouchRestore);
     window.addEventListener("mousedown", this.boundTouchRestore);
-  }
-
-  unbindTouch() {
-    console.log("unbindTouch");
-
-    selectEl.removeEventListener("touchstart", this.boundButtonTouchStart);
-    selectEl.removeEventListener("touchend", this.boundButtonTouchEnd);
-    startEl.removeEventListener("touchstart", this.boundButtonTouchStart);
-    startEl.removeEventListener("touchend", this.boundButtonTouchEnd);
-    bEl.removeEventListener("touchstart", this.boundButtonTouchStart);
-    bEl.removeEventListener("touchend", this.boundButtonTouchEnd);
-    aEl.removeEventListener("touchstart", this.boundButtonTouchStart);
-    aEl.removeEventListener("touchend", this.boundButtonTouchEnd);
-
-    dpadEl.removeEventListener("touchstart", this.boundDpadTouchStartMove);
-    dpadEl.removeEventListener("touchmove", this.boundDpadTouchStartMove);
-    dpadEl.removeEventListener("touchend", this.boundDpadTouchEnd);
-
-    window.removeEventListener("touchstart", this.boundTouchRestore);
-    dpadEl.addEventListener("mousedown", this.boundDpadTouchStartMove);
-    dpadEl.addEventListener("mousemove", this.boundDpadTouchStartMove);
-    dpadEl.addEventListener("mouseup", this.boundDpadTouchEnd);
-    dpadEl.addEventListener("mouseleave", this.boundDpadTouchEnd);
   }
 
   buttonTouchStart(event) {
@@ -457,54 +436,7 @@ class Emulator {
       event.preventDefault();
     }
   }
-  // original code
-  // dpadTouchStartMove(event) {
-  //   const rect = event.currentTarget.getBoundingClientRect();
 
-  //     const x =
-  //       (2 * (event.targetTouches[0].clientX - rect.left)) / rect.width - 1;
-  //     const y =
-  //       (2 * (event.targetTouches[0].clientY - rect.top)) / rect.height - 1;
-  //   if (event.targetTouches && event.targetTouches[0]) {
-  //     x = (2 * (event.targetTouches[0].clientX - rect.left)) / rect.width - 1;
-  //     y = (2 * (event.targetTouches[0].clientY - rect.top)) / rect.height - 1;
-  //   } else if (event.clientX && event.clientY) {
-  //     // Handle mouse events
-  //     x = (2 * (event.clientX - rect.left)) / rect.width - 1;
-  //     y = (2 * (event.clientY - rect.top)) / rect.height - 1;
-  //   } else {
-  //     return; // Exit if we can't get coordinates
-  //   }
-
-  //   // Rest of the function using x and y...
-
-  //   if (Math.abs(x) > OSGP_DEADZONE) {
-  //     if (y > x && y < -x) {
-  //       this.setJoypLeft(true);
-  //       this.setJoypRight(false);
-  //     } else if (y < x && y > -x) {
-  //       this.setJoypLeft(false);
-  //       this.setJoypRight(true);
-  //     }
-  //   } else {
-  //     this.setJoypLeft(false);
-  //     this.setJoypRight(false);
-  //   }
-
-  //   if (Math.abs(y) > OSGP_DEADZONE) {
-  //     if (x > y && x < -y) {
-  //       this.setJoypUp(true);
-  //       this.setJoypDown(false);
-  //     } else if (x < y && x > -y) {
-  //       this.setJoypUp(false);
-  //       this.setJoypDown(true);
-  //     }
-  //   } else {
-  //     this.setJoypUp(false);
-  //     this.setJoypDown(false);
-  //   }
-  //   event.preventDefault();
-  // }
 
   dpadTouchStartMove(event) {
     // works but has unwanted diagonal movement
@@ -555,14 +487,6 @@ class Emulator {
     event.preventDefault();
   }
 
-  //original code
-  // dpadTouchEnd(event) {
-  //   this.setJoypLeft(false);
-  //   this.setJoypRight(false);
-  //   this.setJoypUp(false);
-  //   this.setJoypDown(false);
-  //   event.preventDefault();
-  // }
   dpadTouchEnd(event) {
     this.setJoypLeft(false);
     this.setJoypRight(false);
@@ -693,13 +617,6 @@ class Emulator {
     window.addEventListener("keyup", this.boundKeyUp);
   }
 
-  unbindKeys() {
-    console.log("unbindKeys");
-
-    window.removeEventListener("keydown", this.boundKeyDown);
-    window.removeEventListener("keyup", this.boundKeyUp);
-  }
-
   keyDown(event) {
     if (event.key === "w" && (event.metaKey || event.ctrlKey)) {
       return;
@@ -795,122 +712,6 @@ class Gamepad {
     this.e = e;
   }
 
-  // Load a key map for gamepad-to-gameboy buttons
-  // bindKeys(strMapping) {
-  //   this.GAMEPAD_KEYMAP_STANDARD = [
-  //     {
-  //       gb_key: "b",
-  //       gp_button: 0,
-  //       type: "button",
-  //       gp_bind: this.module._set_joyp_B.bind(null, this.e),
-  //     },
-  //     {
-  //       gb_key: "a",
-  //       gp_button: 1,
-  //       type: "button",
-  //       gp_bind: this.module._set_joyp_A.bind(null, this.e),
-  //     },
-  //     {
-  //       gb_key: "select",
-  //       gp_button: 8,
-  //       type: "button",
-  //       gp_bind: this.module._set_joyp_select.bind(null, this.e),
-  //     },
-  //     {
-  //       gb_key: "start",
-  //       gp_button: 9,
-  //       type: "button",
-  //       gp_bind: this.module._set_joyp_start.bind(null, this.e),
-  //     },
-  //     {
-  //       gb_key: "up",
-  //       gp_button: 12,
-  //       type: "button",
-  //       gp_bind: this.module._set_joyp_up.bind(null, this.e),
-  //     },
-  //     {
-  //       gb_key: "down",
-  //       gp_button: 13,
-  //       type: "button",
-  //       gp_bind: this.module._set_joyp_down.bind(null, this.e),
-  //     },
-  //     {
-  //       gb_key: "left",
-  //       gp_button: 14,
-  //       type: "button",
-  //       gp_bind: this.module._set_joyp_left.bind(null, this.e),
-  //     },
-  //     {
-  //       gb_key: "right",
-  //       gp_button: 15,
-  //       type: "button",
-  //       gp_bind: this.module._set_joyp_right.bind(null, this.e),
-  //     },
-  //   ];
-
-  //   this.GAMEPAD_KEYMAP_DEFAULT = [
-  //     {
-  //       gb_key: "a",
-  //       gp_button: 0,
-  //       type: "button",
-  //       gp_bind: this.module._set_joyp_A.bind(null, this.e),
-  //     },
-  //     {
-  //       gb_key: "b",
-  //       gp_button: 1,
-  //       type: "button",
-  //       gp_bind: this.module._set_joyp_B.bind(null, this.e),
-  //     },
-  //     {
-  //       gb_key: "select",
-  //       gp_button: 2,
-  //       type: "button",
-  //       gp_bind: this.module._set_joyp_select.bind(null, this.e),
-  //     },
-  //     {
-  //       gb_key: "start",
-  //       gp_button: 3,
-  //       type: "button",
-  //       gp_bind: this.module._set_joyp_start.bind(null, this.e),
-  //     },
-  //     {
-  //       gb_key: "up",
-  //       gp_button: 2,
-  //       type: "axis",
-  //       gp_bind: this.module._set_joyp_up.bind(null, this.e),
-  //     },
-  //     {
-  //       gb_key: "down",
-  //       gp_button: 3,
-  //       type: "axis",
-  //       gp_bind: this.module._set_joyp_down.bind(null, this.e),
-  //     },
-  //     {
-  //       gb_key: "left",
-  //       gp_button: 0,
-  //       type: "axis",
-  //       gp_bind: this.module._set_joyp_left.bind(null, this.e),
-  //     },
-  //     {
-  //       gb_key: "right",
-  //       gp_button: 1,
-  //       type: "axis",
-  //       gp_bind: this.module._set_joyp_right.bind(null, this.e),
-  //     },
-  //   ];
-
-  //   // Try to use the w3c "standard" gamepad mapping if available
-  //   // (Chrome/V8 seems to do that better than Firefox)
-  //   //
-  //   // Otherwise use a default mapping that assigns
-  //   // A/B/Select/Start to the first four buttons,
-  //   // and U/D/L/R to the first two axes.
-  //   if (strMapping === GAMEPAD_KEYMAP_STANDARD_STR) {
-  //     this.gp.keybinds = this.GAMEPAD_KEYMAP_STANDARD;
-  //   } else {
-  //     this.gp.keybinds = this.GAMEPAD_KEYMAP_DEFAULT;
-  //   }
-  // }
 
   cacheValues(gamepad) {
     // Read Buttons

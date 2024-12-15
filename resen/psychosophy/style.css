@@ -1,3 +1,35 @@
+html {
+    scroll-behavior: smooth;
+}
+
+button.big, .images {
+    margin-top: 10rem;
+}
+
+[id^=card] {
+    scroll-margin-top: 40vh;
+}
+
+[id^=card]::first-letter {
+    font-size: 2em;
+}
+
+[href="#card1"] {
+    grid-area: 16 / 2 / 26 / 3;
+}
+
+[href="#card2"] {
+    grid-area: 7 / 1 / 17 / 2;
+}
+
+[href="#card3"] {
+    grid-area: 7 / 3 / 17 / 4;
+}
+
+[href="#card4"] {
+    grid-area: 1 / 2 / 11 / 3;
+}
+
 #diamond {
     column-gap: 1rem;
     direction: rtl;
@@ -6,7 +38,7 @@
     justify-items: center;
 }
 
-#diamond > img {
+#diamond img {
     filter: brightness(0);
     max-height: 33vh;
     max-width: 25vw;

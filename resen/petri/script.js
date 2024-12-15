@@ -201,11 +201,11 @@ function arrows(inside, outside, clue) {
         [inside, outside, inside_arrow, outside_arrow] = [outside, inside, outside_arrow, inside_arrow]
     const inside_top = inside / 2 | 0
     const outside_top = outside / 2 + .5 | 0
-    let arrows = outside_arrow.repeat(outside_top) + inside_arrow.repeat(inside_top) + (is_hor && (inside+outside) % 2 == 0 ? '\n' : '') + inside_arrow.repeat(inside - inside_top) + outside_arrow.repeat(outside - outside_top)
+    let result_arrows = outside_arrow.repeat(outside_top) + inside_arrow.repeat(inside_top) + (is_hor && (inside+outside) % 2 == 0 ? '\n' : '') + inside_arrow.repeat(inside - inside_top) + outside_arrow.repeat(outside - outside_top)
     if (is_hor)
-        return arrows
-    arrows = arrows.trim().split('\n')
-    return [...arrows[0]].map((_, c) => arrows.map(row => row[c])).map(c => c.join(' ')).join('\n')
+        return result_arrows
+    result_arrows = result_arrows.trim().split('\n')
+    return [...result_arrows[0]].map((_, c) => result_arrows.map(row => row[c])).map(c => c.join(' ')).join('\n')
 }
 
 function step(grid, json, steps=0, max_tokens={}, result_counter={}, reset_counter=0, tokens) {
@@ -256,23 +256,23 @@ function step(grid, json, steps=0, max_tokens={}, result_counter={}, reset_count
                 const out = json.transitions[elem.dataset.id][1].filter(p => p == place).length
                 const pelem = grid.querySelector(`[data-id="${place}"]`)
                 if (inp + out)
-                    if (elem.parentElement.children[index - cols - 1] == pelem && index % cols && inp + out == 1)
+                    if (elems[index - cols - 1] == pelem && index % cols && inp + out == 1)
                         ts = inp ? 1 : -1
-                    else if (elem.parentElement.children[index - cols + 1] == pelem && (index+1) % cols && inp + out == 1)
+                    else if (elems[index - cols + 1] == pelem && (index+1) % cols && inp + out == 1)
                         te = inp ? 1 : -1
-                    else if (elem.parentElement.children[index + cols - 1] == pelem && index % cols && inp + out == 1)
+                    else if (elems[index + cols - 1] == pelem && index % cols && inp + out == 1)
                         bs = inp ? 1 : -1
-                    else if (elem.parentElement.children[index + cols + 1] == pelem && (index+1) % cols && inp + out == 1)
+                    else if (elems[index + cols + 1] == pelem && (index+1) % cols && inp + out == 1)
                         be = inp ? 1 : -1
                     else if (is_vertical(grid, elem.dataset.id)) {
                         if (elem.previousSibling == pelem && index % cols)
                             elem.dataset.before = arrows(inp, out, label)
                         else if (elem.nextSibling == pelem && (index+1) % cols)
                             elem.dataset.after = arrows(out, inp, label)
-                        else if (elem.parentElement.children[index - cols] == pelem)
-                            elem.parentElement.children[index - cols].dataset.after = arrows(inp, out)
-                        else if (elem.parentElement.children[index + cols] == pelem)
-                            elem.parentElement.children[index + cols].dataset.before = arrows(out, inp, 1)
+                        else if (elems[index - cols] == pelem)
+                            elems[index - cols].dataset.after = arrows(inp, out)
+                        else if (elems[index + cols] == pelem)
+                            elems[index + cols].dataset.before = arrows(out, inp, 1)
                         else
                             missing_arrows.push([elem, pelem, inp, out])
                     } else if (!comp)
@@ -280,9 +280,9 @@ function step(grid, json, steps=0, max_tokens={}, result_counter={}, reset_count
                             elem.previousSibling.firstChild.dataset.after = arrows(inp, out, '')
                         else if (elem.nextSibling == pelem && (index+1) % cols)
                             elem.nextSibling.firstChild.dataset.before = arrows(out, inp, '')
-                        else if (elem.parentElement.children[index - cols] == pelem)
+                        else if (elems[index - cols] == pelem)
                             elem.dataset.before = arrows(inp, out, 1)
-                        else if (elem.parentElement.children[index + cols] == pelem)
+                        else if (elems[index + cols] == pelem)
                             elem.dataset.after = arrows(out, inp)
                         else
                             missing_arrows.push([elem, pelem, inp, out])

@@ -1,39 +1,46 @@
 @font-face {
-    font-family: 'David Libre';
     font-display: block;
+    font-family: 'David Libre';
     src: url('fonts/DavidLibre-Medium.woff2');
 }
 
 @font-face {
-    font-family: 'Miriam Libre';
     font-display: block;
+    font-family: 'Miriam Libre';
     src: url('fonts/MiriamLibre-Regular.woff2');
 }
 
 @font-face {
+    font-display: block;
     font-family: 'Miriam Libre';
     font-weight: bold;
-    font-display: block;
     src: url('fonts/MiriamLibre-Bold.woff2');
 }
 
 @font-face {
-    font-family: Alef;
     font-display: block;
+    font-family: Alef;
     src: url('fonts/Alef-Regular.woff2');
 }
 
 @font-face {
+    font-display: block;
     font-family: Alef;
     font-weight: bold;
-    font-display: block;
     src: url('fonts/Alef-Bold.woff2');
 }
 
 @font-face {
-    font-family: 'Alef Mono';
     font-display: block;
+    font-family: 'Alef Mono';
     src: url('fonts/Alef-Monospace.woff2');
+}
+
+@font-face {
+    font-display: block;
+    font-family: arabic;
+    src: url('fonts/ReadexPro-Arabic-300.woff2');
+    unicode-range: U+0600-06ff;
 }
 
 @font-face {
@@ -49,12 +56,6 @@
     src: local('NotoSansSymbols-Regular-Subsetted'),  /* Chrome requires filename */
          local('Noto Sans Symbols');
     unicode-range: U+2709;
-}
-
-@font-face {
-    font-family: arabic;
-    font-display: block;
-    src: url('fonts/ReadexPro-Arabic-Regular.woff2');
 }
 
 :root, ::backdrop {  /* In Chrome (<122) and Firefox (<120) ::backdrop did not inherit from :root. See: https://issues.chromium.org/issues/40569411, https://bugzilla.mozilla.org/show_bug.cgi?id=1855668 */
@@ -78,8 +79,8 @@
     --letter_spacing: normal;
     --line_height: 1.5;
     --row_gap: 3em;
-    
-    --font: 'Miriam Libre', Arial, sans-serif;
+
+    --font: 'Miriam Libre', arabic, Arial, sans-serif;
     --heading_font: 'David Libre', 'Times New Roman', serif;
     --mono_font: 'Courier New', 'Alef Mono', monospace;
 
@@ -676,6 +677,7 @@ iframe, object {
 
 .images.fullscreen > img:first-child:last-child {
     --max_media_height: 100%;
+    min-height: 0;
 }
 
 .images > img:not(:first-child:last-child) {
@@ -950,6 +952,10 @@ nav[dir=rtl] ~ :nth-last-child(1 of .refs):not([data-title]) {
     direction: rtl;
 }
 
+.pull {
+    font-size: 1.4em;
+}
+
 .refs > blockquote {
     font-size: initial;
 }
@@ -1198,7 +1204,7 @@ video::-webkit-media-controls-enclosure {  /* Not supported in Firefox */
         --media_width: auto;
     }
 
-    .refs > blockquote {
+    .pull, .refs > blockquote {
         margin-inline: 0;
     }
 

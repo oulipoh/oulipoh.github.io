@@ -18,6 +18,14 @@ svg {
     --thick: .8;
 }
 
+#ABMH {
+    --fg: #64ff64;
+}
+
+#ADWS {
+    --fg: #ff6464;
+}
+
 @media (hover: hover) {
     svg:not(.keyboard > *):has(.m21 circle:hover) :is(.m21, .n21),
     svg:not(.keyboard > *):has(.m20 circle:hover) :is(.m20, .n20),
@@ -110,10 +118,6 @@ svg {
         transition-duration: var(--active_transition_sec);
 }
 
-div[oncontextmenu*=toggle_fullscreen] {
-    transition: cursor .5s allow-discrete;
-}
-
 .keyboard {
     cursor: none;
 }
@@ -131,6 +135,10 @@ g {
     transition: all 2s calc(var(--delay, 0s) * 3);
 }
 
+line {
+    stroke: var(--fg);
+}
+
 .m0 {
     transition-delay: 0s;
 }
@@ -143,8 +151,8 @@ g {
     transition-delay: calc(var(--delay) * 2);
 }
 
-line {
-    stroke: var(--fg);
+.snark {
+    transition: cursor .5s allow-discrete;
 }
 
 text {

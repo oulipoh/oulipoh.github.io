@@ -1,4 +1,4 @@
-article > *:not(p + p) {
+article > :not(p + p) {
     margin-top: 5rem;
     width: 100%;
 }
@@ -7,13 +7,17 @@ article > *:not(p + p) {
     direction: ltr;  /* Fix for: https://github.com/google/model-viewer/issues/4930 */
     display: flex;
     justify-content: center;
-    margin-inline: auto;
-    width: var(--media_width);
+    margin-inline: var(--anti_margin);
+    width: auto;
 }
 
 model-viewer {
     aspect-ratio: 1;
     clip-path: inset(1px);  /* Partial fix for: https://github.com/google/model-viewer/discussions/4935 */
     height: auto;
-    min-height: 0;
+}
+
+.model_container model-viewer:first-child:last-child {
+    height: 100vmin;
+    width: 100%;
 }
