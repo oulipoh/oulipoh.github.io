@@ -26,6 +26,11 @@ const prefix = `
 `
 const caret_char = '_'
 
+const en = 'qwertyuiopasdfghjkl;zxcvbnm,.'
+const he = 'ץןקראטותםפשדגכעיחלךףזסבהנמצתץ'
+
+const keymap = {}
+for (let i = 0; i < Math.min(en.length, he.length); i++) keymap[en[i]] = he[i]
 const nikud_pisuk = kaddish.match(/[א-ת][^א-ת]*/g).map(m => m.slice(1))
 const prefix_chars = prefix.match(/[א-ת]/g)
 console.log(nikud_pisuk.length, prefix_chars.length + document.querySelectorAll('svg text').length)
@@ -51,8 +56,8 @@ document.addEventListener('keydown', event => {
         return
     const chars = [...document.querySelectorAll('svg text:not(:empty)')]
     const current = chars.pop()
-    if (event.key.match(/[א-ת]/) && current.textContent == caret_char) {
-        current.textContent = event.key
+    if (event.key.match(/[א-תa-zA-Z;,.]/) && current.textContent == caret_char) {
+        current.textContent = keymap[event.key.toLowerCase()] || event.key
         let caret = update_caret(current)
         if (!caret && !play.classList.contains('on'))
             play.click()

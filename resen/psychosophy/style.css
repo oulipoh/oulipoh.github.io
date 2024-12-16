@@ -15,15 +15,15 @@ button.big, .images {
 }
 
 [href="#card1"] {
-    grid-area: 16 / 2 / 26 / 3;
+    grid-area: 13 / 2 / 23 / 3;
 }
 
 [href="#card2"] {
-    grid-area: 7 / 1 / 17 / 2;
+    grid-area: 6 / 1 / 16 / 2;
 }
 
 [href="#card3"] {
-    grid-area: 7 / 3 / 17 / 4;
+    grid-area: 6 / 3 / 16 / 4;
 }
 
 [href="#card4"] {
@@ -36,6 +36,12 @@ button.big, .images {
     display: grid;
     justify-content: center;
     justify-items: center;
+}
+
+#diamond figcaption {
+    font-size: initial;
+    margin-inline: auto;
+    text-align: center;
 }
 
 #diamond img {

@@ -956,6 +956,14 @@ nav[dir=rtl] ~ :nth-last-child(1 of .refs):not([data-title]) {
     font-size: 1.4em;
 }
 
+.pull::before {
+  content: '"';
+}
+
+.pull::after {
+  content: '"';
+}
+
 .refs > blockquote {
     font-size: initial;
 }
