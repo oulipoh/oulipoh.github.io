@@ -518,7 +518,7 @@ figure > figcaption + * {
     margin-top: .5rem;
 }
 
-.images figure > img + figcaption {
+.images figure img + figcaption {
     font-size: .7em;
     text-align: center;
 }

@@ -19,25 +19,25 @@
     <div id="diamond">
         <a href="#card1">
             <figure>
-                <img src="media/scavengers.png" alt="קלף אוכלי הנבלות - אביר הנוצות">
+                <div><img src="media/scavengers.png" alt="קלף אוכלי הנבלות - אביר הנוצות"></div>
                 <figcaption>1. קלף ה"נושא"</figcaption>
             </figure>
         </a>
         <a href="#card2">
             <figure>
-                <img src="media/oracle.png" alt="קלף האורקל - מלכת העיניים">
+                <div><img src="media/oracle.png" alt="קלף האורקל - מלכת העיניים"></div>
                 <figcaption>2. קלף ה"תומך"</figcaption>
             </figure>
         </a>
         <a href="#card3">
             <figure>
-                <img src="media/swirl.png" alt="קלף הסחרור - שלוש נוצות">
+                <div><img src="media/swirl.png" alt="קלף הסחרור - שלוש נוצות"></div>
                 <figcaption>3. קלף ה"חוסם"</figcaption>
             </figure>
         </a>
         <a href="#card4">
             <figure>
-                <img src="media/diver.png" alt="קלף האמודאי - נסיך העיניים">
+                <div><img src="media/diver.png" alt="קלף האמודאי - נסיך העיניים"></div>
                 <figcaption>4. קלף ה"אני"</figcaption>
             </figure>
         </a>
@@ -130,7 +130,7 @@
     <button class="big" title="גלול לראש הטבלה" onclick="diamond.scrollIntoView()"><span style="mix-blend-mode: overlay">&#x1f51d;&#xfe0e;</span></button>
     <script>
         make_footer()
-        new IntersectionObserver(e => {if (e[0].intersectionRatio == 1) diamond.querySelectorAll('img').forEach((img, i) => {img.style.animationDelay = `${2 * i}s`; img.classList.add('turn')})}, {threshold: 1}).observe(diamond)
+        new IntersectionObserver(e => {if (e[0].intersectionRatio == 1) diamond.querySelectorAll('div').forEach((div, i) => {div.style.animationDelay = `${2 * i}s`; div.classList.add('turn')})}, {threshold: 1}).observe(diamond)
     </script>
 </body>
 </html>

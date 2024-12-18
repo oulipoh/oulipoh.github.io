@@ -38,11 +38,18 @@ button.big, .images {
     justify-items: center;
 }
 
+#diamond div {
+    background-image: url('media/back.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    --opacity: 0;
+    rotate: y .5turn;
+}
+
 #diamond img {
-    filter: brightness(0);
     max-height: 33vh;
     max-width: 25vw;
-    rotate: y .5turn;
+    opacity: var(--opacity);
 }
 
 a figcaption {
@@ -57,9 +64,9 @@ a img {
 }
 
 @keyframes turn {
-    49.99% { filter: brightness(0) }
-    50% { filter: brightness(1) }
-    100% { filter: brightness(1); rotate: y 0turn }
+    49.99% { --opacity: 0 }
+    50% { --opacity: 1 }
+    100% { background-image: none; --opacity: 1; rotate: y 0turn }
 }
 
 .turn {
