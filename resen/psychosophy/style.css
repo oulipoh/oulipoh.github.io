@@ -38,17 +38,22 @@ button.big, .images {
     justify-items: center;
 }
 
-#diamond figcaption {
-    font-size: initial;
-    margin-inline: auto;
-    text-align: center;
-}
-
 #diamond img {
     filter: brightness(0);
     max-height: 33vh;
     max-width: 25vw;
     rotate: y .5turn;
+}
+
+a figcaption {
+    font-size: .7em;
+    margin-inline: initial;
+    margin-top: 2.5%;
+    text-align: center;
+}
+
+a img {
+    border-radius: 10.4% / 6.2%;
 }
 
 @keyframes turn {
