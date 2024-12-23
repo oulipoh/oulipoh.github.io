@@ -6,10 +6,14 @@ const pages = {
     "/": {title: "רֶסֶן", alt: "Resen", author: "resen", logo: "media/resen.svg", skip: true},
     // "open-call-kmeot/": {title: "קול קורא: קמעות", alt: "Open call: Talismans", author: "resen"},
 
+    "mahdukh/": {title: "מה יש לך גברת מהדוך?", alt: "What is with you Mrs. Mahdukh?", author: "doritkedar", kw: [1, "biblical"]},
+    "fortuna/": {title: "פורטונה", alt: "Fortuna", author: "adinaviterbo", kw: [1, "visual"]},
+    "shem/": {title: "שם המפורש", alt: "Shem HaMephorash", author: "avrahamguybarchil", kw: [1, "biblical", "visual"]},
+    "kosheret/": {title: "קושרת אות", alt: "Kosheret Ot", author: "moresun", kw: [1, "sound", "visual"]},
     "zag/": {title: "קמעות צג", alt: "Kmeot zag", author: "eakoukli", kw: [1, "interactive", "live code", "poem", "software", "sound", "visual"]},
     "fateful/": {title: "שהות הרת־גורל", alt: "Fateful stay", author: "shoeyraz", kw: [1]},
     "psychosophy/": {title: "פסיכוסופיה: פתיחה", alt: "Psychsophy: a reading", author: ["avinoamsternheim", "menahemgoldenberg"], kw: [1, "visual"]},
-    "talismother/": {title: "אימא קמעית", alt: "Talis-Mother", author: "sandravalabregue", kw: [1, "visual"]},
+    "talismother/": {title: "אימא קמעית", alt: "Talis-Mother", author: "sandravalabregue", kw: [1, "biblical", "visual"]},
     "umbilical/": {title: "טבוּר", alt: "Umbilical", author: "nettalevtov", kw: [1, "live code", "poem", "visual"]},
     "taase/": {title: "תעשה", alt: "Ta-a-se", author: "ayaamikam", kw: [1, "biblical", "cipher", "interactive", "visual"]},
     "kaddish/": {title: "קדיש (שלד)", alt: "Kaddish (skeleton)", author: "omridanino", kw: [1, "biblical", "interactive", "poem", "sound", "visual"]},
@@ -44,6 +48,10 @@ const authors = {
         "sponsors": "",
         "subscribe": "ayPSSeHk3KL4ALGa9",
     },
+    "adinaviterbo": {
+        "name": {"": "עדינה ויטרבו", "en": "Adina Viterbo"},
+        "instagram": "adina_v",
+    },
     "adisorek": {
         "name": {"": "עדי שורק", "en": "Adi Sorek"},
         "web": ".com",
@@ -55,6 +63,10 @@ const authors = {
     "amitbenami": {
         "name": {"": "עמית בן עמי", "en": "Amit Ben Ami"},
     },
+    "arikweiss": {
+        "name": {"": "אריק וייס", "en": "Arik Weiss"},
+        "instagram": "arikw99",
+    },
     "avimilgrom": {
         "name": {"": "אבי מילגרום", "en": "Avi Milgrom"},
     },
@@ -62,16 +74,19 @@ const authors = {
         "name": {"": "אבינועם שטרנהיים", "en": "Avinoam Sternheim"},
         "web": ".com",
     },
+    "avrahamguybarchil": {
+        "name": {"": "אברהם גיא ברכיל", "en": "Avraham Guy Barchil"},
+        "instagram": "",
+    },
     "ayaamikam": {
         "name": {"": "איה עמיקם", "en": "Aya Amikam"},
         "instagram": "aya_amikam",
     },
-    "arikweiss": {
-        "name": {"": "אריק וייס", "en": "Arik Weiss"},
-        "instagram": "arikw99",
-    },
     "brunogrife": {
         "name": {"": "עידן ברונו גרייף", "en": "Bruno Grife"},
+    },
+    "doritkedar": {
+        "name": {"": "דורית קידר", "en": "Dorit Kedar"},
     },
     "eakoukli": {
         "name": {"": "א. קוּקלי", "en": "E. A. Koukly"},
@@ -104,6 +119,10 @@ const authors = {
     },
     "mikamilgrom": {
         "name": {"": "מיקה מילגרום", "en": "Mika Milgrom"},
+    },
+    "moresun": {
+        "name": {"": "מורסאן עוד־שמש", "en": "More'Sun Odd Shemesh"},
+        "web": "linktr.ee/oddshemesh",
     },
     "neorashem": {
         "name": {"": "נאורה שם", "en": "Neora Shem"},

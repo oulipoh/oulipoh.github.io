@@ -1,0 +1,16 @@
+.gifs {
+    display: grid;
+    --gap: 3rem;
+    gap: var(--gap);
+    --max_img_width: 450px;
+    grid-template-columns: repeat(auto-fit, minmax(0, var(--max_img_width)));
+    justify-content: center;
+    justify-items: center;
+    margin-inline: auto;
+    margin-block: 8rem;
+    max-width: calc(var(--max_img_width)*2 + var(--gap));
+}
+
+img {
+    width: 100%;
+}
