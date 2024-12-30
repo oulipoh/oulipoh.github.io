@@ -3,6 +3,10 @@ article > :not(p + p) {
     width: 100%;
 }
 
+.fullscreen {
+    background-color: white;
+}
+
 .model_container {
     direction: ltr;  /* Fix for: https://github.com/google/model-viewer/issues/4930 */
     display: flex;

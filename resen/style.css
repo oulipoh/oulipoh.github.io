@@ -85,7 +85,7 @@
     --mono_font: 'Courier New', 'Alef Mono', monospace;
 
     --article_width: 80ch;
-    --font_size: 1.3rem;
+    --font_size: 1.2rem;
     --h1_size: clamp(1.5em, 5rem, 10vw);
     --hor_scrollbar_offset: 16px;
     --larger_font: clamp(1.3em, 2rem, 2vw);
@@ -574,6 +574,10 @@ nav[dir=rtl] ~ footer > div {
 .fullscreen > :last-child {
     margin-bottom: auto !important;
     padding-bottom: 0 !important;
+}
+
+.images.fullscreen {
+    --max_media_height: 100%;
 }
 
 img.fullscreen {

@@ -4,6 +4,7 @@ article :is(.images, video) {
 
 .spin {
     --angle: 0;
+    background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
     cursor: var(--down_cursor, var(--cursor));
@@ -14,7 +15,6 @@ article :is(.images, video) {
 
 .spin > img {
     rotate: calc(var(--angle) * 1turn);
-    will-change: rotate;
 }
 
 video {
