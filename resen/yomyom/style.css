@@ -18,5 +18,6 @@ article :is(.images, video) {
 }
 
 video {
+    background-color: white;
     --max_media_height: 50vh;
 }
