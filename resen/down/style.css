@@ -12,9 +12,14 @@ body {
     opacity: min(var(--opacity), .6);
     overscroll-behavior: none;
     touch-action: pinch-zoom;
-    transition: opacity 1s;
+    transition: opacity .5s;
     user-select: none;
     -webkit-user-select: none;
+}
+
+body:active {
+    cursor: grabbing;
+    --opacity: .07;
 }
 
 footer, h1, h2, nav {

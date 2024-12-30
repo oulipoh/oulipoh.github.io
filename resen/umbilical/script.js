@@ -396,8 +396,7 @@ function addX_right(delay) {
         if (currentText.length < 100) {
             delay = Math.max(minDelay, delay * accelerationFactor);
             setTimeout(addCharacter, delay)
-        }
-        else
+        } else
             setTimeout(reset3, 6000)
     }
 

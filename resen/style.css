@@ -390,7 +390,7 @@ button, pre {
     margin-top: var(--row_gap);
 }
 
-.rows_first {
+.row_first {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(clamp((100% - (var(--columns) - 1)*var(--column_gap)) / var(--columns), 250px, 100%), 1fr));
     row-gap: var(--row_gap);
@@ -1114,7 +1114,7 @@ textarea {
     margin-top: 6rem;
 }
 
-[oncontextmenu*=toggle_fullscreen] {  /* Note this will miss elements where the handler was added programmatically, as well as different elements passed to the handler */
+[oncontextmenu*=toggle_fullscreen], [ondblclick*=toggle_fullscreen] {  /* Note this will miss elements where the handler was added programmatically, as well as different elements passed to the handler */
     user-select: none;
     -webkit-user-select: none;
 }
@@ -1195,7 +1195,7 @@ video::-webkit-media-controls-enclosure {  /* Not supported in Firefox */
         text-align: start;
     }
 
-    .contents:not(.rows_first) {
+    .contents:not(.row_first) {
         --columns: 1;
     }
 
@@ -1217,7 +1217,7 @@ video::-webkit-media-controls-enclosure {  /* Not supported in Firefox */
         --media_width: auto;
     }
 
-    .pull, .refs > blockquote {
+    .pull, .quote, .refs > blockquote {
         margin-inline: 0;
     }
 

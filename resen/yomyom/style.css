@@ -1,0 +1,22 @@
+article :is(.images, video) {
+    margin-block: 5rem;
+}
+
+.spin {
+    --angle: 0;
+    background-repeat: no-repeat;
+    background-size: contain;
+    cursor: var(--down_cursor, var(--cursor));
+    overflow: clip;
+    touch-action: none;
+    width: fit-content;
+}
+
+.spin > img {
+    rotate: calc(var(--angle) * 1turn);
+    will-change: rotate;
+}
+
+video {
+    --max_media_height: 50vh;
+}

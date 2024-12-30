@@ -61,8 +61,7 @@ document.addEventListener('keydown', event => {
         let caret = update_caret(current)
         if (!caret && !play.classList.contains('on'))
             play.click()
-    }
-    else if (event.key == 'Backspace' && current != first)
+    } else if (event.key == 'Backspace' && current != first)
     {
         if (current.textContent == caret_char)
             chars.pop().textContent = ''
