@@ -46,7 +46,7 @@ const authors = {
         "mail": "eyalgruss+resen@gmail.com",
         "web": "www.facebook.com/RESENonline",
         "instagram": "resen_an_online_journal",
-        "github": "oulipoh",
+        "github": "github.com/oulipoh/oulipoh.github.io",
         "sponsors": "oulipoh",
         "subscribe": "ayPSSeHk3KL4ALGa9",
     },
