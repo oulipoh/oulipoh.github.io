@@ -13,6 +13,11 @@ article :is(.images, video) {
     width: fit-content;
 }
 
+.spin.fullscreen {
+    background-origin: content-box;
+    padding: 2%;
+}
+
 .spin > img {
     rotate: calc(var(--angle) * 1turn);
 }
