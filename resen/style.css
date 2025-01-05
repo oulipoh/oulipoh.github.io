@@ -682,6 +682,14 @@ iframe, object {
     width: var(--media_width);
 }
 
+.images a {
+    line-height: 0;
+}
+
+.images a:not(:first-child:last-child) {
+    display: contents;
+}
+
 .images img {
     --images_container_height: min(var(--max_media_height), var(--max_height, var(--max_media_height)));
     max-height: var(--images_container_height);
@@ -689,9 +697,9 @@ iframe, object {
     width: 100%;
 }
 
-.images > img:not(:first-child:last-child) {
+.images > a:not(:first-child:last-child) img, .images > img:not(:first-child:last-child) {
     --multi_image_height_factor: .9;  /* Assumes difference between images aspect ratios is less than 10% */
-    height: calc(100% * var(--multi_image_height_factor));
+    height: calc(var(--multi_image_height_factor) * 100%);
     max-height: calc(var(--images_container_height) / var(--multi_image_height_factor));
 }
 
