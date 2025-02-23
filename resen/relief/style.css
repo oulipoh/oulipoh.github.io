@@ -1,0 +1,9 @@
+.model_container {
+    height: 150vh;
+    margin-inline: var(--anti_margin);
+}
+
+model-viewer {
+    height: 100%;
+    width: 100%;
+}
