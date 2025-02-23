@@ -955,20 +955,20 @@ nav[dir=ltr] ~ * .preface_he {
     content: attr(data-title);
 }
 
-nav ~ :nth-last-child(1 of .refs):not([data-title])::before {
+:is(nav ~ :nth-last-child(1 of .refs), nav ~ article:last-of-type > :nth-last-child(1 of .refs)):not([data-title])::before {
     content: 'See also:';
     font-weight: bold;
 }
 
-html[lang=he] nav:not([dir=ltr]) ~ :nth-last-child(1 of .refs):not([data-title])::before {
+html[lang=he] :is(nav:not([dir=ltr]) ~ :nth-last-child(1 of .refs), nav:not([dir=ltr]) ~ article:last-of-type > :nth-last-child(1 of .refs)):not([data-title])::before {
     content: 'ראו גם:';
 }
 
-nav[dir=ltr] ~ :nth-last-child(1 of .refs):not([data-title]) {
+:is(nav[dir=ltr] ~ :nth-last-child(1 of .refs), nav[dir=ltr] ~ article:last-of-type > :nth-last-child(1 of .refs)):not([data-title]) {
     direction: ltr;
 }
 
-nav[dir=rtl] ~ :nth-last-child(1 of .refs):not([data-title]) {
+:is(nav[dir=rtl] ~ :nth-last-child(1 of .refs), nav[dir=rtl] ~ article:last-of-type > :nth-last-child(1 of .refs)):not([data-title]) {
     direction: rtl;
 }
 
