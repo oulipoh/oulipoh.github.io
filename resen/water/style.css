@@ -21,7 +21,7 @@ model-viewer {
     height: auto;
 }
 
-.model_container model-viewer:first-child:last-child {
+.model_container model-viewer:only-child {
     height: 100vmin;
     width: 100%;
 }
