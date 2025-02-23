@@ -56,7 +56,7 @@ document.addEventListener('keydown', event => {
         return
     const chars = [...document.querySelectorAll('svg text:not(:empty)')]
     const current = chars.pop()
-    if (event.key.match(/[א-תa-zA-Z;,.]/) && current.textContent == caret_char) {
+    if (event.key.match(/^[א-תa-zA-Z;,.]$/) && current.textContent == caret_char) {
         current.textContent = keymap[event.key.toLowerCase()] || event.key
         let caret = update_caret(current)
         if (!caret && !play.classList.contains('on'))
