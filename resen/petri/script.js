@@ -160,7 +160,7 @@ function poem_generator(json, trans, place) {
 
 function fire(grid, json, steps, max_tokens, result_counter, reset_counter, tokens, enabled, comp) {
     let trans = enabled[Math.random() * enabled.length | 0]
-    grid.querySelectorAll('pre').forEach(e => e.style.color = e.dataset.id == trans ? 'var(--firing)' : 'inherit')
+    grid.querySelectorAll('pre').forEach(e => e.style.color = e.dataset.id == trans ? 'var(--firing)' : '')
     const inp = json.transitions[trans][0]
     const out = json.transitions[trans][1]
     inp.forEach(p => tokens[p]--)
@@ -247,7 +247,7 @@ function step(grid, json, steps=0, max_tokens={}, result_counter={}, reset_count
             elem.title = alt
         }
         if (transitions.includes(elem.dataset.id)) {
-            elem.style.color = enabled.includes(elem.dataset.id) ? 'var(--enabled)' : 'inherit'
+            elem.style.color = enabled.includes(elem.dataset.id) ? 'var(--enabled)' : ''
             let ts, te, bs, be
             ts = te = bs = be = 0
             new Set(json.transitions[elem.dataset.id].slice(0, 2).flat()).forEach(place => {

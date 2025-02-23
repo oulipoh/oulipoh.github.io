@@ -37,16 +37,6 @@ canvas {
   height: 100px;
   padding: 25px 0;
 }
-#controller_left,
-#controller_right,
-#controller_up,
-#controller_down,
-#controller_a,
-#controller_b,
-#controller_start,
-#controller_select {
-  cursor: pointer;
-}
 
 #controller_dpad:before {
   content: '';

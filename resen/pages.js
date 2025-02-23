@@ -1,4 +1,4 @@
-// Copyright 2023-2024 by Eyal Yehowa Gruss, licensed under CC BY 4.0
+// Copyright 2023-2025 by Eyal Yehowa Gruss, licensed under CC BY 4.0
 // Please attribute by linking to a version of this file [e.g. as done in make_footer()], containing these comments
 
 
@@ -6,12 +6,14 @@ const pages = {
     "/": {title: "רֶסֶן", alt: "Resen", author: "resen", logo: "media/resen.svg", skip: true},
     // "open-call-kmeot/": {title: "קול קורא: קמעות", alt: "Open call: Talismans", author: "resen"},
 
+    "tsc/": {title: "קוד המקור", alt: "The source code", author: "ofirliberman", kw: [1, "interactive", "visual"], skip: true},
+    "relief/": {title: "תבליט־נגד", alt: "Counter relief", author: "michailgrobman", kw: [1, "biblical", "interactive", "visual"], skip: true},
     "yomyom/": {title: "קמעות יום־יום", alt: "Everyday talismans", author: "ohadhadad", kw: [1, "interactive", "visual"]},
     "mahdukh/": {title: "מה יש לך גברת מהדוך?", alt: "What is with you Mrs. Mahdukh?", author: "doritkedar", kw: [1, "biblical"]},
     "fortuna/": {title: "פורטונה", alt: "Fortuna", author: "adinaviterbo", kw: [1, "visual"]},
     "shem/": {title: "שם המפורש", alt: "Shem HaMephorash", author: "avrahamguybarchil", kw: [1, "biblical", "visual"]},
     "kosheret/": {title: "קושרת אות", alt: "Kosheret Ot", author: "moresun", kw: [1, "sound", "visual"]},
-    "zag/": {title: "קמעות צג", alt: "Kmeot zag", author: "eakoukli", kw: [1, "interactive", "live code", "poem", "software", "sound", "visual"]},
+    "zag/": {title: "קמעות צג", alt: "Kmeot Zag", author: "eakoukli", kw: [1, "interactive", "live code", "poem", "software", "sound", "visual"]},
     "fateful/": {title: "שהות הרת־גורל", alt: "Fateful stay", author: "shoeyraz", kw: [1]},
     "psychosophy/": {title: "פסיכוסופיה: פתיחה", alt: "Psychsophy: a reading", author: ["avinoamsternheim", "menahemgoldenberg"], kw: [1, "visual"]},
     "talismother/": {title: "אימא קמעית", alt: "Talis-Mother", author: "sandravalabregue", kw: [1, "biblical", "visual"]},
@@ -119,6 +121,10 @@ const authors = {
         "name": {"": "מנחם גולדנברג", "en": "Menahem Goldenberg"},
         "web": "www.menahem.net",
     },
+    "michailgrobman": {
+        "name": {"": "מיכאיל גרובמן", "en": "Michail Grobman"},
+        "web": "www.grobman.info",
+    },
     "mikamilgrom": {
         "name": {"": "מיקה מילגרום", "en": "Mika Milgrom"},
     },
@@ -140,6 +146,10 @@ const authors = {
     },
     "noashaham": {
         "name": {"": "נעה שחם", "en": "Noa Shaham"},
+    },
+    "ofirliberman": {
+        "name": {"": "אופיר ליברמן", "en": "Ofir Liberman"},
+        "instagram": "ofir.liberman.art",
     },
     "ohadhadad": {
         "name": {"": "אוהד חדד", "en": "Ohad Hadad"},
@@ -642,12 +652,11 @@ function make_header(nav_only=false, reverse_issues_kw=default_reverse_issues_kw
             div.appendChild(button)
         })
         if (page == '/') {
-            button = document.createElement('button')
+            button = div.appendChild(document.createElement('button'))
             button.ariaLabel = 'הסר את כל המסננים'
             button.id = 'kw_x'
             button.innerHTML = 'X'
             button.onclick = () => div.querySelectorAll('.on').forEach(e => e.click())
-            div.appendChild(button)
         }
         header.appendChild(div)
     }
@@ -703,7 +712,8 @@ function get_make_author(page, lang, elem, new_tab_for_social=default_new_tab_fo
     page ??= get_page()
     lang ??= get_lang()
     const translators = merge(pages[page].translator, pages[page].translators)
-    let keys = [...new Set(merge(pages[page].author, pages[page].authors, translators, pages[page].with))]
+    const colabs = merge(pages[page].with)
+    let keys = [...new Set(merge(pages[page].author, pages[page].authors, translators, colabs))]
     if (elem && authors && !keys.length)
         keys = Object.keys(authors).slice(0, 1)
     const all_names = []
@@ -724,12 +734,12 @@ function get_make_author(page, lang, elem, new_tab_for_social=default_new_tab_fo
         if (names) {
         	name = names[lang] || names[''] || Object.values(names)[0] || name
             alt_name = Object.entries(names).find(([k, v]) => k != lang && v)?.[1]
-            if (translators.includes(key) || pages[page].with?.includes(key)) {
+            if (translators.includes(key) || colabs.includes(key)) {
                 const alt_langs = Object.keys(ui).filter(k => k != lang)
                 if (alt_langs.length) {
                     if (translators.includes(key))
                     	alt_name += ' ' + ui[alt_langs[0]].translator
-                    if (!have_with && pages[page].with?.includes(key))
+                    if (!have_with && colabs.includes(key))
                         alt_name = ui[alt_langs[0]].with + ' ' + alt_name
                 }
             }
@@ -738,7 +748,7 @@ function get_make_author(page, lang, elem, new_tab_for_social=default_new_tab_fo
         }
         if (translators.includes(key))
             name += ' ' + ui[lang].translator
-        if (!have_with && pages[page].with?.includes(key)) {
+        if (!have_with && colabs.includes(key)) {
             name = ui[lang].with + ' ' + name
             have_with = true
         }
@@ -747,8 +757,7 @@ function get_make_author(page, lang, elem, new_tab_for_social=default_new_tab_fo
         all_alt_names.push(alt_name || name)
 
         if (elem) {
-            const a = make_link('', name)
-            h2.appendChild(a)
+            const a = h2.appendChild(make_link('', name))
             let url = key
             if (author_pages_folder)
                 url = author_pages_folder + '/' + url
@@ -758,7 +767,7 @@ function get_make_author(page, lang, elem, new_tab_for_social=default_new_tab_fo
 
             const networks = Object.keys(author || {}).filter(k => k != 'name' && k in social)
             if (networks.length) {
-                const span = document.createElement('span')
+                const span = h2.appendChild(document.createElement('span'))
                 span.className = 'social'
                 networks.forEach(net => {
                     if (span.innerHTML)
@@ -775,7 +784,6 @@ function get_make_author(page, lang, elem, new_tab_for_social=default_new_tab_fo
                     const a = span.appendChild(make_link(prefix + author[net] + (social[net].suffix || ''), social[net].label, net, net[0].toUpperCase() + net.slice(1), new_tab_for_social))
                     a.dataset.label = a.textContent
                 })
-                h2.appendChild(span)
             }
             elem.appendChild(h2)
         }

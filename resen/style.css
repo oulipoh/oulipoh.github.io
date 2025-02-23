@@ -308,14 +308,14 @@ nav[dir=rtl] ~ .author {
     margin-inline-end: 1em;
 }
 
-.banner {
+.marquee {
     display: flex;
     gap: 1em;
     justify-content: space-around;
     overflow-x: clip;
 }
 
-.banner > * {
+.marquee > * {
     flex-shrink: 0;
 }
 
@@ -335,7 +335,6 @@ button, [id^=kw_] {
     border-style: solid;
     border-width: 2px;
     color: inherit;
-    cursor: pointer;
     margin: 0;
     padding-block: .1em;
     padding-inline: .5em;
@@ -546,6 +545,14 @@ nav[dir=rtl] ~ footer > div {
     direction: rtl;
 }
 
+footer, .kw, nav,
+svg image,  /* For Firefox Android */
+[oncontextmenu*=toggle_fullscreen], [ondblclick*=toggle_fullscreen]  /* Note this will miss elements where the handler was added programmatically, as well as different elements passed to the handler */
+{
+    user-select: none;
+    -webkit-user-select: none;
+}
+
 .formula {
     text-align: start;
 }
@@ -686,7 +693,7 @@ iframe, object {
     line-height: 0;
 }
 
-.images a:not(:first-child:last-child) {
+.images a:not(:only-child) {
     display: contents;
 }
 
@@ -697,7 +704,7 @@ iframe, object {
     width: 100%;
 }
 
-.images > a:not(:first-child:last-child) img, .images > img:not(:first-child:last-child) {
+.images > a:not(:only-child) img, .images > img:not(:only-child) {
     --multi_image_height_factor: .9;  /* Assumes difference between images aspect ratios is less than 10% */
     height: calc(var(--multi_image_height_factor) * 100%);
     max-height: calc(var(--images_container_height) / var(--multi_image_height_factor));
@@ -727,10 +734,6 @@ input::placeholder {
 
 #kw_x {
     visibility: hidden;
-}
-
-label, label > * {
-    cursor: pointer;
 }
 
 .large {
@@ -899,7 +902,7 @@ nav[dir=ltr] ~ * .preface_he {
     100% { filter: hue-rotate(350deg) saturate(2) invert(0) }
 }
 
-.psycler nav ~ * {
+.psycler nav ~ *, span.psycler {
     animation: 8s linear infinite psycler;
 }
 
@@ -1006,10 +1009,6 @@ nav[dir=rtl] ~ :nth-last-child(1 of .refs):not([data-title]) {
     animation: 3s show_cursor;
 }
 
-:is(button, video).show_cursor {
-    --cursor: pointer;
-}
-
 [onmousemove*=show_hide_cursor],  /* Note this will miss elements where the handler was added programmatically */
 .hide_cursor {
     cursor: none;
@@ -1106,11 +1105,6 @@ a.sponsors {
     padding-inline: .3em;
 }
 
-svg image {
-    user-select: none;  /* For Firefox Android */
-    -webkit-user-select: none;
-}
-
 textarea {
     border: none;
     box-sizing: border-box;
@@ -1124,11 +1118,6 @@ textarea {
 
 .textblock {
     margin-top: 6rem;
-}
-
-[oncontextmenu*=toggle_fullscreen], [ondblclick*=toggle_fullscreen] {  /* Note this will miss elements where the handler was added programmatically, as well as different elements passed to the handler */
-    user-select: none;
-    -webkit-user-select: none;
 }
 
 .twitter {
@@ -1236,25 +1225,4 @@ video::-webkit-media-controls-enclosure {  /* Not supported in Firefox */
     .two_col {
         column-count: 1;
     }
-}
-
-
-/* stuff for https://oulipoh.com/resen/ */
-
-@keyframes banner_first {
-    50% { margin-inline-start: 100% }
-    100% { margin-inline-start: 0 }
-}
-
-@keyframes banner_last {
-    50% { margin-inline-end: 0 }
-    100% { margin-inline-end: 100% }
-}
-
-.banner > :first-child {
-    animation: 23s infinite alternate banner_first;
-}
-
-.banner > :last-child {
-    animation: 24s infinite alternate banner_last;
 }

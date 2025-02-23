@@ -10,8 +10,9 @@ const keymap = {a: 'א',
                 w: 'ו',
                 z: 'ז',
                 j: 'ח',
-                y: 'ט',
+                e: 'ט',
                 i: 'י',
+                y: 'י',
                 k: 'כ',
                 'ך': 'כ',
                 l: 'ל',
@@ -41,7 +42,7 @@ function get_play(event, sticky) {
     const circle = event.target
     const svg = event.currentTarget
     let cls = ''
-    if (navigator.userActivation.hasBeenActive && circle && circle.tagName.toLowerCase() == 'circle') {
+    if (navigator.userActivation.hasBeenActive && circle.tagName.toLowerCase() == 'circle') {
         cls = [...circle.parentElement.classList].find(c => c.match(/^m\d+$/))
         const num = cls.slice(1)
         const path = [...svg.querySelectorAll(`.n${num}`)].map(node => [...node.classList].find(c => c.match(/^m\d+$/)).slice(1))

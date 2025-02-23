@@ -7,6 +7,25 @@
     <link rel="preload" href="fonts/DavidLibre-Medium.woff2" as="font" type="font/woff2" crossorigin>
     <script src="pages.js"></script>
     <link rel="stylesheet" href="style.css">
+    <style>
+        @keyframes marquee_first {
+            50% { margin-inline-start: 100% }
+            100% { margin-inline-start: 0 }
+        }
+
+        @keyframes marquee_last {
+            50% { margin-inline-end: 0 }
+            100% { margin-inline-end: 100% }
+        }
+
+        .marquee > :first-child {
+            animation: 23s infinite alternate marquee_first;
+        }
+
+        .marquee > :last-child {
+            animation: 24s infinite alternate marquee_last;
+        }
+    </style>
     <link rel="icon" href="media/resen.svg">
     <meta property="og:description" content=".">  <!-- og:description is required for WhatsApp to show og:image -->
     <meta property="og:image" content="https://oulipoh.com/resen/media/resen.png">
@@ -24,7 +43,7 @@
         span = document.createElement('span')
         //span.appendChild(make_link(page2url('open-call-kmeot'), 'קול קורא - קמעות'))
         p.appendChild(span)
-        p.classList.add('preface_he', 'banner')
+        p.classList.add('preface_he', 'marquee')
         document.querySelector('.author').before(p)
         make_contents()
         make_footer()
