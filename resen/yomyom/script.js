@@ -16,7 +16,7 @@ document.addEventListener('pointercancel', cancel)
 
 document.addEventListener('pointerup', e => {
     if (down && !e.button) {
-        const start_time = performance.now()
+        const time0 = performance.now()
         const spinner = down
         const style = getComputedStyle(spinner)
         const angle0 = +style.getPropertyValue('--angle')
@@ -24,7 +24,7 @@ document.addEventListener('pointerup', e => {
         cancel()
 
         function spin(time) {
-            const vel = getComputedStyle(spinner).getPropertyValue('--vel') * Math.exp(-friction*(time-start_time))
+            const vel = getComputedStyle(spinner).getPropertyValue('--vel') * Math.exp(-friction*(time-time0))
             if (Math.abs(vel) > vel_thresh) {
                 spinner.style.setProperty('--angle', (angle0+(vel0-vel)/friction) % 1)
                 requestAnimationFrame(spin)
