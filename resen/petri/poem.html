@@ -23,10 +23,10 @@
             toggle_fullscreen(document.documentElement);  // works only in Firefox, after setting: full-screen-api.allow-trusted-requests-only = false
 
         let prev_lang
-        new BroadcastChannel('bc').onmessage = e => {
-            if (e.data) {
-                textarea_writeln(thepoem, e.data.replace(/\n$/, ''))
-                const lang = e.data.localeCompare('z') > 0 ? '' : 'en'
+        new BroadcastChannel('bc').onmessage = event => {
+            if (event.data) {
+                textarea_writeln(thepoem, event.data.replace(/\n$/, ''))
+                const lang = event.data.localeCompare('z') > 0 ? '' : 'en'
                 if (lang != prev_lang)
                     title.value = get_set_titles('petri/', lang).label + ' / ' + get_make_author('/', lang)[0][0]
                 prev_lang = lang
