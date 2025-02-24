@@ -19,7 +19,7 @@
     <script>
         make_header()</script>
     <div class="model_container" oncontextmenu="toggle_fullscreen(event)">
-        <model-viewer src="media/relief.glb" onload="fix_scene(this, .07)" orbit-sensitivity=".1" zoom-sensitivity=".2" camera-controls camera-target="0m 0m -16m" min-camera-orbit="-Infinity 0deg 1.5m" max-camera-orbit="Infinity 180deg 16m" camera-orbit="0deg 90deg 16m" touch-action="pan-y" disable-pan interaction-prompt="none" alt="מודל תלת־ממדי">
+        <model-viewer src="media/relief.glb" onload="fix_scene(this, .07)" orbit-sensitivity=".1" zoom-sensitivity=".2" camera-controls camera-target="0m 0m -16m" min-camera-orbit="-Infinity 0deg 1.5m" max-camera-orbit="Infinity 180deg 16m" camera-orbit="0deg 90deg 16m" field-of-view="45deg" max-field-of-view="45deg" touch-action="pan-y" disable-pan interaction-prompt="none" alt="מודל תלת־ממדי">
             <div class="progress-bar hide" slot="progress-bar"></div>
         </model-viewer>
     </div>
