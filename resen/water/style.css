@@ -12,7 +12,6 @@ article > :not(p + p) {
     display: flex;
     justify-content: center;
     margin-inline: var(--anti_margin);
-    width: auto;
 }
 
 model-viewer {

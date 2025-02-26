@@ -641,7 +641,7 @@ function make_header(nav_only=false, reverse_issues_kw=default_reverse_issues_kw
 
             button.innerHTML = label
             button.dir = 'ltr'  // For left alignment of the multi-line title
-            button.title = `${alt}\npages=${all_keywords_stats[kw].count}\ninfo=${(all_keywords_stats[kw].info * 100).toFixed(1)}%`.trim()
+            button.title = `${alt}\nworks=${all_keywords_stats[kw].count}\ninfo=${(all_keywords_stats[kw].info * 100).toFixed(1)}%`.trim()
             if (page == '/')
                 button.onclick = kw_handler
             else {

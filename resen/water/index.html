@@ -15,7 +15,11 @@
     <noscript><style>body {visibility: visible}</style></noscript>
 </head>
 <body onload="document.body.style.visibility = 'visible'">
-    <script>make_header()</script>
+    <script>
+        make_header()
+        self.ModelViewerElement ??= {}
+        self.ModelViewerElement.dracoDecoderLocation = '../libs/draco_decoder_gltf/'
+    </script>
     <div class="model_container">
         <model-viewer src="media/water.glb" exposure=".7" camera-controls touch-action="pan-y" disable-pan disable-zoom alt="מודל תלת־ממדי של מקווה הבנוי מצורות אותיות המילה מים">
             <div class="progress-bar hide" slot="progress-bar"></div>
