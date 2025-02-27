@@ -22,9 +22,10 @@ const pages = {
     "kaddish/": {title: "קדיש (שלד)", alt: "Kaddish (skeleton)", author: "omridanino", kw: [1, "biblical", "interactive", "poem", "sound", "visual"]},
     "water/": {title: "קוד מים | תרשימי זרימה", alt: "Code of water | flow charts", author: "arikweiss", kw: [1, "2d 3d", "biblical", "interactive", "visual"]},
     "talismetta/": {title: "טליס־מטא", alt: "Talis-Metta", author: ["neorashem", "nimrodkerrett"], kw: [1, "software", "visual"]},
-    "snark/": {title: "כרחש אבמ\"ח וכרחש אדו\"ש", alt: "ABMḤ snark and ADWŠ", author: "eyalgruss", kw: [1, "2d 3d", "combinatorial", "interactive", "new constraint", "pangram", "software", "sound", "visual"]},
+    "snark/": {title: "כרחש אבמ\"ח וכרחש אדו\"ש", alt: "ABMḤ snark and ADWŠ snark", author: "eyalgruss", kw: [1, "2d 3d", "combinatorial", "interactive", "new constraint", "pangram", "software", "sound", "visual"]},
 
     "receptacle/": {title: "כלי קיבולת", alt: "Receptacle", author: "amitbenami", kw: ["poem"]},
+    "harh/": {title: "הַרְחְ", alt: "Harḥ", author: "eyalgruss", kw: ["poem"]},
 
     "0/": {title: "פתח דבר לגיליון 0 – מלחמה", alt: "Foreward to Issue 0 – War", author: "alexbenari", kw: [0]},
     "imagine/": {title: "דמיין", alt: "Imagine", author: "liorzalmanson", kw: [0, "poem"]},

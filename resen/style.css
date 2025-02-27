@@ -39,7 +39,7 @@
 @font-face {
     font-display: block;
     font-family: arabic;
-    src: url('fonts/ReadexPro-Arabic-300.woff2');
+    src: url('fonts/ReadexPro-Arabic-Light.woff2');
     unicode-range: U+0600-06ff;
 }
 
@@ -47,7 +47,7 @@
     font-family: Arial;  /* MacOS, iOS */
     size-adjust: 160%;
     src: local(Arial);
-    unicode-range: U+2709;
+    unicode-range: U+2709;  /* Envelope */
 }
 
 @font-face {
@@ -55,7 +55,7 @@
     size-adjust: 160%;
     src: local('NotoSansSymbols-Regular-Subsetted'),  /* Chrome requires filename */
          local('Noto Sans Symbols');
-    unicode-range: U+2709;
+    unicode-range: U+2709;  /* Envelope */
 }
 
 :root, ::backdrop {  /* In Chrome (<122) and Firefox (<120) ::backdrop did not inherit from :root. See: https://issues.chromium.org/issues/40569411, https://bugzilla.mozilla.org/show_bug.cgi?id=1855668 */

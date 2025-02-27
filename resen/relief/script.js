@@ -2,9 +2,12 @@ function fix_scene(mv, dx) {  // See: https://github.com/google/model-viewer/iss
     const scene = mv[Object.getOwnPropertySymbols(mv).find(e => e.description == 'scene')]
     scene.toneMapping = 0  // See: https://github.com/google/model-viewer/issues/4541
 
+    const ztarget = mv.getCameraTarget().z
+    const factor = 1.33 / (parseFloat(mv.minCameraOrbit.split(' ').pop())+ztarget)
+
     mv.addEventListener('camera-change', event => {
         if (event.detail.source == 'user-interaction')
-            mv.cameraTarget = `${(16-mv.getCameraOrbit().radius) / 11}m 0m -16m`
+            mv.cameraTarget = `${(ztarget+mv.getCameraOrbit().radius) * factor}m 0m ${ztarget}m`
     })
 
     new ResizeObserver(() => {
