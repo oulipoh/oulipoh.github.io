@@ -13,7 +13,7 @@
     <h3><a href=".">אוליפֹה</a></h3>
     <div id="grid"></div>
     <script>
-        people = {
+        const people = {
             'Meytar Moran': {name: 'מיתר מורן', url: 'https://www.meytarmoran.com'},
             'Noam Dovev': {name: 'נעם דובב', url: 'https://palindromes.co'},
             'Eyal Gruss': {name: 'איל גרוּס', url: 'https://eyalgruss.com'},
@@ -28,21 +28,21 @@
         }
 
         for ([person, _] of Object.keys(people).map(x => [x, Math.random()]).sort((a, b) => a[1] - b[1])) {
-            img = document.createElement('img')
+            const img = new Image()
             img.className = 'headshot'
             img.src = `media/headshots/${person}.jpg`
 
-            cap = document.createElement('figcaption')
+            const cap = document.createElement('figcaption')
             cap.innerHTML = people[person].name
-            a = document.createElement('a')
+            let a = document.createElement('a')
             a.dir = 'ltr'
             a.href = a.innerHTML = people[person].url
             a.innerHTML = decodeURI(a.innerHTML.split(/https?:\/\/(www\.)?/).pop())
-            div = document.createElement('div')
+            const div = document.createElement('div')
             div.appendChild(a)
             cap.appendChild(div)
 
-            fig = document.createElement('figure')
+            const fig = document.createElement('figure')
             fig.appendChild(img)
             fig.appendChild(cap)
 

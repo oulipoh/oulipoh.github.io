@@ -284,6 +284,13 @@ nav a:not([href]) {
     color: var(--fg_verydim);
 }
 
+.abs_center {
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    translate: -50% -50%;
+}
+
 article:not(.overflow) {
     margin-inline: auto;
     max-width: var(--article_width);
@@ -597,6 +604,7 @@ img.fullscreen {
 
 h1 {
     margin-block: max(.67em, 2.5 * var(--font_size));
+    position: relative;
 }
 
 h1 img {
@@ -1225,4 +1233,20 @@ video::-webkit-media-controls-enclosure {  /* Not supported in Firefox */
     .two_col {
         column-count: 1;
     }
+}
+
+
+/* stuff for https://oulipoh.com/resen */
+
+
+.grow {
+    filter: brightness(0);
+	scale: .38;
+	top: 48.5%;
+	transition: all 2s;
+}
+
+h1:is(:hover, :focus-visible) .grow {
+    filter: brightness(1);
+	scale: 1.65;
 }

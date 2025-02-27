@@ -13,7 +13,12 @@
     <noscript><style>body {visibility: visible}</style></noscript>
 </head>
 <body onload="document.body.style.visibility = 'visible'">
-    <script>make_header()</script>
+    <script>
+        make_header()
+        const ring = h1.appendChild(new Image())
+        ring.classList.add('abs_center', 'grow')
+        ring.src = '../media/ring.svg'
+    </script>
     <article>
     <p>
         רֶסֶן הוא כתב עת מקוון ליצירה אילוצית וחישובית בעברית. כתב העת שם לעצמו למטרה לתת במה
