@@ -25,7 +25,7 @@ const pages = {
     "snark/": {title: "כרחש אבמ\"ח וכרחש אדו\"ש", alt: "ABMḤ snark and ADWŠ snark", author: "eyalgruss", kw: [1, "2d 3d", "combinatorial", "interactive", "new constraint", "pangram", "software", "sound", "visual"]},
 
     "receptacle/": {title: "כלי קיבולת", alt: "Receptacle", author: "amitbenami", kw: ["poem"]},
-    "harh/": {title: "הַרְחְ", alt: "Harḥ", author: "eyalgruss", kw: ["poem"]},
+    "harh/": {title: "הַרְח", alt: "Harḥ", author: "eyalgruss", kw: ["poem"]},
 
     "0/": {title: "פתח דבר לגיליון 0 – מלחמה", alt: "Foreward to Issue 0 – War", author: "alexbenari", kw: [0]},
     "imagine/": {title: "דמיין", alt: "Imagine", author: "liorzalmanson", kw: [0, "poem"]},
