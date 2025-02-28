@@ -8,6 +8,18 @@
     <script src="pages.js"></script>
     <link rel="stylesheet" href="style.css">
     <style>
+        .grow {
+            filter: brightness(0);
+            scale: .36;
+            top: 48%;
+            transition: all 2s;
+        }
+
+        h1:is(:hover, :focus-visible) .grow {
+            filter: brightness(1);
+            scale: 1.7;
+        }
+
         @keyframes marquee_first {
             50% { margin-inline-start: 100% }
             100% { margin-inline-start: 0 }

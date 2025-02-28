@@ -66,7 +66,7 @@
     --fg_verydim: var(--fg_dim);
     --fg_filter: saturate(0);
     --fg_highlight: var(--on);
-    --glow: aliceblue;
+    --glow: var(--on);
     --inverse_bg: #6580e1;
     --inverse_fg: var(--bg);
     --invert: 1;
@@ -1233,20 +1233,4 @@ video::-webkit-media-controls-enclosure {  /* Not supported in Firefox */
     .two_col {
         column-count: 1;
     }
-}
-
-
-/* stuff for https://oulipoh.com/resen */
-
-
-.grow {
-    filter: brightness(0);
-	scale: .38;
-	top: 48.5%;
-	transition: all 2s;
-}
-
-h1:is(:hover, :focus-visible) .grow {
-    filter: brightness(1);
-	scale: 1.65;
 }

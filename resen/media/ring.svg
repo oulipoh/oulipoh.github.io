@@ -1,18 +1,20 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="35 35 191.71 191.71">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="44 44 174 174">
  <defs>
   <style>
       @keyframes rotate {
-            0% { transform: rotate(0) }  /* Safari cannot use rotate shorthand on SVG elements, and requires 0% */
-            100% { transform: rotate(1turn) }
-    }
-      svg {
-        fill: #ff5337;
-        font-size: 7.1px;
-        animation: 23s linear infinite rotate;
+         0% { transform: rotate(0) }  /* Safari cannot use rotate shorthand on SVG elements, and requires 0% */
+         100% { transform: rotate(1turn) }
       }
+
+      svg {
+         animation: 23s linear infinite rotate;
+         fill: #ff5337;
+         font-size: 7.1px;
+      }
+
       .link {
-        font-family: 'Courier New', monospace;
-        font-size: 6.5px
+         font-family: 'Courier New', monospace;
+         font-size: 6.5px;
       }
   </style>
  </defs>

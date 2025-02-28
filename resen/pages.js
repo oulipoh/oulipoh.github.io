@@ -40,7 +40,7 @@ const pages = {
     "tribe/": {title: "השבט הנושא את עיניו השמיימה", alt: "The tribe with its eyes on the sky", author: "italocalvino", translator: "jonathanfine", kw: [0, "story", "translation"]},
     "achshav/": {title: "אָח־שָׁב – עַכְ־שָׁו", alt: "Ach-Shav", author: "brunogrife", kw: [0, "sound"]},
 
-    "about/": {title: "אודות כתב העת", alt: "About this journal", author: "resen", logo: "../media/resen.svg"},
+    "about/": {title: "אודות כתב העת", alt: "About this journal", author: "resen"},
 }
 
 const authors = {
