@@ -81,7 +81,7 @@ containers.forEach(elem => {
 })
 
 document.addEventListener('keydown', event => {
-    if (event.altKey || event.getModifierState('AltGraph') || event.ctrlKey || event.metaKey || !event.key.match(/^[א-תa-zA-Z]$/) && event.key != 'Backspace' && event.key != 'CapsLock')
+    if (event.altKey || event.getModifierState?.('AltGraph') || event.ctrlKey || event.metaKey || !event.key.match(/^[א-תa-zA-Z]$/) && event.key != 'Backspace' && event.key != 'CapsLock')
         return
     const current = containers[1].classList.contains('fullscreen') | 0
     containers[current].classList.remove('keyboard')
