@@ -110,6 +110,14 @@ textarea#title {
     margin-block: 5em 4em;
 }
 
-textarea#title + #poem {
+textarea#title + #thepoem {
     margin-block: 4em;
+}
+
+div.fullscreen:not(.petri) {
+    padding-inline: var(--main_margin);
+}
+
+div.fullscreen #thepoem {
+    height: var(--max_media_height);
 }
