@@ -455,7 +455,7 @@ function export_all(lang, skip=true) {
 
 
 function is_shortcut(event, shortcut) {
-    shortcut = shortcut.toLowerCase().split(/[+-](?!$)/)
+    shortcut = shortcut.toLowerCase().split(/ ?[+-] ?(?!$)/)
     const shortcut_key = shortcut.pop()
     let event_key = event.key.toLowerCase()
     if (shortcut_key == '+' && event.code == 'Equal' && !'-_'.includes(event.key)
@@ -469,7 +469,7 @@ function is_shortcut(event, shortcut) {
 
 function add_shortcut(elem, shortcut) {
     if (shortcut) {
-        elem.ariaKeyshortcuts = shortcut
+        elem.ariaKeyshortcuts = shortcut.replaceAll(' ', '')
         document.addEventListener('keydown', e => {if (is_shortcut(e, shortcut)) elem.click()})
     }
 }

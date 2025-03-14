@@ -238,8 +238,8 @@ function step(grid, json, steps=0, max_tokens={}, result_counter={}, reset_count
             label = label.split('_')[0]
             alt = alt?.split('_')[0]
         } else {
-            label = label.replace(/_/g, ' ')
-            alt = alt?.replace(/_/g, ' ')
+            label = label.replaceAll('_', ' ')
+            alt = alt?.replaceAll('_', ' ')
         }
         if (alt) {
             if (lang)
