@@ -11,7 +11,7 @@ const pages = {
     "yomyom/": {title: "קמעות יום־יום", alt: "Everyday talismans", author: "ohadhadad", kw: [1, "interactive", "visual"]},
     "mahdukh/": {title: "מה יש לך גברת מהדוך?", alt: "What is with you Mrs. Mahdukh?", author: "doritkedar", kw: [1, "biblical"]},
     "fortuna/": {title: "פורטונה", alt: "Fortuna", author: "adinaviterbo", kw: [1, "visual"]},
-    "shem/": {title: "שם המפורש", alt: "Shem HaMephorash", author: "avrahamguybarchil", kw: [1, "biblical", "visual"]},
+    "shem/": {title: "שם המפורש", alt: "Shem HaMeforash", author: "avrahamguybarchil", kw: [1, "biblical", "visual"]},
     "kosheret/": {title: "קושרת אות", alt: "Kosheret Ot", author: "moresun", kw: [1, "sound", "visual"]},
     "zag/": {title: "קמעות צג", alt: "Kmeot Zag", author: "eakoukli", kw: [1, "interactive", "live code", "poem", "software", "sound", "visual"]},
     "fateful/": {title: "שהות הרת־גורל", alt: "Fateful stay", author: "shoeyraz", kw: [1]},

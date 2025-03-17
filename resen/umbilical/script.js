@@ -4,7 +4,7 @@ function observe(element, animation, threshold=1) {
             o.unobserve(e[0].target)
             animation()
         }
-    }, {threshold: threshold}).observe(element)
+    }, {threshold}).observe(element)
 }
 
 
