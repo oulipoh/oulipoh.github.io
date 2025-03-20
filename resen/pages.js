@@ -197,7 +197,7 @@ const kw_labels = {
     "pangram": "פנגרמה",
     "poem": "שיר",
     "record": "שיא",
-    "self referral": "מתייחס לעצמו",
+    "self-referral": "מתייחס לעצמו",
     "software": "תוכנה",
     "sound": "צלילים",
     "story": "סיפור",
