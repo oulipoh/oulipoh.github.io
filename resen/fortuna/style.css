@@ -2,7 +2,7 @@
     display: grid;
     --gap: 3rem;
     gap: var(--gap);
-    --max_img_width: 450px;
+    --max_img_width: clamp(250px, 60vh, 450px);
     grid-template-columns: repeat(auto-fit, minmax(0, var(--max_img_width)));
     justify-content: center;
     justify-items: center;

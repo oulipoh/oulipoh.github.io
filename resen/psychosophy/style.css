@@ -48,6 +48,7 @@ button.big, .images {
 
 #diamond img {
     max-height: 33vh;
+    min-height: 200px;
     max-width: 25vw;
     opacity: var(--opacity);
 }
@@ -57,6 +58,10 @@ a figcaption {
     margin-inline: initial;
     margin-top: 2.5%;
     text-align: center;
+}
+
+.images img {
+    min-height: 300px;
 }
 
 a img {

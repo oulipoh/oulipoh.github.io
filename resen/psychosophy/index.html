@@ -130,7 +130,7 @@
     <button class="big" title="גלול לראש הטבלה" onclick="diamond.scrollIntoView()"><span style="mix-blend-mode: overlay">&#x1f51d;&#xfe0e;</span></button>
     <script>
         make_footer()
-        new IntersectionObserver(e => {if (e[0].intersectionRatio == 1) diamond.querySelectorAll('div').forEach((div, i) => {div.style.animationDelay = `${2 * i}s`; div.classList.add('turn')})}, {threshold: 1}).observe(diamond)
+        new IntersectionObserver(e => {if (e[0].intersectionRatio == 1) diamond.querySelectorAll('div').forEach((div, i) => {div.style.animationDelay = `${2 * i}s`; div.classList.add('turn')})}, {threshold: 1}).observe(diamond.querySelector('[href="#card1"]'))
     </script>
 </body>
 </html>

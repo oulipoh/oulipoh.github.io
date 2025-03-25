@@ -16,20 +16,52 @@
     <noscript><style>body {visibility: visible}</style></noscript>
 </head>
 <body onload="document.body.style.visibility = 'visible'">
-    <script>
-        make_header()</script>
+    <script>make_header()</script>
     <div class="model_container" oncontextmenu="toggle_fullscreen(event)">
         <model-viewer src="media/relief.glb" onload="fix_scene(this, .07)" orbit-sensitivity=".1" zoom-sensitivity=".2" camera-controls camera-target="0m 0m -16m" min-camera-orbit="-Infinity 0deg 1.5m" max-camera-orbit="Infinity 180deg 16m" camera-orbit="0deg 90deg 16m" field-of-view="37deg" max-field-of-view="37deg" touch-action="pan-y" disable-pan interaction-prompt="none" alt="מודל תלת־ממדי">
             <div class="progress-bar hide" slot="progress-bar"></div>
         </model-viewer>
     </div>
-
-    <div class="images" oncontextmenu="toggle_fullscreen(event)" ondblclick="toggle_fullscreen(event)">
-        <img src="media/601.jpg" alt="רישום">
-    </div>
-
     <article>
-
+    </article>
+    <div class="images" oncontextmenu="toggle_fullscreen(event)" ondblclick="toggle_fullscreen(event)">
+        <figure>
+            <img src="media/601.jpg" alt="רישום">
+            <figcaption>
+                <article>
+                <p>
+                    טקסט משמאל:
+                    פרקטיקה של סימבוליזם מאגי.
+                    פרויקט - <bdi>150 x 150 x 150</bdi> ס"מ.
+                    בטון, גבס, צבע שחור, אקריליק.
+                    בשדה, גינה, מוזיאון, ברחוב, ביער.
+                </p>
+                <p>
+                    טקסט מימין:
+                    "תבליט־נגד", נייר שחור.
+                    <bdi>51 x 72</bdi>. שמן, פסטל.
+                    21 אוג' 1977 - 11 אוק' 1977.
+                    ירושלים.
+                </p>
+                <p dir="ltr">
+                    Text on the left:
+                    Practice of Magical Symbolism.
+                    Project - 150 x 150 x 150 cm.
+                    Concrete, plaster, black paint, acrylic.
+                    In the field, garden, museum, on the street, in the forest.
+                </p>
+                <p dir="ltr">
+                    Text on the right:
+                    "Counter-relief", black paper.
+                    51 x 72. Oil, pastel.
+                    27 Aug. 1977 - 11 Oct. 1977.
+                    Jerusalem.
+                </p>
+                </article>
+            </figcaption>
+        </figure>
+    </div>
+    <article>
     </article>
     <script>make_footer()</script>
 </body>

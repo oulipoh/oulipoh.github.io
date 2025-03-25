@@ -67,6 +67,7 @@
     --fg_filter: saturate(0);
     --fg_highlight: var(--on);
     --glow: var(--on);
+    --glow_blur: 0;
     --inverse_bg: #6580e1;
     --inverse_fg: var(--bg);
     --invert: 1;
@@ -184,7 +185,7 @@ body.todark, .todark ::backdrop {
     }
 
     a:is(:hover, :focus-visible) img {
-        box-shadow: 0 0 .8rem .4rem var(--glow);
+        box-shadow: 0 0 var(--glow_blur) 6.5px var(--glow);
     }
 
     @keyframes border {
