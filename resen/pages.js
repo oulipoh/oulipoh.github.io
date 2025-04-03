@@ -14,11 +14,11 @@ const pages = {
     "shem/": {title: "שם המפורש", alt: "Shem HaMeforash", author: "avrahamguybarchil", kw: [1, "biblical", "visual"]},
     "kosheret/": {title: "קושרת אות", alt: "Kosheret Ot", author: "moresun", kw: [1, "sound", "visual"]},
     "zag/": {title: "קמעות צג", alt: "Kmeot Zag", author: "eakoukli", kw: [1, "interactive", "live code", "poem", "software", "sound", "visual"]},
-    "fateful/": {title: "שהות הרת־גורל", alt: "Fateful stay", author: "shoeyraz", kw: [1]},
+    "fateful/": {title: "שהות הרת־גורל", alt: "Fateful stay", author: "shoeyraz", kw: [1], hazard: "motionSimulation"},
     "psychosophy/": {title: "פסיכוסופיה: פתיחה", alt: "Psychsophy: A reading", author: ["avinoamsternheim", "menahemgoldenberg"], kw: [1, "visual"]},
     "talismother/": {title: "אימא קמעית", alt: "Talis-Mother", author: "sandravalabregue", kw: [1, "biblical", "visual"]},
     "umbilical/": {title: "טבוּר", alt: "Umbilical", author: "nettalevtov", kw: [1, "live code", "poem", "visual"]},
-    "taase/": {title: "תעשה", alt: "Ta-a-se", author: "ayaamikam", kw: [1, "biblical", "cipher", "interactive", "visual"]},
+    "taase/": {title: "תעשה", alt: "Ta-a-se", author: "ayaamikam", kw: [1, "biblical", "cipher", "interactive", "visual"], hazard: "flashing"},
     "kaddish/": {title: "קדיש (שלד)", alt: "Kaddish (skeleton)", author: "omridanino", kw: [1, "biblical", "interactive", "poem", "sound", "visual"]},
     "water/": {title: "קוד מים | תרשימי זרימה", alt: "Code of water | Flow charts", author: "arikweiss", kw: [1, "2d 3d", "biblical", "interactive", "visual"]},
     "talismetta/": {title: "טליס־מטא", alt: "Talis-Metta", author: ["neorashem", "nimrodkerrett"], kw: [1, "software", "visual"]},
@@ -394,6 +394,7 @@ function make_contents(show_snippet=default_show_snippet, show_author=default_sh
             const meta = a.appendChild(document.createElement('meta'))
             meta.setAttribute('itemprop', 'accessibilityHazard')
             meta.content = hazard
+            a.setAttribute('itemscope', '')
         })
 
         const p = document.createElement('p')

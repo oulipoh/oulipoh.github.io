@@ -362,7 +362,7 @@ button, [id^=kw_] {
     border-color: var(--on);
 }
 
-button:not(.on, .no_active, .no_active *, .sliders *):active, .always_on, button.on:not(:active) {
+button:not(:is(.on, .no_active, .no_active *, .sliders *)):active, .always_on, button.on:not(:active) {
     background: var(--on);
     color: var(--inverse_fg);
 }
@@ -661,7 +661,7 @@ nav[dir=rtl] ~ header {
     direction: rtl;
 }
 
-header ~ :not(h2, footer) {
+header ~ :not(:is(h2, footer)) {
     line-height: var(--line_height);
 }
 
@@ -1180,7 +1180,7 @@ video::-webkit-media-controls-enclosure {  /* Not supported in Firefox */
         --fg_filter: saturate(0);
     }
 
-    button:not(.on, .no_active, .no_active *):active, .always_on, .on:not(:active) {
+    button:not(:is(.on, .no_active, .no_active *)):active, .always_on, .on:not(:active) {
         outline-offset: 0;
         outline-style: solid;
         outline-width: 5px;
