@@ -292,8 +292,8 @@ function drawShurukLine() {
         symbol.textContent = "\u05BC";  // Correct Shuruk symbol (ּ)
 
         // Set the position based on the array values
-        symbol.style.left = `${position.x}px`;
-        symbol.style.top = `${position.y}px`;
+        symbol.style.left = position.x + 'px';
+        symbol.style.top = position.y + 'px';
 
         // Append the symbol to the container with a delay to simulate appearance
         setTimeout(() => {
@@ -329,8 +329,8 @@ function positionElements() {
     // Position each moving-l element with a slight vertical offset
     movingLElements.forEach((element, index) => {
         //console.log(index + "|"  + element.style.left + "|" + element.style.top);
-        element.style.left = `${startX3}px`; // Align with the target text
-        element.style.top = `${startY3}px`; // Stack the lines vertically above
+        element.style.left = startX3 + 'px'; // Align with the target text
+        element.style.top = startY3 + 'px'; // Stack the lines vertically above
     });
 }
 
@@ -352,8 +352,8 @@ function positionElements2() {
     // Position each moving-l element with a slight vertical offset
     movingLElements2.forEach((element, index) => {
         //console.log(index + "|"  + element.style.left + "|" + element.style.top);
-        element.style.left = `${startX4}px`; // Align with the target text
-        element.style.top = `${startY4}px`; // Stack the lines vertically above
+        element.style.left = startX4 + 'px'; // Align with the target text
+        element.style.top = startY4 + 'px'; // Stack the lines vertically above
     });
 }
 

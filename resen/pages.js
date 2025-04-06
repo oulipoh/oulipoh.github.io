@@ -434,8 +434,7 @@ function iframe_load_handler() {
     if (footer)
         footer.style.visibility = 'hidden'
     this.contentDocument.documentElement.style.overflowY = 'clip'  // Prevent redundant scrollbars in Chrome
-    const observer = new ResizeObserver(() => {const h = this.contentDocument.documentElement.scrollHeight; if (h >= 10800) console.warn(`Truncated height of ${this.contentDocument.title} from ${h}`); this.style.height = h + 'px'})  // Note: vh units will be relative to the iframe and may cause excessive heights
-    observer.observe(this.contentDocument.documentElement)
+    new ResizeObserver(() => {const h = this.contentDocument.documentElement.scrollHeight; if (h >= 10800) console.warn(`Truncated height of ${this.contentDocument.title} from ${h}`); this.style.height = h + 'px'}).observe(this.contentDocument.documentElement)  // Note: vh units will be relative to the iframe and may cause excessive heights
 }
 
 

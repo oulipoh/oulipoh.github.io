@@ -149,7 +149,7 @@ body.todark, .todark ::backdrop {
         --icon_dur: .3s;
     }
 
-    :where(:not(input[type=checkbox])):focus-visible {
+    :where(:not(input[type=checkbox])):focus-visible, .outline {
         outline-color: var(--on);
         outline-offset: 8px;
         outline-style: solid;
