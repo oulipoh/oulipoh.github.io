@@ -106,6 +106,11 @@
     background-color: var(--inverse_bg);
 }
 
+body.fullscreen ::selection {
+    color: inherit;
+    background-color: inherit;
+}
+
 html {
     scroll-padding-block: 5rem 3rem;
 }
@@ -184,7 +189,9 @@ body.todark, .todark ::backdrop {
         animation: var(--icon_dur) infinite deco;
     }
 
-    a:is(:hover, :focus-visible) img {
+    :is(a:is(:hover, :focus-visible),
+    a:is(:hover, :focus-visible) > :is(div, figure):only-of-type,
+    a:is(:hover, :focus-visible) > figure:only-of-type > div:only-of-type) > img:only-of-type {
         box-shadow: 0 0 var(--glow_blur) 6.5px var(--glow);
     }
 
@@ -193,7 +200,7 @@ body.todark, .todark ::backdrop {
         66% { border-style: dotted }
     }
 
-    :is([id^=kw_], button.big):is(:hover, :focus-visible) {
+    :is([id^=kw_], button.big, button.border, .border button):is(:hover, :focus-visible) {
         animation: var(--icon_dur) infinite border;
         border-color: initial;
     }
@@ -349,6 +356,7 @@ button, [id^=kw_] {
 }
 
 [id^=kw_] {
+    direction: ltr;  /* For left alignment of the multi-line tooltip title */
     font-size: inherit;
     letter-spacing: initial;
     text-decoration: none;
@@ -440,7 +448,6 @@ button, pre {
 .contents > p > a ~ span > span {
     display: inline-block;
     font-size: initial;
-    unicode-bidi: isolate;
 }
 
 .contents > p > a ~ span > span:not(:last-of-type):after {
@@ -553,9 +560,9 @@ nav[dir=rtl] ~ footer > div {
     direction: rtl;
 }
 
-footer, .kw, nav,
+footer, .fullscreen, .kw, nav,
 svg image,  /* For Firefox Android */
-[oncontextmenu*=toggle_fullscreen], [ondblclick*=toggle_fullscreen]  /* Note this will miss elements where the handler was added programmatically, as well as different elements passed to the handler */
+:is([oncontextmenu*=toggle_fullscreen], [ondblclick*=toggle_fullscreen]):not(body)  /* Note this will miss elements where the handler was added programmatically, as well as different elements passed to the handler */
 {
     user-select: none;
     -webkit-user-select: none;
@@ -827,7 +834,7 @@ nav a:not(.trans)::before {
     width: 1.1rem;
 }
 
-nav .back > span {
+nav .back * {
     text-decoration: inherit;
     text-decoration-color: inherit;  /* For Safari */
     text-decoration-style: inherit;  /* For Safari */
@@ -1018,7 +1025,7 @@ html[lang=he] :is(nav:not([dir=ltr]) ~ :nth-last-child(1 of .refs), nav:not([dir
     animation: 3s show_cursor;
 }
 
-[onmousemove*=show_hide_cursor],  /* Note this will miss elements where the handler was added programmatically */
+[onmousemove*='show_hide_cursor(this)'],  /* Note this will miss elements where the handler was added programmatically */
 .hide_cursor {
     cursor: none;
 }
@@ -1028,7 +1035,15 @@ html[lang=he] :is(nav:not([dir=ltr]) ~ :nth-last-child(1 of .refs), nav:not([dir
     flex-wrap: wrap;
     gap: 1em 2em;
     justify-content: space-evenly;
+    justify-self: stretch;
     margin-block: 4ex 5ex;
+}
+
+.sidebyside > ::before {
+    content: var(--sidebyside_long_line);
+    display: block;
+    height: 0;
+    visibility: hidden;
 }
 
 .sliders {
@@ -1106,7 +1121,7 @@ a.sponsors {
 
 .subscribe {
     animation: 50s linear infinite border_dance;
-    background-image: linear-gradient(90deg, currentColor 50%, transparent 50%), linear-gradient(90deg, currentColor 50%, transparent 50%), linear-gradient(0, currentColor 50%, transparent 50%), linear-gradient(0, currentColor 50%, transparent 50%);
+    background-image: linear-gradient(90deg, currentcolor 50%, transparent 50%), linear-gradient(90deg, currentcolor 50%, transparent 50%), linear-gradient(0, currentcolor 50%, transparent 50%), linear-gradient(0, currentcolor 50%, transparent 50%);
     background-position: 0 0, 100% 100%, 0 100%, 100% 0;
     background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
     background-size: .5rem 2px, .5rem 2px, 2px .5rem, 2px .5rem;

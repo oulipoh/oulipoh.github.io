@@ -6,6 +6,10 @@ const pages = {
     "/": {title: "רֶסֶן", alt: "Resen", author: "resen", logo: "media/resen.svg", skip: true},
     // "open-call-kmeot/": {title: "קול קורא: קמעות", alt: "Open call: Talismans", author: "resen"},
 
+    "palindock/": {title: "תעגון שמש נוגעת", alt: "Anchor of a touching sun", author: "noamdovev", kw: [2, "palindrome", "poem"], skip: true},
+    "palisdead/": {title: "מות ידיד יתום", alt: "Death of an orphan friend", author: "uriamiram", kw: [2, "palindrome", "poem"], skip: true},
+    "palindream/": {title: "מול  חיַי – חלום", alt: "Facing my life – a dream", author: "liormaayan", kw: [2, "palindrome", "poem"], skip: true},
+
     "tsc/": {title: "קוד המקור", alt: "The source code", author: "ofirliberman", kw: [1, "interactive", "visual"], skip: true},
     "relief/": {title: "תבליט־נגד", alt: "Counter relief", author: "michailgrobman", kw: [1, "biblical", "interactive", "visual"], skip: true},
     "yomyom/": {title: "קמעות יום־יום", alt: "Everyday talismans", author: "ohadhadad", kw: [1, "interactive", "visual"]},
@@ -13,8 +17,8 @@ const pages = {
     "fortuna/": {title: "פורטונה", alt: "Fortuna", author: "adinaviterbo", kw: [1, "visual"]},
     "shem/": {title: "שם המפורש", alt: "Shem HaMeforash", author: "avrahamguybarchil", kw: [1, "biblical", "visual"]},
     "kosheret/": {title: "קושרת אות", alt: "Kosheret Ot", author: "moresun", kw: [1, "sound", "visual"]},
-    "zag/": {title: "קמעות צג", alt: "Kmeot Zag", author: "eakoukli", kw: [1, "interactive", "live code", "poem", "software", "sound", "visual"]},
-    "fateful/": {title: "שהות הרת־גורל", alt: "Fateful stay", author: "shoeyraz", kw: [1], hazard: "motionSimulation"},
+    "zag/": {title: "קמעות צג", alt: "Kmeot Zag (screen talismans)", author: "eakoukli", kw: [1, "interactive", "live code", "poem", "software", "sound", "visual"]},
+    "fateful/": {title: "שהות הרת־גורל", alt: "Fateful stay", author: "shoeyraz", kw: [1, "story"], hazard: "motionSimulation"},
     "psychosophy/": {title: "פסיכוסופיה: פתיחה", alt: "Psychsophy: A reading", author: ["avinoamsternheim", "menahemgoldenberg"], kw: [1, "visual"]},
     "talismother/": {title: "אימא קמעית", alt: "Talis-Mother", author: "sandravalabregue", kw: [1, "biblical", "visual"]},
     "umbilical/": {title: "טבוּר", alt: "Umbilical", author: "nettalevtov", kw: [1, "live code", "poem", "visual"]},
@@ -115,6 +119,9 @@ const authors = {
     "julienvocance": {
         "name": {"": "ז'וליאן ווֹקַנס", "en": "Julien Vocance"},
     },
+    "liormaayan": {
+        "name": {"": "ליאור מעין", "en": "Lior Maayan"},
+    },
     "liorzalmanson": {
         "name": {"": "ליאור זלמנסון", "en": "Lior Zalmanson"},
     },
@@ -145,6 +152,11 @@ const authors = {
         "name": {"": "נמרוד קרת", "en": "Nimrod Kerrett"},
         "web": "zzzen.com",
     },
+    "noamdovev": {
+        "name": {"": "נעם דובב", "en": "Noam Dovev"},
+        "web": "palindromes.co/",
+        "mail": "noamdo@gmail.com"
+    },
     "noashaham": {
         "name": {"": "נעה שחם", "en": "Noa Shaham"},
     },
@@ -171,6 +183,9 @@ const authors = {
         "name": {"": "שועי רז", "en": "Shoey Raz"},
         "web": ".wordpress.com",
     },
+    "uriamiram": {
+        "name": {"": "אורי עמירם", "en": "Uri Amiram"},
+    },
 }
 
 const ui = {
@@ -179,6 +194,7 @@ const ui = {
 }
 
 const kw_labels = {
+    2: "ב – יחסים פלינדרומיים",
     1: "א – קמעות",
     0: "0 – מלחמה",
     "2d 3d": "רב־ממדי",
@@ -318,11 +334,11 @@ function get_set_titles(page, lang, elem) {
     lang ??= get_lang()
     const titles = {label: pages[page]?.title ?? page.split('/')[0], alt: ''}
     if (titles.label.match(/\p{P}$/u))
-        titles.label = '⁨' + titles.label
+        titles.label = '\u2068' + titles.label + '\u2069'
     if (pages[page]?.alt) {
         titles.alt = pages[page].alt
         if (titles.alt.match(/\p{P}$/u))
-            titles.alt = '⁨' + titles.alt
+            titles.alt = '\u2068' + titles.alt + '\u2069'
         if (lang)
             [titles.label, titles.alt] = [titles.alt, titles.label]
     }
@@ -399,23 +415,30 @@ function make_contents(show_snippet=default_show_snippet, show_author=default_sh
 
         const p = document.createElement('p')
         p.classList.add(...all_keywords.filter(kw => !pages[page].kw?.map(String).includes(kw)).map(kw => 'non_' + sanitize(kw)))
-        p.id = 'page_' + div.children.length
+        p.id = 'page_' + div.childElementCount
         p.appendChild(a)
+
+        let span = null
+        if (pages[page].wip) {
+            span = p.appendChild(document.createElement('span'))
+            const s = span.appendChild(document.createElement('span'))
+            s.classList.add('wip')
+            s.textContent = ui[lang].wip
+        }
 
         if (show_author) {
             let [authors, alt_authors] = get_make_author(page, lang)
             authors = authors.map(harden)
             alt_authors = alt_authors.map(harden)
-            if (authors.join() != contents_authors) {
-                const span = p.appendChild(document.createElement('span'))
+            if (authors.join() != contents_authors)
                 authors.forEach((author, i) => {
+                    span ??= p.appendChild(document.createElement('span'))
                     const s = span.appendChild(document.createElement('span'))
                     s.innerHTML = author
                     if (alt_authors[i] != author)
                         s.title = alt_authors[i]
                 })
             }
-        }
         div.appendChild(p)
     }
     document.body.appendChild(div)
@@ -469,7 +492,7 @@ function is_shortcut(event, shortcut) {
 
 function add_shortcut(elem, shortcut) {
     if (shortcut) {
-        elem.ariaKeyshortcuts = shortcut.replaceAll(' ', '')
+        elem.ariaKeyShortcuts = shortcut.replaceAll(' ', '')
         document.addEventListener('keydown', e => {if (is_shortcut(e, shortcut)) elem.click()})
     }
 }
@@ -554,10 +577,9 @@ function make_header(nav_only=false, reverse_issues_kw=default_reverse_issues_kw
     let diff = get_width(index_title, nav) - get_width(parent_title, nav)
     let span, back, keywords, trans
     if (page == '/') {
-        span = document.createElement('span')
-        span.dir = 'ltr'
-        span.innerHTML = parent_title
-        add_nav_element(nav, parent_title ? '..' : '', span, 'back', diff, shortcuts.back)
+        bdi = document.createElement('bdi')
+        bdi.innerHTML = parent_title
+        add_nav_element(nav, parent_title ? '..' : '', bdi, 'back', diff, shortcuts.back)
         keywords = all_keywords
     } else {
         add_nav_element(nav, page2url('.', lang, page), index_title, 'back', -diff, shortcuts.back)
@@ -641,7 +663,6 @@ function make_header(nav_only=false, reverse_issues_kw=default_reverse_issues_kw
             }
 
             button.innerHTML = label
-            button.dir = 'ltr'  // For left alignment of the multi-line title
             button.title = `${alt}\nworks=${all_keywords_stats[kw].count}\ninfo=${(all_keywords_stats[kw].info * 100).toFixed(1)}%`.trim()
             if (page == '/')
                 button.onclick = kw_handler
@@ -681,7 +702,7 @@ function make_header(nav_only=false, reverse_issues_kw=default_reverse_issues_kw
     const desc = []
     if (en_title)
         desc.push(en_title)
-    if (pages[page].author || pages[page].authors || pages[page].translator || pages[page].translators || pages[page].with) {
+    if (pages[page].author || pages[page].authors || pages[page].by || pages[page].trans || pages[page].translation || pages[page].translator || pages[page].translators || pages[page].colab || pages[page].colabs || pages[page].collab || pages[page].collabs || pages[page].collaboration || pages[page].collaborator || pages[page].collaborators || pages[page].with) {
         const current_authors = get_make_author(page, lang, header, new_tab_for_social)[lang != 'en' | 0].join(', ')
         if (current_authors)
             desc.push(current_authors)
@@ -712,9 +733,9 @@ function make_header(nav_only=false, reverse_issues_kw=default_reverse_issues_kw
 function get_make_author(page, lang, elem, new_tab_for_social=default_new_tab_for_social) {
     page ??= get_page()
     lang ??= get_lang()
-    const translators = merge(pages[page].translator, pages[page].translators)
-    const colabs = merge(pages[page].with)
-    let keys = [...new Set(merge(pages[page].author, pages[page].authors, translators, colabs))]
+    const translators = merge(pages[page].trans, pages[page].translation, pages[page].translator, pages[page].translators)
+    const collaborators = merge(pages[page].colab, pages[page].colabs, pages[page].collab, pages[page].collabs, pages[page].collaboration, pages[page].collaborator, pages[page].collaborators, pages[page].with)
+    let keys = [...new Set(merge(pages[page].author, pages[page].authors, pages[page].by, translators, collaborators))]
     if (elem && authors && !keys.length)
         keys = Object.keys(authors).slice(0, 1)
     const all_names = []
@@ -735,12 +756,12 @@ function get_make_author(page, lang, elem, new_tab_for_social=default_new_tab_fo
         if (names) {
         	name = names[lang] || names[''] || Object.values(names)[0] || name
             alt_name = Object.entries(names).find(([k, v]) => k != lang && v)?.[1]
-            if (translators.includes(key) || colabs.includes(key)) {
+            if (translators.includes(key) || collaborators.includes(key)) {
                 const alt_langs = Object.keys(ui).filter(k => k != lang)
                 if (alt_langs.length) {
                     if (translators.includes(key))
                     	alt_name += ' ' + ui[alt_langs[0]].translator
-                    if (!have_with && colabs.includes(key))
+                    if (!have_with && collaborators.includes(key))
                         alt_name = ui[alt_langs[0]].with + ' ' + alt_name
                 }
             }
@@ -749,7 +770,7 @@ function get_make_author(page, lang, elem, new_tab_for_social=default_new_tab_fo
         }
         if (translators.includes(key))
             name += ' ' + ui[lang].translator
-        if (!have_with && colabs.includes(key)) {
+        if (!have_with && collaborators.includes(key)) {
             name = ui[lang].with + ' ' + name
             have_with = true
         }
@@ -835,7 +856,17 @@ function textarea_writeln(textarea, line='', chars_for_reset=500000) {
 }
 
 
-function show_hide_cursor(elem) {
+function sidebyside_align(...elems) {
+    (elems.length ? elems : document.querySelectorAll('.sidebyside')).forEach(elem => {
+        const lines = elem.textContent.split('\n')
+        const maxlen = Math.max(...lines.map(line => get_width(line, elem)))
+        elem.style.setProperty('--sidebyside_long_line', `'${lines.find(line => get_width(line, elem) == maxlen)}'`)
+    })
+}
+
+
+function show_hide_cursor(event_or_elem) {
+    const elem = event_or_elem.currentTarget || event_or_elem
     elem.classList.remove('show_cursor')
     elem.offsetWidth  // Restart animation, see: https://css-tricks.com/restart-css-animation/
     elem.classList.add('show_cursor')
@@ -863,8 +894,7 @@ function visibility_change_handler() {
 
 
 function toggle_fullscreen(event_or_elem, landscape=true, target_screen, elem) {
-    if (event_or_elem.preventDefault)
-        event_or_elem.preventDefault()
+    event_or_elem?.preventDefault?.()
     elem ??= event_or_elem?.currentTarget || event_or_elem
     const was_not_fullscreen_before = !document.fullscreenElement
     if (was_not_fullscreen_before) {
