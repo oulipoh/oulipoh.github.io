@@ -5,10 +5,11 @@
 const pages = {
     "/": {title: "רֶסֶן", alt: "Resen", author: "resen", logo: "media/resen.svg", skip: true},
     // "open-call-kmeot/": {title: "קול קורא: קמעות", alt: "Open call: Talismans", author: "resen"},
+    "open-call-horaa/": {title: "קול קורא: הוראה", alt: "Open call: Instruction", author: "resen"},
 
     "palindock/": {title: "תעגון שמש נוגעת", alt: "Anchor of a touching sun", author: "noamdovev", kw: [2, "palindrome", "poem"], skip: true},
     "palisdead/": {title: "מות ידיד יתום", alt: "Death of an orphan friend", author: "uriamiram", kw: [2, "palindrome", "poem"], skip: true},
-    "palindream/": {title: "מול  חיַי – חלום", alt: "Facing my life – a dream", author: "liormaayan", kw: [2, "palindrome", "poem"], skip: true},
+    "palindream/": {title: "מול  חיי – חלום", alt: "Facing my life – a dream", author: "liormaayan", kw: [2, "palindrome", "poem"], skip: true},
 
     "tsc/": {title: "קוד המקור", alt: "The source code", author: "ofirliberman", kw: [1, "interactive", "visual"], skip: true},
     "relief/": {title: "תבליט־נגד", alt: "Counter relief", author: "michailgrobman", kw: [1, "biblical", "interactive", "visual"], skip: true},

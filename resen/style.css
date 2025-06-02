@@ -383,7 +383,7 @@ button.big {
     padding-inline: 1em;
 }
 
-button, .dim_ref, footer, nav, .preface_he, .sliders {
+button, .dim_ref, footer, .marquee, nav, .preface_he, .sliders {
     font-size: initial;
 }
 
