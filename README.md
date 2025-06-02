@@ -1,3 +1,3 @@
-Website for OulipoH: Oulipo Hebrew chapter.
+Website for OuLiPoH: OuLiPo Hebrew chapter.
 
 Under construction.

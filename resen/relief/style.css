@@ -6,7 +6,6 @@ figcaption > article > :not([dir=ltr]) + [dir=ltr] {
     margin-top: 2em !important;
 }
 
-
 .model_container {
     height: min(84vw + var(--anti_margin)*2*852/1200, 121.5vh);
     margin-inline: var(--anti_margin);

@@ -6,7 +6,6 @@ function preload() {
   Fira = loadFont("fonts/FiraCode-Light.ttf");
 }
 const bg = getComputedStyle(document.documentElement).getPropertyValue('--bg');
-const sketch = document.getElementById("sketch");
 
 // Birthdays, Month is zero-based
 let startDateAvi = new Date(1978, 10, 27, 22, 10, 10);

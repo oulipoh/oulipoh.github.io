@@ -20,12 +20,14 @@ canvas {
   touch-action: none;
   text-align: center;
   position: relative;
-
+  margin-bottom: 6rem;
 }
+
 #fullScreenButton span.material-symbols-outlined {
   color: #f1dcab;
   vertical-align: bottom;
 }
+
 #controller_dpad {
   position: absolute;
   bottom: 10px;
@@ -33,6 +35,7 @@ canvas {
   width: 184px;
   height: 184px;
 }
+
 #xyzLogo {
   height: 100px;
   padding: 25px 0;

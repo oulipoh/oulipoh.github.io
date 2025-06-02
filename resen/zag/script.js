@@ -437,7 +437,6 @@ class Emulator {
     }
   }
 
-
   dpadTouchStartMove(event) {
     // works but has unwanted diagonal movement
     // Ignore mousemove events if the mouse button isn't pressed
@@ -494,6 +493,7 @@ class Emulator {
     this.setJoypDown(false);
     event.preventDefault();
   }
+
   touchRestore() {
     this.touchEnabled = true;
     // this.updateOnscreenGamepad();
@@ -501,6 +501,7 @@ class Emulator {
 
   bindKeys() {
     console.log("bindKeys");
+    const customControls = {};
 
     this.keyFuncs = {
       Backspace: this.keyRewind.bind(this),
@@ -509,7 +510,7 @@ class Emulator {
       "]": this.keyNextPalette.bind(this),
     };
 
-    if (customControls.down && customControls.down.length > 0) {
+    if (customControls.down && customControls.down.length) {
       customControls.down.forEach((k) => {
         this.keyFuncs[k] = this.setJoypDown.bind(this);
       });
@@ -522,7 +523,7 @@ class Emulator {
       this.keyFuncs["ד"] = this.setJoypDown.bind(this);
     }
 
-    if (customControls.left && customControls.left.length > 0) {
+    if (customControls.left && customControls.left.length) {
       customControls.left.forEach((k) => {
         this.keyFuncs[k] = this.setJoypLeft.bind(this);
       });
@@ -534,7 +535,7 @@ class Emulator {
       this.keyFuncs["A"] = this.setJoypDown.bind(this);
     }
 
-    if (customControls.right && customControls.right.length > 0) {
+    if (customControls.right && customControls.right.length) {
       customControls.right.forEach((k) => {
         this.keyFuncs[k] = this.setJoypRight.bind(this);
       });
@@ -546,7 +547,7 @@ class Emulator {
       this.keyFuncs["D"] = this.setJoypDown.bind(this);
     }
 
-    if (customControls.up && customControls.up.length > 0) {
+    if (customControls.up && customControls.up.length) {
       customControls.up.forEach((k) => {
         this.keyFuncs[k] = this.setJoypUp.bind(this);
       });
@@ -559,7 +560,7 @@ class Emulator {
       this.keyFuncs["'"] = this.setJoypUp.bind(this);
     }
 
-    if (customControls.a && customControls.a.length > 0) {
+    if (customControls.a && customControls.a.length) {
       customControls.a.forEach((k) => {
         this.keyFuncs[k] = this.setJoypA.bind(this);
       });
@@ -575,7 +576,7 @@ class Emulator {
       // this.keyFuncs["Alt"] = this.setJoypA.bind(this);
     }
 
-    if (customControls.b && customControls.b.length > 0) {
+    if (customControls.b && customControls.b.length) {
       customControls.b.forEach((k) => {
         this.keyFuncs[k] = this.setJoypB.bind(this);
       });
@@ -590,7 +591,7 @@ class Emulator {
       // this.keyFuncs["Control"] = this.setJoypB.bind(this);
     }
 
-    if (customControls.start && customControls.start.length > 0) {
+    if (customControls.start && customControls.start.length) {
       customControls.start.forEach((k) => {
         this.keyFuncs[k] = this.setJoypStart.bind(this);
       });
@@ -600,7 +601,7 @@ class Emulator {
       this.keyFuncs["Enter"] = this.setJoypStart.bind(this);
     }
 
-    if (customControls.select && customControls.select.length > 0) {
+    if (customControls.select && customControls.select.length) {
       customControls.select.forEach((k) => {
         this.keyFuncs[k] = this.setJoypSelect.bind(this);
       });
@@ -711,7 +712,6 @@ class Gamepad {
     this.module = module;
     this.e = e;
   }
-
 
   cacheValues(gamepad) {
     // Read Buttons
