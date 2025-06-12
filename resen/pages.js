@@ -369,9 +369,13 @@ function page2url(page, lang, current, hash) {
 }
 
 
-function open_internal_link(elem) {
-    const [page, ...hash] = elem.hash.slice(1).replace(/\?(.*)/, '').split('#')
-    elem.href = page2url(page, elem.hash.match(/\?(.*)/)?.[1] || elem.search.slice(1) || null, null, hash.join('#'))
+function open_internal_link(elem, replace) {
+    const [page, ...hash] = elem.hash.replace(/^#|\?(.*)/g, '').split('#')
+    const url = page2url(page, elem.hash.match(/\?(.*)/)?.[1] || elem.search.slice(1) || null, null, hash.join('#'))
+    if (replace)
+        location.replace(url)
+    else
+        elem.href = url
 }
 
 
