@@ -581,7 +581,9 @@ function make_header(nav_only=false, reverse_issues_kw=default_reverse_issues_kw
     let is_mobile
     if (is_mobile = matchMedia('(max-width: 480px), (max-height: 480px)').matches)
         index_title = index_title.split(' ').slice(0, lang ? 1 : 2).join(' ')
-    const parent_title = decodeURI(URL.parse(page2url('/') + '/..', location)).split('/').slice(-2)[0]
+    const base = page2url('.', lang, page)
+    const parent = URL.parse(base + '/..', location).href
+    const parent_title = URL.parse(base, location).href == parent ? '' : decodeURI(parent).split('/').slice(-2)[0]
     const nav = document.createElement('nav')
     let diff = get_width(index_title, nav) - get_width(parent_title, nav)
     let span, back, keywords, trans
@@ -591,7 +593,7 @@ function make_header(nav_only=false, reverse_issues_kw=default_reverse_issues_kw
         add_nav_element(nav, parent_title ? '..' : '', bdi, 'back', diff, shortcuts.back)
         keywords = all_keywords
     } else {
-        add_nav_element(nav, page2url('.', lang, page), index_title, 'back', -diff, shortcuts.back)
+        add_nav_element(nav, base, index_title, 'back', -diff, shortcuts.back)
         keywords = reorder(pages[page].kw, lang, reverse_issues_kw)
     }
 
