@@ -581,7 +581,7 @@ function make_header(nav_only=false, reverse_issues_kw=default_reverse_issues_kw
     let is_mobile
     if (is_mobile = matchMedia('(max-width: 480px), (max-height: 480px)').matches)
         index_title = index_title.split(' ').slice(0, lang ? 1 : 2).join(' ')
-    const parent_title = decodeURI(location).split('/').slice(-3)[0]
+    const parent_title = decodeURI(URL.parse(page2url('/') + '/..', location)).split('/').slice(-2)[0]
     const nav = document.createElement('nav')
     let diff = get_width(index_title, nav) - get_width(parent_title, nav)
     let span, back, keywords, trans
@@ -878,7 +878,7 @@ function sidebyside_align(...elems) {
 function show_hide_cursor(event_or_elem) {
     const elem = event_or_elem.currentTarget || event_or_elem
     elem.classList.remove('show_cursor')
-    elem.offsetWidth  // Restart animation, see: https://css-tricks.com/restart-css-animation/
+    elem.offsetWidth  // Restart animation. See: https://css-tricks.com/restart-css-animation/
     elem.classList.add('show_cursor')
 }
 
