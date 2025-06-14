@@ -443,7 +443,7 @@ function make_contents(show_snippet=default_show_snippet, show_author=default_sh
                     if (alt_authors[i] != author)
                         s.title = alt_authors[i]
                 })
-            }
+        }
         div.appendChild(p)
     }
     document.body.appendChild(div)
@@ -513,9 +513,13 @@ function add_nav_element(nav, url, label, cls, delta=0, key) {
 
 
 function get_page() {
-    const page = decodeURI(location.pathname).match(/([^/]*?\/?)(index)?(\.html)?$/)[1]
+    const path = decodeURI(location.pathname)
+    const page = path.match(/([^/]*?\/?)(index)?(\.html)?$/)[1]
     if (page in pages)
         return page
+    const folder = path.match(/([^/]*?\/?)[^\/]*$/)[1]
+    if (folder in pages)
+        return folder
     return '/'
 }
 
@@ -590,6 +594,7 @@ function make_header(nav_only=false, reverse_issues_kw=default_reverse_issues_kw
         add_nav_element(nav, page2url('.', lang, page), index_title, 'back', -diff, shortcuts.back)
         keywords = reorder(pages[page].kw, lang, reverse_issues_kw)
     }
+
     let url_kw = sanitize(decodeURIComponent(location.hash))
     if (!keywords.map(sanitize).includes(url_kw))
         url_kw = ''

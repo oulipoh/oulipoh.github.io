@@ -54,7 +54,7 @@
         שאם פספסתי במילה אז שלא יתהפך, לרוב בקמעות שיש בהם רגישות גבוהה.
         בעיסוק באנרגייה, זימונים, תפילות, פתיחת שערים, יש לעסוק במשנה זהירות.
     </p>
-    <video src="media/yomyom.mp4" controls loop muted playsinline preload onloadeddata="new IntersectionObserver(e => {if (e[0].intersectionRatio >= .9) this.play()}, {threshold: .9}).observe(this)" aria-label="סרטון של הסקצ'בוק"></video>
+    <video src="media/yomyom.mp4" controls loop muted playsinline preload onloadeddata="new IntersectionObserver((e, o) => {if (e[0].intersectionRatio >= .9) {o.unobserve(e[0].target); this.play()}}, {threshold: .9}).observe(this)" aria-label="סרטון של הסקצ'בוק"></video>
     <p dir="ltr">
         I get inspiration from all kinds of talismans, mainly Jewish, and one of my understandings is that the action itself is the talisman - the summoning, the writing, the creation of it, and I do it with caution and modesty.
         Sometimes inside the talisman I weave words of protection from the talisman itself.

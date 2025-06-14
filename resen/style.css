@@ -92,6 +92,7 @@
     --larger_font: clamp(1.3em, 2rem, 2vw);
     --max_media_height: 85vh;
     --media_width: 85%;
+    --frag_dur: 7s;
 
     /* Following variables must use units that are not relative to elements (i.e. avoid %, em, ex) */
     --main_margin: max(2rem, 5vw);
@@ -961,6 +962,14 @@ nav[dir=ltr] ~ * .preface_he {
 
 :is(.ref, .refs > blockquote[id])::first-letter {
     font-size: 0;
+}
+
+@keyframes frag {
+    0% {background-color: var(--fg_verydim)}
+}
+
+.refs blockquote:target {
+    animation: var(--frag_dur) ease-in frag;
 }
 
 .refs, .refs + p {
