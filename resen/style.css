@@ -161,7 +161,7 @@ body.todark, .todark ::backdrop {
         outline-style: solid;
     }
 
-    [dir=ltr] {
+    :is([dir=ltr], :dir(ltr)) {
         --back: -1;
     }
 
