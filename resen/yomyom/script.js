@@ -12,6 +12,7 @@ function cancel() {
 }
 
 addEventListener('blur', cancel)
+addEventListener('pointercancel', cancel)
 
 addEventListener('pointerup', () => {
     if (down) {
