@@ -11,24 +11,24 @@
     <script src="binjgb/binjgb.js"></script>
     <link rel="icon" href="../media/resen.svg">
     <meta property="og:description" content=".">  <!-- og:description is required for WhatsApp to show og:image -->
-    <meta property="og:image" content="https://oulipoh.com/resen/zag/snippet">
+    <meta property="og:image" content="https://resen.co.il/zag/snippet">
     <noscript><style>body {visibility: visible}</style></noscript>
 </head>
 <body class="todark" onload="document.body.style.visibility = 'visible'">
     <script>make_header()</script>
-    <div oncontextmenu="toggle_fullscreen(event)">
+    <div oncontextmenu="if (event.target.role == 'button') event.preventDefault(); else toggle_fullscreen(event)">
         <canvas id="mainCanvas" width="256" height="224"></canvas>
         <div id="controller">
-          <div id="controller_dpad">
-            <div id="controller_left" role="button"></div>
-            <div id="controller_right" role="button"></div>
-            <div id="controller_up" role="button"></div>
-            <div id="controller_down" role="button"></div>
-          </div>
-          <div id="controller_select" class="capsuleBtn" role="button">Select</div>
-          <div id="controller_start" class="capsuleBtn" role="button">Start</div>
-          <div id="controller_b" class="roundBtn" role="button">B</div>
-          <div id="controller_a" class="roundBtn" role="button">A</div>
+            <div id="controller_dpad">
+                <div id="controller_left" role="button"></div>
+                <div id="controller_right" role="button"></div>
+                <div id="controller_up" role="button"></div>
+                <div id="controller_down" role="button"></div>
+            </div>
+            <div id="controller_select" class="capsuleBtn" role="button">Select</div>
+            <div id="controller_start" class="capsuleBtn" role="button">Start</div>
+            <div id="controller_b" class="roundBtn" role="button">B</div>
+            <div id="controller_a" class="roundBtn" role="button">A</div>
         </div>
     </div>
     <script>

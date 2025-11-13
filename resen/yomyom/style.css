@@ -9,13 +9,18 @@ article :is(.images, video) {
     background-size: contain;
     cursor: var(--down_cursor, var(--cursor));
     overflow: clip;
+    padding-block: 1%;
     touch-action: none;
+    -webkit-user-select: none;
+    user-select: none;
     width: fit-content;
 }
 
 .spin.fullscreen {
     background-origin: content-box;
-    padding: 2%;
+    --pad: 2vh;
+    padding-block: var(--pad);
+    --max_media_height: calc(100vh - 2*var(--pad));
 }
 
 .spin > img {

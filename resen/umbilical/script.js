@@ -21,91 +21,91 @@ observe(poem2, animateSecondPoem)
 
 function animateSecondPoem() {
     document.querySelectorAll('.shuruk-symbol').forEach(symbol => symbol.remove())
-    vavTav.classList.remove("move");
-    yodLamed.classList.add("hidden");
-    period.classList.add("hidden");
-    heVav.classList.add("hidden");
-    newLine.classList.remove("show");
-    yodLamed.classList.remove("grow", "disappear");
-    heVav.classList.remove("grow-left", "disappear");
+    vavTav.classList.remove("move")
+    yodLamed.classList.add("hidden")
+    period.classList.add("hidden")
+    heVav.classList.add("hidden")
+    newLine.classList.remove("show")
+    yodLamed.classList.remove("grow", "disappear")
+    heVav.classList.remove("grow-left", "disappear")
 
     // Step 1: Move "ות" to the left
     setTimeout(() => {
-        vavTav.classList.add("move");
+        vavTav.classList.add("move")
 
         // Step 2: After "ות" moves, show the period
         setTimeout(() => {
-            period.classList.remove("hidden");
+            period.classList.remove("hidden")
 
             // Step 3: Finally, scale the "יל" text from 0 to full width
             setTimeout(() => {
-                yodLamed.classList.remove("hidden");
-                yodLamed.classList.add("grow"); // Apply grow to trigger the scale
+                yodLamed.classList.remove("hidden")
+                yodLamed.classList.add("grow")  // Apply grow to trigger the scale
 
                 // Step 4: Disappear the "יל" part after 3 seconds
                 setTimeout(() => {
-                    yodLamed.classList.add("disappear"); // Add disappear class
+                    yodLamed.classList.add("disappear")  // Add disappear class
 
                     // Step 5: Show "(וה)" and scale it from left to right
                     setTimeout(() => {
-                        heVav.classList.remove("hidden");
-                        heVav.classList.add("grow-left"); // Trigger the scale from left to right
+                        heVav.classList.remove("hidden")
+                        heVav.classList.add("grow-left")  // Trigger the scale from left to right
 
                         // Step 6: Make both "יל" and "וה" disappear after 4 seconds
                         setTimeout(() => {
-                            heVav.classList.add("disappear");
+                            heVav.classList.add("disappear")
                             //console.log(yodLamed.classList + "|" + heVav.classList)
                             //console.log(yodLamed.style.transform + "|" + heVav.style.transform)
 
                             //step 6.5: back to scale 0
                             setTimeout(() => {
-                                yodLamed.classList.remove("grow");
-                                heVav.classList.remove("grow-left");
+                                yodLamed.classList.remove("grow")
+                                heVav.classList.remove("grow-left")
 
                                 // Step 7: Reanimate both "יל" and "וה" together
                                 setTimeout(() => {
-                                    yodLamed.classList.remove("disappear");
-                                    heVav.classList.remove("disappear");
-                                    yodLamed.classList.add("grow");
-                                    heVav.classList.add("grow-left");
+                                    yodLamed.classList.remove("disappear")
+                                    heVav.classList.remove("disappear")
+                                    yodLamed.classList.add("grow")
+                                    heVav.classList.add("grow-left")
                                     //console.log(yodLamed.classList + "|" + heVav.classList)
                                     //console.log(yodLamed.style.transform + "|" + heVav.style.transform)
 
                                     // Step 8: Show new line after 1.5 seconds
                                     setTimeout(() => {
-                                        newLine.classList.add("show");
+                                        newLine.classList.add("show")
                                         setTimeout(() => {
                                             // Step 9: Trigger the final Shuruk line animation
-                                            drawShurukLine();
-                                        }, 1000);
-                                    }, 4000); // Increased the delay to allow proper reset
-                                }, 2000); // Reanimate after a longer delay
-                            }, 1000);
-                        }, 7000); // Increased disappearance time for both to 4 seconds
-                    }, 2000); // Allow 1.5 seconds before starting to scale "(וה)"
-                }, 7000); // Wait 3 seconds for "(יל)" to disappear
-            }, 4000); // After 1 second, trigger the scaling of "יל"
-        }, 2000); // Wait 1.5 seconds for the movement of "ות" to complete
-    }, 6000);
+                                            drawShurukLine()
+                                        }, 1000)
+                                    }, 4000)  // Increased the delay to allow proper reset
+                                }, 2000)  // Reanimate after a longer delay
+                            }, 1000)
+                        }, 7000)  // Increased disappearance time for both to 4 seconds
+                    }, 2000)  // Allow 1.5 seconds before starting to scale "(וה)"
+                }, 7000)  // Wait 3 seconds for "(יל)" to disappear
+            }, 4000)  // After 1 second, trigger the scaling of "יל"
+        }, 2000)  // Wait 1.5 seconds for the movement of "ות" to complete
+    }, 6000)
 }
 
 // Function to create and animate the Shuruk symbols
 // Function to show the Shuruk symbols at predefined positions from an array
 function drawShurukLine() {
 
-    const newLineRect = anuVav.getBoundingClientRect();
-    const startX = newLineRect.left - 12; // X position of ו
-    const startY = newLineRect.top + scrollY;  // Y position of ו
+    const newLineRect = anuVav.getBoundingClientRect()
+    const startX = newLineRect.left - 12  // X position of ו
+    const startY = newLineRect.top + scrollY  // Y position of ו
 
-    const periodRect = period.getBoundingClientRect();
-    const X0 = periodRect.left ; // X position of ו
-    const Y0 = periodRect.top + scrollY ;  // Y position of ו
+    const periodRect = period.getBoundingClientRect()
+    const X0 = periodRect.left  // X position of ו
+    const Y0 = periodRect.top + scrollY  // Y position of ו
 
-    const vavTavRect = vavTav.getBoundingClientRect();
-    const X1 = vavTavRect.left + 14; // X position of ו
-    const Y1 = vavTavRect.top + 10 + scrollY;  // Y position of ו
+    const vavTavRect = vavTav.getBoundingClientRect()
+    const X1 = vavTavRect.left + 14  // X position of ו
+    const Y1 = vavTavRect.top + 10 + scrollY  // Y position of ו
 
-    const space = 8;
+    const space = 8
     // Array of positions for each Shuruk symbol (x and y coordinates) relative to ו's position
     const shurukPositions = [
         // Left (straight line)
@@ -283,23 +283,23 @@ function drawShurukLine() {
         { x: X1 + space * 15.5 + 2, y: Y1 - space * 51 },
         { x: X1 + space * 15.5 + 2, y: Y1 - space * 52 },
         { x: X1 + space * 15.5 + 2, y: Y1 - space * 53 }
-    ];
+    ]
 
     // Iterate over the array of positions and create Shuruk symbols
     shurukPositions.forEach((position, index) => {
-        const symbol = document.createElement("span");
-        symbol.classList.add("shuruk-symbol");
-        symbol.textContent = "\u05BC";  // Correct Shuruk symbol (ּ)
+        const symbol = document.createElement("span")
+        symbol.classList.add("shuruk-symbol")
+        symbol.textContent = "\u05BC"  // Correct Shuruk symbol (ּ)
 
         // Set the position based on the array values
-        symbol.style.left = position.x + 'px';
-        symbol.style.top = position.y + 'px';
+        symbol.style.left = position.x + 'px'
+        symbol.style.top = position.y + 'px'
 
         // Append the symbol to the container with a delay to simulate appearance
         setTimeout(() => {
-            lineAnimation.appendChild(symbol); // Add each symbol after a delay
-        }, index * 200); // Delay by 500ms between each symbol appearing
-    });
+            lineAnimation.appendChild(symbol)  // Add each symbol after a delay
+        }, index * 200)  // Delay by 500ms between each symbol appearing
+    })
 
     setTimeout(animateSecondPoem, (shurukPositions.length-1)*200 + 6000)
 }
@@ -307,9 +307,9 @@ function drawShurukLine() {
 
 // poem3
 // Get the elements containing the ל ל לל ל lines
-const movingLElements = document.querySelectorAll('.movings');
+const movingLElements = document.querySelectorAll('.movings')
 // Get the elements containing the ק ק lines
-const movingLElements2 = document.querySelectorAll('.movings2');
+const movingLElements2 = document.querySelectorAll('.movings2')
 
 observe(poem3, animateThirdPoem, .5)
 
@@ -320,18 +320,18 @@ function animateThirdPoem() {
 // Function to position the moving elements directly above the "לְחָלָלאֱלֹ" part
 function positionElements() {
     // Get the bounding rectangle of the target text
-    const targetRect = targetText.getBoundingClientRect();
+    const targetRect = targetText.getBoundingClientRect()
 
     // Calculate the position where the lines should appear
-    const startX3 = targetRect.left; // Include scroll offset
-    const startY3 = targetRect.top + scrollY;
+    const startX3 = targetRect.left  // Include scroll offset
+    const startY3 = targetRect.top + scrollY
 
     // Position each moving-l element with a slight vertical offset
     movingLElements.forEach((element, index) => {
-        //console.log(index + "|"  + element.style.left + "|" + element.style.top);
-        element.style.left = startX3 + 'px'; // Align with the target text
-        element.style.top = startY3 + 'px'; // Stack the lines vertically above
-    });
+        //console.log(index + "|" + element.style.left + "|" + element.style.top)
+        element.style.left = startX3 + 'px'  // Align with the target text
+        element.style.top = startY3 + 'px'  // Stack the lines vertically above
+    })
 }
 
 // Function to show the elements and animate them upward
@@ -343,18 +343,18 @@ function showAndAnimate() {
 
 function positionElements2() {
     // Get the bounding rectangle of the target text
-    const targetRect2 = targetText2.getBoundingClientRect();
+    const targetRect2 = targetText2.getBoundingClientRect()
 
     // Calculate the position where the lines should appear
-    const startX4 = targetRect2.left; // Include scroll offset
-    const startY4 = targetRect2.top + scrollY;
+    const startX4 = targetRect2.left  // Include scroll offset
+    const startY4 = targetRect2.top + scrollY
 
     // Position each moving-l element with a slight vertical offset
     movingLElements2.forEach((element, index) => {
-        //console.log(index + "|"  + element.style.left + "|" + element.style.top);
-        element.style.left = startX4 + 'px'; // Align with the target text
-        element.style.top = startY4 + 'px'; // Stack the lines vertically above
-    });
+        //console.log(index + "|" + element.style.left + "|" + element.style.top)
+        element.style.left = startX4 + 'px'  // Align with the target text
+        element.style.top = startY4 + 'px'  // Stack the lines vertically above
+    })
 }
 
 // Function to show the elements and animate them upward
@@ -365,18 +365,18 @@ function showAndAnimate2() {
 }
 
 
-let initialDelay = 600; // Start with a slower delay
-const minDelay = 90; // Set a minimum delay (fastest speed)
-const accelerationFactor = 0.9; // Factor by which delay decreases each time
+let initialDelay = 600  // Start with a slower delay
+const minDelay = 90  // Set a minimum delay (fastest speed)
+const accelerationFactor = 0.9  // Factor by which delay decreases each time
 
 function addX() {
-    let currentText = '';
-    let delay = initialDelay;
+    let currentText = ''
+    let delay = initialDelay
 
     function addCharacter() {
-        currentText += 'ש';
-        shins.textContent = currentText;
-        delay = Math.max(minDelay, delay * accelerationFactor);
+        currentText += 'ש'
+        shins.textContent = currentText
+        delay = Math.max(minDelay, delay * accelerationFactor)
         if (currentText.length < 120)
             setTimeout(addCharacter, delay)
         else
@@ -387,14 +387,14 @@ function addX() {
 }
 
 function addX_right(delay) {
-    let currentText = '';
+    let currentText = ''
 
     function addCharacter() {
-        currentText += 'ש';
-        shins_container.dataset.content = currentText;
+        currentText += 'ש'
+        shins_container.dataset.content = currentText
 
         if (currentText.length < 100) {
-            delay = Math.max(minDelay, delay * accelerationFactor);
+            delay = Math.max(minDelay, delay * accelerationFactor)
             setTimeout(addCharacter, delay)
         } else
             setTimeout(reset3, 6000)
@@ -411,5 +411,5 @@ function reset3() {
     animateThirdPoem()
 }
 
-addEventListener('resize', positionElements, {passive: true});
-addEventListener('resize', positionElements2, {passive: true});
+addEventListener('resize', positionElements)
+addEventListener('resize', positionElements2)

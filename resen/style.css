@@ -44,7 +44,7 @@
 }
 
 @font-face {
-    font-family: Arial;  /* MacOS, iOS */
+    font-family: Arial;  /* macOS, iOS */
     size-adjust: 160%;
     src: local(Arial);
     unicode-range: U+2709;  /* Envelope */
@@ -71,7 +71,7 @@
     --inverse_bg: #6580e1;
     --inverse_fg: var(--bg);
     --invert: 1;
-	--whitish_rgb: 224 224 224;
+    --whitish_rgb: 224 224 224;
     --whitish: rgb(var(--whitish_rgb));
 
     --column_gap: 4em;
@@ -131,8 +131,8 @@ body {
     padding-inline: var(--main_margin);
     padding-bottom: 8px;
     table-layout: fixed;
-    text-size-adjust: none;
     -webkit-text-size-adjust: none;
+    text-size-adjust: none;
     visibility: hidden;
     width: 100%;
 }
@@ -565,8 +565,8 @@ footer, .fullscreen, .kw, nav,
 svg image,  /* For Firefox Android */
 :is([oncontextmenu*=toggle_fullscreen], [ondblclick*=toggle_fullscreen]):not(body)  /* Note this will miss elements where the handler was added programmatically, as well as different elements passed to the handler */
 {
-    user-select: none;
     -webkit-user-select: none;
+    user-select: none;
 }
 
 .formula {
@@ -600,7 +600,7 @@ svg image,  /* For Firefox Android */
 }
 
 .images.fullscreen {
-    --max_media_height: 100%;
+    --max_media_height: 100vh;
 }
 
 img.fullscreen {
@@ -648,13 +648,6 @@ h4 {
 
 h4:not(article *) {
     margin-bottom: 6rem;
-}
-
-.harden {
-    display: inline-block;
-    text-decoration: inherit;
-    text-decoration-color: inherit;  /* For Safari */
-    text-decoration-style: inherit;  /* For Safari */
 }
 
 header {
@@ -915,7 +908,7 @@ nav[dir=ltr] ~ * .preface_he {
 
 @keyframes psycler {  /* From: https://zzzen.com/psycler/ */
     0% { filter: hue-rotate(5deg) saturate(2) invert(0) }
-    50% { filter: hue-rotate(160deg) saturate(8) invert(0.25) }
+    50% { filter: hue-rotate(160deg) saturate(8) invert(.25) }
     100% { filter: hue-rotate(350deg) saturate(2) invert(0) }
 }
 

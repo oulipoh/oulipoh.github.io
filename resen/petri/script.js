@@ -11,7 +11,7 @@ if (hash == 'fast') {
     halfstep_secs = 3
     restart_secs = halfstep_secs * 3
 } else if (hash.startsWith('full'))
-    toggle_fullscreen(petri);  // works only in Firefox, after setting: full-screen-api.allow-trusted-requests-only = false
+    toggle_fullscreen(petri);  // Works only in Firefox, after setting: full-screen-api.allow-trusted-requests-only = false
 
 const auto_vertical = true
 const label_location = 'half'  // Can be: 'half' (half above and half below, favoring the below), 'above', or anything else to indicate below
@@ -28,15 +28,15 @@ const leaderline_comp_bottom = 90
 const comp_marking = 5
 
 let global_reset_counter = 0
-document.addEventListener('keydown', e => global_reset_counter += is_shortcut(e, 'Backspace'))
+addEventListener('keydown', e => global_reset_counter += is_shortcut(e, 'Backspace'))
 
 const lang = get_lang()
 const bc = new BroadcastChannel('bc')
 
 function reset_poem() {
-    if (typeof thepoem != 'undefined')
+    if (self.thepoem)
         thepoem.value = '\n'
-    if (typeof bc != 'undefined')
+    if (self.bc)
         bc.postMessage('')
 }
 
@@ -45,11 +45,10 @@ reset_poem()
 function compare_lists(a, b) {
     if (a.length != b.length)
         return a.length - b.length
-    for (let i = 0; i < a.length; i++) {
-        const diff = a[i] - b[i]
-        if (diff)
+    let diff
+    for (let i = 0; i < a.length; i++)
+        if (diff = a[i] - b[i])
             return diff
-    }
     return 0
 }
 
@@ -62,7 +61,7 @@ function sanitized_len(string, split=false) {
 
 const place_template = "\n   .-'''-.   \n \\ JD645CI / \n| NHB312AGM |\n / LF978EK \\ \n   `-...-`   \n"
 const place_lines = place_template.trim().split('\n')
-const place_width = Math.max(...place_lines.map(l => sanitized_len(l)))
+const place_width = Math.max(...place_lines.map(sanitized_len))
 const place_max_tokens = place_template.match(/[0-9A-Z]/g).length
 
 function center(label, width, align_start=false) {
@@ -167,9 +166,9 @@ function fire(grid, json, steps, max_tokens, result_counter, reset_counter, toke
     out.forEach(p => tokens[p] = (tokens[p] || 0) + 1)
     if (!comp) {
         const verse = poem_generator(json, trans, out[Math.random() * out.length | 0])
-        if (typeof thepoem != 'undefined')
+        if (self.thepoem)
             textarea_writeln(thepoem, verse)
-        if (typeof bc != 'undefined')
+        if (self.bc)
             bc.postMessage(verse)
     }
     setTimeout(step, halfstep_secs * 1000, grid, json, steps, max_tokens, result_counter, reset_counter, tokens)
@@ -213,12 +212,10 @@ function step(grid, json, steps=0, max_tokens={}, result_counter={}, reset_count
     if (grid.parentElement.id in json.transitions)
         comp = grid.parentElement.id
     const transitions = comp ? [comp] : Object.keys(json.transitions)
-    if (tokens == undefined)
-        tokens = comp ? Object.fromEntries(json.transitions[comp][0].map(p => [p, comp_marking])) : {...json.marking}
+    tokens ??= comp ? Object.fromEntries(json.transitions[comp][0].map(p => [p, comp_marking])) : {...json.marking}
     grid.querySelectorAll('[data-clicks]').forEach(place => {
-        const clicks = place.dataset.clicks | 0
+        tokens[place.dataset.id] = (tokens[place.dataset.id] || 0) + (place.dataset.clicks | 0)
         place.removeAttribute('data-clicks')
-        tokens[place.dataset.id] = (tokens[place.dataset.id] || 0) + clicks
     })
 
     const enabled = transitions.filter(t => is_enabled(json.transitions[t][0], tokens))
@@ -346,12 +343,12 @@ function step(grid, json, steps=0, max_tokens={}, result_counter={}, reset_count
         step(grid, json, 0, max_tokens, result_counter, reset_counter)
     } else if (!enabled.length || comp && Object.values(tokens).some(n => n > place_max_tokens) || !comp && !json.require?.every(require => require.some(t => tokens[t]))) {
         if (!comp) {
-            if (typeof thepoem != 'undefined')
+            if (self.thepoem)
                 textarea_writeln(thepoem)
-            if (typeof bc != 'undefined')
+            if (self.bc)
                 bc.postMessage('\n')
             if (stats) {
-                const result = json.require?.map(side => side.some(p => tokens[p]) | 0)
+                const result = json.require?.map(side => +side.some(p => tokens[p]))
                 result_counter[result] = (result_counter[result] || []).concat(steps).sort((a, b) => a - b)
                 const all_steps = Object.values(result_counter).flat()
                 const sides = result?.map((_, i) => Object.entries(result_counter).filter(x => x[0].split(',')[i] == 1).map(x => x[1]).flat().length)
@@ -414,7 +411,7 @@ fetch(json_file).then(response => response.json()).then(json => {
                 if (json.labels[label]?.includes('|')) {
                     const forms = json.labels[label].split('|')
                     json.full_labels[label] = forms[0]
-                    json.labels[label] = forms[pre.classList.contains('vertical') | 0]
+                    json.labels[label] = forms[+pre.classList.contains('vertical')]
                 }
             } else {
                 pre.className = 'place'

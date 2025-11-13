@@ -73,7 +73,7 @@ const aEl = $("#controller_a");
 
 const binjgbPromise = Binjgb();
 
-const sgbEnabled = window.location.href.includes("sgb=true");
+const sgbEnabled = location.href.includes("sgb=true");
 if (sgbEnabled) {
   $("canvas").width = SGB_SCREEN_WIDTH;
   $("canvas").height = SGB_SCREEN_HEIGHT;
@@ -137,7 +137,7 @@ class VM {
 }
 // // Function to detect if the user is using an iPhone or iPad
 // function isIOS() {
-//   const userAgent = window.navigator.userAgent;
+//   const userAgent = navigator.userAgent;
 //   return /iPad|iPhone|iPod/.test(userAgent);
 // }
 
@@ -417,8 +417,8 @@ class Emulator {
     dpadEl.addEventListener("mouseleave", this.boundDpadTouchEnd);
 
     this.boundTouchRestore = this.touchRestore.bind(this);
-    window.addEventListener("touchstart", this.boundTouchRestore);
-    window.addEventListener("mousedown", this.boundTouchRestore);
+    addEventListener("touchstart", this.boundTouchRestore);
+    addEventListener("mousedown", this.boundTouchRestore);
   }
 
   buttonTouchStart(event) {
@@ -614,8 +614,8 @@ class Emulator {
     this.boundKeyDown = this.keyDown.bind(this);
     this.boundKeyUp = this.keyUp.bind(this);
 
-    window.addEventListener("keydown", this.boundKeyDown);
-    window.addEventListener("keyup", this.boundKeyUp);
+    addEventListener("keydown", this.boundKeyDown);
+    addEventListener("keyup", this.boundKeyUp);
   }
 
   keyDown(event) {
@@ -884,10 +884,10 @@ class Gamepad {
     this.boundGamepadDisconnected = this.eventDisconnected.bind(this);
 
     // When a gamepad connects, start polling it for input
-    window.addEventListener("gamepadconnected", this.boundGamepadConnected);
+    addEventListener("gamepadconnected", this.boundGamepadConnected);
 
     // When a gamepad disconnects, shut down polling for input
-    window.addEventListener(
+    addEventListener(
       "gamepaddisconnected",
       this.boundGamepadDisconnected
     );
@@ -896,8 +896,8 @@ class Gamepad {
   // Release event connection handlers and settings
   shutdown() {
     this.releaseGamepad();
-    window.removeEventListener("gamepadconnected", this.boundGamepadConnected);
-    window.removeEventListener(
+    removeEventListener("gamepadconnected", this.boundGamepadConnected);
+    removeEventListener(
       "gamepaddisconnected",
       this.boundGamepadDisconnected
     );
@@ -917,15 +917,15 @@ class Audio {
     this.resume();
 
     this.boundStartPlayback = this.startPlayback.bind(this);
-    window.addEventListener("keydown", this.boundStartPlayback, true);
-    window.addEventListener("click", this.boundStartPlayback, true);
-    window.addEventListener("touchend", this.boundStartPlayback, true);
+    addEventListener("keydown", this.boundStartPlayback, true);
+    addEventListener("click", this.boundStartPlayback, true);
+    addEventListener("touchend", this.boundStartPlayback, true);
   }
 
   startPlayback() {
-    window.removeEventListener("touchend", this.boundStartPlayback, true);
-    window.removeEventListener("keydown", this.boundStartPlayback, true);
-    window.removeEventListener("click", this.boundStartPlayback, true);
+    removeEventListener("touchend", this.boundStartPlayback, true);
+    removeEventListener("keydown", this.boundStartPlayback, true);
+    removeEventListener("click", this.boundStartPlayback, true);
     this.started = true;
     this.resume();
   }
@@ -991,7 +991,7 @@ class Video {
     // Both iPhone and Desktop Safari dont't upscale using image-rendering: pixelated
     // on webgl canvases. See https://bugs.webkit.org/show_bug.cgi?id=193895.
     // For now, default to Canvas2D.
-    if (window.navigator.userAgent.match(/iPhone|iPad|15.[0-9] Safari/)) {
+    if (navigator.userAgent.match(/iPhone|iPad|15.[0-9] Safari/)) {
       this.renderer = new Canvas2DRenderer(el);
     } else {
       try {

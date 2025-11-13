@@ -12,7 +12,7 @@
     <script src="../pages.js"></script>
     <link rel="icon" href="../media/resen.svg">
     <meta property="og:description" content=".">  <!-- og:description is required for WhatsApp to show og:image -->
-    <meta property="og:image" content="https://oulipoh.com/resen/petri/snippet">
+    <meta property="og:image" content="https://resen.co.il/petri/snippet">
     <noscript><style>body {visibility: visible}</style></noscript>
 </head>
 <body class="toblack" onload="document.body.style.visibility = 'visible'" onmousemove="show_hide_cursor(this)">
@@ -20,7 +20,7 @@
     <textarea id="thepoem" autocomplete="off" dir="auto" readonly rows="32" spellcheck="false"></textarea>
     <script>
         if (location.hash.slice(1).startsWith('full'))
-            toggle_fullscreen(document.documentElement);  // works only in Firefox, after setting: full-screen-api.allow-trusted-requests-only = false
+            toggle_fullscreen(document.documentElement);  // Works only in Firefox, after setting: full-screen-api.allow-trusted-requests-only = false
 
         let prev_lang
         new BroadcastChannel('bc').onmessage = event => {

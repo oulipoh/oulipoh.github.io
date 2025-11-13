@@ -1,17 +1,18 @@
 body {
- --bg: #1d0212 !important;
+  --bg: #1d0212 !important;
 }
 
 canvas {
-    display: block;
-    width: 100%;
-    max-width: 480px;
-    margin-inline: auto;
-    image-rendering: crisp-edges;
-    image-rendering: pixelated;
+  display: block;
+  width: 100%;
+  max-width: 480px;
+  margin-inline: auto;
+  image-rendering: crisp-edges;
+  image-rendering: pixelated;
 }
 
 #controller {
+  cursor: default;
   display: block;
   height: 230px;
   width: 100%;
@@ -115,21 +116,7 @@ canvas {
   bottom: 80px;
   right: 90px;
 }
-ul.navigation {
-  width: 85%;
-  direction: rtl;
-  right: 0;
-  margin: 0;
-  padding: 0;
-}
-#logo,
-ul.navigation {
-  display: inline-flex;
-}
-ul.navigation li {
-  margin: 0;
-  padding: 0;
-}
+
 .roundBtn {
   display: flex;
   justify-content: center;
@@ -143,7 +130,6 @@ ul.navigation li {
   color: #9e3230;
   background: #e38c89;
   border: 2px solid #9e3230;
-
   box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.2);
 }
 
@@ -179,4 +165,10 @@ ul.navigation li {
 
 .btnPressed {
   opacity: 0.5;
+}
+
+@media (hover: hover) {
+    [role=button]:not(.btnPressed):hover {
+      opacity: 0.8;
+    }
 }

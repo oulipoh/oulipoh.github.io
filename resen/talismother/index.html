@@ -9,13 +9,14 @@
     <script src="../pages.js"></script>
     <link rel="icon" href="../media/resen.svg">
     <meta property="og:description" content=".">  <!-- og:description is required for WhatsApp to show og:image -->
-    <meta property="og:image" content="https://oulipoh.com/resen/talismother/snippet">
+    <meta property="og:image" content="https://resen.co.il/talismother/snippet">
     <noscript><style>body {visibility: visible}</style></noscript>
 </head>
 <body onload="document.body.style.visibility = 'visible'">
     <script>make_header()</script>
-    <img src="talismother.jpg" style="width: 100%" oncontextmenu="toggle_fullscreen(event)" ondblclick="toggle_fullscreen(event)" alt="ציור">
-    <br><br>
+    <img id="img" src="talismother.jpg" style="width: 100%" oncontextmenu="toggle_fullscreen(event, false)" ondblclick="toggle_fullscreen(event, false)" alt="ציור">
+    <button class="big" onclick="toggle_fullscreen(event, false, null, img)" title="Zoom out">התרחקי</button>
+    <br>
     <article>
     <p>
         בגווני קשת, דמות אישה, בפתח ביטנה כיתוב: "כאן שם יהוה של ע"ב", בראשה: "אהיה אשר אהיה", וברגליה שני שמות מלאכים: אכתריאל ויהוכיאל.

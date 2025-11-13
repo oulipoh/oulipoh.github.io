@@ -84,7 +84,7 @@ h3 {
 #lineAnimation {
     position: absolute;
     top: 0px;
-	left: 0px;
+    left: 0px;
     height: 500px; /* Enough height for the symbols to go up */
 }
 

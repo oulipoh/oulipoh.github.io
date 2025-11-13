@@ -5,8 +5,8 @@
       --fg_dim: black;
       -webkit-tap-highlight-color: transparent;
       -webkit-touch-callout: none;
-      user-select: none;
       -webkit-user-select: none;
+      user-select: none;
     }
 
     @media (hover: hover) {
@@ -90,6 +90,6 @@
     <image width="35%" x="12%" y="59%" href="arim.svg" aria-label="מתוך מסכת מכות י א" aria-description="ערים הללו אין עושין אותן לא טירין קטנים ולא כרכין גדולים אלא עיירות בינוניות (מסכת מכות י א)" />
   </a>
   <script>
-    document.addEventListener('keydown', e => {if (e.key == 'Escape') document.querySelectorAll('image').forEach(i => i.classList.remove('show'))})
+    addEventListener('keydown', e => {if (e.key == 'Escape') document.querySelectorAll('image').forEach(i => i.classList.remove('show'))})
   </script>
 </svg>

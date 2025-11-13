@@ -18,8 +18,8 @@
     display: grid;
     overflow-x: auto;
     padding-block: 1em 3em;
-    user-select: none;
     -webkit-user-select: none;
+    user-select: none;
 }
 
 .petri > div {

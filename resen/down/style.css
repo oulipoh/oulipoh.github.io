@@ -13,8 +13,8 @@ body {
     overscroll-behavior: none;
     touch-action: pinch-zoom;
     transition: opacity .5s;
-    user-select: none;
     -webkit-user-select: none;
+    user-select: none;
 }
 
 body:active {

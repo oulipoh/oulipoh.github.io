@@ -5,11 +5,16 @@
 const pages = {
     "/": {title: "רֶסֶן", alt: "Resen", author: "resen", logo: "media/resen.svg", skip: true},
     // "open-call-kmeot/": {title: "קול קורא: קמעות", alt: "Open call: Talismans", author: "resen"},
-    "open-call-horaa/": {title: "קול קורא: הוראה", alt: "Open call: Instruction", author: "resen"},
+    // "open-call-horaa/": {title: "קול קורא: הוראה", alt: "Open call: Instruction", author: "resen"},
 
     "palindock/": {title: "תעגון שמש נוגעת", alt: "Anchor of a touching sun", author: "noamdovev", kw: [2, "palindrome", "poem"], skip: true},
     "palisdead/": {title: "מות ידיד יתום", alt: "Death of an orphan friend", author: "uriamiram", kw: [2, "palindrome", "poem"], skip: true},
     "palindream/": {title: "מול  חיי – חלום", alt: "Facing my life – a dream", author: "liormaayan", kw: [2, "palindrome", "poem"], skip: true},
+
+    "humanity/": {title: "הוראות לאנושות – מקבץ חושי", alt: "Instructions for Humanity – Sensory collection", kw: [2, "poem"], skip: true},
+    "operating/": {title: "הוראות הפעלה – מקבץ מכניקה", alt: "Operating instructions – Mechanics collection", kw: [2, "poem", "visual"], skip: true},
+    "heart/": {title: "הוראות ללב – מקבץ יחסים", alt: "Instructions for the heart – Relationship collection", kw: [2, "poem"], skip: true},
+    "opening/": {title: "הוראות פתיחה – מקבץ מלחמה", alt: "Opening instructions – War collection", kw: [2, "poem"], skip: true},
 
     "tsc/": {title: "קוד המקור", alt: "The source code", author: "ofirliberman", kw: [1, "interactive", "visual"], skip: true},
     "relief/": {title: "תבליט־נגד", alt: "Counter relief", author: "michailgrobman", kw: [1, "biblical", "interactive", "visual"], skip: true},
@@ -195,7 +200,8 @@ const ui = {
 }
 
 const kw_labels = {
-    2: "ב – יחסים פלינדרומיים",
+    3: "ג – יחסים פלינדרומיים",
+        2: "ב – הוראה",
     1: "א – קמעות",
     0: "0 – מלחמה",
     "2d 3d": "רב־ממדי",
@@ -218,6 +224,7 @@ const kw_labels = {
     "software": "תוכנה",
     "sound": "צלילים",
     "story": "סיפור",
+    "tool": "כלי",
     "translation": "תרגום",
     "visual": "חזותי",
 }
@@ -291,8 +298,8 @@ function get_all_keywords(lang='', reverse_issues=default_reverse_issues_kw, pag
 }
 
 
-function harden(s) {
-    return s.replace(/(.*) \/ (.*)/, '<span class="harden">$1 /</span> <span class="harden">$2</span>').replace(/[\p{L}\p{M}\p{N}\xa0]+[\u05be-][\p{L}\p{M}\p{N}\xa0\u05be-]+/gu, '<span class="harden">$&</span>')
+function soften(s) {
+    return s.split(' ').map((w, i) => i ? w : w.replace(/(?<=[\p{L}\p{M}\p{N}])\p{Pd}(?=[\p{L}\p{M}\p{N}])/gu, '$&\u200b')).join(' ')
 }
 
 
@@ -319,7 +326,7 @@ function make_link(url, label, cls, title, new_tab=false, force_new_tab_for_mail
         a.className = cls
     }
     if (typeof label == 'string')
-        a.innerHTML = harden(label)
+        a.innerHTML = soften(label)
     else
         a.appendChild(label)
     if (title)
@@ -393,7 +400,7 @@ function make_contents(show_snippet=default_show_snippet, show_author=default_sh
     const contents = get_page()
     const lang = get_lang()
     const all_keywords = get_all_keywords(lang)
-    const contents_authors = get_make_author(contents, lang)[0].map(harden).join()
+    const contents_authors = get_make_author(contents, lang)[0].join()
     const div = document.createElement('div')
     div.className = 'contents'
     div.classList.toggle('row_first', row_first)
@@ -419,11 +426,11 @@ function make_contents(show_snippet=default_show_snippet, show_author=default_sh
         })
 
         const p = document.createElement('p')
-        p.classList.add(...all_keywords.filter(kw => !pages[page].kw?.map(String).includes(kw)).map(kw => 'non_' + sanitize(kw)))
+        p.classList.add(...all_keywords.filter(kw => pages[page].kw?.map(String).includes(kw)).map(kw => '_' + sanitize(kw)))
         p.id = 'page_' + div.childElementCount
         p.appendChild(a)
 
-        let span = null
+        let span
         if (pages[page].wip) {
             span = p.appendChild(document.createElement('span'))
             const s = span.appendChild(document.createElement('span'))
@@ -433,13 +440,11 @@ function make_contents(show_snippet=default_show_snippet, show_author=default_sh
 
         if (show_author) {
             let [authors, alt_authors] = get_make_author(page, lang)
-            authors = authors.map(harden)
-            alt_authors = alt_authors.map(harden)
             if (authors.join() != contents_authors)
                 authors.forEach((author, i) => {
                     span ??= p.appendChild(document.createElement('span'))
                     const s = span.appendChild(document.createElement('span'))
-                    s.innerHTML = author
+                    s.textContent = author
                     if (alt_authors[i] != author)
                         s.title = alt_authors[i]
                 })
@@ -484,7 +489,9 @@ function export_all(lang, skip=true) {
 
 function is_shortcut(event, shortcut) {
     shortcut = shortcut.toLowerCase().split(/ ?[+-] ?(?!$)/)
-    const shortcut_key = shortcut.pop()
+    let shortcut_key = shortcut.pop()
+    if (shortcut_key == 'space')
+        shortcut_key = ' '
     let event_key = event.key.toLowerCase()
     if (shortcut_key == '+' && event.code == 'Equal' && !'-_'.includes(event.key)
         || shortcut_key == '-' && event.code == 'Minus' && !'+?\\'.includes(event.key)
@@ -498,7 +505,12 @@ function is_shortcut(event, shortcut) {
 function add_shortcut(elem, shortcut) {
     if (shortcut) {
         elem.ariaKeyShortcuts = shortcut.replaceAll(' ', '')
-        document.addEventListener('keydown', e => {if (is_shortcut(e, shortcut)) elem.click()})
+        addEventListener('keydown', event => {
+            if (is_shortcut(event, shortcut)) {
+                event.preventDefault()
+                elem.click()
+            }
+        })
     }
 }
 
@@ -578,18 +590,18 @@ function make_header(nav_only=false, reverse_issues_kw=default_reverse_issues_kw
     // nav:
 
     let index_title = get_set_titles('/', lang).label
-    let is_mobile
-    if (is_mobile = matchMedia('(max-width: 480px), (max-height: 480px)').matches)
+    const is_mobile = matchMedia('(max-width: 480px), (max-height: 480px)').matches
+    if (is_mobile)
         index_title = index_title.split(' ').slice(0, lang ? 1 : 2).join(' ')
     const base = page2url('.', lang, page)
-    const parent = URL.parse(base + '/..', location).href
-    const parent_title = URL.parse(base, location).href == parent ? '' : decodeURI(parent).split('/').slice(-2)[0]
+    const parent = new URL(base + '/..', location).href
+    const parent_title = new URL(base, location).href == parent ? '' : decodeURI(parent).split('/').slice(-2)[0]
     const nav = document.createElement('nav')
     let diff = get_width(index_title, nav) - get_width(parent_title, nav)
     let span, back, keywords, trans
     if (page == '/') {
-        bdi = document.createElement('bdi')
-        bdi.innerHTML = parent_title
+        const bdi = document.createElement('bdi')
+        bdi.textContent = parent_title
         add_nav_element(nav, parent_title ? '..' : '', bdi, 'back', diff, shortcuts.back)
         keywords = all_keywords
     } else {
@@ -622,20 +634,21 @@ function make_header(nav_only=false, reverse_issues_kw=default_reverse_issues_kw
     const header = document.createElement('header')
     let button
     if (keywords.length) {
+        const css = document.head.querySelector('link[rel=stylesheet]:not([href^=data])').sheet
         const div = document.createElement('div')
         div.className = 'kw'
 
         function kw_handler() {
             const on = this.classList.toggle('on')
-            const css = document.head.querySelector('link[rel=stylesheet]:not([href^=data])').sheet
+            const prefix = '.contents > p:not(.'
             let found
             for (const i in css.cssRules)
-                if (found = css.cssRules[i].selectorText?.slice(1) == this.id.replace(/^kw_/, 'non_')) {
+                if (found = css.cssRules[i].selectorText?.slice(prefix.length, -1) == this.id.replace(/^kw/, '')) {
                     css.deleteRule(i)
                     break
                 }
             if (!found)
-                css.insertRule(`.${this.id.replace(/^kw_/, 'non_')} {color: var(--fg_verydim) !important}`)
+                css.insertRule(`${prefix}${this.id.replace(/^kw/, '')}) {color: var(--fg_verydim) !important}`)
             const buttons_on = div.querySelectorAll('.on')
             kw_x.style.visibility = buttons_on.length ? 'inherit' : 'hidden'
             if (buttons_on.length > 1)
@@ -650,7 +663,7 @@ function make_header(nav_only=false, reverse_issues_kw=default_reverse_issues_kw
                 if (trans)
                     trans.hash = url_kw
                 set_next_prev_page(page, next, prev, lang, url_kw)
-                page_items.forEach(p => p.firstChild.hash = p.classList.contains('non_' + url_kw) ? '' : url_kw)
+                page_items.forEach(p => p.firstChild.hash = p.classList.contains('_' + url_kw) ? url_kw : '')
             }
             const fg_rgb = getComputedStyle(document.documentElement).color
             page_items.forEach(p => {const enabled = getComputedStyle(p).color == fg_rgb; p.querySelectorAll(':scope > a').forEach(a => {if (enabled) a.removeAttribute('aria-disabled'); else a.ariaDisabled = 'true'})})
@@ -674,11 +687,12 @@ function make_header(nav_only=false, reverse_issues_kw=default_reverse_issues_kw
                     alt = ''
             }
 
-            button.innerHTML = label
+            button.textContent = label
             button.title = `${alt}\nworks=${all_keywords_stats[kw].count}\ninfo=${(all_keywords_stats[kw].info * 100).toFixed(1)}%`.trim()
-            if (page == '/')
+            if (page == '/') {
                 button.onclick = kw_handler
-            else {
+                css.insertRule(`body:has(.${button.id.replace(/^kw/, '')}:hover, .${button.id.replace(/^kw/, '')} > :focus-visible) #${button.id} {border-color: var(--on)}`)
+            } else {
                 button.className = 'always_on'
                 button.classList.toggle('persistent', !button_index && url_kw)
                 button.href = page2url('.', lang, page, button.id.slice(3))
@@ -689,7 +703,7 @@ function make_header(nav_only=false, reverse_issues_kw=default_reverse_issues_kw
             button = div.appendChild(document.createElement('button'))
             button.ariaLabel = 'הסר את כל המסננים'
             button.id = 'kw_x'
-            button.innerHTML = 'X'
+            button.textContent = 'X'
             button.onclick = () => div.querySelectorAll('.on').forEach(e => e.click())
         }
         header.appendChild(div)
@@ -704,9 +718,9 @@ function make_header(nav_only=false, reverse_issues_kw=default_reverse_issues_kw
         h1.appendChild(img)
         h1.title = en_title ?? titles.label
     } else {
-    	h1.innerHTML = harden(titles.label)
-    	if (titles.alt)
-        	h1.title = titles.alt
+        h1.textContent = soften(titles.label)
+        if (titles.alt)
+            h1.title = titles.alt
     }
     header.appendChild(h1)
     if (ui[lang].dir && ui[lang].dir != document.documentElement.dir)
@@ -723,10 +737,9 @@ function make_header(nav_only=false, reverse_issues_kw=default_reverse_issues_kw
 
 
     if (desc.length) {
-        const meta = document.createElement('meta')
-        meta.name = 'description'
+        const meta = document.head.appendChild(document.createElement('meta'))
         meta.content = desc.join(', ')
-        document.head.appendChild(meta)
+        meta.name = 'description'
     }
     if (page == '/')
         addEventListener('load', () => {
@@ -766,13 +779,13 @@ function get_make_author(page, lang, elem, new_tab_for_social=default_new_tab_fo
 
         let alt_name
         if (names) {
-        	name = names[lang] || names[''] || Object.values(names)[0] || name
+            name = names[lang] || names[''] || Object.values(names)[0] || name
             alt_name = Object.entries(names).find(([k, v]) => k != lang && v)?.[1]
             if (translators.includes(key) || collaborators.includes(key)) {
                 const alt_langs = Object.keys(ui).filter(k => k != lang)
                 if (alt_langs.length) {
                     if (translators.includes(key))
-                    	alt_name += ' ' + ui[alt_langs[0]].translator
+                        alt_name += ' ' + ui[alt_langs[0]].translator
                     if (!have_with && collaborators.includes(key))
                         alt_name = ui[alt_langs[0]].with + ' ' + alt_name
                 }
@@ -849,12 +862,10 @@ function make_footer(copyright_url=default_copyright_url, copyright_label=defaul
 
 
 function textarea_writeln(textarea, line='', chars_for_reset=500000) {
-    if (typeof textarea == 'undefined')
-        return
     const selection_start = textarea.selectionStart
     const selection_end = textarea.selectionEnd
     const should_scroll = (textarea.scrollTop + 1 >= textarea.scrollHeight - textarea.clientHeight || textarea.clientHeight != textarea.dataset.height || textarea.clientWidth != textarea.dataset.width) && selection_start == selection_end
-    if (!line && textarea.value.length > chars_for_reset) {
+    if (!line && textarea.textLength > chars_for_reset) {
         should_scroll = true
         textarea.value = textarea.value.match(/(^|\n)\n/) ? textarea.value.split(/(^|\n)(?=\n)/).pop() : ''
     }
@@ -863,8 +874,10 @@ function textarea_writeln(textarea, line='', chars_for_reset=500000) {
         textarea.scrollTop = textarea.scrollHeight
         textarea.dataset.height = textarea.clientHeight
         textarea.dataset.width = textarea.clientWidth
-    } else if (selection_start != selection_end)
-        textarea.setSelectionRange(selection_start, selection_end)  // Needed to restore the selection after value change. Note: In Firefox this will scroll the selection into view
+    } else if (selection_start != selection_end) {  // Needed for restoring the selection after value change. Note: In Firefox this will scroll the selection into view
+        textarea.selectionStart = selection_start
+        textarea.selectionEnd = selection_end
+    }
 }
 
 
@@ -885,7 +898,7 @@ function show_hide_cursor(event_or_elem) {
 }
 
 
-document.addEventListener('keydown', e => {if (e.key == '~') document.body.classList.toggle('psycler')})
+addEventListener('keydown', e => {if (e.key == '~') document.body.classList.toggle('psycler')})
 
 
 // FULLSCREEN
@@ -915,14 +928,14 @@ function toggle_fullscreen(event_or_elem, landscape=true, target_screen, elem) {
             elem.addEventListener('fullscreenchange', () => {
                 if (elem.classList.toggle('fullscreen')) {
                     if (landscape)
-                        screen.orientation.lock('landscape').catch(e => console.warn(e.message))  // Works only in Chrome Android. See: https://bugzilla.mozilla.org/show_bug.cgi?id=1744125
+                        screen.orientation.lock('landscape').catch(e => console.warn(e.message))
                     request_wake_lock()
                     document.addEventListener('visibilitychange', visibility_change_handler)
                 } else
                     wake_lock?.release().then(() => wake_lock = null)
             })
         }
-        elem.requestFullscreen({navigationUI: 'hide', screen: target_screen}).catch(e => console.warn(e.message))
+        elem.requestFullscreen({navigationUI: 'hide', screen: target_screen || undefined}).catch(e => console.warn(e.message))
     } else
         document.exitFullscreen()
     return was_not_fullscreen_before
