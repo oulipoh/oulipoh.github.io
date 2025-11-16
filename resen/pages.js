@@ -11,6 +11,8 @@ const pages = {
     "palisdead/": {title: "מות ידיד יתום", alt: "Death of an orphan friend", author: "uriamiram", kw: [2, "palindrome", "poem"], skip: true},
     "palindream/": {title: "מול  חיי – חלום", alt: "Facing my life – a dream", author: "liormaayan", kw: [2, "palindrome", "poem"], skip: true},
 
+    "exegesis/": {title: "ביאורי הסימנים למשפחות השכולות", alt: "Exegesis of the Signs for the Bereaved Families", author: "nettalevtov", kw: [2, "interactive", "visual"], skip: true},
+    "noa/": {title: "נעה א; נעה ב", alt: "Noa A; Noa B", author: "noakatz", kw: [2, "visual"], skip: true},
     "opening/": {title: "הוראות פתיחה", alt: "Opening instructions", author: "war", kw: [2, "poem"], skip: true},
     "operating/": {title: "הוראות הפעלה", alt: "Operating instructions", author: "mechanics", kw: [2, "poem", "visual"], skip: true},
     "humanity/": {title: "הוראות לאנושות", alt: "Instructions for Humanity", author: "sensory", kw: [2, "poem"], skip: true},
@@ -171,6 +173,9 @@ const authors = {
     "nimrodkerrett": {
         "name": {"": "נמרוד קרת", "en": "Nimrod Kerrett"},
         "web": "zzzen.com",
+    },
+    "noakatz": {
+        "name": {"": "נעה כץ", "en": "Noa Katz"},
     },
     "noamdovev": {
         "name": {"": "נעם דובב", "en": "Noam Dovev"},
