@@ -339,7 +339,7 @@ blockquote {
     margin-block: 3ex;
 }
 
-blockquote, h4, li:not(.mono *), p {
+blockquote, li:not(.mono *), p {
     text-align: justify;
     text-wrap: pretty;
 }
@@ -641,13 +641,8 @@ h3 {
     margin-block: 6rem 2rem;
 }
 
-h4 {
-    font-size: initial;
-    margin-bottom: 3rem;
-}
-
-h4:not(article *) {
-    margin-bottom: 6rem;
+article.collection h3 {
+    margin-top: 9rem;
 }
 
 header {
@@ -664,6 +659,15 @@ nav[dir=rtl] ~ header {
 
 header ~ :not(:is(h2, footer)) {
     line-height: var(--line_height);
+}
+
+.heading_small {
+    font-size: initial;
+    margin-bottom: 3rem;
+}
+
+.heading_small:not(article *) {
+    margin-bottom: 6rem;
 }
 
 .huge, .subhuge {
@@ -888,9 +892,9 @@ ol, ul {
     padding-bottom: var(--hor_scrollbar_offset);
 }
 
-:is(p:not([dir=ltr]), p:not([dir=ltr]) + br) + :is(blockquote, h4, p)[dir=ltr],
-:is(p:not([dir=ltr]), p:not([dir=ltr]) + br) + div[dir=ltr] > :is(blockquote, h4, p):first-child,
-:is(p[dir=ltr], p[dir=ltr] + br) + :is(blockquote, h4, p):not([dir=ltr]) {
+:is(p:not([dir=ltr]), p:not([dir=ltr]) + br) + :is(blockquote, p)[dir=ltr],
+:is(p:not([dir=ltr]), p:not([dir=ltr]) + br) + div[dir=ltr] > :is(blockquote, p):first-child,
+:is(p[dir=ltr], p[dir=ltr] + br) + :is(blockquote, p):not([dir=ltr]) {
     margin-top: max(6ex, 4.5rem);
 }
 
@@ -1190,6 +1194,11 @@ video::-webkit-media-controls-enclosure {  /* Not supported in Firefox */
     margin-block: 3rem;
     max-height: var(--max_media_height);
     max-width: calc(var(--max_media_height) * 16 / 9);
+}
+
+.wide_poem {
+    line-height: 2;
+    white-space: pre-line;
 }
 
 @media (forced-colors: active) {

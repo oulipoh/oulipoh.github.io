@@ -1,0 +1,28 @@
+.table {
+    overflow-x: auto;
+    margin-block: 2.5em;
+    padding-bottom: 16px;
+    padding-inline-end: 1px;  /* Show missing border in Chrome when overflowing */
+}
+
+table {
+    border-collapse: collapse;
+    margin-inline: auto;
+    width: max-content;
+}
+
+td {
+    border: 1px solid;
+    height: 1em;
+    line-height: 1em;
+    text-align: center;
+    width: 1em;
+}
+
+td:empty {
+    background-color: var(--fg);
+}
+
+td.number {
+    font-weight: bold;
+}

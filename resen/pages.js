@@ -11,10 +11,10 @@ const pages = {
     "palisdead/": {title: "מות ידיד יתום", alt: "Death of an orphan friend", author: "uriamiram", kw: [2, "palindrome", "poem"], skip: true},
     "palindream/": {title: "מול  חיי – חלום", alt: "Facing my life – a dream", author: "liormaayan", kw: [2, "palindrome", "poem"], skip: true},
 
-    "humanity/": {title: "הוראות לאנושות – מקבץ חושי", alt: "Instructions for Humanity – Sensory collection", kw: [2, "poem"], skip: true},
-    "operating/": {title: "הוראות הפעלה – מקבץ מכניקה", alt: "Operating instructions – Mechanics collection", kw: [2, "poem", "visual"], skip: true},
-    "heart/": {title: "הוראות ללב – מקבץ יחסים", alt: "Instructions for the heart – Relationship collection", kw: [2, "poem"], skip: true},
-    "opening/": {title: "הוראות פתיחה – מקבץ מלחמה", alt: "Opening instructions – War collection", kw: [2, "poem"], skip: true},
+    "opening/": {title: "הוראות פתיחה", alt: "Opening instructions", author: "war", kw: [2, "poem"], skip: true},
+    "operating/": {title: "הוראות הפעלה", alt: "Operating instructions", author: "mechanics", kw: [2, "poem", "visual"], skip: true},
+    "humanity/": {title: "הוראות לאנושות", alt: "Instructions for Humanity", author: "sensory", kw: [2, "poem"], skip: true},
+    "heart/": {title: "הוראות ללב", alt: "Instructions for the heart", author: "relationship", kw: [2, "poem"], skip: true},
 
     "tsc/": {title: "קוד המקור", alt: "The source code", author: "ofirliberman", kw: [1, "interactive", "visual"], skip: true},
     "relief/": {title: "תבליט־נגד", alt: "Counter relief", author: "michailgrobman", kw: [1, "biblical", "interactive", "visual"], skip: true},
@@ -63,6 +63,20 @@ const authors = {
         "sponsors": "oulipoh",
         "subscribe": "ayPSSeHk3KL4ALGa9",
     },
+
+    "mechanics": {
+        "name": {"": "מקבץ מכניקה", "en": "Mechanics collection"},
+    },
+    "relationship": {
+        "name": {"": "מקבץ יחסים", "en": "Relationship collection"},
+    },
+    "sensory": {
+        "name": {"": "מקבץ חושי", "en": "Sensory collection"},
+    },
+    "war": {
+        "name": {"": "מקבץ מלחמה", "en": "War collection"},
+    },
+
     "adinaviterbo": {
         "name": {"": "עדינה ויטרבו", "en": "Adina Viterbo"},
         "instagram": "adina_v",
