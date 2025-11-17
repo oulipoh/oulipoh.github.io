@@ -175,7 +175,7 @@ const authors = {
         "web": "zzzen.com",
     },
     "noakatz": {
-        "name": {"": "נעה כץ", "en": "Noa Katz"},
+        "name": {"": "נעה כ\"ץ", "en": "Noa Katz"},
     },
     "noamdovev": {
         "name": {"": "נעם דובב", "en": "Noam Dovev"},
