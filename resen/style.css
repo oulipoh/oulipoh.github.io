@@ -384,6 +384,10 @@ button.big {
     padding-inline: 1em;
 }
 
+.toblack button.big {
+    color: var(--bg);
+}
+
 button, .dim_ref, footer, .marquee, nav, .preface_he, .sliders {
     font-size: initial;
 }
@@ -645,6 +649,20 @@ article.collection h3 {
     margin-top: 9rem;
 }
 
+article.collection h3 a {
+    margin-inline-end: 1em;
+}
+
+
+article.collection h3 span {
+    display: inline-block;
+}
+
+article.collection h3 span::before {
+    content: '/';
+    margin-inline-end: 1em;
+}
+
 header {
     margin-block: calc(var(--nav_pad_top) + var(--nav_pad_bottom) + 2*var(--nav_lh)) calc(var(--h1_size) * .8);
 }
@@ -880,7 +898,6 @@ nav .trans {
 [data-title]:is(ol, ul)::before {
     content: attr(data-title);
     font-weight: bold;
-    margin-inline-start: -40px;
 }
 
 ol, ul {
@@ -1146,7 +1163,7 @@ textarea {
     width: var(--media_width);
 }
 
-.textblock {
+.textblock:not(.collection *) {
     margin-top: 6rem;
 }
 
@@ -1244,8 +1261,8 @@ video::-webkit-media-controls-enclosure {  /* Not supported in Firefox */
         margin-inline: calc(var(--anti_margin) + 8px);
     }
 
-    li:not(.mono *) {
-        margin-inline-start: 0;
+    :is(ol, ul):not(.mono) {
+        padding-inline-start: 0;
     }
 
     object {
