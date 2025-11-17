@@ -2,6 +2,8 @@
 // Please attribute by linking to a version of this file [e.g. as done in make_footer()], containing these comments
 
 
+const canonical_origin = 'https://resen.co.il'
+
 const pages = {
     "/": {title: "רֶסֶן", alt: "Resen", author: "resen", logo: "media/resen.svg", skip: true},
     // "open-call-kmeot/": {title: "קול קורא: קמעות", alt: "Open call: Talismans", author: "resen"},
@@ -11,12 +13,15 @@ const pages = {
     "palisdead/": {title: "מות ידיד יתום", alt: "Death of an orphan friend", author: "uriamiram", kw: [2, "palindrome", "poem"], skip: true},
     "palindream/": {title: "מול  חיי – חלום", alt: "Facing my life – a dream", author: "liormaayan", kw: [2, "palindrome", "poem"], skip: true},
 
+    "geometry/": {title: "גאומטרייה II", alt: "Geometry II", author: "lidasharetmassad", kw: [2, "interactive", "visual"], skip: true},
+    "dada/": {title: "מכתב כופר דאדא", alt: "Dada ransom note", author: "eliyahorn", kw: [2, "visual"], skip: true},
+    "grok/": {title: "גרוק", alt: "Grok", author: "danieloz", kw: [2, "interactive", "visual"], skip: true},
     "exegesis/": {title: "ביאורי הסימנים למשפחות השכולות", alt: "Exegesis of the Signs for the Bereaved Families", author: "nettalevtov", kw: [2, "interactive", "visual"], skip: true},
     "noa/": {title: "נעה א; נעה ב", alt: "Noa A; Noa B", author: "noakatz", kw: [2, "visual"], skip: true},
-    "opening/": {title: "הוראות פתיחה", alt: "Opening instructions", author: "war", kw: [2, "poem"], skip: true},
-    "operating/": {title: "הוראות הפעלה", alt: "Operating instructions", author: "mechanics", kw: [2, "poem", "visual"], skip: true},
-    "humanity/": {title: "הוראות לאנושות", alt: "Instructions for Humanity", author: "sensory", kw: [2, "poem"], skip: true},
-    "heart/": {title: "הוראות ללב", alt: "Instructions for the heart", author: "relationship", kw: [2, "poem"], skip: true},
+    "opening/": {title: "הוראות פתיחה", alt: "Opening instructions", author: "war", kw: [2, "collection", "poem"], skip: true},
+    "operating/": {title: "הוראות הפעלה", alt: "Operating instructions", author: "mechanics", kw: [2, "collection", "poem", "visual"], skip: true},
+    "humanity/": {title: "הוראות לאנושות", alt: "Instructions for Humanity", author: "sensory", kw: [2, "collection", "poem"], skip: true},
+    "heart/": {title: "הוראות ללב", alt: "Instructions for the heart", author: "relationship", kw: [2, "2d 3d", "collection", "poem", "story", "visual"], skip: true},
 
     "tsc/": {title: "קוד המקור", alt: "The source code", author: "ofirliberman", kw: [1, "interactive", "visual"], skip: true},
     "relief/": {title: "תבליט־נגד", alt: "Counter relief", author: "michailgrobman", kw: [1, "biblical", "interactive", "visual"], skip: true},
@@ -116,12 +121,18 @@ const authors = {
     "brunogrife": {
         "name": {"": "עידן ברונו גרייף", "en": "Bruno Grife"},
     },
+    "danieloz": {
+        "name": {"": "דניאל עוז", "en": "Daniel Oz"},
+    },
     "doritkedar": {
         "name": {"": "דורית קידר", "en": "Dorit Kedar"},
     },
     "eakoukli": {
         "name": {"": "א. קוּקלי", "en": "E. A. Koukly"},
         "web": "toonsnake.net",
+    },
+    "eliyahorn": {
+        "name": {"": "אליה הורן", "en": "Eliya Horn"},
     },
     "eyalgruss": {
         "name": {"": "איל יהוה גרוּס", "en": "Eyal Yehowa Gruss"},
@@ -140,6 +151,9 @@ const authors = {
     },
     "julienvocance": {
         "name": {"": "ז'וליאן ווֹקַנס", "en": "Julien Vocance"},
+    },
+    "lidasharetmassad": {
+        "name": {"": "לידה שרת מסד", "en": "Lida Sharet Massad"},
     },
     "liormaayan": {
         "name": {"": "ליאור מעין", "en": "Lior Maayan"},
@@ -180,7 +194,7 @@ const authors = {
     "noamdovev": {
         "name": {"": "נעם דובב", "en": "Noam Dovev"},
         "web": "palindromes.co/",
-        "mail": "noamdo@gmail.com"
+        "mail": "noamdo@gmail.com",
     },
     "noashaham": {
         "name": {"": "נעה שחם", "en": "Noa Shaham"},
@@ -220,12 +234,13 @@ const ui = {
 
 const kw_labels = {
     3: "ג – יחסים פלינדרומיים",
-        2: "ב – הוראה",
+    2: "ב – הוראה",
     1: "א – קמעות",
     0: "0 – מלחמה",
     "2d 3d": "רב־ממדי",
     "biblical": "תורני",
     "cipher": "צופן",
+    "collection": "אסופה",
     "combinatorial": "קומבינטורי",
     "combined forms": "שילוב אילוצים",
     "data available": "נתונים להורדה",
@@ -318,7 +333,7 @@ function get_all_keywords(lang='', reverse_issues=default_reverse_issues_kw, pag
 
 
 function soften(s) {
-    return s.split(' ').map((w, i) => i ? w : w.replace(/(?<=[\p{L}\p{M}\p{N}])\p{Pd}(?=[\p{L}\p{M}\p{N}])/gu, '$&\u200b')).join(' ')
+    return s.split(' ').map((w, i) => i ? w : w.replace(/(?<=[\p{L}\p{M}\p{N}]\p{Pd})(?=[\p{L}\p{M}\p{N}])/gu, '\u200b')).join(' ')
 }
 
 
@@ -604,6 +619,11 @@ function make_header(nav_only=false, reverse_issues_kw=default_reverse_issues_kw
     const [all_keywords, all_keywords_stats] = get_all_keywords(lang, reverse_issues_kw, page)
     const titles = get_set_titles(page, lang)
     document.title = titles.label
+    if (canonical_origin) {
+        const link = document.head.appendChild(document.createElement('link'))
+        link.rel = 'canonical'
+        link.href = new URL(page, canonical_origin)
+    }
 
 
     // nav:
