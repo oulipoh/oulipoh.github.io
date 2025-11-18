@@ -12,7 +12,8 @@ table {
 }
 
 td {
-    border: 1px solid var(--fg);
+    border: 1px solid;
+    border-color: inherit;
     height: 1em;
     line-height: 1em;
     text-align: center;
