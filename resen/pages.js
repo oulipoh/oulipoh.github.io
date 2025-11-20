@@ -190,6 +190,7 @@ const authors = {
     },
     "noakatz": {
         "name": {"": "נעה כ\"ץ", "en": "Noa Katz"},
+        "web": ".net",
     },
     "noamdovev": {
         "name": {"": "נעם דובב", "en": "Noam Dovev"},
