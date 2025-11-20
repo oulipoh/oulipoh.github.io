@@ -124,6 +124,7 @@ body {
     display: table;
     font-family: var(--font);
     font-size: var(--font_size);
+    -webkit-font-smoothing: antialiased;
     height: 100vh;
     height: 100dvh;
     letter-spacing: var(--letter_spacing);
@@ -652,7 +653,6 @@ article.collection h3 {
 article.collection h3 a {
     margin-inline-end: 1em;
 }
-
 
 article.collection h3 span {
     display: inline-block;
