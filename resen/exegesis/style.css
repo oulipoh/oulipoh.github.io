@@ -38,7 +38,6 @@ img {
     grid-column: 1 / 2;
     grid-row: 1 / 2;
     position: relative;
-    touch-action: pinch-zoom;
 }
 
 #legend > * {
@@ -57,6 +56,7 @@ img {
     -webkit-mask: var(--mask);
     mask: var(--mask);
     position: absolute;
+    touch-action: pinch-zoom;
 }
 
 .show {
