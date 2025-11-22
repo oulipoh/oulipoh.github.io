@@ -39,6 +39,7 @@ img {
     grid-row: 1 / 2;
     position: relative;
     --r: 10vh;
+    touch-action: pinch-zoom;
 }
 
 #legend > * {
@@ -47,26 +48,6 @@ img {
 }
 
 #front {
-    inset: 0;
-    --mask: radial-gradient(
-        circle var(--r) at var(--x) var(--y),
-        transparent var(--r),
-        black var(--r) 100%
-    );
-    -webkit-mask: var(--mask);
-    mask: var(--mask);
-    position: absolute;
-    touch-action: pinch-zoom;
-}
-
-#legend::after {
-    background: radial-gradient(
-        circle var(--r) at var(--x) var(--y),
-        transparent var(--r),
-        black var(--r) calc(var(--r) + 1px),
-        transparent calc(var(--r) + 1px) 100%
-    );
-    content: '';
     inset: 0;
     position: absolute;
 }
@@ -82,4 +63,27 @@ img {
 
 #legend.fullscreen img {
     --max_media_height: 100vh;
+}
+
+.fullscreen #front {
+    --mask: radial-gradient(
+        circle var(--r) at var(--x) var(--y),
+        transparent var(--r),
+        black var(--r) 100%
+    );
+    -webkit-mask: var(--mask);
+    mask: var(--mask);
+    will-change: -webkit-mask, mask;
+}
+
+#legend.fullscreen::after {
+    background: radial-gradient(
+        circle var(--r) at var(--x) var(--y),
+        transparent var(--r),
+        black var(--r) calc(var(--r) + 1px),
+        transparent calc(var(--r) + 1px) 100%
+    );
+    content: '';
+    inset: 0;
+    position: absolute;
 }
