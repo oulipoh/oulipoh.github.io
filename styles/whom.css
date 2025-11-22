@@ -36,7 +36,7 @@ figcaption > div {
 }
 
 figcaption > div > a {
-    background: #fff8;
+    background-color: #fff8;
     font-size: 1rem;
     font-weight: normal;
     padding-inline: .2em;
@@ -67,7 +67,7 @@ figcaption > div > a {
 }
 
 h3 {
-    background: #fff8;
+    background-color: #fff8;
     font-size: max(2vw, 1rem);
     font-weight: normal;
     left: 1em;

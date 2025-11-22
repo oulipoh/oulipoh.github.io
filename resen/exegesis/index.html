@@ -15,7 +15,7 @@
 </head>
 <body onload="document.body.style.visibility = 'visible'">
     <script>make_header()</script>
-    <div id="images" onclick="toggle_fullscreen(event, false, null, event.target)" oncontextmenu="event.preventDefault()">
+    <div id="images" onclick="toggle_fullscreen(event, false, null, event.target)" oncontextmenu="event.preventDefault()" ondragstart="event.preventDefault()">
         <img id="right" src="media/right.jpg">
         <div id="left">
             <div id="legend">

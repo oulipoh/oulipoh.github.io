@@ -47,7 +47,7 @@ body {
 }
 
 #filler {
-  background: linear-gradient(#B3E5FC, #425cfc 1000px);
+  background-image: linear-gradient(#b3e5fc, #425cfc 1000px);
   flex: 0 0 0;
   forced-color-adjust: none;
 }
