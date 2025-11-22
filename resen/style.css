@@ -568,7 +568,7 @@ nav[dir=rtl] ~ footer > div {
 
 footer, .fullscreen, .kw, nav,
 svg image,  /* For Firefox Android */
-:is([oncontextmenu*=toggle_fullscreen], [ondblclick*=toggle_fullscreen]):not(body)  /* Note this will miss elements where the handler was added programmatically, as well as different elements passed to the handler */
+:is([oncontextmenu*=toggle_fullscreen], [ondblclick*=toggle_fullscreen] [click*=toggle_fullscreen]):not(body)  /* Note this will miss elements where the handler was added programmatically, as well as different elements passed to the handler */
 {
     -webkit-user-select: none;
     user-select: none;
@@ -608,7 +608,7 @@ svg image,  /* For Firefox Android */
     --max_media_height: 100vh;
 }
 
-img.fullscreen {
+.fullscreen:where(img) {
     --fullscreen_bg: black;
 }
 

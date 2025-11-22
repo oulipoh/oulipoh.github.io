@@ -15,7 +15,7 @@
 </head>
 <body onload="document.body.style.visibility = 'visible'">
     <script>make_header()</script>
-    <div id="images">
+    <div id="images" onclick="toggle_fullscreen(event, false, null, event.target)" oncontextmenu="event.preventDefault()">
         <img id="right" src="media/right.jpg">
         <div id="left">
             <div id="legend">
@@ -26,6 +26,10 @@
             <img id="side" src="media/side.jpg">
         </div>
     </div>
+    <article>
+        <p>לתצוגת תקריב לחצו על איזור בתמונה.</p>
+        <p dir="ltr">For a close-up view, click on an area in the image.</p>
+    </article>
     <script>make_footer()</script>
     <script src="script.js"></script>
 </body>

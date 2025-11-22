@@ -1,12 +1,11 @@
 #images {
+    cursor: zoom-in;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    margin-bottom: 6rem;
     margin-inline: auto;
     max-width: var(--media_width);
-    position: relative;
-    -webkit-user-select: none;
-    user-select: none;
 }
 
 img {
@@ -17,9 +16,10 @@ img {
 
 #left {
     aspect-ratio: 1651 / 2160;
+    background-color: #bda581;
     display: grid;
     grid-template-columns: 55.3% 44.7%;
-    grid-template-rows: 75.05% 24.95%;
+    grid-template-rows: 75% 25%;
     max-height: var(--max_media_height);
 }
 
@@ -34,13 +34,15 @@ img {
 }
 
 #legend {
-    cursor: crosshair;
+    display: block !important;
     grid-column: 1 / 2;
     grid-row: 1 / 2;
     position: relative;
+    --r: 10vh;
 }
 
 #legend > * {
+    pointer-events: none;
     width: 100%;
 }
 
@@ -48,10 +50,8 @@ img {
     inset: 0;
     --mask: radial-gradient(
         circle var(--r) at var(--x) var(--y),
-        transparent 0,
         transparent var(--r),
-        black var(--r),
-        black 100%
+        black var(--r) 100%
     );
     -webkit-mask: var(--mask);
     mask: var(--mask);
@@ -59,15 +59,27 @@ img {
     touch-action: pinch-zoom;
 }
 
-.show {
-    background-color: var(--bg);
-    left: 50%;
-    position: absolute !important;
-    top: 50%;
-    translate: -50% -50%;
-    width: 100%;
+#legend::after {
+    background: radial-gradient(
+        circle var(--r) at var(--x) var(--y),
+        transparent var(--r),
+        black var(--r) calc(var(--r) + 1px),
+        transparent calc(var(--r) + 1px) 100%
+    );
+    content: '';
+    inset: 0;
+    position: absolute;
 }
 
-.hide {
-    visibility: hidden;
+.fullscreen {
+    cursor: zoom-out;
+    --fullscreen_bg: var(--bg);
+}
+
+#legend.fullscreen {
+    cursor: crosshair;
+}
+
+#legend.fullscreen img {
+    --max_media_height: 100vh;
 }
