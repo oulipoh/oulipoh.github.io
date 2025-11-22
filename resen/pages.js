@@ -9,18 +9,22 @@ const pages = {
     // "open-call-kmeot/": {title: "קול קורא: קמעות", alt: "Open call: Talismans", author: "resen"},
     // "open-call-horaa/": {title: "קול קורא: הוראה", alt: "Open call: Instruction", author: "resen"},
 
-    "palindock/": {title: "תעגון שמש נוגעת", alt: "Anchor of a touching sun", author: "noamdovev", kw: [2, "palindrome", "poem"], skip: true},
-    "palisdead/": {title: "מות ידיד יתום", alt: "Death of an orphan friend", author: "uriamiram", kw: [2, "palindrome", "poem"], skip: true},
-    "palindream/": {title: "מול  חיי – חלום", alt: "Facing my life – a dream", author: "liormaayan", kw: [2, "palindrome", "poem"], skip: true},
+    "palindock/": {title: "תעגון שמש נוגעת", alt: "Anchor of a touching sun", author: "noamdovev", kw: [3, "palindrome", "poem"], skip: true},
+    "palisdead/": {title: "מות ידיד יתום", alt: "Death of an orphan friend", author: "uriamiram", kw: [3, "palindrome", "poem"], skip: true},
+    "palindream/": {title: "מול  חיי – חלום", alt: "Facing my life – a dream", author: "liormaayan", kw: [3, "palindrome", "poem"], skip: true},
 
-    "geometry/": {title: "גאומטרייה II", alt: "Geometry II", author: "lidasharetmassad", kw: [2, "interactive", "visual"], skip: true},
+    "2/": {title: "פתח דבר לגיליון ב – הוראה", alt: "Foreword to Issue 2 – Instruction", author: ["nurilevy", "eranhadas"], kw: [2], skip: true},
     "dada/": {title: "מכתב כופר דאדא", alt: "Dada ransom note", author: "eliyahorn", kw: [2, "visual"], skip: true},
     "grok/": {title: "גרוק", alt: "Grok", author: "danieloz", kw: [2, "interactive", "visual"], skip: true},
-    "exegesis/": {title: "ביאורי הסימנים למשפחות השכולות", alt: "Exegesis of the Signs for the Bereaved Families", author: "nettalevtov", kw: [2, "interactive", "visual"], skip: true},
+    "geometry/": {title: "גאומטרייה II", alt: "Geometry II", author: "lidasharetmassad", kw: [2, "interactive", "visual"], skip: true},
+    "unbearable/": {title: "הקלות הבלתי נסבלת של ההקלדה", alt: "The unbearable lightness of typing", author: "avimeishar", kw: [2, "interactive", "visual"], skip: true},
     "noa/": {title: "נעה א; נעה ב", alt: "Noa A; Noa B", author: "noakatz", kw: [2, "visual"], skip: true},
+    "tnua/": {title: "תנועה", author: "eliautochkin", kw: [2, "software", "visual"], skip: true},
+    "exegesis/": {title: "ביאורי הסימנים למשפחות השכולות", alt: "Exegesis of the signs for the bereaved families", author: "nettalevtov", kw: [2, "interactive", "visual"], skip: true},
+    "flesh/": {title: "בשר ותולעים", alt: "Flesh and worms", author: "avimeishar", kw: [2, "interactive", "sound", "visual"], skip: true},
     "opening/": {title: "הוראות פתיחה", alt: "Opening instructions", author: "war", kw: [2, "collection", "poem"], skip: true},
     "operating/": {title: "הוראות הפעלה", alt: "Operating instructions", author: "mechanics", kw: [2, "collection", "poem", "visual"], skip: true},
-    "humanity/": {title: "הוראות לאנושות", alt: "Instructions for Humanity", author: "sensory", kw: [2, "collection", "poem"], skip: true},
+    "humanity/": {title: "הוראות לאנושות", alt: "Instructions for humanity", author: "sensory", kw: [2, "collection", "poem"], skip: true},
     "heart/": {title: "הוראות ללב", alt: "Instructions for the heart", author: "relationship", kw: [2, "2d 3d", "collection", "poem", "story", "visual"], skip: true},
 
     "tsc/": {title: "קוד המקור", alt: "The source code", author: "ofirliberman", kw: [1, "interactive", "visual"], skip: true},
@@ -103,6 +107,9 @@ const authors = {
         "name": {"": "אריק וייס", "en": "Arik Weiss"},
         "instagram": "arikw99",
     },
+    "avimeishar": {
+        "name": {"": "אבי מישר", "en": "Avi Meishar"},
+    },
     "avimilgrom": {
         "name": {"": "אבי מילגרום", "en": "Avi Milgrom"},
     },
@@ -133,6 +140,9 @@ const authors = {
     },
     "eliyahorn": {
         "name": {"": "אליה הורן", "en": "Eliya Horn"},
+    },
+    "eliautochkin": {
+        "name": {"": "אליה אוטוצ'קין", "en": "Elia Utochkin"},
     },
     "eyalgruss": {
         "name": {"": "איל יהוה גרוּס", "en": "Eyal Yehowa Gruss"},
@@ -188,6 +198,9 @@ const authors = {
         "name": {"": "נמרוד קרת", "en": "Nimrod Kerrett"},
         "web": "zzzen.com",
     },
+    "nirgilad": {
+        "name": {"": "ניר גלעד", "en": "Nir Gilad"},
+    },
     "noakatz": {
         "name": {"": "נעה כ\"ץ", "en": "Noa Katz"},
         "web": ".net",
@@ -199,6 +212,10 @@ const authors = {
     },
     "noashaham": {
         "name": {"": "נעה שחם", "en": "Noa Shaham"},
+    },
+    "nurilevy": {
+        "name": {"": "נורי לוי", "en": "Nuri Levy"},
+        "instagram": "nuri.levy",
     },
     "ofirliberman": {
         "name": {"": "אופיר ליברמן", "en": "Ofir Liberman"},
@@ -269,7 +286,7 @@ const social = {
     "web": {"label": "&#x1f3e0;&#xfe0e;"},
     "twitter": {"url": "x.com", "label": "&#x1f426;"},
     "facebook": {"url": "www.facebook.com", "label": "&#x24d5;"},
-    "instagram": {"url": "instagram.com", "label": "&#x1f4f7;&#xfe0e;"},
+    "instagram": {"url": "www.instagram.com", "label": "&#x1f4f7;&#xfe0e;"},
     "github": {"url": "github.com", "label": "&#x1f431;"},
     "sponsors": {"url": "github.com/sponsors", "label": "&hearts;"},
     "paypal": {"url": "www.paypal.com/donate/?hosted_button_id=", "label": "&#x1f4b8;"},
