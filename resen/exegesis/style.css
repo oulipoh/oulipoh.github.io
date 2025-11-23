@@ -3,7 +3,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    margin-bottom: 6rem;
+    margin-block: 4rem;
     margin-inline: auto;
     max-width: var(--media_width);
 }
@@ -33,24 +33,28 @@ img {
     grid-row: 2 / 3;
 }
 
+#bottom.fullscreen {
+    object-fit: scale-down;
+}
+
 #legend {
-    display: block !important;
     grid-column: 1 / 2;
     grid-row: 1 / 2;
     position: relative;
-    --r: 10vh;
+    --r: 4vh;
     touch-action: pinch-zoom;
     width: fit-content;
 }
 
 #legend > * {
     pointer-events: none;
-    width: 100%;
 }
 
-#front {
-    inset: 0;
+#front, .fullscreen > #back {
+    left: 50%;
     position: absolute;
+    top: 50%;
+    translate: -50% -50%;
 }
 
 .fullscreen {
@@ -80,7 +84,7 @@ img {
     background-image: radial-gradient(
         circle var(--r) at var(--x) var(--y),
         transparent var(--r),
-        black var(--r) calc(var(--r) + 1px),
+        #ccc var(--r) calc(var(--r) + 1px),
         transparent calc(var(--r) + 1px) 100%
     );
     content: '';

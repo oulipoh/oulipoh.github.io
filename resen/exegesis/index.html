@@ -15,6 +15,9 @@
 </head>
 <body onload="document.body.style.visibility = 'visible'">
     <script>make_header()</script>
+    <article>
+        <p>לתצוגת תקריב לחצו על איזור בתמונה.</p>
+    </article>
     <div id="images" onclick="toggle_fullscreen(event, false, null, event.target)" oncontextmenu="event.preventDefault()" ondragstart="event.preventDefault()">
         <img id="right" src="media/right.jpg">
         <div id="left">
@@ -27,7 +30,6 @@
         </div>
     </div>
     <article>
-        <p>לתצוגת תקריב לחצו על איזור בתמונה.</p>
         <p dir="ltr">For a close-up view, click on an area in the image.</p>
     </article>
     <script>make_footer()</script>
