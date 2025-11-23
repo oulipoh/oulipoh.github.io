@@ -192,7 +192,8 @@ const authors = {
     },
     "nettalevtov": {
         "name": {"": "נטע לב טוב", "en": "Netta Lev Tov"},
-        "web": "netta-lev-tov.com"
+        "instagram": "netta.lev.tov",
+        "web": "netta-lev-tov.com",
     },
     "nimrodkerrett": {
         "name": {"": "נמרוד קרת", "en": "Nimrod Kerrett"},

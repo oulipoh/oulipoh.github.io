@@ -42,12 +42,7 @@ img {
     grid-row: 1 / 2;
     position: relative;
     --r: 4vh;
-    touch-action: pinch-zoom;
     width: fit-content;
-}
-
-#legend > * {
-    pointer-events: none;
 }
 
 #front, .fullscreen > #back {
@@ -89,6 +84,5 @@ img {
     );
     content: '';
     inset: 0;
-    pointer-events: none;
     position: absolute;
 }
