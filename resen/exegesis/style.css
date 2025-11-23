@@ -6,6 +6,7 @@
     margin-block: 4rem;
     margin-inline: auto;
     max-width: var(--media_width);
+    width: fit-content;
 }
 
 img {
@@ -43,8 +44,6 @@ img {
     background-size: contain;
     grid-column: 1 / 2;
     grid-row: 1 / 2;
-    --r: 4vh;
-    width: fit-content;
 }
 
 #legend > * {
@@ -58,7 +57,7 @@ img {
 
 #legend.fullscreen {
     cursor: crosshair;
-    position: relative;
+    --r: max(4vh, 40px);
 }
 
 .fullscreen > img {
