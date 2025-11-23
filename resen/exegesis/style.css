@@ -44,7 +44,7 @@ img {
     background-size: contain;
     grid-column: 1 / 2;
     grid-row: 1 / 2;
-    --x: calc(var(--r) * 5);
+    --x: calc(var(--r) * 4);
     --y: calc(var(--r) * 9);
 }
 
