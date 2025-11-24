@@ -12,11 +12,12 @@
     <meta property="og:image" content="https://resen.co.il/flesh/snippet">
     <style>
         iframe {
-            aspect-ratio: 16 / 9;
+            --aspect: 16 / 9;
+            aspect-ratio: var(--aspect);
             border: none;
             clip-path: inset(2px);
-            height: var(--max_media_height);
-            width: auto;
+            max-height: var(--max_media_height);
+            width: min(var(--media_width), calc(var(--max_media_height) * var(--aspect)));
         }
     </style>
     <noscript><style>body {visibility: visible}</style></noscript>
