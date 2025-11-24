@@ -144,6 +144,10 @@ const authors = {
     "eliautochkin": {
         "name": {"": "אליה אוטוצ'קין", "en": "Elia Utochkin"},
     },
+    "eranhadas": {
+        "name": {"": "ערן הדס", "en": "Eran Hadas"},
+        "web": ".com",
+    },
     "eyalgruss": {
         "name": {"": "איל יהוה גרוּס", "en": "Eyal Yehowa Gruss"},
         "mail": "@gmail.com",
