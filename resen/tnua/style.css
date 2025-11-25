@@ -1,0 +1,22 @@
+.model_container {
+    background-image: url(media/partitura.png);
+    background-position: 50% 15%;
+    background-repeat: no-repeat;
+    background-size: min(var(--article_width), 100%);
+    display: flex;
+    justify-content: center;
+}
+
+model-viewer {
+    aspect-ratio: 1;
+    height: auto;
+}
+
+.model_container model-viewer:only-child {
+    max-height: 50vh;
+    width: 100%;
+}
+
+.model_container + div > p:first-child {
+    margin-top: 0;
+}
