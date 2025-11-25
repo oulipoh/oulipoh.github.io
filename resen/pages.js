@@ -19,7 +19,7 @@ const pages = {
     "geometry/": {title: "גאומטרייה II", alt: "Geometry II", author: "lidasharetmassad", kw: [2, "interactive", "visual"]},
     "unbearable/": {title: "הקלות הבלתי נסבלת של ההקלדה", alt: "The unbearable lightness of typing", author: "avimeishar", kw: [2, "interactive", "visual"]},
     "noa/": {title: "נעה א; נעה ב", alt: "Noa A; Noa B", author: "noakatz", kw: [2, "visual"]},
-    "tnua/": {title: "תנועה", author: "eliautochkin", kw: [2, "software", "visual"]},
+    "tnua/": {title: "תנועה", author: "eliautochkin", kw: [2, "2d 3d", "software", "visual"]},
     "exegesis/": {title: "ביאורי הסימנים למשפחות השכולות", alt: "Exegesis of the signs for the bereaved families", author: "nettalevtov", kw: [2, "interactive", "visual"]},
     "flesh/": {title: "בשר ותולעים", alt: "Flesh and worms", author: "nirgilad", kw: [2, "interactive", "sound", "visual"]},
     "opening/": {title: "הוראות פתיחה", alt: "Opening instructions", author: "war", kw: [2, "collection", "poem"]},
