@@ -60,6 +60,7 @@ img {
 #legend.fullscreen {
     cursor: crosshair;
     --r: max(7vh, 50px);
+    touch-action: none;
 }
 
 .fullscreen > img {

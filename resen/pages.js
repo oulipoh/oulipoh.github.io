@@ -109,6 +109,7 @@ const authors = {
     },
     "avimeishar": {
         "name": {"": "אבי מישר", "en": "Avi Meishar"},
+        "facebook": "avi.meishar",
     },
     "avimilgrom": {
         "name": {"": "אבי מילגרום", "en": "Avi Milgrom"},
@@ -168,6 +169,7 @@ const authors = {
     },
     "lidasharetmassad": {
         "name": {"": "לידה שרת מסד", "en": "Lida Sharet Massad"},
+        "web": ".com",
     },
     "liormaayan": {
         "name": {"": "ליאור מעין", "en": "Lior Maayan"},
