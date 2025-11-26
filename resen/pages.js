@@ -1007,5 +1007,5 @@ function toggle_fullscreen(event_or_elem, landscape=true, target_screen, elem) {
 }
 
 
-if (!document.body.requestFullscreen)  // For iPhone
-    document.body.classList.add('no_fullscreen')
+if (!document.documentElement.requestFullscreen)  // For iPhone
+    document.documentElement.classList.add('no_fullscreen')
