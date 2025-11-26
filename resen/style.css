@@ -891,6 +891,10 @@ nav .trans {
     float: left;
 }
 
+.no_fullscreen .fullscreen_button{
+    display: none;
+}
+
 .nowrap {
     white-space: nowrap;
 }

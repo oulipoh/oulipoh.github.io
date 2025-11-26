@@ -986,21 +986,26 @@ function toggle_fullscreen(event_or_elem, landscape=true, target_screen, elem) {
     event_or_elem?.preventDefault?.()
     elem ??= event_or_elem?.currentTarget || event_or_elem
     const was_not_fullscreen_before = !document.fullscreenElement
-    if (was_not_fullscreen_before) {
-        if (!elem.dataset.has_fullscreen_handler) {
-            elem.dataset.has_fullscreen_handler = true
-            elem.addEventListener('fullscreenchange', () => {
-                if (elem.classList.toggle('fullscreen')) {
-                    if (landscape)
-                        screen.orientation.lock('landscape').catch(e => console.warn(e.message))
-                    request_wake_lock()
-                    document.addEventListener('visibilitychange', visibility_change_handler)
-                } else
-                    wake_lock?.release().then(() => wake_lock = null)
-            })
-        }
-        elem.requestFullscreen({navigationUI: 'hide', screen: target_screen || undefined}).catch(e => console.warn(e.message))
-    } else
-        document.exitFullscreen()
+    if (elem.requestFullscreen)  // Not supported on iPhone
+        if (was_not_fullscreen_before) {
+            if (!elem.dataset.has_fullscreen_handler) {
+                elem.dataset.has_fullscreen_handler = true
+                elem.addEventListener('fullscreenchange', () => {
+                    if (elem.classList.toggle('fullscreen')) {
+                        if (landscape)
+                            screen.orientation.lock('landscape').catch(e => console.warn(e.message))
+                        request_wake_lock()
+                        document.addEventListener('visibilitychange', visibility_change_handler)
+                    } else
+                        wake_lock?.release().then(() => wake_lock = null)
+                })
+            }
+            elem.requestFullscreen({navigationUI: 'hide', screen: target_screen || undefined}).catch(e => console.warn(e.message))
+        } else
+            document.exitFullscreen()
     return was_not_fullscreen_before
 }
+
+
+if (!document.body.requestFullscreen)  // For iPhone
+    document.body.classList.add('no_fullscreen')
