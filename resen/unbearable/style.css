@@ -23,6 +23,7 @@ input {
     letter-spacing: inherit;
     outline-style: none !important;
     padding: 0;
+    scroll-margin-top: 70vh;
 }
 
 input ~ span {
