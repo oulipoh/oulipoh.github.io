@@ -6,16 +6,32 @@
     <link rel="preload" href="../fonts/MiriamLibre-Regular.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="../fonts/DavidLibre-Medium.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="style.css">
     <script src="../pages.js"></script>
     <link rel="icon" href="../media/resen.svg">
     <meta property="og:description" content=".">  <!-- og:description is required for WhatsApp to show og:image -->
     <meta property="og:image" content="https://resen.co.il/unbearable/snippet">
     <noscript><style>body {visibility: visible}</style></noscript>
 </head>
-<body onload="document.body.style.visibility = 'visible'">
+<body onload="document.body.style.visibility = 'visible'; input.focus()">
     <script>make_header()</script>
     <article>
-        <p style="color: red">היצירה תעלה בקרוב.</p>
+    <pre class="narrow_poem">
+אצבע על מקש <b>ח</b>
+אמה <b>ל</b>; קמיצה <b>ך</b>
+זרת <b>ף</b>; אגודל <b>רווח</b>
+
+וַיַּקְלֵד
+אמה–קמיצה–אגודל–אמה–קמיצה
+<span>חמש הקשות</span>
+<input id="input" type="text" autocomplete="off" maxlength="5" placeholder="לך לך" spellcheck="false" oninput="const next = nextElementSibling; if (next && value == 'לך לך') {if (next.nextElementSibling) value = ''; next.after(this); this.focus(); if (value) {selectionEnd = 0; onkeydown = e => {if (e.key == ' ') document.execCommand('forwardDelete'); return true}}} else if (!next && value == '     ') readOnly = true">
+<span>חמש הקשות מארצך</span>
+<span>חמש הקשות ממולדתך</span>
+<span>חמש הקשות מבית אביך</span>
+
+<span>עקב בצד
+אגודל–אגודל–אגודל–אגודל–אגודל</span>
+</pre>
     </article>
     <script>make_footer()</script>
 </body>

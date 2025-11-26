@@ -1,0 +1,14 @@
+input {
+    background: inherit;
+    border: none;
+    color: inherit;
+    display: block;
+    font: inherit;
+    letter-spacing: inherit;
+    outline-style: none !important;
+    padding: 0;
+}
+
+input ~ span {
+    visibility: hidden;
+}
