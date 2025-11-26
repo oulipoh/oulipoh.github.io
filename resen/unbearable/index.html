@@ -24,7 +24,7 @@
 וַיַּקְלֵד
 אמה–קמיצה–אגודל–אמה–קמיצה
 <span>חמש הקשות</span>
-<input id="input" type="text" autocomplete="off" maxlength="5" placeholder="לך לך" spellcheck="false" oninput="const next = nextElementSibling; if (next && value == 'לך לך') {if (next.nextElementSibling) value = ''; next.after(this); this.focus(); if (value) {selectionEnd = 0; onkeydown = e => {if (e.key == ' ') document.execCommand('forwardDelete'); return true}}} else if (!next && value == '     ') readOnly = true">
+<input id="input" type="text" autocomplete="off" maxlength="5" placeholder="לך לך" spellcheck="false" oninput="const next = nextElementSibling; if (next && value == 'לך לך') {if (next.nextElementSibling) value = ''; next.after(this); focus(); if (value) {selectionEnd = 0; onkeydown = e => {if (e.key == ' ') document.execCommand('forwardDelete')}}} else if (!next && value == '     ') readOnly = true">
 <span>חמש הקשות מארצך</span>
 <span>חמש הקשות ממולדתך</span>
 <span>חמש הקשות מבית אביך</span>
