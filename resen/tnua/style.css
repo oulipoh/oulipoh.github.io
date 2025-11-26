@@ -1,3 +1,7 @@
+li {
+    margin-bottom: 5em;
+}
+
 .model_container {
     background-image: url(media/partitura.png);
     background-position: 50% 15%;
@@ -19,4 +23,8 @@ model-viewer {
 
 .model_container + div > p:first-child {
     margin-top: 0;
+}
+
+video {
+    max-width: 512px;
 }
