@@ -15,9 +15,9 @@ const pages = {
 
     "2/": {title: "פתח דבר לגיליון ב – הוראה", alt: "Foreword to Issue 2 – Instruction", author: ["nurilevy", "eranhadas"], kw: [2]},
     "dada/": {title: "מכתב כופר דאדא", alt: "Dada ransom note", author: "eliyahorn", kw: [2, "visual"]},
-    "grok/": {title: "גרוק", alt: "Grok", author: "danieloz", kw: [2, "interactive", "visual"]},
-    "geometry/": {title: "גאומטרייה II", alt: "Geometry II", author: "lidasharetmassad", kw: [2, "interactive", "visual"]},
-    "unbearable/": {title: "הקלות הבלתי נסבלת של ההקלדה", alt: "The unbearable lightness of typing", author: "avimeishar", kw: [2, "interactive", "visual"]},
+    "grok/": {title: "גרוק", alt: "Grok", author: "danieloz", kw: [2, "poem"]},
+    "geometry/": {title: "גאומטרייה II", alt: "Geometry II", author: "lidasharetmassad", kw: [2, "visual"]},
+    "unbearable/": {title: "הקלות הבלתי נסבלת של ההקלדה", alt: "The unbearable lightness of typing", author: "avimeishar", kw: [2, "interactive", "poem", "visual"]},
     "noa/": {title: "נעה א; נעה ב", alt: "Noa A; Noa B", author: "noakatz", kw: [2, "visual"]},
     "tnua/": {title: "תנועה", author: "eliautochkin", kw: [2, "2d 3d", "software", "visual"]},
     "exegesis/": {title: "ביאורי הסימנים למשפחות השכולות", alt: "Exegesis of the signs for the bereaved families", author: "nettalevtov", kw: [2, "interactive", "visual"]},
@@ -28,7 +28,7 @@ const pages = {
     "heart/": {title: "הוראות ללב", alt: "Instructions for the heart", author: "relationship", kw: [2, "2d 3d", "collection", "poem", "story", "visual"]},
 
     "tsc/": {title: "קוד המקור", alt: "The source code", author: "ofirliberman", kw: [1, "interactive", "visual"], skip: true},
-    "relief/": {title: "תבליט־נגד", alt: "Counter relief", author: "michailgrobman", kw: [1, "biblical", "interactive", "visual"], skip: true},
+    "relief/": {title: "תבליט־נגד", alt: "Counter relief", author: "michailgrobman", kw: [1, "2d_3d", "biblical", "interactive", "visual"], skip: true},
     "yomyom/": {title: "קמעות יום־יום", alt: "Everyday talismans", author: "ohadhadad", kw: [1, "interactive", "visual"]},
     "mahdukh/": {title: "מה יש לך גברת מהדוך?", alt: "What is with you Mrs. Mahdukh?", author: "doritkedar", kw: [1, "biblical"]},
     "fortuna/": {title: "פורטונה", alt: "Fortuna", author: "adinaviterbo", kw: [1, "visual"]},
