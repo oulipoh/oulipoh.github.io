@@ -16,6 +16,10 @@ model-viewer {
     width: 100%;
 }
 
+.images {
+    margin-top: 5rem;
+}
+
 @media (max-width: 480px) {
     .model_container {
         height: calc(96vw + var(--anti_margin)*2*852/1200);
