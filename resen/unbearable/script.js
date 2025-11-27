@@ -5,8 +5,8 @@ input.addEventListener('input', () => {
         next.after(input)
         input.focus()
     } else if (!next && input.value == '     ') {
-        input.value = '⁙'
         input.readOnly = true
-        input.scrollIntoView({behavior: 'smooth', block: 'end'})
+        input.value = '⁙'
+        requestAnimationFrame(() => input.scrollIntoView({behavior: 'smooth', block: 'end'}))
     }
 })
