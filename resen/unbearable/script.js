@@ -14,6 +14,6 @@ input.addEventListener('input', () => {
         }
     } else if (input.value == '     לך לך') {
         input.readOnly = true
-        setTimeout(() => input.scrollIntoView({behavior: 'smooth', block: 'end'}), 2000)
+        setTimeout(() => thepoem.scrollIntoView({behavior: 'smooth', block: 'end'}), 2000)
     }
 })
