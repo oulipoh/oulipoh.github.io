@@ -24,13 +24,8 @@
 </head>
 <body onload="document.body.style.visibility = 'visible'">
     <script>make_header()</script>
-    <iframe src="game.html"></iframe>
-    <br>
-    <article>
-    <p dir="ltr">
-        For fullscreen display, press Preferences and then Fullscreen.
-     </p>
-    </article>
+    <iframe id="iframe" src="game.html"></iframe>
+    <button class="big fullscreen_button" onclick="toggle_fullscreen(event, true, null, iframe)" title="Fullscreen">למסך מלא</button>
     <script>make_footer()</script>
 </body>
 </html>
