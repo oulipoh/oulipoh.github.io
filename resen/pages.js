@@ -28,7 +28,7 @@ const pages = {
     "heart/": {title: "הוראות ללב", alt: "Instructions for the heart", author: "relationship", kw: [2, "2d 3d", "collection", "poem", "story", "visual"]},
 
     "tsc/": {title: "קוד המקור", alt: "The source code", author: "ofirliberman", kw: [1, "interactive", "visual"], skip: true},
-    "relief/": {title: "תבליט־נגד", alt: "Counter relief", author: "michailgrobman", kw: [1, "2d_3d", "biblical", "interactive", "visual"], skip: true},
+    "relief/": {title: "תבליט־נגד", alt: "Counter relief", author: "michailgrobman", kw: [1, "2d_3d", "biblical", "interactive", "visual"]},
     "yomyom/": {title: "קמעות יום־יום", alt: "Everyday talismans", author: "ohadhadad", kw: [1, "interactive", "visual"]},
     "mahdukh/": {title: "מה יש לך גברת מהדוך?", alt: "What is with you Mrs. Mahdukh?", author: "doritkedar", kw: [1, "biblical"]},
     "fortuna/": {title: "פורטונה", alt: "Fortuna", author: "adinaviterbo", kw: [1, "visual"]},

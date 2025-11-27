@@ -21,6 +21,8 @@ input {
     font-family: spaced;
     height: 1.4ex;
     letter-spacing: inherit;
+    margin-bottom: .6em;
+    margin-top: 1.6em;
     outline-style: none !important;
     padding: 0;
 }
@@ -29,10 +31,6 @@ input[readOnly] {
     caret-color: transparent;
 }
 
-#last + input::placeholder {
-    color: inherit;
-}
-
-input ~ span {
+input:not(.last) ~ span {
     visibility: hidden;
 }

@@ -1,12 +1,19 @@
 input.addEventListener('input', () => {
-    const next = input.nextElementSibling
-    if (next && input.value == 'לך לך') {
-        input.value = ''
-        next.after(input)
-        input.focus()
-    } else if (!next && input.value == '     ') {
+    if (input.value == 'לך לך') {
+        if (input.previousElementSibling.id == 'last') {
+            if (!input.classList.contains('last')) {
+                input.classList.add('last')
+                input.selectionEnd = 0
+                input.maxLength = 10
+                input.size = 10
+            }
+        } else {
+            input.value = ''
+            input.nextElementSibling.after(input)
+            input.focus()
+        }
+    } else if (input.value == '     לך לך') {
         input.readOnly = true
-        input.value = '⁙'
         setTimeout(() => input.scrollIntoView({behavior: 'smooth', block: 'end'}), 2000)
     }
 })
