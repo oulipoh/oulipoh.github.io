@@ -7,6 +7,6 @@ input.addEventListener('input', () => {
     } else if (!next && input.value == '     ') {
         input.readOnly = true
         input.value = '⁙'
-        requestAnimationFrame(() => input.scrollIntoView({behavior: 'smooth', block: 'end'}))
+        setTimeout(() => input.scrollIntoView({behavior: 'smooth', block: 'end'}), 1000)
     }
 })
