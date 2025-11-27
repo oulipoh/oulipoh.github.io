@@ -6,7 +6,7 @@ input.addEventListener('input', () => {
                 input.selectionEnd = 0
                 input.maxLength = 10
                 input.size = 10
-                input.scrollIntoView(false)
+                thepoem.scrollIntoView(false)
             }
         } else {
             input.value = ''
