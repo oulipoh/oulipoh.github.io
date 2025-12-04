@@ -11,7 +11,7 @@ const pages = {
 
     "palindock/": {title: "תעגון שמש נוגעת", alt: "Anchor of a touching sun", author: "noamdovev", kw: [3, "palindrome", "poem"], skip: true},
     "palisdead/": {title: "מות ידיד יתום", alt: "Death of an orphan friend", author: "uriamiram", kw: [3, "palindrome", "poem"], skip: true},
-    "palindream/": {title: "מול  חיי – חלום", alt: "Facing my life – a dream", author: "liormaayan", kw: [3, "palindrome", "poem"], skip: true},
+    "palindream/": {title: "מול  חיי – חלום", alt: "Palindream", author: "liormaayan", kw: [3, "palindrome", "poem"], skip: true},
 
     "2/": {title: "פתח דבר לגיליון ב – הוראה", alt: "Foreword to Issue 2 – Instruction", author: ["nurilevy", "eranhadas"], kw: [2]},
     "dada/": {title: "מכתב כופר דאדא", alt: "Dada ransom note", author: "eliyahorn", kw: [2, "visual"]},
@@ -173,6 +173,7 @@ const authors = {
     },
     "liormaayan": {
         "name": {"": "ליאור מעין", "en": "Lior Maayan"},
+        "facebook": "lior.maayan.7",
     },
     "liorzalmanson": {
         "name": {"": "ליאור זלמנסון", "en": "Lior Zalmanson"},
