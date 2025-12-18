@@ -15,7 +15,7 @@ if (hash == 'fast') {
 
 const auto_vertical = true
 const label_location = 'half'  // Can be: 'half' (half above and half below, favoring the below), 'above', or anything else to indicate below
-const default_token_symbol = 'o'  // Cannot be of 1-9 or capital A-N
+const default_token_symbol = 'o'  // Cannot be of 1-9 or uppercase A-N
 const arrow_width = 4
 const arrow_height = 1
 const arrow_short_diag = 3
@@ -53,7 +53,7 @@ function compare_lists(a, b) {
 }
 
 function sanitized_len(string, split=false) {
-    string = string.replace(/[\u034f\u0591-\u05bd\u05bf\u05c1\u05c2\u05c4\u05c5\u05c7\u200b-\u200f]|_.*/g, '')
+    string = string.replace(/[\u034f\u0591-\u05bd\u05bf\u05c1\u05c2\u05c4\u05c5\u05c7-\u05c9\u200b-\u200f]|_.*/g, '')
     if (split)
         return Math.max(...string.split(' ').map(s => s.length))
     return string.length
