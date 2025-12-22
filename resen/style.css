@@ -58,7 +58,7 @@
     unicode-range: U+2709;  /* Envelope */
 }
 
-:root, ::backdrop {  /* In Chrome (<122) and Firefox (<120) ::backdrop did not inherit from :root. See: https://issues.chromium.org/issues/40569411, https://bugzilla.mozilla.org/show_bug.cgi?id=1855668 */
+:root, :host(.root), ::backdrop {  /* In Chrome (<122) and Firefox (<120) ::backdrop did not inherit from :root. See: https://issues.chromium.org/issues/40569411, https://bugzilla.mozilla.org/show_bug.cgi?id=1855668 */
     --bg: white;
     --fg_rgb: 0 0 0;
     --on: #ff5337;
@@ -151,7 +151,7 @@ body.todark, .todark ::backdrop {
 }
 
 @media (hover: hover) {
-    :root {
+    :root, :host(.root) {
         --back: 1;
         --icon_dur: .3s;
     }
@@ -1223,7 +1223,7 @@ video::-webkit-media-controls-enclosure {  /* Not supported in Firefox */
 }
 
 @media (forced-colors: active) {
-    :root {
+    :root, :host(.root) {
         --fg_filter: saturate(0);
     }
 
@@ -1244,7 +1244,7 @@ video::-webkit-media-controls-enclosure {  /* Not supported in Firefox */
 }
 
 @media (max-width: 480px) {
-    :root {
+    :root, :host(.root) {
         --media_width: 100%;
     }
 

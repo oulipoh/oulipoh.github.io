@@ -53,7 +53,7 @@ function compare_lists(a, b) {
 }
 
 function sanitized_len(string, split=false) {
-    string = string.replace(/[\u034f\u0591-\u05bd\u05bf\u05c1\u05c2\u05c4\u05c5\u05c7-\u05c9\u200b-\u200f]|_.*/g, '')
+    string = remove_diacritics(string).replace(/_.*/g, '')
     if (split)
         return Math.max(...string.split(' ').map(s => s.length))
     return string.length

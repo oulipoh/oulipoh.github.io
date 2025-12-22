@@ -323,7 +323,8 @@ author_pages_folder = author_pages_folder.replace(/^[./]+|[./]+$/g, '')
 
 
 function get_lang() {
-    return location.search.slice(1) in ui ? location.search.slice(1) : Object.keys(ui)[0]
+    const lang = location.search.slice(1).split('&')[0]
+    return lang in ui ? lang : Object.keys(ui)[0]
 }
 
 
@@ -430,7 +431,7 @@ function page2url(page, lang, current, hash) {
     current ??= get_page()
     lang ??= get_lang()
     let url = (page == '/' ? '.' : page) + (page.includes('.') || page.endsWith('/') ? '' : '.html') + (lang && '?' + lang) + (hash ? '#' + hash.replace(/^#/, '') : '')
-    if (current.match(/.\//) || author_pages_folder && decodeURI(location.pathname).includes('/' + author_pages_folder + '/'))
+    if (current.match(/.\//) || author_pages_folder && decodeURI(location.pathname).includes(`/${author_pages_folder}/`))
         url = '../' + url
     return url
 }
@@ -658,10 +659,12 @@ function make_header(nav_only=false, reverse_issues_kw=default_reverse_issues_kw
     const is_mobile = matchMedia('(max-width: 480px), (max-height: 480px)').matches
     if (is_mobile)
         index_title = index_title.split(' ').slice(0, lang ? 1 : 2).join(' ')
-    const base = page2url('.', lang, page)
-    const parent = new URL(base + '/..', location).href
-    const parent_title = new URL(base, location).href == parent ? '' : decodeURI(parent).split('/').slice(-2)[0]
+    const url = page2url('.', lang, page)
+    const parent = new URL('..', new URL(url, location)).href
+    const parent_title = new URL(url, location).href == parent ? '' : decodeURI(parent).split('/').slice(-2)[0]
     const nav = document.createElement('nav')
+    if (ui[lang].dir && ui[lang].dir != document.documentElement.dir)
+        nav.dir = ui[lang].dir
     let diff = get_width(index_title, nav) - get_width(parent_title, nav)
     let span, back, keywords, trans
     if (page == '/') {
@@ -670,7 +673,7 @@ function make_header(nav_only=false, reverse_issues_kw=default_reverse_issues_kw
         add_nav_element(nav, parent_title ? '..' : '', bdi, 'back', diff, shortcuts.back)
         keywords = all_keywords
     } else {
-        add_nav_element(nav, base, index_title, 'back', -diff, shortcuts.back)
+        add_nav_element(nav, url, index_title, 'back', -diff, shortcuts.back)
         keywords = reorder(pages[page].kw, lang, reverse_issues_kw)
     }
 
@@ -690,9 +693,13 @@ function make_header(nav_only=false, reverse_issues_kw=default_reverse_issues_kw
     if (alt_langs.length)
         trans = add_nav_element(nav, page2url(page, alt_langs[0], page, location.hash), ui[alt_langs[0]].lang.slice(0, is_mobile ? 2 : undefined), 'trans')
 
-    document.body.appendChild(nav)
+    if (nav_only instanceof Node)
+        nav_only.appendChild(nav)
+    else
+        document.body.appendChild(nav)
     if (nav_only)
-        return
+        return titles.label
+
 
     // header:
 
@@ -788,8 +795,6 @@ function make_header(nav_only=false, reverse_issues_kw=default_reverse_issues_kw
             h1.title = titles.alt
     }
     header.appendChild(h1)
-    if (ui[lang].dir && ui[lang].dir != document.documentElement.dir)
-        nav.dir = ui[lang].dir
     const desc = []
     if (en_title)
         desc.push(en_title)
@@ -799,7 +804,6 @@ function make_header(nav_only=false, reverse_issues_kw=default_reverse_issues_kw
             desc.push(current_authors)
     }
     document.currentScript.parentElement.appendChild(header)
-
 
     if (desc.length) {
         const meta = document.head.appendChild(document.createElement('meta'))
@@ -960,6 +964,11 @@ function show_hide_cursor(event_or_elem) {
     elem.classList.remove('show_cursor')
     elem.offsetWidth  // Restart animation. See: https://css-tricks.com/restart-css-animation/
     elem.classList.add('show_cursor')
+}
+
+
+function remove_diacritics(s) {
+    return s.replace(/[\u034f\u0591-\u05bd\u05bf-\u05c9\u200c\u200d]/g, '')
 }
 
 
