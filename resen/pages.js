@@ -660,17 +660,16 @@ function make_header(nav_only=false, reverse_issues_kw=default_reverse_issues_kw
     if (is_mobile)
         index_title = index_title.split(' ').slice(0, lang ? 1 : 2).join(' ')
     const url = page2url('.', lang, page)
-    const parent = new URL('..', new URL(url, location)).href
-    const parent_title = new URL(url, location).href == parent ? '' : decodeURI(parent).split('/').slice(-2)[0]
+    const parent = location.pathname == '/' ? '' : decodeURI(new URL('..', new URL(url, location)).href).split('/').slice(-2)[0]
     const nav = document.createElement('nav')
     if (ui[lang].dir && ui[lang].dir != document.documentElement.dir)
         nav.dir = ui[lang].dir
-    let diff = get_width(index_title, nav) - get_width(parent_title, nav)
+    let diff = get_width(index_title, nav) - get_width(parent, nav)
     let span, back, keywords, trans
     if (page == '/') {
         const bdi = document.createElement('bdi')
-        bdi.textContent = parent_title
-        add_nav_element(nav, parent_title ? '..' : '', bdi, 'back', diff, shortcuts.back)
+        bdi.textContent = parent
+        add_nav_element(nav, parent ? '..' : '', bdi, 'back', diff, shortcuts.back)
         keywords = all_keywords
     } else {
         add_nav_element(nav, url, index_title, 'back', -diff, shortcuts.back)
