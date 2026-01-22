@@ -41,7 +41,7 @@ img {
     grid-column: 1 / 2;
     grid-row: 1 / 2;
     position: relative;
-
+    touch-action: pinch-zoom;
     --r: 30px;
     --x: calc(var(--r) * 3);
     --y: calc(var(--r) * 6);
