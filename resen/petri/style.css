@@ -16,6 +16,7 @@
     --firing: #64ff64;
     color: var(--fg);
     display: grid;
+    margin-inline: var(--anti_margin);
     overflow-x: auto;
     padding-block: 1em 3em;
     -webkit-user-select: none;
@@ -98,6 +99,13 @@
 
 .petri pre[data-after].place::after {
     bottom: var(--ver_offset);
+}
+
+.song {
+    line-height: 1.5;
+    margin-inline: auto;
+    max-width: fit-content;
+    white-space: pre-line;
 }
 
 textarea {

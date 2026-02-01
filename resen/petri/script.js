@@ -215,7 +215,7 @@ function step(grid, json, steps=0, max_tokens={}, result_counter={}, reset_count
     tokens ??= comp ? Object.fromEntries(json.transitions[comp][0].map(p => [p, comp_marking])) : {...json.marking}
     grid.querySelectorAll('[data-clicks]').forEach(place => {
         tokens[place.dataset.id] = (tokens[place.dataset.id] || 0) + (place.dataset.clicks | 0)
-        place.removeAttribute('data-clicks')
+        delete place.dataset.clicks
     })
 
     const enabled = transitions.filter(t => is_enabled(json.transitions[t][0], tokens))
@@ -416,7 +416,7 @@ fetch(json_file).then(response => response.json()).then(json => {
             } else {
                 pre.className = 'place'
                 pre.addEventListener('click', () => pre.dataset.clicks = (pre.dataset.clicks | 0) + 1)
-                if (!(elem.id in json.transitions) && (json.above?.includes(label) || label_location == 'above' || label_location == 'half' && index < (labels.length/cols/2 | 0) * cols))
+                if (!json.transitions[elem.id] && (json.above?.includes(label) || label_location == 'above' || label_location == 'half' && index < (labels.length/cols/2 | 0) * cols))
                     pre.classList.add('above')
             }
             pre.appendChild(document.createElement('span'))

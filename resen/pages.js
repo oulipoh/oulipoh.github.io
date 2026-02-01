@@ -727,8 +727,7 @@ function make_header(nav_only=false, reverse_issues_kw=default_reverse_issues_kw
             else
                 delete sessionStorage.kw
             const page_items = document.querySelectorAll('.contents > p')
-            if (buttons_on.length == 1 || url_kw)
-            {
+            if (buttons_on.length == 1 || url_kw) {
                 url_kw = buttons_on.length == 1 ? buttons_on[0].id.slice(3) : ''
                 history.replaceState(history.state, '', '#' + url_kw)
                 if (trans)
@@ -907,8 +906,7 @@ function get_make_author(page, lang, elem, new_tab_for_social=default_new_tab_fo
 }
 
 
-function make_footer(copyright_url=default_copyright_url, copyright_label=default_copyright_label, new_tab_for_footer=default_new_tab_for_footer)
-{
+function make_footer(copyright_url=default_copyright_url, copyright_label=default_copyright_label, new_tab_for_footer=default_new_tab_for_footer) {
     const lang = get_lang()
     const footer = document.createElement('footer')
     const div = footer.appendChild(document.createElement('div'))

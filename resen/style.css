@@ -534,8 +534,8 @@ figcaption:where(:not(.images figure > *)) {
     margin-inline-start: calc((100% - var(--media_width)) / 2);
 }
 
-figure > figcaption + * {
-    margin-top: .5rem;
+figure > figcaption:not(:last-child) {
+    margin-bottom: .5rem;
 }
 
 .images figure img + figcaption {
@@ -798,7 +798,7 @@ li:not(.mono *) {
 
 @counter-style pad {
     system: extends decimal;
-    pad: 2 '\00a0';
+    pad: 2 '\a0';
     suffix: ': ';
 }
 
