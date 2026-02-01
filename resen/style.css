@@ -1052,7 +1052,7 @@ html[lang=he] :is(nav:not([dir=ltr]) ~ :nth-last-child(1 of .refs), nav:not([dir
     animation: 3s show_cursor;
 }
 
-[onmousemove*='show_hide_cursor(this)'],  /* Note this will miss elements where the handler was added programmatically */
+[onmousemove*='show_hide_cursor(this)'],  /* Note this will miss elements where the handler was added programmatically (but they will get the class nevertheless on first mouse move) */
 .hide_cursor {
     cursor: none;
 }

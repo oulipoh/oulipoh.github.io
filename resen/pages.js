@@ -957,7 +957,10 @@ function sidebyside_align(...elems) {
 
 
 function show_hide_cursor(event_or_elem) {
-    const elem = event_or_elem.currentTarget || event_or_elem
+    let elem = event_or_elem.currentTarget || event_or_elem
+    if (elem == window)
+        elem = document.body
+    elem.classList.add('hide_cursor')
     elem.classList.remove('show_cursor')
     elem.offsetWidth  // Restart animation. See: https://css-tricks.com/restart-css-animation/
     elem.classList.add('show_cursor')

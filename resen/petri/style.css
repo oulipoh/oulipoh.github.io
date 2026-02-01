@@ -15,6 +15,7 @@
     --enabled: #ffff64;
     --firing: #64ff64;
     color: var(--fg);
+    cursor: none;
     display: grid;
     margin-inline: var(--anti_margin);
     overflow-x: auto;
@@ -24,6 +25,7 @@
 }
 
 .petri > div {
+    cursor: initial;
     display: grid;
     grid-template-columns: repeat(var(--cols), 25ch);
     justify-self: stretch;

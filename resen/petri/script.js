@@ -375,6 +375,8 @@ fetch(json_file).then(response => response.json()).then(json => {
     })
 
     document.querySelectorAll('.petri').forEach(elem => {
+        elem.addEventListener('contextmenu', toggle_fullscreen)
+        elem.addEventListener('mousemove', show_hide_cursor)
         const grid = elem.appendChild(document.createElement('div'))
         grid.className = 'leader-line-container'
         let transitions = all_transitions
