@@ -8,10 +8,18 @@
     width: fit-content;
 }
 
+:not(.no_fullscreen) #images > * {
+    cursor: zoom-in;
+}
+
 img {
     max-height: var(--max_media_height);
     max-width: 100%;
     object-fit: contain;
+}
+
+.fullscreen > img {
+    --max_media_height: 100vh;
 }
 
 #left {
@@ -33,18 +41,33 @@ img {
     grid-row: 2 / 3;
 }
 
+#bottom.fullscreen {
+    object-fit: scale-down;
+}
+
 #legend {
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
-    cursor: crosshair;
     grid-column: 1 / 2;
     grid-row: 1 / 2;
     position: relative;
+    --r: max(7vh, 50px);
     touch-action: pinch-zoom;
-    --r: 30px;
-    --x: calc(var(--r) * 3);
-    --y: calc(var(--r) * 6);
+    --x: 50%;
+    --y: 50%;
+}
+
+#legend::after {
+    background-image: radial-gradient(
+        circle var(--r) at var(--x) var(--y),
+        transparent var(--r),
+        #ccc var(--r) calc(var(--r) + 1px),
+        transparent calc(var(--r) + 1px) 100%
+    );
+    content: '';
+    inset: 0;
+    position: absolute;
 }
 
 #front {
@@ -58,16 +81,4 @@ img {
     mask: var(--mask);
     pointer-events: none;
     width: 100%;
-}
-
-#legend::after {
-    background-image: radial-gradient(
-        circle var(--r) at var(--x) var(--y),
-        transparent var(--r),
-        #ccc var(--r) calc(var(--r) + 1px),
-        transparent calc(var(--r) + 1px) 100%
-    );
-    content: '';
-    inset: 0;
-    position: absolute;
 }

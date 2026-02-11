@@ -1,5 +1,6 @@
-// Copyright 2023-2025 by Eyal Yehowa Gruss, licensed under CC BY 4.0
+// Copyright 2023-2026 by Eyal Yehowa Gruss, licensed under CC BY 4.0
 // Please attribute by linking to a version of this file [e.g. as done in make_footer()], containing these comments
+// ECMAScript 2021 (ES12) compatible
 
 
 const canonical_origin = 'https://resen.co.il'
@@ -479,7 +480,7 @@ function make_contents(show_snippet=default_show_snippet, show_author=default_sh
             img.src = page + 'snippet'
         }
 
-        ;[...new Set(merge(pages[page].hazard, pages[page].hazards))].forEach(hazard => {
+        new Set(merge(pages[page].hazard, pages[page].hazards)).forEach(hazard => {
             const meta = a.appendChild(document.createElement('meta'))
             meta.setAttribute('itemprop', 'accessibilityHazard')
             meta.content = hazard
@@ -956,7 +957,14 @@ function sidebyside_align(...elems) {
 }
 
 
+let last_cursor_time = 0
+
+
 function show_hide_cursor(event_or_elem) {
+    const now = Date.now()
+    if (now - last_cursor_time < 500)
+        return
+    last_cursor_time = now
     let elem = event_or_elem.currentTarget || event_or_elem
     if (elem == window)
         elem = document.body

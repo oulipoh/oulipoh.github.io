@@ -55,7 +55,7 @@ spins.forEach(elem => {
     elem.role = 'img'
 
     elem.addEventListener('contextmenu', event => {
-        down_angle = get_polar(event.clientX, event.clientY, elem)
+        down_angle = get_polar(event.x, event.y, elem)
         if (down_angle == null)
             toggle_fullscreen(event)
         else
@@ -64,7 +64,7 @@ spins.forEach(elem => {
 
     elem.addEventListener('pointerdown', event => {
         event.preventDefault()  // Prevent drag-and-drop
-        down_angle = get_polar(event.clientX, event.clientY, elem)
+        down_angle = get_polar(event.x, event.y, elem)
         if (down_angle != null) {
             down = elem
             down.style.setProperty('--down_cursor', 'grabbing')
@@ -79,10 +79,10 @@ addEventListener('focus', () => dispatchEvent(new PointerEvent('pointermove')))
 addEventListener('pointermove', event => {
     if (!down) {
         for (const spin of spins)
-            spin.style.setProperty('--cursor', get_polar(event.clientX, event.clientY, spin) == null ? '' : 'grab')
+            spin.style.setProperty('--cursor', get_polar(event.x, event.y, spin) == null ? '' : 'grab')
         return
     }
-    const new_angle = get_polar(event.clientX, event.clientY, down)
+    const new_angle = get_polar(event.x, event.y, down)
     if (new_angle == null) {
         down.style.setProperty('--down_cursor', '')
         down.style.setProperty('--cursor', '')

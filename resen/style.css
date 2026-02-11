@@ -60,16 +60,16 @@
 
 :root, :host(.root), ::backdrop {  /* In Chrome (<122) and Firefox (<120) ::backdrop did not inherit from :root. See: https://issues.chromium.org/issues/40569411, https://bugzilla.mozilla.org/show_bug.cgi?id=1855668 */
     --bg: white;
+    --bg_inverse: #6580e1;
     --fg_rgb: 0 0 0;
     --on: #ff5337;
     --fg_dim: #cdc2b7;
     --fg_verydim: var(--fg_dim);
     --fg_filter: saturate(0);
     --fg_highlight: var(--on);
+    --fg_inverse: var(--bg);
     --glow: var(--on);
     --glow_blur: 0;
-    --inverse_bg: #6580e1;
-    --inverse_fg: var(--bg);
     --invert: 1;
     --whitish_rgb: 224 224 224;
     --whitish: rgb(var(--whitish_rgb));
@@ -103,13 +103,13 @@
 }
 
 ::selection {
-    color: var(--inverse_fg);
-    background-color: var(--inverse_bg);
+    background-color: var(--bg_inverse);
+    color: var(--fg_inverse);
 }
 
 body.fullscreen ::selection {
-    color: inherit;
     background-color: inherit;
+    color: inherit;
 }
 
 html {
@@ -374,7 +374,7 @@ button, [id^=kw_] {
 
 button:not(:is(.on, .no_active, .no_active *, .sliders *)):active, .always_on, button.on:not(:active) {
     background: var(--on);
-    color: var(--inverse_fg);
+    color: var(--fg_inverse);
 }
 
 button.big {
@@ -590,8 +590,10 @@ svg image,  /* For Firefox Android */
     justify-items: center;
 }
 
-.fullscreen::backdrop {
-    background-color: var(--fullscreen_bg, var(--bg));
+.fullscreen::backdrop,
+.fullscreen:where(img)  /* Fix for Firefox issue: https://bugzilla.mozilla.org/show_bug.cgi?id=2015488 */
+{
+    background-color: var(--bg_fullscreen, var(--bg));
 }
 
 .fullscreen > :first-child {
@@ -609,7 +611,7 @@ svg image,  /* For Firefox Android */
 }
 
 .fullscreen:where(img) {
-    --fullscreen_bg: black;
+    --bg_fullscreen: black;
 }
 
 .github, .paypal {
