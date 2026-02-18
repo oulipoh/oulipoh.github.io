@@ -1,5 +1,4 @@
 #images {
-    cursor: zoom-in;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -7,6 +6,10 @@
     margin-inline: auto;
     max-width: var(--media_width);
     width: fit-content;
+}
+
+:not(.no_fullscreen) #images > * {
+    cursor: zoom-in;
 }
 
 img {
@@ -34,40 +37,37 @@ img {
     grid-row: 2 / 3;
 }
 
-#bottom.fullscreen {
-    object-fit: scale-down;
-}
-
 #legend {
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
+    container-type: size;
     grid-column: 1 / 2;
     grid-row: 1 / 2;
-    --x: calc(var(--r) * 3);
-    --y: calc(var(--r) * 6);
+    position: relative;
+    --r: 3.5vh;
+    touch-action: pinch-zoom;
+}
+
+@supports (container-type: size) {
+    #legend {
+        --r: 5cqh;
+    }
+}
+
+#legend::after {
+    background-image: radial-gradient(
+        circle var(--r) at var(--x) var(--y),
+        transparent var(--r),
+        var(--on) var(--r) calc(var(--r) + 2px),
+        transparent calc(var(--r) + 2px) 100%
+    );
+    content: '';
+    inset: 0;
+    position: absolute;
 }
 
 #front {
-    pointer-events: none;
-}
-
-.fullscreen {
-    cursor: zoom-out;
-    --fullscreen_bg: var(--bg);
-}
-
-#legend.fullscreen {
-    cursor: crosshair;
-    --r: max(7vh, 50px);
-    touch-action: none;
-}
-
-.fullscreen > img {
-    --max_media_height: 100vh;
-}
-
-.fullscreen #front {
     height: 100%;
     --mask: radial-gradient(
         circle var(--r) at var(--x) var(--y),
@@ -76,17 +76,19 @@ img {
     );
     -webkit-mask: var(--mask);
     mask: var(--mask);
+    pointer-events: none;
     width: 100%;
 }
 
-#legend.fullscreen::after {
-    background-image: radial-gradient(
-        circle var(--r) at var(--x) var(--y),
-        transparent var(--r),
-        #ccc var(--r) calc(var(--r) + 1px),
-        transparent calc(var(--r) + 1px) 100%
-    );
-    content: '';
-    inset: 0;
-    position: absolute;
+.fullscreen {
+    cursor: zoom-out;
+    --bg_fullscreen: var(--bg);
+}
+
+.fullscreen > img {
+    --max_media_height: 100vh;
+}
+
+#bottom.fullscreen {
+    object-fit: scale-down;
 }

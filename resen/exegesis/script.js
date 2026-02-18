@@ -1,12 +1,19 @@
-let scheduled
+let x, y, scheduled
 
 legend.addEventListener('pointermove', event => {
+    x = event.offsetX
+    y = event.offsetY
     if (!scheduled) {
         scheduled = true
         requestAnimationFrame(() => {
+            legend.style.setProperty('--x', x + 'px')
+            legend.style.setProperty('--y', y + 'px')
             scheduled = false
-            legend.style.setProperty('--x', event.clientX + 'px')
-            legend.style.setProperty('--y', event.clientY + 'px')
         })
     }
+})
+
+addEventListener('fullscreenchange', () => {
+    legend.style.removeProperty('--x')
+    legend.style.removeProperty('--y')
 })
