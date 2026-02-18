@@ -6,14 +6,23 @@ legend.addEventListener('pointermove', event => {
     if (!scheduled) {
         scheduled = true
         requestAnimationFrame(() => {
-            legend.style.setProperty('--x', x + 'px')
-            legend.style.setProperty('--y', y + 'px')
+            if (x != null) {
+                legend.style.setProperty('--x', x + 'px')
+                legend.style.setProperty('--y', y + 'px')
+            }
             scheduled = false
         })
     }
 })
 
-addEventListener('fullscreenchange', () => {
+function cancel() {
+    x = y = null
     legend.style.removeProperty('--x')
     legend.style.removeProperty('--y')
-})
+}
+
+legend.addEventListener('mouseleave', cancel)
+addEventListener('blur', cancel)
+addEventListener('fullscreenchange', cancel)
+addEventListener('resize', cancel)
+addEventListener('scroll', cancel)
