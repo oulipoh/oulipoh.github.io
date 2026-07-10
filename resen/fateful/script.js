@@ -1,4 +1,4 @@
-// From: Jos Faber, https://codepen.io/josfabre/pen/QWeVyKb
+// Based on: Jos Faber, https://codepen.io/josfabre/pen/QWeVyKb
 
 const n = 12
 const width = 1400
@@ -14,8 +14,6 @@ for (let i = 0; i <= n + 1; i++) {
         ox: x,
         oy: y,
         t: Math.random() * 2 * Math.PI,
-        s: .05 + Math.random()*.15,
-        factor: .4 + Math.random()*1.2
     })
 }
 
@@ -29,10 +27,8 @@ const tick = () => {
     ctx.beginPath()
 
     points.forEach((p, i) => {
-        if (i > 0 || i < points.length - 1) {
-            p.x = p.ox - 3 + Math.sin(p.t)*6
-            p.y = p.oy + Math.cos(p.t)*8
-        }
+        p.x = p.ox - 3 + Math.sin(p.t)*6
+        p.y = p.oy + Math.cos(p.t)*8
 
         p.s = {
             x:

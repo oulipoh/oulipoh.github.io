@@ -90,6 +90,6 @@
     <image width="35%" x="12%" y="59%" href="arim.svg" aria-label="מתוך מסכת מכות י א" aria-description="ערים הללו אין עושין אותן לא טירין קטנים ולא כרכין גדולים אלא עיירות בינוניות (מסכת מכות י א)" />
   </a>
   <script>
-    addEventListener('keydown', e => {if (e.key == 'Escape') document.querySelectorAll('image').forEach(i => i.classList.remove('show'))})
+    addEventListener('keydown', e => {if (e.key == 'Escape' &amp;&amp; !e.shiftKey &amp;&amp; !e.ctrlKey &amp;&amp; !e.metaKey &amp;&amp; !e.altKey &amp;&amp; !e.getModifierState?.('AltGraph')) document.querySelectorAll('image').forEach(i => i.classList.remove('show'))})
   </script>
 </svg>

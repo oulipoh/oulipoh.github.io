@@ -75,5 +75,5 @@ a img {
 }
 
 .turn {
-    animation: 2s turn ease-in-out forwards;
+    animation: 2s ease-in-out forwards turn;
 }

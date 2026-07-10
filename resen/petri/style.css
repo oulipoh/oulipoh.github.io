@@ -116,6 +116,10 @@ textarea {
     padding-inline: 3em;
 }
 
+#thepoem {
+    scrollbar-gutter: stable;
+}
+
 textarea#title {
     margin-block: 5em 4em;
 }

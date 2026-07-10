@@ -519,7 +519,6 @@ class Emulator {
       this.keyFuncs["ArrowDown"] = this.setJoypDown.bind(this);
       this.keyFuncs["s"] = this.setJoypDown.bind(this);
       this.keyFuncs["S"] = this.setJoypDown.bind(this);
-
       this.keyFuncs["ד"] = this.setJoypDown.bind(this);
     }
 
@@ -531,8 +530,8 @@ class Emulator {
       // keys assigned to LEFT button on game boy
       this.keyFuncs["ArrowLeft"] = this.setJoypLeft.bind(this);
       this.keyFuncs["a"] = this.setJoypLeft.bind(this);
-      this.keyFuncs["ש"] = this.setJoypLeft.bind(this);
       this.keyFuncs["A"] = this.setJoypDown.bind(this);
+      this.keyFuncs["ש"] = this.setJoypLeft.bind(this);
     }
 
     if (customControls.right && customControls.right.length) {
@@ -543,8 +542,8 @@ class Emulator {
       // keys assigned to RIGHT button on game boy
       this.keyFuncs["ArrowRight"] = this.setJoypRight.bind(this);
       this.keyFuncs["d"] = this.setJoypRight.bind(this);
-      this.keyFuncs["ג"] = this.setJoypRight.bind(this);
       this.keyFuncs["D"] = this.setJoypDown.bind(this);
+      this.keyFuncs["ג"] = this.setJoypRight.bind(this);
     }
 
     if (customControls.up && customControls.up.length) {
@@ -553,11 +552,11 @@ class Emulator {
       });
     } else {
       // keys assigned to UP button on game boy
-
       this.keyFuncs["ArrowUp"] = this.setJoypUp.bind(this);
       this.keyFuncs["w"] = this.setJoypUp.bind(this);
       this.keyFuncs["W"] = this.setJoypUp.bind(this);
       this.keyFuncs["'"] = this.setJoypUp.bind(this);
+      this.keyFuncs["ן"] = this.setJoypUp.bind(this);
     }
 
     if (customControls.a && customControls.a.length) {
@@ -568,11 +567,11 @@ class Emulator {
       // keys assigned to A button on game boy
 
       this.keyFuncs["z"] = this.setJoypA.bind(this);
-      this.keyFuncs["ז"] = this.setJoypA.bind(this);
-      this.keyFuncs["ח"] = this.setJoypA.bind(this);
-      this.keyFuncs["j"] = this.setJoypA.bind(this);
       this.keyFuncs["Z"] = this.setJoypA.bind(this);
+      this.keyFuncs["ז"] = this.setJoypA.bind(this);
       this.keyFuncs["j"] = this.setJoypA.bind(this);
+      this.keyFuncs["J"] = this.setJoypA.bind(this);
+      this.keyFuncs["ח"] = this.setJoypA.bind(this);
       // this.keyFuncs["Alt"] = this.setJoypA.bind(this);
     }
 
@@ -585,9 +584,9 @@ class Emulator {
       this.keyFuncs["x"] = this.setJoypB.bind(this);
       this.keyFuncs["X"] = this.setJoypB.bind(this);
       this.keyFuncs["ס"] = this.setJoypB.bind(this);
-      this.keyFuncs["ל"] = this.setJoypB.bind(this);
       this.keyFuncs["k"] = this.setJoypB.bind(this);
       this.keyFuncs["K"] = this.setJoypB.bind(this);
+      this.keyFuncs["ל"] = this.setJoypB.bind(this);
       // this.keyFuncs["Control"] = this.setJoypB.bind(this);
     }
 
@@ -619,7 +618,7 @@ class Emulator {
   }
 
   keyDown(event) {
-    if (event.key === "w" && (event.metaKey || event.ctrlKey)) {
+    if (event.ctrlKey || event.metaKey || event.altKey || event.getModifierState?.('AltGraph')) {
       return;
     }
     if (event.key in this.keyFuncs) {

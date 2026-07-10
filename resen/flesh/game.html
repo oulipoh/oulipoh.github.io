@@ -7,7 +7,6 @@
   <title>Flesh and Worms</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="manifest" href="manifest.json" crossorigin="use-credentials" />
-
   <meta name="theme-color" content="#000" />
 
   <style>
@@ -18,12 +17,10 @@
 
     #canvas, #overlayDiv {
       position: absolute;
-      top: 0px;
-      left: 0px;
-
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
-
       border: 0 none;
     }
 
@@ -50,12 +47,10 @@
       margin: auto;
       min-width: min(340px, 100%);
       padding: 10px;
-
       position: absolute;
       top: 0;
       left: 0;
       right: 0;
-
       border-radius: 0 0 5px 5px;
     }
 
@@ -82,7 +77,6 @@
       font-size: 150%;
       margin-bottom: 1em;
       margin-top: 1em;
-
     }
 
     #inputText {
@@ -100,14 +94,14 @@
     #ContextContainer {
       display: none;
       position: absolute;
-      left: 0px;
-      top: 0px;
+      left: 0;
+      top: 0;
       color: white;
     }
 
     #ContextContainer.shown {
       background: rgba(0, 0, 0, 0.5);
-      border-radius: 0px 0px 5px 0px;
+      border-radius: 0 0 5px 0;
     }
 
     #ContextButton {
@@ -115,8 +109,8 @@
       color: lightgrey;
       font-size: xx-large;
       cursor: pointer;
+      -webkit-user-select: none;
       user-select: none;
-      -moz-user-select: none;
       padding: 10px 10px;
       opacity: .75;
     }
@@ -158,7 +152,6 @@
         height: 100%;
         object-fit: contain;
     }
-
   </style>
 
 </head>

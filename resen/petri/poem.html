@@ -26,7 +26,7 @@
         new BroadcastChannel('bc').onmessage = event => {
             if (event.data) {
                 textarea_writeln(thepoem, event.data.replace(/\n$/, ''))
-                const lang = event.data.localeCompare('z') > 0 ? '' : 'en'
+                const lang = event.data.localeCompare('z', 'en') > 0 ? '' : 'en'
                 if (lang != prev_lang)
                     title.value = get_set_titles('petri/', lang).label + ' / ' + get_make_author('/', lang)[0][0]
                 prev_lang = lang

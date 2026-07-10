@@ -1,13 +1,9 @@
 :root {
     --bg: #fdcda3;
-    --fg_dim: --fg;
+    --fg_dim: currentColor;
 }
 
-html {
-    overflow-x: clip;
-}
-
-body {
+html, body {
     overflow-x: clip;
 }
 
@@ -83,8 +79,8 @@ h3 {
 /* Styling for the Shuruk/Dagesh line */
 #lineAnimation {
     position: absolute;
-    top: 0px;
-    left: 0px;
+    top: 0;
+    left: 0;
     height: 500px;  /* Enough height for the symbols to go up */
 }
 

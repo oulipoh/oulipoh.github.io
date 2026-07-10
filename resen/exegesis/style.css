@@ -38,29 +38,25 @@ img {
 }
 
 #legend {
+    --aspect: calc(1621 / 913);
+    --base_r: 6.5;
+    --ry: calc(var(--base_r) * 1%);
+    --r: calc(var(--ry) * var(--aspect)) var(--ry);
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
-    container-type: size;
     grid-column: 1 / 2;
     grid-row: 1 / 2;
     position: relative;
-    --r: 3.5vh;
     touch-action: pinch-zoom;
-}
-
-@supports (container-type: size) {
-    #legend {
-        --r: 5cqh;
-    }
 }
 
 #legend::after {
     background-image: radial-gradient(
-        circle var(--r) at var(--x) var(--y),
-        transparent var(--r),
-        var(--on) var(--r) calc(var(--r) + 2px),
-        transparent calc(var(--r) + 2px) 100%
+        var(--r) at var(--x) calc(var(--y) - 100%),
+        transparent 100%,
+        var(--on) 100% calc(100% + 2px),
+        transparent
     );
     content: '';
     inset: 0;
@@ -70,9 +66,9 @@ img {
 #front {
     height: 100%;
     --mask: radial-gradient(
-        circle var(--r) at var(--x) var(--y),
-        transparent var(--r),
-        black var(--r) 100%
+        var(--r) at var(--x) calc(var(--y) - var(--ry)),
+        transparent 100%,
+        black
     );
     -webkit-mask: var(--mask);
     mask: var(--mask);
@@ -81,12 +77,14 @@ img {
 }
 
 .fullscreen {
-    cursor: zoom-out;
     --bg_fullscreen: var(--bg);
+    cursor: zoom-out;
+    --max_media_height: 100vh;
 }
 
-.fullscreen > img {
-    --max_media_height: 100vh;
+#legend.fullscreen {
+    --r: calc(var(--base_r) * min(1vh, 1vw * var(--aspect)));
+    --ry: var(--r);
 }
 
 #bottom.fullscreen {

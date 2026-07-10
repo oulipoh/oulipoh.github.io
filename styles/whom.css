@@ -25,9 +25,8 @@ figure {
 figcaption {
     bottom: 7%;
     font-size: max(5vw, 3em);
-    left: 0;
+    inset-inline: 0;
     position: absolute;
-    right: 0;
     text-align: center;
 }
 

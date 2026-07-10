@@ -87,12 +87,13 @@
 
     --article_width: 80ch;
     --font_size: 1.2rem;
+    --frag_dur: 7s;
     --h1_size: clamp(1.5em, 5rem, 10vw);
     --hor_scrollbar_offset: 16px;
+    --icon_dur: .3s;
     --larger_font: clamp(1.3em, 2rem, 2vw);
     --max_media_height: 85vh;
     --media_width: 85%;
-    --frag_dur: 7s;
 
     /* Following variables must use units that are not relative to elements (i.e. avoid %, em, ex) */
     --main_margin: max(2rem, 5vw);
@@ -116,6 +117,13 @@ html {
     scroll-padding-block: 5rem 3rem;
 }
 
+body, :host(.root) {
+    font-size: var(--font_size);
+    letter-spacing: var(--letter_spacing);
+    padding-inline: var(--main_margin);
+    visibility: hidden;
+}
+
 body {
     background-color: var(--bg);
     box-sizing: border-box;
@@ -123,18 +131,14 @@ body {
     color: var(--fg);
     display: table;
     font-family: var(--font);
-    font-size: var(--font_size);
     -webkit-font-smoothing: antialiased;
     height: 100vh;
     height: 100dvh;
-    letter-spacing: var(--letter_spacing);
     margin: 0;
-    padding-inline: var(--main_margin);
     padding-bottom: 8px;
     table-layout: fixed;
     -webkit-text-size-adjust: none;
     text-size-adjust: none;
-    visibility: hidden;
     width: 100%;
 }
 
@@ -153,7 +157,6 @@ body.todark, .todark ::backdrop {
 @media (hover: hover) {
     :root, :host(.root) {
         --back: 1;
-        --icon_dur: .3s;
     }
 
     :where(:not(input[type=checkbox])):focus-visible, .outline {
@@ -286,6 +289,10 @@ a {
     text-underline-position: under;
 }
 
+:host(nav-wrapper) {
+    display: block;
+}
+
 nav * {
     display: inline-block;
 }
@@ -362,6 +369,7 @@ button, [id^=kw_] {
     font-size: inherit;
     letter-spacing: initial;
     text-decoration: none;
+    unicode-bidi: plaintext;
 }
 
 .persistent {
@@ -427,8 +435,6 @@ button, pre {
 
 .contents > p > a img {
     aspect-ratio: 16 / 9;
-    border-color: var(--fg);
-    border-width: 1px;
     display: block;
     margin-bottom: 1rem;
     object-fit: cover;
@@ -523,6 +529,10 @@ nav[dir=rtl] ~ .contents {
 
 .fg_filter, input:is([type=range], [type=checkbox]), .social, nav .trans::before {
     filter: var(--fg_filter);
+}
+
+:host(nav-wrapper) .trans::before {
+    filter: brightness(0);
 }
 
 figure {
@@ -893,7 +903,7 @@ nav .trans {
     float: left;
 }
 
-.no_fullscreen .fullscreen_button{
+.no_fullscreen .fullscreen_button {
     visibility: hidden;
 }
 
@@ -1150,7 +1160,7 @@ a.sponsors {
 
 .subscribe {
     animation: 50s linear infinite border_dance;
-    background-image: linear-gradient(90deg, currentcolor 50%, transparent 50%), linear-gradient(90deg, currentcolor 50%, transparent 50%), linear-gradient(0, currentcolor 50%, transparent 50%), linear-gradient(0, currentcolor 50%, transparent 50%);
+    background-image: linear-gradient(90deg, currentColor 50%, transparent 50%), linear-gradient(90deg, currentColor 50%, transparent 50%), linear-gradient(0, currentColor 50%, transparent 50%), linear-gradient(0, currentColor 50%, transparent 50%);
     background-position: 0 0, 100% 100%, 0 100%, 100% 0;
     background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
     background-size: .5rem 2px, .5rem 2px, 2px .5rem, 2px .5rem;
@@ -1214,6 +1224,7 @@ video::-webkit-media-controls-enclosure {  /* Not supported in Firefox */
 .video {
     aspect-ratio: 16 / 9;
     border: none;
+    clip-path: inset(1px);
     margin-block: 3rem;
     max-height: var(--max_media_height);
     max-width: calc(var(--max_media_height) * 16 / 9);

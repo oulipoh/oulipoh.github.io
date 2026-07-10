@@ -21,7 +21,7 @@ td {
 }
 
 td:empty {
-    background-color: var(--fg);
+    background-color: currentColor;
     opacity: .8;
 }
 

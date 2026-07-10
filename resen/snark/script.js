@@ -108,7 +108,8 @@ containers.forEach(elem => {
 })
 
 addEventListener('keydown', event => {
-    if (event.altKey || event.getModifierState?.('AltGraph') || event.ctrlKey || event.metaKey || !event.key.match(/^[א-תa-zA-Z]$/) && event.key != 'Backspace' && (event.key != 'Tab' || event.shiftKey))
+    if (!event.key.match(/^[א-תa-zA-Z]$/) && event.key != 'Backspace' && (event.key != 'Tab' || event.shiftKey)
+        || event.ctrlKey || event.metaKey || event.altKey || event.getModifierState?.('AltGraph'))
         return
     event.preventDefault()
     const current = +containers[1].classList.contains('fullscreen')
