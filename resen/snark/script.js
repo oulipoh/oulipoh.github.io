@@ -1,36 +1,9 @@
 const notes = {ABMH: 'C4 D4 E4 F4 E4 F4 F4 G4 G4 A4 F4 G4 G4 A4 G4 A4 A4 B4 A4 B4 B4 C5',
                ADWS: 'C4 B3 A3 G3 A3 G3 G3 F3 F3 E3 G3 F3 F3 E3 F3 E3 E3 D3 E3 D3 D3 C3'}
 
-const keymap = {a: 'א',
-                b: 'ב',
-                g: 'ג',
-                d: 'ד',
-                h: 'ה',
-                u: 'ו',
-                w: 'ו',
-                z: 'ז',
-                j: 'ח',
-                e: 'ט',
-                i: 'י',
-                y: 'י',
-                k: 'כ',
-                'ך': 'כ',
-                l: 'ל',
-                m: 'מ',
-                'ם': 'מ',
-                n: 'נ',
-                'ן': 'נ',
-                s: 'ס',
-                o: 'ע',
-                f: 'פ',
-                p: 'פ',
-                'ף': 'פ',
-                c: 'צ',
-                'ץ': 'צ',
-                q: 'ק',
-                r: 'ר',
-                x: 'ש',
-                t: 'ת'}
+const en = 'qwertyuiopasdfghjkl;zxcvbnm,.ךםןףץ'
+const he = 'צנקראטותמפשדגכעיחלכפזסבהנמצתצכמנפצ'
+const keymap = Object.fromEntries([...en.slice(0, he.length)].map((c, i) => [c, he[i]]))
 
 const duration_sec = .125
 const style = getComputedStyle(document.body)

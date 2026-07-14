@@ -11,7 +11,7 @@ const pages = {
     // "open-call-horaa/": {title: "קול קורא: הוראה", alt: "Open call: Instruction", author: "resen"},
 
     "3/": {title: "פתח דבר לגיליון ג – יחסים פלינדרומיים", alt: "Foreword to Issue 3 – Palindromic relations", author: "noamdovev", kw: [3]},
-    "shigra/": {title: "שגרה", alt: "Routine", author: "eranhadas", kw: [3, "palindrome", "poem"]},
+    "shigra/": {title: "שגרה – בה רגש", alt: "Routine has emotion", author: "eranhadas", kw: [3, "palindrome", "poem"]},
     "palindock/": {title: "תעגון שמש נוגעת", alt: "Anchor of a touching sun", author: "noamdovev", kw: [3, "palindrome", "poem"]},
     "palisdead/": {title: "מות ידיד יתום", alt: "Death of an orphan friend", author: "uriamiram", kw: [3, "palindrome", "poem"]},
     "palindream/": {title: "מול  חיי – חלום", alt: "Palindream", author: "liormaayan", kw: [3, "palindrome", "poem"]},
