@@ -28,9 +28,8 @@ const caret_char = '_'
 
 const en = 'qwertyuiopasdfghjkl;zxcvbnm,.'
 const he = 'ץןקראטותםפשדגכעיחלךףזסבהנמצתץ'
+const keymap = Object.fromEntries([...en.slice(0, he.length)].map((c, i) => [c, he[i]]))
 
-const keymap = {}
-for (let i = 0; i < Math.min(en.length, he.length); i++) keymap[en[i]] = he[i]
 const nikud_pisuk = kaddish.match(/[א-ת][^א-ת]*/g).map(m => m.slice(1))
 const prefix_chars = prefix.match(/[א-ת]/g)
 console.log(nikud_pisuk.length, prefix_chars.length + document.querySelectorAll('svg text').length)
