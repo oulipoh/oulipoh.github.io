@@ -3,7 +3,7 @@ const notes = {ABMH: 'C4 D4 E4 F4 E4 F4 F4 G4 G4 A4 F4 G4 G4 A4 G4 A4 A4 B4 A4 B
 
 const en = 'qwertyuiopasdfghjkl;zxcvbnm,.ךםןףץ'
 const he = 'צנקראטותמפשדגכעיחלכפזסבהנמצתצכמנפצ'
-const keymap = Object.fromEntries([...en.slice(0, he.length)].map((c, i) => [c, he[i]]))
+const keymap = Object.fromEntries(Array.from(en.slice(0, he.length), (c, i) => [c, he[i]]))
 
 const duration_sec = .125
 const style = getComputedStyle(document.body)
@@ -74,7 +74,7 @@ containers.forEach(elem => {
         circles.get(svg)[circle.nextElementSibling.textContent] = circle
         cls = circle.dataset.class = [...circle.parentElement.classList].find(c => c.match(/^m\d+$/))
         const num = cls.slice(1)
-        const path = [...svg.querySelectorAll(`.n${num}`)].map(node => [...node.classList].find(c => c.match(/^m\d+$/)).slice(1))
+        const path = Array.from(svg.querySelectorAll(`.n${num}`), node => [...node.classList].find(c => c.match(/^m\d+$/)).slice(1))
         path.reverse().push(num)
         circle.dataset.path_notes = path.map(i => notes_array[i]).join()
     })

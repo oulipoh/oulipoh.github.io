@@ -7,8 +7,9 @@ const canonical_origin = 'https://resen.co.il'
 
 const pages = {
     "/": {title: "רֶסֶן", alt: "Resen", author: "resen", logo: "media/resen.svg", skip: true},
-    // "open-call-kmeot/": {title: "קול קורא: קמעות", alt: "Open call: Talismans", author: "resen"},
-    // "open-call-horaa/": {title: "קול קורא: הוראה", alt: "Open call: Instruction", author: "resen"},
+    "open-call-random/": {title: "קול קורא: אקראיות", alt: "Open call: Randomness", author: ["avimeishar", "eranhadas"]},
+    // "open-call-horaa/": {title: "קול קורא: הוראה", alt: "Open call: Instruction", author: ["nurilevy", "eranhadas"]},
+    // "open-call-kmeot/": {title: "קול קורא: קמעות", alt: "Open call: Talismans", author: ["meytarmoran", "eyalgruss"]},
 
     "3/": {title: "פתח דבר לגיליון ג – יחסים פלינדרומיים", alt: "Foreword to Issue 3 – Palindromic relations", author: "noamdovev", kw: [3]},
     "shigra/": {title: "שגרה – בה רגש", alt: "Routine has emotion", author: "eranhadas", kw: [3, "palindrome", "poem"]},
@@ -268,6 +269,7 @@ const ui = {
 }
 
 const kw_labels = {
+    4: "ד - אקראיות",
     3: "ג – יחסים פלינדרומיים",
     2: "ב – הוראה",
     1: "א – קמעות",
@@ -341,7 +343,7 @@ const collator = Intl.Collator(document.documentElement.lang, {numeric: true})
 
 
 function reorder(list_of_strings, lang='', reverse_issues=default_reverse_issues_kw, labels=kw_labels) {
-    return [...new Set(list_of_strings)].map(String).sort((a, b) => {
+    return Array.from(new Set(list_of_strings), String).sort((a, b) => {
         const a_is_issue = /^\d+$/.test(a)
         const b_is_issue = /^\d+$/.test(b)
         if (!lang) {
@@ -364,7 +366,7 @@ function get_all_keywords(lang='', reverse_issues=default_reverse_issues_kw, pag
     const entropy = Object.fromEntries(Object.entries(freq).map(([kw, f]) => [kw, -f * Math.log2(f)]))
     const maxent = Math.log2(len)
     const info = Object.fromEntries(Object.entries(entropy).map(([kw, e]) => [kw, e / maxent]))
-    return [ordered, Object.fromEntries(ordered.map(kw => [kw, {count: counts[kw], info: info[kw]}]))]  // Note object keys parsing as integers will appear first an ascending order. See: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...in
+    return [ordered, Object.fromEntries(ordered.map(kw => [kw, {count: counts[kw], info: info[kw]}]))]  // Note that object keys parsing as integers will appear first in ascending order. See: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...in
 }
 
 
@@ -648,7 +650,7 @@ function export_all(lang, skip=true) {
 }
 
 
-function is_shortcut(event, shortcut) {
+function is_shortcut(event, shortcut, ignore_mod) {
     shortcut = shortcut.toLowerCase().split(/ ?[+-] ?(?!$)/)
     let shortcut_key = shortcut.pop()
     if (shortcut_key == 'space')
@@ -663,15 +665,15 @@ function is_shortcut(event, shortcut) {
         || event.code == 'Digit' + shortcut_key  // For AZERTY keyboard
         || !event_key.match(/^[a-z]$/) && event.code == 'Key' + shortcut_key.toUpperCase())  // For Hebrew keyboard
         event_key = shortcut_key
-    return event_key == shortcut_key && event.shiftKey == shortcut.includes('shift') && (event.ctrlKey && !global_is_mac && !event.metaKey || event.metaKey && global_is_mac && !event.ctrlKey) == shortcut.includes('ctrl') && (event.altKey || event.getModifierState?.('AltGraph')) == shortcut.includes('alt')
+    return event_key == shortcut_key && (ignore_mod || event.shiftKey == shortcut.includes('shift') && (event.ctrlKey != global_is_mac && event.metaKey == global_is_mac) == shortcut.includes('ctrl') && (event.altKey || event.getModifierState?.('AltGraph')) == shortcut.includes('alt'))
 }
 
 
-function add_shortcut(elem, shortcut) {
+function add_shortcut(elem, shortcut, ignore_mod) {
     if (shortcut) {
         elem.ariaKeyShortcuts = shortcut.replace(/ ?[+-] ?(?!$)/g, '+').replace(/Ctrl/i, global_is_mac ? 'Meta' : 'Control').replace(/ $/, 'Space').replace(/\+$/, 'plus')
         addEventListener('keydown', event => {
-            if (is_shortcut(event, shortcut)) {
+            if (is_shortcut(event, shortcut, ignore_mod)) {
                 event.preventDefault()
                 elem.click()
             }

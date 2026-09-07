@@ -108,7 +108,7 @@ function trans_ver_symbol(label, len) {
     label = label.map(l => center(l, len))
     const border = '-'.repeat(label.length * 3)
     const shift = ' '.repeat(label.length % 2 == 0)
-    const rows = [...label[0]].map((_, c) => label.map(row => row[c])).map(c => fix_lang_align(c.join('  '))).join(` |\n${shift}| `)
+    const rows = Array.from(label[0], (_, c) => label.map(row => row[c])).map(c => fix_lang_align(c.join('  '))).join(` |\n${shift}| `)
     return `${len % 2 ? '' : '\n'}${shift}.${border}.\n${shift}| ${rows} |\n${shift}'${border}'`
 }
 
@@ -204,7 +204,7 @@ function arrows(inside, outside, clue) {
     if (is_hor)
         return result_arrows
     result_arrows = result_arrows.trim().split('\n')
-    return [...result_arrows[0]].map((_, c) => result_arrows.map(row => row[c])).map(c => c.join(' ')).join('\n')
+    return Array.from(result_arrows[0], (_, c) => result_arrows.map(row => row[c])).map(c => c.join(' ')).join('\n')
 }
 
 function step(grid, json, steps=0, max_tokens={}, result_counter={}, reset_counter=0, tokens) {
