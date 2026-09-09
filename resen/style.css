@@ -733,11 +733,15 @@ iframe, object {
     width: var(--media_width);
 }
 
-.images a {
+.images > a {
     line-height: 0;
 }
 
-.images a:not(:only-child) {
+.images > a * {
+    line-height: var(--line_height);
+}
+
+.images > a:not(:only-child) {
     display: contents;
 }
 
@@ -756,6 +760,7 @@ iframe, object {
 
 img {
     font-style: italic;
+    overflow-clip-margin: 2px;
     white-space: pre-line;
 }
 
