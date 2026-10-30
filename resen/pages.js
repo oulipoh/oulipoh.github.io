@@ -1025,7 +1025,7 @@ function show_hide_cursor(event_or_elem) {
 
 
 function remove_diacritics(s) {
-    return s.replace(/[\u034f\u0591-\u05bd\u05bf-\u05c9\u200c\u200d]/g, '')
+    return s.replace(/[\u200c\u200d]*[\u034f\u0591-\u05bd\u05bf-\u05c9][\u200c\u200d]*/g, '')
 }
 
 

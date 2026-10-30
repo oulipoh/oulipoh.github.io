@@ -53,7 +53,7 @@ img {
 
 #legend::after {
     background-image: radial-gradient(
-        var(--r) at var(--x) calc(var(--y) - 100%),
+        var(--r) at var(--x) calc(var(--y) - var(--ry)),
         transparent 100%,
         var(--on) 100% calc(100% + 2px),
         transparent
